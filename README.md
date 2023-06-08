@@ -29,6 +29,12 @@ The implications of these design goals are:
 
 This is a very first release and many more of the modules the we already have in use will be published in the coming weeks.
 
+| Link                                                               | Description                                                         |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| [dp-strawmam-module](https://github.com/bsdlab/dp-strawman-module) | a strawman repository as starting point for developing your modules |
+|                                                                    |                                                                     |
+|                                                                    |                                                                     |
+
 ### Individual module
 
 You can find individual modules included in the `./modules` folder, where they are linked as submodules
