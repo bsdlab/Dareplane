@@ -27,23 +27,25 @@ The implications of these design goals are:
 
 ## Overview of the Dareplane project and individual modules
 
-This is a very first release and many more of the modules the we already have in use will be published in the coming weeks.
+This is a very first release and many more of the modules we already have in use will be published in the coming weeks.
 
-| Link                                                               | Description                                                         |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------- |
-| [dp-strawmam-module](https://github.com/bsdlab/dp-strawman-module) | a strawman repository as starting point for developing your modules |
-|                                                                    |                                                                     |
-|                                                                    |                                                                     |
+| Link                                                               | Description                                                                                             |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| [dp-strawmam-module](https://github.com/bsdlab/dp-strawman-module) | a strawman repository as starting point for developing your modules                                     |
+| [dp-control-room](https://github.com/bsdlab/dp-control-room)       | the central module which combines individual modules to a system                                        |
+| [dp-lsl-recording](https://github.com/bsdlab/dp-lsl-recording)     | module for interacting with the [LSL LabRecorder](https://github.com/labstreaminglayer/App-LabRecorder) |
+| [dp-mockup-streamer](https://github.com/bsdlab/dp-mockup-streamer) | module for creating mock-up streams from files or generating random data                                |
+|                                                                    |                                                                                                         |
+|                                                                    |                                                                                                         |
 
 ### Individual module
 
-You can find individual modules included in the `./modules` folder, where they are linked as submodules
-The
+You can find individual modules included in the `./modules` folder, where they are linked as submodules.
 
 #### Control Room module
 
-The `control room` module is the central piece for composition of modules to a larger system.
-Modules you need in your experiment are added within a setup configuration file (see `./examples`)
+The [`control room`](https://github.com/bsdlab/dp-control-room) module is the central piece for composition of modules to a larger system.
+Modules you need in your experiment are added within a setup configuration file (see `./examples` and the documentation in the [`control room`](https://github.com/bsdlab/dp-control-room))
 
 ## Get started
 
