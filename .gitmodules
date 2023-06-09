@@ -1,0 +1,16 @@
+[submodule "modules/dp-strawman-module"]
+	path = modules/dp-strawman-module
+	url = git@github.com:bsdlab/dp-strawman-module.git
+	branch = main
+[submodule "modules/dp-control-room"]
+	path = modules/dp-control-room
+	url = git@github.com:bsdlab/dp-control-room.git
+	branch = main
+[submodule "modules/dp-mockup-streamer"]
+	path = modules/dp-mockup-streamer
+	url = git@github.com:bsdlab/dp-mockup-streamer.git
+	branch = main
+[submodule "modules/dp-lsl-recording"]
+	path = modules/dp-lsl-recording
+	url = git@github.com:bsdlab/dp-lsl-recording.git
+	branch = main
