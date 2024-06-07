@@ -38,9 +38,17 @@ This is a very first release and many more of the modules we already have in use
 |                                                                    |                                                                                                         |
 |                                                                    |                                                                                                         |
 
-### Individual module
+### Individual modules
 
 You can find individual modules included in the `./modules` folder, where they are linked as submodules.
+
+### For python modules / development
+
+If you are building your modules in python, or using the existing python modules, you will need the `dareplane-utils` python module.
+```
+pip install dareplane-utils
+```
+The module provides basic functionality around TCP servers, logging, and collect data from LSL streams.
 
 #### Control Room module
 
