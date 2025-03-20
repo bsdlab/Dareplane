@@ -42,7 +42,13 @@ The implications of these design goals are:
 | [dp-picoscope-streamer](https://github.com/bsdlab/dp-picoscope-streamer)     | module to stream data from a Picoscope to [LSL](https://labstreaminglayer.org)                                     |
 | [dp-passthrough](https://github.com/bsdlab/dp-passthrough)                   | a simple passthrough Dareplane module for performance testing                                                      |
 | [dp-threshold-controller](https://github.com/bsdlab/dp-threshold-controller) | a threshold control module with grace periods                                                                      |
-| [dp-cortec-bic](https://github.com/bsdlab/dp-cortec-bic)                     | _soon to be released_                                                                                              |
+| [dp-cortec-bic](https://github.com/bsdlab/dp-cortec-bic)                     | module to interact with the API of the CorTec BrainInterchange                                                     |
+| [dp-cvep-speller](https://github.com/thijor/dp-cvep-speller)                 | a c-VEP speller paradigm module                                                                                    |
+| [dp-cvep-decoder](https://github.com/thijor/dp-cvep-decoder)                 | decoding module for a c-VEP speller, using rCCA                                                                    |
+
+## Getting started
+
+A good starting point is the [cVEP experiment](https://github.com/thijor/dp-cvep), which contains a setup script that downloads and configures a cVEP speller, outlining how modules need to be configured for interaction.
 
 ### For python modules / development
 
