@@ -13,7 +13,7 @@ First, lets decide to call the module `dp-mi-paradigm`. The prefix of `dp-` for 
 
 ### Initialize the project
 
-To start, get the [`dp-strawman-module`](git@github.com:bsdlab/dp-strawman-module.git) and read the `README.md` therein carefully. After that you should know how to build upon the strawman. So lets rename the relevant folders. The content of our new module folder `./dp-mi-paradigm` should then look like this:
+To start, get the [`dp-strawman-module`](https://github.com/bsdlab/dp-strawman-module) and read the `README.md` therein carefully. After that you should know how to build upon the strawman. So lets rename the relevant folders. The content of our new module folder `./dp-mi-paradigm` should then look like this:
 
 ```bash
 ├── LICENSE
