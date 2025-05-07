@@ -1,0 +1,9 @@
+# pyproject.toml
+[tool.pytest.ini_options]
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+    "./"
+]
+filterwarnings = ["ignore:::.*fire.core"]
+

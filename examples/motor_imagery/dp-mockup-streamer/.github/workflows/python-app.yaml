@@ -1,0 +1,34 @@
+name: Dareplane mockup streamer pytest
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest] # macos-latest, 
+        python-version: ["3.11", "3.12"]   # multi-version workflows failed
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Install liblsl Unix  # should come with pylsl for windows
+        run: |
+          wget https://github.com/sccn/liblsl/releases/download/v1.16.2/liblsl-1.16.2-bionic_amd64.deb
+          sudo apt install ./liblsl*.deb
+        continue-on-error: true
+      - name: Lint with Ruff
+        run: |
+          pip install ruff
+          ruff check .
+        continue-on-error: true
+      - name: Test with pytest
+        run: pytest . -vv

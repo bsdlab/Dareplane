@@ -1,0 +1,7 @@
+dareplane_utils>=0.0.8
+fire>=0.5.0
+mne>=1.8.0
+numpy
+pylsl>=1.16.2
+pytest>=8.3.2
+pyxdf>=1.16.8

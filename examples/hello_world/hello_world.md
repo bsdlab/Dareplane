@@ -132,6 +132,7 @@ if __name__ == "__main__":
 
 ```
 
+### Composing the module with others
 This should be all we need for being able to test the paradigm via `python -m mi_paradigm.main`. Test it like this and make sure it works (especially installing requirements!).
 
 ### Wrapping the server around

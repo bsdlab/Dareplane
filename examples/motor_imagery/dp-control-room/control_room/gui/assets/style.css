@@ -1,0 +1,274 @@
+:root {
+  --dark_gray: #333333;
+  --light_gray: #555555;
+  --lighter_gray: #888888;
+  --dark_green: #133813;
+  --light_blue: #5999ff;
+  --dark_blue: #19398f;
+  --valid_json: #aaffaa;
+  --invalid_json: #ffaaaa;
+  --bg_primary: #111122;
+  --bg_tile: #333344;
+  --header_color: #2af985;
+  --filter_header_color: invert(71%) sepia(34%) saturate(891%) hue-rotate(90deg)
+    brightness(103%) contrast(100%);
+  --module_not_ready: #ffaaaa;
+  --module_ready: #aaffaa;
+  --log_debug: #eee;
+  --log_info: #aaffaa;
+  --log_warn: #ffcc88;
+  --log_error: #ff8888;
+}
+
+@import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
+
+body {
+  margin: 0;
+  background-color: var(--bg_primary);
+}
+
+#header_row {
+  display: flex;
+}
+
+.header_icon {
+  filter: var(--filter_header_color);
+}
+
+#control_room_app {
+  /* font-family: 'Fira Code', sans-serif; */
+  font-family: sans-serif;
+}
+
+#control_room_icon {
+  width: 25px;
+  margin: 0px 5px;
+  /* background-color: var(--header_color); */
+  /* width: 20px; */
+}
+
+#control_room_title {
+  display: inline-block;
+  width: 100%;
+  /* height: 20px; */
+  font-size: 1.2rem;
+  margin: 10px 0px;
+  color: var(--header_color);
+  /* background-color: var(--dark_blue); */
+}
+
+#control_room_body {
+  display: flex;
+}
+
+.lsl_and_log {
+  width: 50%;
+  position: relative;
+  top: 20px;
+}
+
+/* NOTE this currently is not nice: -> a better solution would be to fix */
+/* the rest of the layout and have this element scroll */
+.module_tiles {
+  position: absolute;
+  overflow-y: auto;
+  left: 50%;
+  top: 60px;
+  right: 5px;
+  bottom: 0;
+}
+
+#lsl_stream_tile,
+#log_stream_tile {
+  border: solid var(--bg_tile);
+  margin: 0rem 0.5rem 0.5rem 0.5rem;
+  height: 500px;
+  border-radius: 5px;
+}
+
+#lsl_streams_title,
+#logfile_title {
+  background-color: var(--bg_tile);
+  padding: 0.3rem;
+}
+#lsl_tile_header {
+  display: flex;
+  background-color: var(--bg_tile);
+  padding: 2px;
+}
+#log_stream_tile_header {
+  display: flex;
+  background-color: var(--bg_tile);
+  padding: 2px;
+}
+#lsl_title_icon {
+  width: 20px;
+}
+#logfile_title_icon {
+  width: 20px;
+}
+
+#logfile_title::before {
+  content: " ";
+  background-image: url("assets/images/log-file-format-svgrepo-com.svg");
+  filter: var(--filter_header_color);
+}
+
+#logfile_data {
+  height: 92%;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
+  padding: 0.3rem;
+  background-color: #121212;
+  color: #aaffaa;
+}
+#lsl_streams_list {
+  padding: 0.3rem;
+  color: var(--header_color);
+}
+#logfile_data P {
+  margin: 0.2rem;
+}
+#logfile_data .DEBUG {
+  color: var(--log_debug);
+}
+#logfile_data .INFO {
+  color: var(--log_info);
+}
+#logfile_data .WARN {
+  color: var(--log_warn);
+}
+#logfile_data .ERROR {
+  color: var(--log_error);
+}
+
+#lsl_streams_list P {
+  margin: 0.2rem;
+}
+
+.tile_header {
+  display: flex;
+  color: var(--lighter_gray);
+  padding: 0.3rem 0.3rem;
+  /* background-color: var(--dark_gray); */
+}
+
+.tile_header .module_name {
+  min-width: 300px;
+  width: 100%;
+}
+.tile_header .module_ip {
+  color: var(--lighter_gray);
+}
+.tile_header .module_port {
+  color: var(--lighter_gray);
+}
+.tile_header .module_type {
+  color: var(--lighter_gray);
+}
+
+.tile_header .module_ip::after {
+  content: ":";
+}
+.tile_header .module_port {
+  margin-right: 1rem;
+}
+
+.tile_header .module_type::before {
+  content: "(";
+}
+.tile_header .module_type::after {
+  content: ")";
+}
+.tile_header .module_control::before {
+  content: "(";
+}
+.tile_header .module_decoding::before {
+  content: "(";
+}
+.tile_header .module_io_data::before {
+  content: "(";
+}
+
+.tile_header {
+  color: var(--header_color);
+}
+
+.module_input {
+  width: 80%;
+}
+
+.module_tile {
+  /* border: solid var(--dark_gray); */
+  background-color: var(--bg_tile);
+  margin: 0rem 0rem 0.5rem 0rem;
+  padding: 0.2rem;
+  border-radius: 5px;
+}
+
+.pcomm_button_input_row {
+  margin: 1rem 1rem;
+}
+
+.pcomm_button {
+  min-width: 100px;
+  margin-right: 1rem;
+}
+
+.hidden_div {
+  display: none;
+}
+
+.valid_json_input {
+  background-color: var(--valid_json);
+}
+
+.invalid_json_input {
+  background-color: var(--invalid_json);
+}
+
+.pcomm_button_input_row textarea {
+  width: 80%;
+  height: 1rem;
+}
+
+/* All interaction for the module check boxes */
+#module_server_check_boxes {
+  display: flex;
+  margin: 5px 10px;
+}
+
+.module_check_box {
+  background-color: var(--module_not_ready);
+  width: 30px;
+  height: 30px;
+  margin: 0px 5px;
+}
+
+.module_check_box:hover {
+  border: 2px solid var(--light_gray);
+}
+
+.module_check_box:hover .module_meta {
+  display: block;
+}
+
+.module_meta {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  background-color: inherit;
+  padding: 2rem;
+  z-index: 2;
+  display: None;
+}
+
+.running_module_check_box {
+  background-color: var(--module_ready);
+}
+
+#macros_div .module_name {
+  color: var(--light_blue);
+}

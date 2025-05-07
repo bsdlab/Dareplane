@@ -1,0 +1,42 @@
+[python]
+modules_root = '../'
+
+# -------------------- used modules ---------------------------------------
+
+[python.modules.dp-mi-paradigm]
+type = 'paradigm'
+port = 8081
+ip = '127.0.0.1'
+loglevel = 10
+
+[python.modules.dp-mockup-streamer]
+type = 'source'
+port = 8082
+ip = '127.0.0.1'
+loglevel = 10
+
+[python.modules.dp-lsl-recording]
+type = 'paradigm'
+port = 8083
+ip = '127.0.0.1'
+loglevel = 10
+
+
+[macros.start_test]
+name = 'START_TEST'
+description = 'start all modules for simulation'
+delay_s = 1
+[macros.start_test.default_json]
+nrep = 6
+[macros.start_test.cmds]
+# variable names are arbitrary, the commands will be executes in the same order as they are read by tomllib
+com1 = ['dp-mockup-streamer', 'START_RANDOM']
+com2 = ['dp-lsl-recording', 'SELECT_ALL']
+com4 = ['dp-lsl-recording', 'RECORD']
+com5 = ['dp-mi-paradigm', 'RUN', 'nrepetitions=nrep']
+
+[macros.stop]
+name = 'STOP_TEST'
+description = 'Send a stop command to all involved modules'
+[macros.stop.cmds]
+com1 = ['dp-lsl-recording', 'STOPRECORD']

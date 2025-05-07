@@ -1,0 +1,32 @@
+[random]
+#
+# # second part of the key, here <stream1> is arbitrary, but must be unique
+[random.stream1]
+  # at least sampling_freq and n_samples must be specified, else no regular stream will be created. It will still be checked for markers
+  stream_name='mock_random1'  # name of the stream
+  sampling_freq=100
+  n_channels=2
+  pre_buffer_s=300             # number of seconds data is prebuffered for, if not specified, 300s will be buffered
+
+# if markers are specified, they will be sent in given intervals 
+[random.stream1.markers]
+  marker_stream_name='mock_random1'             # if not specified, it will be `stream_name` + '_markers'
+  t_interval_s = 1
+  values = ['a', 'b', 'c']     # list or single string -> will be repeated by cycling through (np.tile)
+
+# to specify streams from individual files. Currently supported are xdf, BrainVision (.vhdr, .vmrk, .eeg), and .npy files
+# [files]
+# # second part of the key, here <file1> is arbitrary, but must be unique
+# [files.file1]
+#   # file_path='../mock_EEG_stream_1.xdf'      # path to the file, if file cannot be found, no stream will be created. Note: This can be a glob pattern in which case the returning list will be stream one file after the other
+#   stream_name='AODataStream'
+#   mode='repeat'                           # repeat or once -> loop over files again
+#   type='regular'                          # regular or irregular
+#   # sampling_freq='derive'                  # sampling rate to be simulated, can be float or `derive` to take the sfreq from the sources. This can be used to speed up the replay or slow it down
+#   sampling_freq=22_000                  # sampling rate to be simulated, can be float or `derive` to take the sfreq from the sources. This can be used to speed up the replay or slow it down
+#   stream_type='EEG'                       # Can be any string, but LSL encourages to stick to common types
+#   # select_channels=['Fp1', 'Fp2']        # list of strings e.g. ['C3', 'Cz', 'C4'] to select specific channels only
+  
+
+# [files.file1.markers]
+#   marker_stream_name='mock_EEG_stream_marker_Fp1'
