@@ -1,0 +1,13 @@
+# get_streams_names { #dareplane_utils.stream_watcher.lsl_stream_watcher.get_streams_names }
+
+```python
+stream_watcher.lsl_stream_watcher.get_streams_names()
+```
+
+Get a list of all available lsl stream names.
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name    | Type        | Description                        |
+|---------|-------------|------------------------------------|
+| streams | list\[str\] | names of all available LSL streams |

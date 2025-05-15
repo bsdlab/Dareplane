@@ -1,0 +1,47 @@
+# StreamWatcher { #dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher }
+
+```python
+stream_watcher.lsl_stream_watcher.StreamWatcher(
+    self,
+    name='',
+    buffer_size_s=2,
+    logger=logger,
+)
+```
+
+
+
+## Methods
+
+| Name | Description |
+| --- | --- |
+| [connect_to_stream](#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream) | Either use the self.name or a provided identifier dict to hook up |
+| [disconnect](#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect) | Destroying the inlet will disconnect -> see pylsl.pylsl.py |
+| [update_numeric](#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric) | Look for new data and update the buffer |
+
+### connect_to_stream { #dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream }
+
+```python
+stream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(
+    identifier=None,
+)
+```
+
+Either use the self.name or a provided identifier dict to hook up
+with an LSL stream, they should coincide
+
+### disconnect { #dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect }
+
+```python
+stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()
+```
+
+Destroying the inlet will disconnect -> see pylsl.pylsl.py
+
+### update_numeric { #dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric }
+
+```python
+stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()
+```
+
+Look for new data and update the buffer

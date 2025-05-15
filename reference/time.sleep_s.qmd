@@ -1,0 +1,15 @@
+# time.sleep_s { #dareplane_utils.general.time.sleep_s }
+
+```python
+general.time.sleep_s(s, partial_sleep_threshold=0.0005, nsteps=30)
+```
+
+Sleep for a specified duration with partial sleep optimization.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name                    | Type   | Description                                                                                                                                                                 | Default    |
+|-------------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| s                       | float  | The total duration to sleep in seconds.                                                                                                                                     | _required_ |
+| partial_sleep_threshold | float  | The threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations `s` above the threshold, the optimization is applied. | `0.0005`   |
+| nsteps                  | int    | The number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to `nsteps` > 4.     | `30`       |

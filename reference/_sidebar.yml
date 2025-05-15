@@ -1,0 +1,30 @@
+website:
+  sidebar:
+  - contents:
+    - reference/index.qmd
+    - contents:
+      - contents:
+        - reference/DefaultServer.qmd
+        section: Server
+      - contents:
+        - reference/logger.get_logger.qmd
+        - reference/server.LogRecordStreamHandler.qmd
+        - reference/server.LogRecordSocketReceiver.qmd
+        - reference/server.modify_root_logger.qmd
+        section: Logging
+      - contents:
+        - reference/StreamWatcher.qmd
+        - reference/get_streams_names.qmd
+        - reference/pylsl_xmlelement_to_dict.qmd
+        - reference/get_channel_names.qmd
+        section: Streaming data
+      - contents:
+        - reference/ringbuffer.RingBuffer.qmd
+        - reference/time.sleep_s.qmd
+        - reference/time.partial_sleep.qmd
+        - reference/time.full_speed.qmd
+        - reference/event_loop.EventLoop.qmd
+        section: General
+      section: dareplane_utils
+    id: reference
+  - id: dummy-sidebar

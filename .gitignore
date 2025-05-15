@@ -1,3 +1,3 @@
 .quarto/
-reference/
+# reference/  # for not do the quartodoc part manually, later add to CI action
 _site/

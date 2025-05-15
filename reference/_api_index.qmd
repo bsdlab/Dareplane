@@ -1,0 +1,53 @@
+# Function reference {.doc .doc-index}
+
+## dareplane_utils
+
+Utility functions for Python regarding common components which can be usefull for multiple Dareplane modules.
+
+### Server
+
+The server components can be used from `dareplane_utils.default_server.server`
+
+| | |
+| --- | --- |
+| [DefaultServer](DefaultServer.qmd#dareplane_utils.default_server.server.DefaultServer) | The default server which is being used and modified by pther dareplane |
+
+### Logging
+
+Logging components which add a TCP handler to a logger derived from Python's standard `logging.Logger`. This allows to 
+the [dp-control-room](https://github.com/bsdlab/dp-control-room) to create a single consolidated log-file.
+
+
+| | |
+| --- | --- |
+| [logger.get_logger](logger.get_logger.qmd#dareplane_utils.logging.logger.get_logger) | Get a configured logger. |
+| [server.LogRecordStreamHandler](server.LogRecordStreamHandler.qmd#dareplane_utils.logging.server.LogRecordStreamHandler) | Handler for a streaming logging request. |
+| [server.LogRecordSocketReceiver](server.LogRecordSocketReceiver.qmd#dareplane_utils.logging.server.LogRecordSocketReceiver) | Simple TCP socket-based logging receiver suitable for testing. |
+| [server.modify_root_logger](server.modify_root_logger.qmd#dareplane_utils.logging.server.modify_root_logger) |  |
+
+### Streaming data
+
+Dareplane relies mostly on the [lab streaming layer (LSL)](https://labstreaminglayer.org/#/) for streaming data. A central element of the  [`dareplane-utils`](https://pypi.org/project/dareplane-utils/) 
+is the [`StreamWatcher`](https://github.com/matthiasdold/dareplane-pyutils/blob/main/src/dareplane_utils/stream_watcher/lsl_stream_watcher.py) which is a ring buffer to read from streams. Currently we only
+have a `StreamWatcher` for LSL implemented, using `pylsl` and inlets defined therein.
+
+
+| | |
+| --- | --- |
+| [StreamWatcher](StreamWatcher.qmd#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher) |  |
+| [get_streams_names](get_streams_names.qmd#dareplane_utils.stream_watcher.lsl_stream_watcher.get_streams_names) | Get a list of all available lsl stream names. |
+| [pylsl_xmlelement_to_dict](pylsl_xmlelement_to_dict.qmd#dareplane_utils.stream_watcher.lsl_stream_watcher.pylsl_xmlelement_to_dict) | The pylsl XMLElement is hard to investigate -> cast to a dict for |
+| [get_channel_names](get_channel_names.qmd#dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names) |  |
+
+### General
+
+General utility functions and classes
+
+
+| | |
+| --- | --- |
+| [ringbuffer.RingBuffer](ringbuffer.RingBuffer.qmd#dareplane_utils.general.ringbuffer.RingBuffer) |  |
+| [time.sleep_s](time.sleep_s.qmd#dareplane_utils.general.time.sleep_s) | Sleep for a specified duration with partial sleep optimization. |
+| [time.partial_sleep](time.partial_sleep.qmd#dareplane_utils.general.time.partial_sleep) | Sleep for 90% of `s` or up to 30ms to the end, whatever is longer |
+| [time.full_speed](time.full_speed.qmd#dareplane_utils.general.time.full_speed) |  |
+| [event_loop.EventLoop](event_loop.EventLoop.qmd#dareplane_utils.general.event_loop.EventLoop) |  |

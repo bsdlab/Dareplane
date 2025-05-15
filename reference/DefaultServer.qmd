@@ -1,0 +1,65 @@
+# DefaultServer { #dareplane_utils.default_server.server.DefaultServer }
+
+```python
+default_server.server.DefaultServer(
+    self,
+    port=8080,
+    ip='0.0.0.0',
+    nlisten=10,
+    name='default_server',
+    thread_stopper=stop_thread,
+    proc_stopper=stop_process,
+    msg_interpreter=interpret_msg,
+    pcommand_map=dict(),
+    current_conn=None,
+    server_socket=None,
+    threads=dict(),
+    processes=dict(),
+    is_listening=False,
+    logger=get_logger(__name__),
+)
+```
+
+The default server which is being used and modified by pther dareplane
+projects
+
+## Methods
+
+| Name | Description |
+| --- | --- |
+| [default_msg_interpretation](#dareplane_utils.default_server.server.DefaultServer.default_msg_interpretation) | This contains the default interpretation |
+| [handle_msg](#dareplane_utils.default_server.server.DefaultServer.handle_msg) | interpret the message |
+| [msg_interpretation](#dareplane_utils.default_server.server.DefaultServer.msg_interpretation) | Interpret the message and perform book keeping if necessary |
+| [shutdown](#dareplane_utils.default_server.server.DefaultServer.shutdown) | Shutdown the server and close all connections |
+
+### default_msg_interpretation { #dareplane_utils.default_server.server.DefaultServer.default_msg_interpretation }
+
+```python
+default_server.server.DefaultServer.default_msg_interpretation(msg)
+```
+
+This contains the default interpretation
+
+### handle_msg { #dareplane_utils.default_server.server.DefaultServer.handle_msg }
+
+```python
+default_server.server.DefaultServer.handle_msg(msg)
+```
+
+interpret the message
+
+### msg_interpretation { #dareplane_utils.default_server.server.DefaultServer.msg_interpretation }
+
+```python
+default_server.server.DefaultServer.msg_interpretation(msg)
+```
+
+Interpret the message and perform book keeping if necessary
+
+### shutdown { #dareplane_utils.default_server.server.DefaultServer.shutdown }
+
+```python
+default_server.server.DefaultServer.shutdown()
+```
+
+Shutdown the server and close all connections

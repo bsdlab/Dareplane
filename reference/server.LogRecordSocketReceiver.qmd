@@ -1,0 +1,13 @@
+# server.LogRecordSocketReceiver { #dareplane_utils.logging.server.LogRecordSocketReceiver }
+
+```python
+logging.server.LogRecordSocketReceiver(
+    self,
+    host='localhost',
+    port=logging.handlers.DEFAULT_TCP_LOGGING_PORT,
+    handler=LogRecordStreamHandler,
+    logfile=Path('default_socket.log'),
+)
+```
+
+Simple TCP socket-based logging receiver suitable for testing.

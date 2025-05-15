@@ -1,0 +1,62 @@
+# ringbuffer.RingBuffer { #dareplane_utils.general.ringbuffer.RingBuffer }
+
+```python
+general.ringbuffer.RingBuffer(self, shape, dtype=np.float32)
+```
+
+## Attributes {.doc-section .doc-section-attributes}
+
+| Name     | Type           | Description                                     |
+|----------|----------------|-------------------------------------------------|
+| buffer   | np.ndarray     | the data buffer                                 |
+| buffer_t | np.ndarray     | the time buffer                                 |
+| last_t   | float          | latest time stamp                               |
+| curr_i   | int            | index of the latest data point int the buffer   |
+| logger   | logging.Logger | the logger used for warnings and debug messages |
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name   | Type                   | Description                                                                                                    | Default      |
+|--------|------------------------|----------------------------------------------------------------------------------------------------------------|--------------|
+| shape  | tuple\[int, int, ...\] | shape of the buffer needs to be at least 2D (n_samples, n_features), arbitrary further dimensions can be added | _required_   |
+| dtype  | type                   | a numpy data type for the buffer                                                                               | `np.float32` |
+
+## Methods
+
+| Name | Description |
+| --- | --- |
+| [add_continuous_buffer](#dareplane_utils.general.ringbuffer.RingBuffer.add_continuous_buffer) | Slice samples should not be necessary >>> as we add continuously |
+| [get_insert_slices](#dareplane_utils.general.ringbuffer.RingBuffer.get_insert_slices) | Get slices mapping data from the samples to the buffer |
+
+### add_continuous_buffer { #dareplane_utils.general.ringbuffer.RingBuffer.add_continuous_buffer }
+
+```python
+general.ringbuffer.RingBuffer.add_continuous_buffer(
+    slice_buffer,
+    samples,
+    times,
+)
+```
+
+Slice samples should not be necessary >>> as we add continuously
++ slice selection from lists is slow
+
+### get_insert_slices { #dareplane_utils.general.ringbuffer.RingBuffer.get_insert_slices }
+
+```python
+general.ringbuffer.RingBuffer.get_insert_slices(len_samples)
+```
+
+Get slices mapping data from the samples to the buffer
+
+#### Parameters {.doc-section .doc-section-parameters}
+
+| Name        | Type   | Description              | Default    |
+|-------------|--------|--------------------------|------------|
+| len_samples | int    | number of samples to add | _required_ |
+
+#### Returns {.doc-section .doc-section-returns}
+
+| Name   | Type                                       | Description   |
+|--------|--------------------------------------------|---------------|
+|        | tuple\[list\[slice\], list\[slice\], int\] |               |
