@@ -1,0 +1,11 @@
+typography:
+  fonts:
+    - family: Jura
+      source: google
+  base: Jura
+  headings: Jura
+
+logo:
+  small: ./assets/favicon_dareplane_logo.png
+  medium: ./assets/single_dareplane_logo.svg
+  large: ./assets/single_dareplane_logo.svg
