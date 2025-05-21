@@ -1,5 +1,205 @@
 [
   {
+    "objectID": "reference/server.LogRecordStreamHandler.html",
+    "href": "reference/server.LogRecordStreamHandler.html",
+    "title": "server.LogRecordStreamHandler",
+    "section": "",
+    "text": "logging.server.LogRecordStreamHandler()\nHandler for a streaming logging request.\nThis basically logs the record using whatever logging policy is configured locally.\n\n\n\n\n\nName\nDescription\n\n\n\n\nhandle\nHandle multiple requests - each expected to be a 4-byte length,\n\n\n\n\n\nlogging.server.LogRecordStreamHandler.handle()\nHandle multiple requests - each expected to be a 4-byte length, followed by the LogRecord in pickle format. Logs the record according to whatever policy is configured locally.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "server.LogRecordStreamHandler"
+    ]
+  },
+  {
+    "objectID": "reference/server.LogRecordStreamHandler.html#methods",
+    "href": "reference/server.LogRecordStreamHandler.html#methods",
+    "title": "server.LogRecordStreamHandler",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nhandle\nHandle multiple requests - each expected to be a 4-byte length,\n\n\n\n\n\nlogging.server.LogRecordStreamHandler.handle()\nHandle multiple requests - each expected to be a 4-byte length, followed by the LogRecord in pickle format. Logs the record according to whatever policy is configured locally.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "server.LogRecordStreamHandler"
+    ]
+  },
+  {
+    "objectID": "reference/event_loop.EventLoop.html",
+    "href": "reference/event_loop.EventLoop.html",
+    "title": "event_loop.EventLoop",
+    "section": "",
+    "text": "general.event_loop.EventLoop(self, dt_s, stop_event=Event(), ctx=None)\n\n\n\n\n\nName\nDescription\n\n\n\n\nvalidate_callback\nCheck that every callback accepts at least a kwarg with ‘ctx’\n\n\n\n\n\ngeneral.event_loop.EventLoop.validate_callback(cb)\nCheck that every callback accepts at least a kwarg with ‘ctx’",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "event_loop.EventLoop"
+    ]
+  },
+  {
+    "objectID": "reference/event_loop.EventLoop.html#methods",
+    "href": "reference/event_loop.EventLoop.html#methods",
+    "title": "event_loop.EventLoop",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nvalidate_callback\nCheck that every callback accepts at least a kwarg with ‘ctx’\n\n\n\n\n\ngeneral.event_loop.EventLoop.validate_callback(cb)\nCheck that every callback accepts at least a kwarg with ‘ctx’",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "event_loop.EventLoop"
+    ]
+  },
+  {
+    "objectID": "reference/get_streams_names.html",
+    "href": "reference/get_streams_names.html",
+    "title": "get_streams_names",
+    "section": "",
+    "text": "stream_watcher.lsl_stream_watcher.get_streams_names()\nGet a list of all available lsl stream names.\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nstreams\nlist[str]\nnames of all available LSL streams",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "get_streams_names"
+    ]
+  },
+  {
+    "objectID": "reference/get_streams_names.html#returns",
+    "href": "reference/get_streams_names.html#returns",
+    "title": "get_streams_names",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nstreams\nlist[str]\nnames of all available LSL streams",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "get_streams_names"
+    ]
+  },
+  {
+    "objectID": "reference/time.sleep_s.html",
+    "href": "reference/time.sleep_s.html",
+    "title": "time.sleep_s",
+    "section": "",
+    "text": "general.time.sleep_s(s, partial_sleep_threshold=0.0005, nsteps=30)\nSleep for a specified duration with partial sleep optimization.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ns\nfloat\nThe total duration to sleep in seconds.\nrequired\n\n\npartial_sleep_threshold\nfloat\nThe threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations s above the threshold, the optimization is applied.\n0.0005\n\n\nnsteps\nint\nThe number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to nsteps &gt; 4.\n30",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "time.sleep_s"
+    ]
+  },
+  {
+    "objectID": "reference/time.sleep_s.html#parameters",
+    "href": "reference/time.sleep_s.html#parameters",
+    "title": "time.sleep_s",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ns\nfloat\nThe total duration to sleep in seconds.\nrequired\n\n\npartial_sleep_threshold\nfloat\nThe threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations s above the threshold, the optimization is applied.\n0.0005\n\n\nnsteps\nint\nThe number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to nsteps &gt; 4.\n30",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "time.sleep_s"
+    ]
+  },
+  {
+    "objectID": "reference/server.modify_root_logger.html",
+    "href": "reference/server.modify_root_logger.html",
+    "title": "server.modify_root_logger",
+    "section": "",
+    "text": "server.modify_root_logger\nlogging.server.modify_root_logger(logfile)",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "server.modify_root_logger"
+    ]
+  },
+  {
+    "objectID": "reference/time.full_speed.html",
+    "href": "reference/time.full_speed.html",
+    "title": "time.full_speed",
+    "section": "",
+    "text": "time.full_speed\ngeneral.time.full_speed(s, start)",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "time.full_speed"
+    ]
+  },
+  {
+    "objectID": "reference/DefaultServer.html",
+    "href": "reference/DefaultServer.html",
+    "title": "DefaultServer",
+    "section": "",
+    "text": "default_server.server.DefaultServer(\n    self,\n    port=8080,\n    ip='0.0.0.0',\n    nlisten=10,\n    name='default_server',\n    thread_stopper=stop_thread,\n    proc_stopper=stop_process,\n    msg_interpreter=interpret_msg,\n    pcommand_map=dict(),\n    current_conn=None,\n    server_socket=None,\n    threads=dict(),\n    processes=dict(),\n    is_listening=False,\n    logger=get_logger(__name__),\n)\nThe default server which is being used and modified by pther dareplane projects\n\n\n\n\n\nName\nDescription\n\n\n\n\ndefault_msg_interpretation\nThis contains the default interpretation\n\n\nhandle_msg\ninterpret the message\n\n\nmsg_interpretation\nInterpret the message and perform book keeping if necessary\n\n\nshutdown\nShutdown the server and close all connections\n\n\n\n\n\ndefault_server.server.DefaultServer.default_msg_interpretation(msg)\nThis contains the default interpretation\n\n\n\ndefault_server.server.DefaultServer.handle_msg(msg)\ninterpret the message\n\n\n\ndefault_server.server.DefaultServer.msg_interpretation(msg)\nInterpret the message and perform book keeping if necessary\n\n\n\ndefault_server.server.DefaultServer.shutdown()\nShutdown the server and close all connections",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "DefaultServer"
+    ]
+  },
+  {
+    "objectID": "reference/DefaultServer.html#methods",
+    "href": "reference/DefaultServer.html#methods",
+    "title": "DefaultServer",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\ndefault_msg_interpretation\nThis contains the default interpretation\n\n\nhandle_msg\ninterpret the message\n\n\nmsg_interpretation\nInterpret the message and perform book keeping if necessary\n\n\nshutdown\nShutdown the server and close all connections\n\n\n\n\n\ndefault_server.server.DefaultServer.default_msg_interpretation(msg)\nThis contains the default interpretation\n\n\n\ndefault_server.server.DefaultServer.handle_msg(msg)\ninterpret the message\n\n\n\ndefault_server.server.DefaultServer.msg_interpretation(msg)\nInterpret the message and perform book keeping if necessary\n\n\n\ndefault_server.server.DefaultServer.shutdown()\nShutdown the server and close all connections",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "DefaultServer"
+    ]
+  },
+  {
+    "objectID": "examples/hello_world/hello_world.html",
+    "href": "examples/hello_world/hello_world.html",
+    "title": "Hello World for Dareplane with python modules",
+    "section": "",
+    "text": "This example will guide you through the process of creating a simple motor imagery task as a Dareplane module and then hook it up with a mock-up data streamer as well as LSL recording. Completing this example you will have a data source (mockup only), a paradigm providing visual queues and markers and finally recording of markers and streaming data with LSL into an *.xdf file.\n\n\nInstall the dareplane-utils to make use of the default TCP server. E.g. via pip install dareplane-utils.\n\n\n\nFirst, lets decide to call the module dp-mi-paradigm. The prefix of dp- for Dareplane is arbitrary and you can of course choose not to use it.\n\n\nTo start, get the dp-strawman-module and read the README.md therein carefully. After that you should know how to build upon the strawman. So lets rename the relevant folders. The content of our new module folder ./dp-mi-paradigm should then look like this:\n├── LICENSE\n├── README.md\n├── api\n│   └── server.py\n├── configs\n├── mi_paradigm\n│   ├── main.py\n│   └── utils\n│       └── logging.py\n└── tests\n\n\n\nFor our paradigm we decide to show simple instructions for motor imagination of left (L) and right ( R) hand movement by displaying letters ‘L’ and ‘R’ as well as a fixation cross ‘+’ using psychopy. In addition, we want to send markers to an LSL stream capturing when a direction is shown.\nSo our ./mi_paradigm/main.py could look like this.\n```python ./mi_paradigm/main.py\nfrom fire import Fire import time import random import pylsl from psychopy.visual import TextStim, Window\nfrom mi_paradigm.utils.logging import logger\nlogger.setLevel(10)\nBG_COLOR = (0, 0, 0) TEXT_COLOR = (1, 0, 0)"
+  },
+  {
+    "objectID": "examples/hello_world/hello_world.html#get-the-dareplane-pyutils",
+    "href": "examples/hello_world/hello_world.html#get-the-dareplane-pyutils",
+    "title": "Hello World for Dareplane with python modules",
+    "section": "",
+    "text": "Install the dareplane-utils to make use of the default TCP server. E.g. via pip install dareplane-utils."
+  },
+  {
+    "objectID": "examples/hello_world/hello_world.html#building-the-paradigm-module",
+    "href": "examples/hello_world/hello_world.html#building-the-paradigm-module",
+    "title": "Hello World for Dareplane with python modules",
+    "section": "",
+    "text": "First, lets decide to call the module dp-mi-paradigm. The prefix of dp- for Dareplane is arbitrary and you can of course choose not to use it.\n\n\nTo start, get the dp-strawman-module and read the README.md therein carefully. After that you should know how to build upon the strawman. So lets rename the relevant folders. The content of our new module folder ./dp-mi-paradigm should then look like this:\n├── LICENSE\n├── README.md\n├── api\n│   └── server.py\n├── configs\n├── mi_paradigm\n│   ├── main.py\n│   └── utils\n│       └── logging.py\n└── tests\n\n\n\nFor our paradigm we decide to show simple instructions for motor imagination of left (L) and right ( R) hand movement by displaying letters ‘L’ and ‘R’ as well as a fixation cross ‘+’ using psychopy. In addition, we want to send markers to an LSL stream capturing when a direction is shown.\nSo our ./mi_paradigm/main.py could look like this.\n```python ./mi_paradigm/main.py\nfrom fire import Fire import time import random import pylsl from psychopy.visual import TextStim, Window\nfrom mi_paradigm.utils.logging import logger\nlogger.setLevel(10)\nBG_COLOR = (0, 0, 0) TEXT_COLOR = (1, 0, 0)"
+  },
+  {
+    "objectID": "examples/hello_world/hello_world.html#running-your-module-from-the-control-room",
+    "href": "examples/hello_world/hello_world.html#running-your-module-from-the-control-room",
+    "title": "Hello World for Dareplane with python modules",
+    "section": "Running your module from the control room",
+    "text": "Running your module from the control room\nIt is now time to integrate the dp-mi-paradigm with other modules. This is done using the dp-control-room. If you do not yet have it, clone it from git and place it e.g. in the parent directory of pd-mi-paradigm. So that you have the pd-mi-paradigm and pd-control-room paradigm in the same folder. Make sure to have all dependencies of the control room installed. Try pip install -r requirements.txt from within the pd-control-room folder.\nThen move into the dp-control-room directory and create a config at ./configs/mi_experiment.toml with the following content:\n```toml ./configs/mi_experiment.toml [python] modules_root = ‘../’"
+  },
+  {
+    "objectID": "docs/index.html",
+    "href": "docs/index.html",
+    "title": "Documentation",
+    "section": "",
+    "text": "The documentation mainly covers the dareplane-utils Python package. Please refere to the individual modules and their README.md for further details on individual modules."
+  },
+  {
+    "objectID": "docs/index.html#dareplane_utils",
+    "href": "docs/index.html#dareplane_utils",
+    "title": "Documentation",
+    "section": "dareplane_utils",
+    "text": "dareplane_utils\nUtility functions for Python regarding common components which can be usefull for multiple Dareplane modules.\n\nServer\nThe server components can be used from dareplane_utils.default_server.server\n\n\n\nDefaultServer\nThe default server which is being used and modified by pther dareplane\n\n\n\n\n\nLogging\nLogging components which add a TCP handler to a logger derived from Python’s standard logging.Logger. This allows to the dp-control-room to create a single consolidated log-file.\n\n\n\nlogger.get_logger\nGet a configured logger.\n\n\nserver.LogRecordStreamHandler\nHandler for a streaming logging request.\n\n\nserver.LogRecordSocketReceiver\nSimple TCP socket-based logging receiver suitable for testing.\n\n\nserver.modify_root_logger\n\n\n\n\n\n\nStreaming data\nDareplane relies mostly on the lab streaming layer (LSL) for streaming data. A central element of the dareplane-utils is the StreamWatcher which is a ring buffer to read from streams. Currently we only have a StreamWatcher for LSL implemented, using pylsl and inlets defined therein.\n\n\n\nStreamWatcher\n\n\n\nget_streams_names\nGet a list of all available lsl stream names.\n\n\npylsl_xmlelement_to_dict\nThe pylsl XMLElement is hard to investigate -&gt; cast to a dict for\n\n\nget_channel_names\n\n\n\n\n\n\nGeneral\nGeneral utility functions and classes\n\n\n\nringbuffer.RingBuffer\n\n\n\ntime.sleep_s\nSleep for a specified duration with partial sleep optimization.\n\n\ntime.partial_sleep\nSleep for 90% of s or up to 30ms to the end, whatever is longer\n\n\ntime.full_speed\n\n\n\nevent_loop.EventLoop"
+  },
+  {
+    "objectID": "docs/documentation_setup.html",
+    "href": "docs/documentation_setup.html",
+    "title": "Documentation setup",
+    "section": "",
+    "text": "The documentation for Dareplane is generated with Quarto and quartodoc. The later is used to automatically generate API documentation for python modules. Quarto uses a central _quarto.yml file to configure the documentation.\n\n\n\nCurrently the Home section is sourced from the main.qmd file as directly including the README.md did not work. As I could not get the logo to work properly (neither could I just ignore). The basic idea was from the quarto docs."
+  },
+  {
+    "objectID": "docs/documentation_setup.html#todo",
+    "href": "docs/documentation_setup.html#todo",
+    "title": "Documentation setup",
+    "section": "",
+    "text": "Currently the Home section is sourced from the main.qmd file as directly including the README.md did not work. As I could not get the logo to work properly (neither could I just ignore). The basic idea was from the quarto docs."
+  },
+  {
     "objectID": "docs/main.html",
     "href": "docs/main.html",
     "title": "Dareplane",
@@ -42,245 +242,11 @@
     "text": "Other frameworks\nThis is a non-exhaustive list of other frameworks which might be more suitable depending on your needs:\n\nBCI2000\nMedusabci\ntimeflux"
   },
   {
-    "objectID": "docs/index.html",
-    "href": "docs/index.html",
-    "title": "Documentation",
-    "section": "",
-    "text": "The documentation mainly covers the dareplane-utils Python package. Please refere to the individual modules and their README.md for further details on individual modules."
-  },
-  {
-    "objectID": "docs/index.html#dareplane_utils",
-    "href": "docs/index.html#dareplane_utils",
-    "title": "Documentation",
-    "section": "dareplane_utils",
-    "text": "dareplane_utils\nUtility functions for Python regarding common components which can be usefull for multiple Dareplane modules.\n\nServer\nThe server components can be used from dareplane_utils.default_server.server\n\n\n\nDefaultServer\nThe default server which is being used and modified by pther dareplane\n\n\n\n\n\nLogging\nLogging components which add a TCP handler to a logger derived from Python’s standard logging.Logger. This allows to the dp-control-room to create a single consolidated log-file.\n\n\n\nlogger.get_logger\nGet a configured logger.\n\n\nserver.LogRecordStreamHandler\nHandler for a streaming logging request.\n\n\nserver.LogRecordSocketReceiver\nSimple TCP socket-based logging receiver suitable for testing.\n\n\nserver.modify_root_logger\n\n\n\n\n\n\nStreaming data\nDareplane relies mostly on the lab streaming layer (LSL) for streaming data. A central element of the dareplane-utils is the StreamWatcher which is a ring buffer to read from streams. Currently we only have a StreamWatcher for LSL implemented, using pylsl and inlets defined therein.\n\n\n\nStreamWatcher\n\n\n\nget_streams_names\nGet a list of all available lsl stream names.\n\n\npylsl_xmlelement_to_dict\nThe pylsl XMLElement is hard to investigate -&gt; cast to a dict for\n\n\nget_channel_names\n\n\n\n\n\n\nGeneral\nGeneral utility functions and classes\n\n\n\nringbuffer.RingBuffer\n\n\n\ntime.sleep_s\nSleep for a specified duration with partial sleep optimization.\n\n\ntime.partial_sleep\nSleep for 90% of s or up to 30ms to the end, whatever is longer\n\n\ntime.full_speed\n\n\n\nevent_loop.EventLoop"
-  },
-  {
-    "objectID": "reference/time.partial_sleep.html",
-    "href": "reference/time.partial_sleep.html",
-    "title": "time.partial_sleep",
-    "section": "",
-    "text": "time.partial_sleep\ngeneral.time.partial_sleep(s, start, nsteps=30)\nSleep for 90% of s or up to 30ms to the end, whatever is longer",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "time.partial_sleep"
-    ]
-  },
-  {
-    "objectID": "reference/server.modify_root_logger.html",
-    "href": "reference/server.modify_root_logger.html",
-    "title": "server.modify_root_logger",
-    "section": "",
-    "text": "server.modify_root_logger\nlogging.server.modify_root_logger(logfile)",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "server.modify_root_logger"
-    ]
-  },
-  {
-    "objectID": "reference/DefaultServer.html",
-    "href": "reference/DefaultServer.html",
-    "title": "DefaultServer",
-    "section": "",
-    "text": "default_server.server.DefaultServer(\n    self,\n    port=8080,\n    ip='0.0.0.0',\n    nlisten=10,\n    name='default_server',\n    thread_stopper=stop_thread,\n    proc_stopper=stop_process,\n    msg_interpreter=interpret_msg,\n    pcommand_map=dict(),\n    current_conn=None,\n    server_socket=None,\n    threads=dict(),\n    processes=dict(),\n    is_listening=False,\n    logger=get_logger(__name__),\n)\nThe default server which is being used and modified by pther dareplane projects\n\n\n\n\n\nName\nDescription\n\n\n\n\ndefault_msg_interpretation\nThis contains the default interpretation\n\n\nhandle_msg\ninterpret the message\n\n\nmsg_interpretation\nInterpret the message and perform book keeping if necessary\n\n\nshutdown\nShutdown the server and close all connections\n\n\n\n\n\ndefault_server.server.DefaultServer.default_msg_interpretation(msg)\nThis contains the default interpretation\n\n\n\ndefault_server.server.DefaultServer.handle_msg(msg)\ninterpret the message\n\n\n\ndefault_server.server.DefaultServer.msg_interpretation(msg)\nInterpret the message and perform book keeping if necessary\n\n\n\ndefault_server.server.DefaultServer.shutdown()\nShutdown the server and close all connections",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "DefaultServer"
-    ]
-  },
-  {
-    "objectID": "reference/DefaultServer.html#methods",
-    "href": "reference/DefaultServer.html#methods",
-    "title": "DefaultServer",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\ndefault_msg_interpretation\nThis contains the default interpretation\n\n\nhandle_msg\ninterpret the message\n\n\nmsg_interpretation\nInterpret the message and perform book keeping if necessary\n\n\nshutdown\nShutdown the server and close all connections\n\n\n\n\n\ndefault_server.server.DefaultServer.default_msg_interpretation(msg)\nThis contains the default interpretation\n\n\n\ndefault_server.server.DefaultServer.handle_msg(msg)\ninterpret the message\n\n\n\ndefault_server.server.DefaultServer.msg_interpretation(msg)\nInterpret the message and perform book keeping if necessary\n\n\n\ndefault_server.server.DefaultServer.shutdown()\nShutdown the server and close all connections",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "DefaultServer"
-    ]
-  },
-  {
-    "objectID": "reference/server.LogRecordSocketReceiver.html",
-    "href": "reference/server.LogRecordSocketReceiver.html",
-    "title": "server.LogRecordSocketReceiver",
-    "section": "",
-    "text": "server.LogRecordSocketReceiver\nlogging.server.LogRecordSocketReceiver(\n    self,\n    host='localhost',\n    port=logging.handlers.DEFAULT_TCP_LOGGING_PORT,\n    handler=LogRecordStreamHandler,\n    logfile=Path('default_socket.log'),\n)\nSimple TCP socket-based logging receiver suitable for testing.",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "server.LogRecordSocketReceiver"
-    ]
-  },
-  {
-    "objectID": "reference/get_streams_names.html",
-    "href": "reference/get_streams_names.html",
-    "title": "get_streams_names",
-    "section": "",
-    "text": "stream_watcher.lsl_stream_watcher.get_streams_names()\nGet a list of all available lsl stream names.\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nstreams\nlist[str]\nnames of all available LSL streams",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "get_streams_names"
-    ]
-  },
-  {
-    "objectID": "reference/get_streams_names.html#returns",
-    "href": "reference/get_streams_names.html#returns",
-    "title": "get_streams_names",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nstreams\nlist[str]\nnames of all available LSL streams",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "get_streams_names"
-    ]
-  },
-  {
-    "objectID": "reference/pylsl_xmlelement_to_dict.html",
-    "href": "reference/pylsl_xmlelement_to_dict.html",
-    "title": "pylsl_xmlelement_to_dict",
-    "section": "",
-    "text": "pylsl_xmlelement_to_dict\nstream_watcher.lsl_stream_watcher.pylsl_xmlelement_to_dict(inf)\nThe pylsl XMLElement is hard to investigate -&gt; cast to a dict for simplicity",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "pylsl_xmlelement_to_dict"
-    ]
-  },
-  {
-    "objectID": "reference/server.LogRecordStreamHandler.html",
-    "href": "reference/server.LogRecordStreamHandler.html",
-    "title": "server.LogRecordStreamHandler",
-    "section": "",
-    "text": "logging.server.LogRecordStreamHandler()\nHandler for a streaming logging request.\nThis basically logs the record using whatever logging policy is configured locally.\n\n\n\n\n\nName\nDescription\n\n\n\n\nhandle\nHandle multiple requests - each expected to be a 4-byte length,\n\n\n\n\n\nlogging.server.LogRecordStreamHandler.handle()\nHandle multiple requests - each expected to be a 4-byte length, followed by the LogRecord in pickle format. Logs the record according to whatever policy is configured locally.",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "server.LogRecordStreamHandler"
-    ]
-  },
-  {
-    "objectID": "reference/server.LogRecordStreamHandler.html#methods",
-    "href": "reference/server.LogRecordStreamHandler.html#methods",
-    "title": "server.LogRecordStreamHandler",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nhandle\nHandle multiple requests - each expected to be a 4-byte length,\n\n\n\n\n\nlogging.server.LogRecordStreamHandler.handle()\nHandle multiple requests - each expected to be a 4-byte length, followed by the LogRecord in pickle format. Logs the record according to whatever policy is configured locally.",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "server.LogRecordStreamHandler"
-    ]
-  },
-  {
     "objectID": "examples/examples.html",
     "href": "examples/examples.html",
     "title": "Examples",
     "section": "",
     "text": "Examples\nSome Dareplane example implementations\nMANUALLY list here"
-  },
-  {
-    "objectID": "examples/hello_world/hello_world.html",
-    "href": "examples/hello_world/hello_world.html",
-    "title": "Hello World for Dareplane with python modules",
-    "section": "",
-    "text": "This example will guide you through the process of creating a simple motor imagery task as a Dareplane module and then hook it up with a mock-up data streamer as well as LSL recording. Completing this example you will have a data source (mockup only), a paradigm providing visual queues and markers and finally recording of markers and streaming data with LSL into an *.xdf file.\n\n\nInstall the dareplane-utils to make use of the default TCP server. E.g. via pip install dareplane-utils.\n\n\n\nFirst, lets decide to call the module dp-mi-paradigm. The prefix of dp- for Dareplane is arbitrary and you can of course choose not to use it.\n\n\nTo start, get the dp-strawman-module and read the README.md therein carefully. After that you should know how to build upon the strawman. So lets rename the relevant folders. The content of our new module folder ./dp-mi-paradigm should then look like this:\n├── LICENSE\n├── README.md\n├── api\n│   └── server.py\n├── configs\n├── mi_paradigm\n│   ├── main.py\n│   └── utils\n│       └── logging.py\n└── tests\n\n\n\nFor our paradigm we decide to show simple instructions for motor imagination of left (L) and right ( R) hand movement by displaying letters ‘L’ and ‘R’ as well as a fixation cross ‘+’ using psychopy. In addition, we want to send markers to an LSL stream capturing when a direction is shown.\nSo our ./mi_paradigm/main.py could look like this.\n```python ./mi_paradigm/main.py\nfrom fire import Fire import time import random import pylsl from psychopy.visual import TextStim, Window\nfrom mi_paradigm.utils.logging import logger\nlogger.setLevel(10)\nBG_COLOR = (0, 0, 0) TEXT_COLOR = (1, 0, 0)"
-  },
-  {
-    "objectID": "examples/hello_world/hello_world.html#get-the-dareplane-pyutils",
-    "href": "examples/hello_world/hello_world.html#get-the-dareplane-pyutils",
-    "title": "Hello World for Dareplane with python modules",
-    "section": "",
-    "text": "Install the dareplane-utils to make use of the default TCP server. E.g. via pip install dareplane-utils."
-  },
-  {
-    "objectID": "examples/hello_world/hello_world.html#building-the-paradigm-module",
-    "href": "examples/hello_world/hello_world.html#building-the-paradigm-module",
-    "title": "Hello World for Dareplane with python modules",
-    "section": "",
-    "text": "First, lets decide to call the module dp-mi-paradigm. The prefix of dp- for Dareplane is arbitrary and you can of course choose not to use it.\n\n\nTo start, get the dp-strawman-module and read the README.md therein carefully. After that you should know how to build upon the strawman. So lets rename the relevant folders. The content of our new module folder ./dp-mi-paradigm should then look like this:\n├── LICENSE\n├── README.md\n├── api\n│   └── server.py\n├── configs\n├── mi_paradigm\n│   ├── main.py\n│   └── utils\n│       └── logging.py\n└── tests\n\n\n\nFor our paradigm we decide to show simple instructions for motor imagination of left (L) and right ( R) hand movement by displaying letters ‘L’ and ‘R’ as well as a fixation cross ‘+’ using psychopy. In addition, we want to send markers to an LSL stream capturing when a direction is shown.\nSo our ./mi_paradigm/main.py could look like this.\n```python ./mi_paradigm/main.py\nfrom fire import Fire import time import random import pylsl from psychopy.visual import TextStim, Window\nfrom mi_paradigm.utils.logging import logger\nlogger.setLevel(10)\nBG_COLOR = (0, 0, 0) TEXT_COLOR = (1, 0, 0)"
-  },
-  {
-    "objectID": "examples/hello_world/hello_world.html#running-your-module-from-the-control-room",
-    "href": "examples/hello_world/hello_world.html#running-your-module-from-the-control-room",
-    "title": "Hello World for Dareplane with python modules",
-    "section": "Running your module from the control room",
-    "text": "Running your module from the control room\nIt is now time to integrate the dp-mi-paradigm with other modules. This is done using the dp-control-room. If you do not yet have it, clone it from git and place it e.g. in the parent directory of pd-mi-paradigm. So that you have the pd-mi-paradigm and pd-control-room paradigm in the same folder. Make sure to have all dependencies of the control room installed. Try pip install -r requirements.txt from within the pd-control-room folder.\nThen move into the dp-control-room directory and create a config at ./configs/mi_experiment.toml with the following content:\n```toml ./configs/mi_experiment.toml [python] modules_root = ‘../’"
-  },
-  {
-    "objectID": "reference/time.sleep_s.html",
-    "href": "reference/time.sleep_s.html",
-    "title": "time.sleep_s",
-    "section": "",
-    "text": "general.time.sleep_s(s, partial_sleep_threshold=0.0005, nsteps=30)\nSleep for a specified duration with partial sleep optimization.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ns\nfloat\nThe total duration to sleep in seconds.\nrequired\n\n\npartial_sleep_threshold\nfloat\nThe threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations s above the threshold, the optimization is applied.\n0.0005\n\n\nnsteps\nint\nThe number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to nsteps &gt; 4.\n30",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "time.sleep_s"
-    ]
-  },
-  {
-    "objectID": "reference/time.sleep_s.html#parameters",
-    "href": "reference/time.sleep_s.html#parameters",
-    "title": "time.sleep_s",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ns\nfloat\nThe total duration to sleep in seconds.\nrequired\n\n\npartial_sleep_threshold\nfloat\nThe threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations s above the threshold, the optimization is applied.\n0.0005\n\n\nnsteps\nint\nThe number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to nsteps &gt; 4.\n30",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "time.sleep_s"
-    ]
-  },
-  {
-    "objectID": "reference/time.full_speed.html",
-    "href": "reference/time.full_speed.html",
-    "title": "time.full_speed",
-    "section": "",
-    "text": "time.full_speed\ngeneral.time.full_speed(s, start)",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "time.full_speed"
-    ]
-  },
-  {
-    "objectID": "reference/event_loop.EventLoop.html",
-    "href": "reference/event_loop.EventLoop.html",
-    "title": "event_loop.EventLoop",
-    "section": "",
-    "text": "general.event_loop.EventLoop(self, dt_s, stop_event=Event(), ctx=None)\n\n\n\n\n\nName\nDescription\n\n\n\n\nvalidate_callback\nCheck that every callback accepts at least a kwarg with ‘ctx’\n\n\n\n\n\ngeneral.event_loop.EventLoop.validate_callback(cb)\nCheck that every callback accepts at least a kwarg with ‘ctx’",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "event_loop.EventLoop"
-    ]
-  },
-  {
-    "objectID": "reference/event_loop.EventLoop.html#methods",
-    "href": "reference/event_loop.EventLoop.html#methods",
-    "title": "event_loop.EventLoop",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nvalidate_callback\nCheck that every callback accepts at least a kwarg with ‘ctx’\n\n\n\n\n\ngeneral.event_loop.EventLoop.validate_callback(cb)\nCheck that every callback accepts at least a kwarg with ‘ctx’",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "event_loop.EventLoop"
-    ]
-  },
-  {
-    "objectID": "reference/get_channel_names.html",
-    "href": "reference/get_channel_names.html",
-    "title": "get_channel_names",
-    "section": "",
-    "text": "get_channel_names\nstream_watcher.lsl_stream_watcher.get_channel_names(inf)",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "get_channel_names"
-    ]
   },
   {
     "objectID": "reference/logger.get_logger.html",
@@ -319,27 +285,15 @@
     ]
   },
   {
-    "objectID": "reference/StreamWatcher.html",
-    "href": "reference/StreamWatcher.html",
-    "title": "StreamWatcher",
+    "objectID": "reference/get_channel_names.html",
+    "href": "reference/get_channel_names.html",
+    "title": "get_channel_names",
     "section": "",
-    "text": "stream_watcher.lsl_stream_watcher.StreamWatcher(\n    self,\n    name='',\n    buffer_size_s=2,\n    logger=logger,\n)\n\n\n\n\n\nName\nDescription\n\n\n\n\nconnect_to_stream\nEither use the self.name or a provided identifier dict to hook up\n\n\ndisconnect\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\nupdate_numeric\nLook for new data and update the buffer\n\n\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(\n    identifier=None,\n)\nEither use the self.name or a provided identifier dict to hook up with an LSL stream, they should coincide\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()\nLook for new data and update the buffer",
+    "text": "get_channel_names\nstream_watcher.lsl_stream_watcher.get_channel_names(inf)",
     "crumbs": [
       "Home",
       "Reference",
-      "StreamWatcher"
-    ]
-  },
-  {
-    "objectID": "reference/StreamWatcher.html#methods",
-    "href": "reference/StreamWatcher.html#methods",
-    "title": "StreamWatcher",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nconnect_to_stream\nEither use the self.name or a provided identifier dict to hook up\n\n\ndisconnect\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\nupdate_numeric\nLook for new data and update the buffer\n\n\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(\n    identifier=None,\n)\nEither use the self.name or a provided identifier dict to hook up with an LSL stream, they should coincide\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()\nLook for new data and update the buffer",
-    "crumbs": [
-      "Home",
-      "Reference",
-      "StreamWatcher"
+      "get_channel_names"
     ]
   },
   {
@@ -391,17 +345,63 @@
     ]
   },
   {
-    "objectID": "docs/documentation_setup.html",
-    "href": "docs/documentation_setup.html",
-    "title": "Documentation setup",
+    "objectID": "reference/pylsl_xmlelement_to_dict.html",
+    "href": "reference/pylsl_xmlelement_to_dict.html",
+    "title": "pylsl_xmlelement_to_dict",
     "section": "",
-    "text": "The documentation for Dareplane is generated with Quarto and quartodoc. The later is used to automatically generate API documentation for python modules. Quarto uses a central _quarto.yml file to configure the documentation.\n\n\n\nCurrently the Home section is sourced from the main.qmd file as directly including the README.md did not work. As I could not get the logo to work properly (neither could I just ignore). The basic idea was from the quarto docs."
+    "text": "pylsl_xmlelement_to_dict\nstream_watcher.lsl_stream_watcher.pylsl_xmlelement_to_dict(inf)\nThe pylsl XMLElement is hard to investigate -&gt; cast to a dict for simplicity",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "pylsl_xmlelement_to_dict"
+    ]
   },
   {
-    "objectID": "docs/documentation_setup.html#todo",
-    "href": "docs/documentation_setup.html#todo",
-    "title": "Documentation setup",
+    "objectID": "reference/server.LogRecordSocketReceiver.html",
+    "href": "reference/server.LogRecordSocketReceiver.html",
+    "title": "server.LogRecordSocketReceiver",
     "section": "",
-    "text": "Currently the Home section is sourced from the main.qmd file as directly including the README.md did not work. As I could not get the logo to work properly (neither could I just ignore). The basic idea was from the quarto docs."
+    "text": "server.LogRecordSocketReceiver\nlogging.server.LogRecordSocketReceiver(\n    self,\n    host='localhost',\n    port=logging.handlers.DEFAULT_TCP_LOGGING_PORT,\n    handler=LogRecordStreamHandler,\n    logfile=Path('default_socket.log'),\n)\nSimple TCP socket-based logging receiver suitable for testing.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "server.LogRecordSocketReceiver"
+    ]
+  },
+  {
+    "objectID": "reference/time.partial_sleep.html",
+    "href": "reference/time.partial_sleep.html",
+    "title": "time.partial_sleep",
+    "section": "",
+    "text": "time.partial_sleep\ngeneral.time.partial_sleep(s, start, nsteps=30)\nSleep for 90% of s or up to 30ms to the end, whatever is longer",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "time.partial_sleep"
+    ]
+  },
+  {
+    "objectID": "reference/StreamWatcher.html",
+    "href": "reference/StreamWatcher.html",
+    "title": "StreamWatcher",
+    "section": "",
+    "text": "stream_watcher.lsl_stream_watcher.StreamWatcher(\n    self,\n    name='',\n    buffer_size_s=2,\n    logger=logger,\n)\n\n\n\n\n\nName\nDescription\n\n\n\n\nconnect_to_stream\nEither use the self.name or a provided identifier dict to hook up\n\n\ndisconnect\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\nupdate_numeric\nLook for new data and update the buffer\n\n\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(\n    identifier=None,\n)\nEither use the self.name or a provided identifier dict to hook up with an LSL stream, they should coincide\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()\nLook for new data and update the buffer",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "StreamWatcher"
+    ]
+  },
+  {
+    "objectID": "reference/StreamWatcher.html#methods",
+    "href": "reference/StreamWatcher.html#methods",
+    "title": "StreamWatcher",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nconnect_to_stream\nEither use the self.name or a provided identifier dict to hook up\n\n\ndisconnect\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\nupdate_numeric\nLook for new data and update the buffer\n\n\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(\n    identifier=None,\n)\nEither use the self.name or a provided identifier dict to hook up with an LSL stream, they should coincide\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()\nLook for new data and update the buffer",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "StreamWatcher"
+    ]
   }
 ]

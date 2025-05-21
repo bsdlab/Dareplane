@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Documentation – Dareplane</title>
+<title>default_server.server.defaultserver – Dareplane</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -97,6 +132,14 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../docs/main.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../examples/examples.html"> 
+<span class="menu-text">Examples</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../reference/index.html" aria-current="page"> 
+<span class="menu-text">Documentation Index</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
@@ -123,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Documentation Index</a></li><li class="breadcrumb-item"><a href="../reference/default_server.server.DefaultServer.html">default_server.server.DefaultServer</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -140,10 +183,16 @@ ul.task-list li input[type="checkbox"] {
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Documentation Index</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Reference</span></a>
+            <a href="../reference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Documentation Index</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -151,86 +200,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reference/default_server.server.DefaultServer.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">default_server.server.DefaultServer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reference/DefaultServer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">DefaultServer</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/event_loop.EventLoop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">event_loop.EventLoop</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/get_channel_names.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">get_channel_names</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/get_streams_names.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">get_streams_names</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/logger.get_logger.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">logger.get_logger</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/pylsl_xmlelement_to_dict.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">pylsl_xmlelement_to_dict</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/ringbuffer.RingBuffer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ringbuffer.RingBuffer</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/server.LogRecordSocketReceiver.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">server.LogRecordSocketReceiver</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/server.LogRecordStreamHandler.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">server.LogRecordStreamHandler</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/server.modify_root_logger.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">server.modify_root_logger</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/StreamWatcher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">StreamWatcher</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/time.full_speed.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">time.full_speed</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/time.partial_sleep.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">time.partial_sleep</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/time.sleep_s.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">time.sleep_s</span></a>
   </div>
 </li>
       </ul>
@@ -242,121 +219,78 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Documentation</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Documentation Index</a></li><li class="breadcrumb-item"><a href="../reference/default_server.server.DefaultServer.html">default_server.server.DefaultServer</a></li></ol></nav></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<!-- # Documentation {.doc .doc-index} -->
-<p>The documentation mainly covers the <a href="https://pypi.org/project/dareplane-utils/"><code>dareplane-utils</code></a> Python package. Please refere to the individual modules and their <code>README.md</code> for further details on individual modules.</p>
-<section id="function-reference" class="level1 doc doc-index">
-<h1 class="doc doc-index">Function reference</h1>
-<section id="dareplane_utils" class="level2">
-<h2 class="anchored" data-anchor-id="dareplane_utils">dareplane_utils</h2>
-<p>Utility functions for Python regarding common components which can be usefull for multiple Dareplane modules.</p>
-<section id="server" class="level3">
-<h3 class="anchored" data-anchor-id="server">Server</h3>
-<p>The server components can be used from <code>dareplane_utils.default_server.server</code></p>
+<section id="dareplane_utils.default_server.server.DefaultServer" class="level1">
+<h1>default_server.server.DefaultServer</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>default_server.server.DefaultServer(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    port<span class="op">=</span><span class="dv">8080</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    ip<span class="op">=</span><span class="st">'0.0.0.0'</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    nlisten<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'default_server'</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    thread_stopper<span class="op">=</span>stop_thread,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    proc_stopper<span class="op">=</span>stop_process,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    msg_interpreter<span class="op">=</span>interpret_msg,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    pcommand_map<span class="op">=</span><span class="bu">dict</span>(),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    current_conn<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    server_socket<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    threads<span class="op">=</span><span class="bu">dict</span>(),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    processes<span class="op">=</span><span class="bu">dict</span>(),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    is_listening<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    logger<span class="op">=</span>get_logger(<span class="va">__name__</span>),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The default server which is being used and modified by pther dareplane projects</p>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
 <table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td><a href="DefaultServer.qmd#dareplane_utils.default_server.server.DefaultServer">DefaultServer</a></td>
-<td>The default server which is being used and modified by pther dareplane</td>
+<td><a href="#dareplane_utils.default_server.server.DefaultServer.default_msg_interpretation">default_msg_interpretation</a></td>
+<td>This contains the default interpretation</td>
+</tr>
+<tr class="even">
+<td><a href="#dareplane_utils.default_server.server.DefaultServer.handle_msg">handle_msg</a></td>
+<td>interpret the message</td>
+</tr>
+<tr class="odd">
+<td><a href="#dareplane_utils.default_server.server.DefaultServer.msg_interpretation">msg_interpretation</a></td>
+<td>Interpret the message and perform book keeping if necessary</td>
+</tr>
+<tr class="even">
+<td><a href="#dareplane_utils.default_server.server.DefaultServer.shutdown">shutdown</a></td>
+<td>Shutdown the server and close all connections</td>
 </tr>
 </tbody>
 </table>
+<section id="dareplane_utils.default_server.server.DefaultServer.default_msg_interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.default_server.server.DefaultServer.default_msg_interpretation">default_msg_interpretation</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>default_server.server.DefaultServer.default_msg_interpretation(msg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This contains the default interpretation</p>
 </section>
-<section id="logging" class="level3">
-<h3 class="anchored" data-anchor-id="logging">Logging</h3>
-<p>Logging components which add a TCP handler to a logger derived from Python’s standard <code>logging.Logger</code>. This allows to the <a href="https://github.com/bsdlab/dp-control-room">dp-control-room</a> to create a single consolidated log-file.</p>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td><a href="logger.get_logger.qmd#dareplane_utils.logging.logger.get_logger">logger.get_logger</a></td>
-<td>Get a configured logger.</td>
-</tr>
-<tr class="even">
-<td><a href="server.LogRecordStreamHandler.qmd#dareplane_utils.logging.server.LogRecordStreamHandler">server.LogRecordStreamHandler</a></td>
-<td>Handler for a streaming logging request.</td>
-</tr>
-<tr class="odd">
-<td><a href="server.LogRecordSocketReceiver.qmd#dareplane_utils.logging.server.LogRecordSocketReceiver">server.LogRecordSocketReceiver</a></td>
-<td>Simple TCP socket-based logging receiver suitable for testing.</td>
-</tr>
-<tr class="even">
-<td><a href="server.modify_root_logger.qmd#dareplane_utils.logging.server.modify_root_logger">server.modify_root_logger</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="dareplane_utils.default_server.server.DefaultServer.handle_msg" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.default_server.server.DefaultServer.handle_msg">handle_msg</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>default_server.server.DefaultServer.handle_msg(msg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>interpret the message</p>
 </section>
-<section id="streaming-data" class="level3">
-<h3 class="anchored" data-anchor-id="streaming-data">Streaming data</h3>
-<p>Dareplane relies mostly on the <a href="https://labstreaminglayer.org/#/">lab streaming layer (LSL)</a> for streaming data. A central element of the <a href="https://pypi.org/project/dareplane-utils/"><code>dareplane-utils</code></a> is the <a href="https://github.com/matthiasdold/dareplane-pyutils/blob/main/src/dareplane_utils/stream_watcher/lsl_stream_watcher.py"><code>StreamWatcher</code></a> which is a ring buffer to read from streams. Currently we only have a <code>StreamWatcher</code> for LSL implemented, using <code>pylsl</code> and inlets defined therein.</p>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td><a href="StreamWatcher.qmd#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher">StreamWatcher</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="get_streams_names.qmd#dareplane_utils.stream_watcher.lsl_stream_watcher.get_streams_names">get_streams_names</a></td>
-<td>Get a list of all available lsl stream names.</td>
-</tr>
-<tr class="odd">
-<td><a href="pylsl_xmlelement_to_dict.qmd#dareplane_utils.stream_watcher.lsl_stream_watcher.pylsl_xmlelement_to_dict">pylsl_xmlelement_to_dict</a></td>
-<td>The pylsl XMLElement is hard to investigate -&gt; cast to a dict for</td>
-</tr>
-<tr class="even">
-<td><a href="get_channel_names.qmd#dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names">get_channel_names</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="dareplane_utils.default_server.server.DefaultServer.msg_interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.default_server.server.DefaultServer.msg_interpretation">msg_interpretation</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>default_server.server.DefaultServer.msg_interpretation(msg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Interpret the message and perform book keeping if necessary</p>
 </section>
-<section id="general" class="level3">
-<h3 class="anchored" data-anchor-id="general">General</h3>
-<p>General utility functions and classes</p>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td><a href="ringbuffer.RingBuffer.qmd#dareplane_utils.general.ringbuffer.RingBuffer">ringbuffer.RingBuffer</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="time.sleep_s.qmd#dareplane_utils.general.time.sleep_s">time.sleep_s</a></td>
-<td>Sleep for a specified duration with partial sleep optimization.</td>
-</tr>
-<tr class="odd">
-<td><a href="time.partial_sleep.qmd#dareplane_utils.general.time.partial_sleep">time.partial_sleep</a></td>
-<td>Sleep for 90% of <code>s</code> or up to 30ms to the end, whatever is longer</td>
-</tr>
-<tr class="even">
-<td><a href="time.full_speed.qmd#dareplane_utils.general.time.full_speed">time.full_speed</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="event_loop.EventLoop.qmd#dareplane_utils.general.event_loop.EventLoop">event_loop.EventLoop</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="dareplane_utils.default_server.server.DefaultServer.shutdown" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.default_server.server.DefaultServer.shutdown">shutdown</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>default_server.server.DefaultServer.shutdown()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Shutdown the server and close all connections</p>
 
 
 </section>
@@ -436,7 +370,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/bsdlab\.github\.io\/Dareplane\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
