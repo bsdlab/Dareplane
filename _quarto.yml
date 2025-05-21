@@ -7,6 +7,7 @@ brand: docs/_brand.yml
 # content
 website:
   title: "Dareplane"
+  site-url: "https://bsdlab.github.io/Dareplane/" # makes site links work on your remote site
   navbar:
     # logo: assets/single_dareplane_logo.svg   # logo is defined in _brand.yml
     left:
