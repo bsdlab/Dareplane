@@ -1,3 +1,5 @@
+on: push
+
 permissions:
   contents: write
   pages: write
