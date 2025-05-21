@@ -1,6 +1,7 @@
 ---
-title: Documentation Index
+title: Documentation
 ---
+
 <!-- # Documentation {.doc .doc-index} -->
 
 The documentation mainly covers the [`dareplane-utils`](https://pypi.org/project/dareplane-utils/) Python package. Please refere to the individual modules and their `README.md` for further details on individual modules.

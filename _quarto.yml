@@ -14,7 +14,7 @@ website:
       # - href: README.qmd
       #   text: Home
       - docs/main.qmd
-      - examples/examples.qmd
+      # - examples/examples.qmd
       - reference/index.qmd # the api documentation
       # - docs/documentation_setup.qmd
 
@@ -28,7 +28,7 @@ website:
     style: "docked"
     search: false
     contents:
-      - reference/index.qmd
+      # - reference/index.qmd
       - auto: reference
 
 # tell quarto to read the generated sidebar

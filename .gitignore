@@ -3,3 +3,7 @@
 _site/
 
 /.quarto/
+
+# ------------ quartodoc
+reference/
+objects.json

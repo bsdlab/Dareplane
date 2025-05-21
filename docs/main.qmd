@@ -1,4 +1,7 @@
-# Home
+---
+title: Home
+---
+
 
 ![](/assets/single_dareplane_logo.svg)
 
