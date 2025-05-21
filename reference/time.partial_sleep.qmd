@@ -1,7 +1,0 @@
-# time.partial_sleep { #dareplane_utils.general.time.partial_sleep }
-
-```python
-general.time.partial_sleep(s, start, nsteps=30)
-```
-
-Sleep for 90% of `s` or up to 30ms to the end, whatever is longer

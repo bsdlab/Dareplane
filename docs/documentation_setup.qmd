@@ -1,8 +1,0 @@
-# Documentation setup
-
-The documentation for Dareplane is generated with [Quarto](https://quarto.org/) and [quartodoc](https://machow.github.io/quartodoc). The later is used to automatically generate API documentation for python modules. [Quarto](https://quarto.org/) uses a central `_quarto.yml` file to configure the documentation.
-
-
-## TODO
-
-- [ ] Currently the `Home` section is sourced from the `main.qmd` file as directly including the `README.md` did not work. As I could not get the logo to work properly (neither could I just ignore). The basic idea was from the [quarto docs](https://quarto.org/docs/authoring/includes.html).

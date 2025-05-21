@@ -1,9 +1,0 @@
-.quarto/
-# reference/  # for not do the quartodoc part manually, later add to CI action
-_site/
-
-/.quarto/
-
-# ------------ quartodoc
-reference/
-objects.json

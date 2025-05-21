@@ -1,6 +1,0 @@
-# time.full_speed { #dareplane_utils.general.time.full_speed }
-
-```python
-general.time.full_speed(s, start)
-```
-
