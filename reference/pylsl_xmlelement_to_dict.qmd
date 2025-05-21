@@ -1,8 +1,0 @@
-# pylsl_xmlelement_to_dict { #dareplane_utils.stream_watcher.lsl_stream_watcher.pylsl_xmlelement_to_dict }
-
-```python
-stream_watcher.lsl_stream_watcher.pylsl_xmlelement_to_dict(inf)
-```
-
-The pylsl XMLElement is hard to investigate -> cast to a dict for
-simplicity

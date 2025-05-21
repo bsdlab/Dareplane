@@ -1,6 +1,0 @@
-# server.modify_root_logger { #dareplane_utils.logging.server.modify_root_logger }
-
-```python
-logging.server.modify_root_logger(logfile)
-```
-

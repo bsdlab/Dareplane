@@ -1,4 +1,11 @@
-![](/assets/single_dareplane_logo.svg)
+
+::: {.light-content}
+{{< brand logo large light>}}
+:::
+
+::: {.dark-content}
+{{< brand logo large dark>}}
+:::
 
 Dareplane is a modular and broad technology agnostic open source software platform for brain-computer interface research. [LSL](https://labstreaminglayer.org) is used for data communication and `TCP` sockets for module communication. The platform is designed to be minimalistic and to allow for easy development of custom modules, with minimal overhead of integrating existing code.
 

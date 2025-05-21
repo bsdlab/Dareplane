@@ -6,3 +6,4 @@ The documentation for Dareplane is generated with [Quarto](https://quarto.org/) 
 ## TODO
 
 - [ ] Currently the `Home` section is sourced from the `main.qmd` file as directly including the `README.md` did not work. As I could not get the logo to work properly (neither could I just ignore). The basic idea was from the [quarto docs](https://quarto.org/docs/authoring/includes.html).
+  -> the problems is simply that quarto did non load the logo for the dark theme... check once I added theming properly

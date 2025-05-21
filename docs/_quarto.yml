@@ -2,7 +2,13 @@ project:
   type: website
 
 # styling
-brand: docs/_brand.yml
+brand:
+  light: light_brand.yml
+  dark: dark_brand.yml
+
+theme:
+  light: flatly
+  dark: darkly
 
 # content
 website:
@@ -13,8 +19,16 @@ website:
     left:
       # - href: README.qmd
       #   text: Home
-      - href: docs/main.qmd
+      - href: main.qmd
         text: Home
+
+      # - href: quartodoc_index.qmd
+      - href: reference/index.qmd
+        text: Documentation
+
+      - href: quarto_documentation_setup.qmd
+        text: Documentation Setup
+
       # - examples/examples.qmd
       # - reference/index.qmd # the api documentation
       # - docs/documentation_setup.qmd
@@ -43,8 +57,9 @@ format:
 
 quartodoc:
   # the name used to import the package you want to create reference docs for
-  package: ""
-  out_index: _api_index.qmd
+  package: "Dareplane"
+
+  # out_index: _api_index.qmd
 
   # write sidebar and style data -> where quartodoc writes its content without impacting quarto
   sidebar: reference/_sidebar.yml

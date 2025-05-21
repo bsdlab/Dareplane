@@ -14,7 +14,7 @@ The server components can be used from `dareplane_utils.default_server.server`
 
 ### Logging
 
-Logging components which add a TCP handler to a logger derived from Python's standard `logging.Logger`. This allows to
+Logging components which add a TCP handler to a logger derived from Python's standard `logging.Logger`. This allows to 
 the [dp-control-room](https://github.com/bsdlab/dp-control-room) to create a single consolidated log-file.
 
 
@@ -27,7 +27,7 @@ the [dp-control-room](https://github.com/bsdlab/dp-control-room) to create a sin
 
 ### Streaming data
 
-Dareplane relies mostly on the [lab streaming layer (LSL)](https://labstreaminglayer.org/#/) for streaming data. A central element of the  [`dareplane-utils`](https://pypi.org/project/dareplane-utils/)
+Dareplane relies mostly on the [lab streaming layer (LSL)](https://labstreaminglayer.org/#/) for streaming data. A central element of the  [`dareplane-utils`](https://pypi.org/project/dareplane-utils/) 
 is the [`StreamWatcher`](https://github.com/matthiasdold/dareplane-pyutils/blob/main/src/dareplane_utils/stream_watcher/lsl_stream_watcher.py) which is a ring buffer to read from streams. Currently we only
 have a `StreamWatcher` for LSL implemented, using `pylsl` and inlets defined therein.
 
