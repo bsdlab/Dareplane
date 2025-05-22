@@ -1,0 +1,26 @@
+.gallery-entry {
+  display: flex;
+}
+
+.gallery-entry__img-container {
+  padding: 5px;
+}
+
+.gallery-entry a {
+  text-decoration: none;
+}
+
+.gallery-entry__body {
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+.gallery-entry__body ul {
+  list-style-type: none;
+  padding: 0px;
+  margin-bottom: 0;
+}
+.gallery-entry__body ul li {
+  display: inline;
+  margin-right: 20px;
+}

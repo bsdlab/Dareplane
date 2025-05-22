@@ -3,8 +3,8 @@ project:
 
 # styling
 brand:
-  light: light_brand.yml
-  dark: dark_brand.yml
+  light: styles/light_brand.yml
+  dark: styles/dark_brand.yml
 
 theme:
   light: flatly
@@ -15,23 +15,26 @@ website:
   title: "Dareplane"
   site-url: "https://bsdlab.github.io/Dareplane/" # makes site links work on your remote site
   navbar:
-    # logo: assets/single_dareplane_logo.svg   # logo is defined in _brand.yml
+    title: false # do not show title on navbar as well -> too many Dareplanes otherwise
+    logo-href: main.html
     left:
-      # - href: README.qmd
-      #   text: Home
-      - href: main.qmd
-        text: Home
+      - text: Home
+        href: main.qmd
 
-      # - href: quartodoc_index.qmd
-      - href: reference/index.qmd
-        text: Documentation
+      - text: Documentation
+        href: reference/index.qmd
 
-      - href: quarto_documentation_setup.qmd
-        text: Documentation Setup
+      - text: Examples
+        href: examples/index.qmd
 
-      # - examples/examples.qmd
-      # - reference/index.qmd # the api documentation
-      # - docs/documentation_setup.qmd
+      - text: About
+        menu:
+          - href: about/quarto_documentation_setup.qmd
+            text: Quarto setup
+          # - href: https://bsdlab.github.io/Dareplane/about.html#contributing
+          #   text: Contributing
+          # - href: https://bsdlab.github.io/Dareplane/about.html#license
+          #   text: License-
 
     right:
       - icon: github
@@ -39,12 +42,9 @@ website:
           - text: Source Code
             href: https://github.com/bsdlab/Dareplane
 
-  sidebar:
-    style: "docked"
-    search: false
-    contents:
-      # - reference/index.qmd
-      - auto: reference
+sidebar:
+  file: reference/_sidebar.yml
+
 # tell quarto to read the generated sidebar
 metadata-files:
   - reference/_sidebar.yml
@@ -54,19 +54,40 @@ format:
   html:
     css:
       - reference/_styles-quartodoc.css
+    toc: true
+    toc-location: right
+    toc-title: "On this page"
 
 quartodoc:
   # the name used to import the package you want to create reference docs for
   package: "Dareplane"
 
+  title: "Docs"
+
   # out_index: _api_index.qmd
 
   # write sidebar and style data -> where quartodoc writes its content without impacting quarto
-  sidebar: reference/_sidebar.yml
+  sidebar:
+    file: "reference/_sidebar.yml"
+    # logo: ""
+    style: docked
+    search: true
+    collapse-level: 2
+    contents:
+      - text: "Introduction"
+        href: main.qmd
+      - text: "Modules"
+        href: examples.qmd
+      - text: "Examples"
+        href: examples.qmd
+      - section: "Documentation"
+        contents:
+          - "{{ contents }}"
+
   css: reference/_styles-quartodoc.css
 
   sections:
-    - title: dareplane_utils
+    - title: "`dareplane_utils`"
       desc: Utility functions for Python regarding common components which can be usefull for multiple Dareplane modules.
 
     - subtitle: Server

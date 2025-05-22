@@ -1,0 +1,9 @@
+# c-VEP demo setup script
+
+In this example, we walk over the details of the [c-VEP demo setup script](https://github.com/thijor/dp-cvep).
+
+Setup scripts for Dareplane provide an easy way to configure and share a full experimental setup. The idea is to download and configure all necessary components from scratch. Together with version control, this makes it easy to reproduce experiments and share them with others.
+
+
+### Pre requisists
+- [LSL Lab recorder](https://github.com/labstreaminglayer/App-LabRecorder) is installed

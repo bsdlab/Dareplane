@@ -1,0 +1,17 @@
+- category: Creating modules
+  description: ""
+  tiles:
+    - title: Hello world from Dareplane
+      description: |
+        Building your first module based of the strawmen module.
+      href: ./hello_world.qmd
+      thumbnail: assets/single_dareplane_logo.svg
+
+- category: Setup scripts
+  description: ""
+  tiles:
+    - title: c-VEP experiment
+      description: |
+        Walk through the [setup script for c-VEP BCI](https://github.com/thijor/dp-cvep).
+      href: ./c-VEP_setup.html
+      thumbnail: assets/c-VEP_keyboard.png
