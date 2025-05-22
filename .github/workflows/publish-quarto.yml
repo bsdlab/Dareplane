@@ -10,6 +10,9 @@ permissions:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./app
 
     steps:
       - name: Check out repository
@@ -40,13 +43,11 @@ jobs:
           python -m pip install dareplane-utils
 
       - name: Build references
-        working-directory: ./docs
         run: |
           quartodoc build
 
       # NOTE: If Publishing to GitHub Pages, set the permissions correctly (see top of this yaml)
       - name: Publish to GitHub Pages (and render)
-        working-directory: ./docs
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
