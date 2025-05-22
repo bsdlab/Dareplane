@@ -34,20 +34,6 @@ The implications of these design goals are:
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | [dp-strawmam-module](https://github.com/bsdlab/dp-strawman-module)           | a strawman repository as starting point for developing your modules                                                |
 | [dp-control-room](https://github.com/bsdlab/dp-control-room)                 | the central module which combines individual modules to a system                                                   |
-| [dp-lsl-recording](https://github.com/bsdlab/dp-lsl-recording)               | module for interacting with the [LSL LabRecorder](https://github.com/labstreaminglayer/App-LabRecorder)            |
-| [dp-mockup-streamer](https://github.com/bsdlab/dp-mockup-streamer)           | module for creating mock-up streams from files or generating random data                                           |
-| [dp-copydraw](https://github.com/bsdlab/dp-copydraw)                         | module to run the [CopyDraw - Castano et al. 2019](https://ieeexplore.ieee.org/abstract/document/8839739) paradigm |
-| [dp-multiband-regression](https://github.com/bsdlab/dp-multiband-regression) | module to perform a multiband regression based on a multichannel data stream                                       |
-| [dp-bollinger-control](https://github.com/bsdlab/dp-bollinger-control)       | a [Bollinger Band](https://en.wikipedia.org/wiki/Bollinger_Bands) control module                                   |
-| [dp-ao-communicatio](https://github.com/bsdlab/dp-ao-communication)          | a C++ module interacting with the [Alpha Omega](https://www.alphaomega-eng.com/Neuro-Omega-System)'s API           |
-| [dp-ao-stimulator](https://github.com/bsdlab/dp-ao-stimulator)               | python module to trigger stimulation via dp-ao-communication                                                       |
-| [dp-arduino-stimulator](https://github.com/bsdlab/dp-arduino-stimulator)     | module to use an Arduino as a mock-up of a neuro-stimulator                                                        |
-| [dp-picoscope-streamer](https://github.com/bsdlab/dp-picoscope-streamer)     | module to stream data from a Picoscope to [LSL](https://labstreaminglayer.org)                                     |
-| [dp-passthrough](https://github.com/bsdlab/dp-passthrough)                   | a simple passthrough Dareplane module for performance testing                                                      |
-| [dp-threshold-controller](https://github.com/bsdlab/dp-threshold-controller) | a threshold control module with grace periods                                                                      |
-| [dp-cortec-bic](https://github.com/bsdlab/dp-cortec-bic)                     | module to interact with the API of the CorTec BrainInterchange                                                     |
-| [dp-cvep-speller](https://github.com/thijor/dp-cvep-speller)                 | a c-VEP speller paradigm module                                                                                    |
-| [dp-cvep-decoder](https://github.com/thijor/dp-cvep-decoder)                 | decoding module for a c-VEP speller, using rCCA                                                                    |
 
 ## Getting started
 

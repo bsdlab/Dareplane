@@ -22,7 +22,7 @@ website:
         href: main.qmd
 
       - text: Documentation
-        href: reference/index.qmd
+        href: reference/
 
       - text: Examples
         href: examples/index.qmd
@@ -42,18 +42,42 @@ website:
           - text: Source Code
             href: https://github.com/bsdlab/Dareplane
 
-sidebar:
-  file: reference/_sidebar.yml
+  sidebar:
+    - id: "main"
+      file: "reference/_sidebar.yml"
+      # logo: ""
+      style: docked
+      search: true
+      collapse-level: 2
+      contents:
+        - text: "Introduction"
+          href: main.qmd
+        - text: "Modules"
+          href: examples.qmd
+        - text: "Examples"
+          href: examples.qmd
+        - section: "Documentation"
+          contents:
+            - subsection:
+              auto: modules_docs/*/index.qmd
+          # contents:
+          #   - text: "dareplane-utils"
+          #     href: "reference/index.qmd"
+
+# sidebar:
+#   file: reference/_sidebar.yml
 
 # tell quarto to read the generated sidebar
 metadata-files:
   - reference/_sidebar.yml
+  # - modules_docs/dp-control-room/_sidebar.yml
 
 # tell quarto to read the generated styles
 format:
   html:
-    css:
-      - reference/_styles-quartodoc.css
+    # css:               # not loading a specific one to avoid conflicts as docs are generated over multiple repos
+    # - reference/_styles-quartodoc.css
+    # - modules_docs/dp-control-room/_styles-quartodoc.yml
     toc: true
     toc-location: right
     toc-title: "On this page"
@@ -62,7 +86,10 @@ quartodoc:
   # the name used to import the package you want to create reference docs for
   package: "Dareplane"
 
-  title: "Docs"
+  title: "Documentation for `dareplane_utils`"
+
+  options:
+    signature_name: full
 
   # out_index: _api_index.qmd
 
@@ -70,19 +97,19 @@ quartodoc:
   sidebar:
     file: "reference/_sidebar.yml"
     # logo: ""
-    style: docked
-    search: true
-    collapse-level: 2
-    contents:
-      - text: "Introduction"
-        href: main.qmd
-      - text: "Modules"
-        href: examples.qmd
-      - text: "Examples"
-        href: examples.qmd
-      - section: "Documentation"
-        contents:
-          - "{{ contents }}"
+    # style: docked
+    # search: true
+    # collapse-level: 2
+    # contents:
+    #   - text: "Introduction"
+    #     href: main.qmd
+    #   - text: "Modules"
+    #     href: examples.qmd
+    #   - text: "Examples"
+    #     href: examples.qmd
+    #   - section: "Documentation"
+    #     contents:
+    #       - "{{ contents }}"
 
   css: reference/_styles-quartodoc.css
 
