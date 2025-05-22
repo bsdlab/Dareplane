@@ -1,6 +1,0 @@
-# Examples
-
-Some Dareplane example implementations
-
-MANUALLY list here
-
