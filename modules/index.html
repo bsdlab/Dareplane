@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>get_channel_names – Dareplane</title>
+<title>Examples – Dareplane</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -66,6 +31,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="..//assets/favicon_dareplane_logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -107,12 +74,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-gallery .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
 
-<link rel="stylesheet" href="../reference/_styles-quartodoc.css">
+    const options = {
+      valueNames: ['listing-category','listing-description','listing-tiles',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-category","listing-description","listing-tiles"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-gallery'] = new List('listing-gallery', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="_style.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -292,11 +317,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../main.html" aria-current="page"> 
+    <a class="nav-link" href="../main.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../reference/index.html"> 
+    <a class="nav-link active" href="../modules/index.html" aria-current="page"> 
 <span class="menu-text">Documentation</span></a>
   </li>  
   <li class="nav-item">
@@ -336,237 +361,501 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Documentation</a></li><li class="breadcrumb-item"><code>dareplane_utils</code></li><li class="breadcrumb-item"><a href="../reference/StreamWatcher.html">Streaming data</a></li><li class="breadcrumb-item"><a href="../reference/get_channel_names.html">get_channel_names</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="../index.html" class="sidebar-logo-link">
-      <img src="../assets/single_dareplane_logo.svg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
-      </a>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../main.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../examples.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Modules</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../examples.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Examples</span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Documentation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Docs</span></a>
-  </div>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text"><code>dareplane_utils</code></span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Server</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/DefaultServer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">DefaultServer</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Logging</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/logger.get_logger.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">logger.get_logger</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/server.LogRecordStreamHandler.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">server.LogRecordStreamHandler</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/server.LogRecordSocketReceiver.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">server.LogRecordSocketReceiver</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/server.modify_root_logger.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">server.modify_root_logger</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Streaming data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/StreamWatcher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">StreamWatcher</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/get_streams_names.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">get_streams_names</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/pylsl_xmlelement_to_dict.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">pylsl_xmlelement_to_dict</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/get_channel_names.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">get_channel_names</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">General</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/ringbuffer.RingBuffer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ringbuffer.RingBuffer</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/time.sleep_s.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">time.sleep_s</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/time.partial_sleep.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">time.partial_sleep</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/time.full_speed.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">time.full_speed</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/event_loop.EventLoop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">event_loop.EventLoop</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names" id="toc-dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names" class="nav-link active" data-scroll-target="#dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names">get_channel_names</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Documentation</a></li><li class="breadcrumb-item"><code>dareplane_utils</code></li><li class="breadcrumb-item"><a href="../reference/StreamWatcher.html">Streaming data</a></li><li class="breadcrumb-item"><a href="../reference/get_channel_names.html">get_channel_names</a></li></ol></nav></header>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
 
-<section id="dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names" class="level1">
-<h1>get_channel_names</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>stream_watcher.lsl_stream_watcher.get_channel_names(inf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column-page">
+<div id="listing-gallery" class="quarto-listing quarto-listing-container-custom">
+
+<h2 class="anchored">Utility librarires</h2>
+<p>Collection of libraries providing functionality to Dareplane</p>
+<div class="list grid" style="column-gap: 10px;">
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="0">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="../libraries/dareplane_utils/index.html" class="card-text" target="_blank">
+            dareplane-utils
+        </a>
+    </div>
+    <a href="../libraries/dareplane_utils/index.html" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="Python module with various utility functions for Dareplane modules" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+       
+        <span class="text-muted">Python module with various utility functions for Dareplane modules</span>
+      
+      <ul>
+        <li>
+          <a href="../libraries/dareplane_utils/index.html" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+</div>
+
+<h2 class="anchored">Single module documentation</h2>
+<p>Dareplane is structured in individual module, each providing its own documentation</p>
+<div class="list grid" style="column-gap: 10px;">
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="1">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-strawman-module/reference/index.qmd" class="card-text" target="_blank">
+            dp-strawman-module
+        </a>
+    </div>
+    <a href="dp-strawman-module/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-strawman-module/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="2">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="../modules/dp-control-room/reference/index.html" class="card-text" target="_blank">
+            dp-control-room
+        </a>
+    </div>
+    <a href="../modules/dp-control-room/reference/index.html" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="../modules/dp-control-room/reference/index.html" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="3">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-lsl-recording/reference/index.qmd" class="card-text" target="_blank">
+            dp-lsl-recording
+        </a>
+    </div>
+    <a href="dp-lsl-recording/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-lsl-recording/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="4">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-mockup-streamer/reference/index.qmd" class="card-text" target="_blank">
+            dp-mockup-streamer
+        </a>
+    </div>
+    <a href="dp-mockup-streamer/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-mockup-streamer/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="5">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-copydraw/reference/index.qmd" class="card-text" target="_blank">
+            dp-copydraw
+        </a>
+    </div>
+    <a href="dp-copydraw/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-copydraw/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="6">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-multiband-regression/reference/index.qmd" class="card-text" target="_blank">
+            dp-multiband-regression
+        </a>
+    </div>
+    <a href="dp-multiband-regression/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-multiband-regression/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="7">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-bollinger-control/reference/index.qmd" class="card-text" target="_blank">
+            dp-bollinger-control
+        </a>
+    </div>
+    <a href="dp-bollinger-control/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-bollinger-control/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="8">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-ao-communication/reference/index.qmd" class="card-text" target="_blank">
+            dp-ao-communication
+        </a>
+    </div>
+    <a href="dp-ao-communication/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-ao-communication/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="9">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-ao-stimulator/reference/index.qmd" class="card-text" target="_blank">
+            dp-ao-stimulator
+        </a>
+    </div>
+    <a href="dp-ao-stimulator/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-ao-stimulator/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="10">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-arduino-stimulator/reference/index.qmd" class="card-text" target="_blank">
+            dp-arduino-stimulator
+        </a>
+    </div>
+    <a href="dp-arduino-stimulator/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-arduino-stimulator/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="11">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-picoscope-streamer/reference/index.qmd" class="card-text" target="_blank">
+            dp-picoscope-streamer
+        </a>
+    </div>
+    <a href="dp-picoscope-streamer/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-picoscope-streamer/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="12">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-passthrough/reference/index.qmd" class="card-text" target="_blank">
+            dp-passthrough
+        </a>
+    </div>
+    <a href="dp-passthrough/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-passthrough/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="13">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-threshold-controller/reference/index.qmd" class="card-text" target="_blank">
+            dp-threshold-controller
+        </a>
+    </div>
+    <a href="dp-threshold-controller/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-threshold-controller/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="14">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-cortec-bic/reference/index.qmd" class="card-text" target="_blank">
+            dp-cortec-bic
+        </a>
+    </div>
+    <a href="dp-cortec-bic/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-cortec-bic/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="15">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-cvep-speller/reference/index.qmd" class="card-text" target="_blank">
+            dp-cvep-speller
+        </a>
+    </div>
+    <a href="dp-cvep-speller/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-cvep-speller/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="16">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-cvep-decoder/reference/index.qmd" class="card-text" target="_blank">
+            dp-cvep-decoder
+        </a>
+    </div>
+    <a href="dp-cvep-decoder/reference/index.qmd" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="dp-cvep-decoder/reference/index.qmd" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+</div>
+
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</div>
 
 
-</section>
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

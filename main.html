@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -74,7 +109,6 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="reference/_styles-quartodoc.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -261,7 +295,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./reference/index.html"> 
+    <a class="nav-link" href="./modules/index.html"> 
 <span class="menu-text">Documentation</span></a>
   </li>  
   <li class="nav-item">
@@ -339,13 +373,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples.html" class="sidebar-item-text sidebar-link">
+  <a href="./examples.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Modules</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples.html" class="sidebar-item-text sidebar-link">
+  <a href="./examples/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Examples</span></a>
   </div>
 </li>
@@ -360,147 +394,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Docs</span></a>
+  <a href="./libraries/dareplane_utils/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">dareplane-utils</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text"><code>dareplane_utils</code></span></a>
+ <span class="menu-text">Dp Control Room</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Server</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/DefaultServer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">DefaultServer</span></a>
+  <a href="./modules/dp-control-room/reference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Documentation control room</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Logging</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/logger.get_logger.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">logger.get_logger</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/server.LogRecordStreamHandler.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">server.LogRecordStreamHandler</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/server.LogRecordSocketReceiver.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">server.LogRecordSocketReceiver</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/server.modify_root_logger.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">server.modify_root_logger</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Streaming data</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/StreamWatcher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">StreamWatcher</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/get_streams_names.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">get_streams_names</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/pylsl_xmlelement_to_dict.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">pylsl_xmlelement_to_dict</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/get_channel_names.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">get_channel_names</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">General</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/ringbuffer.RingBuffer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ringbuffer.RingBuffer</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/time.sleep_s.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">time.sleep_s</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/time.partial_sleep.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">time.partial_sleep</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/time.full_speed.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">time.full_speed</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/event_loop.EventLoop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">event_loop.EventLoop</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
       </ul>
   </li>
       </ul>
@@ -521,7 +433,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#for-python-modules-development" id="toc-for-python-modules-development" class="nav-link" data-scroll-target="#for-python-modules-development">For python modules / development</a></li>
   </ul></li>
-  <li><a href="#getting-started-1" id="toc-getting-started-1" class="nav-link" data-scroll-target="#getting-started-1">Getting started</a></li>
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
   <li><a href="#other-frameworks" id="toc-other-frameworks" class="nav-link" data-scroll-target="#other-frameworks">Other frameworks</a></li>
   </ul>
 </nav>
@@ -540,7 +452,10 @@ ul.task-list li input[type="checkbox"] {
 <img src="./assets/single_dareplane_logo_white.svg" class="img-fluid">
 </div>
 <p>Dareplane is a modular and broad technology agnostic open source software platform for brain-computer interface research. <a href="https://labstreaminglayer.org">LSL</a> is used for data communication and <code>TCP</code> sockets for module communication. The platform is designed to be minimalistic and to allow for easy development of custom modules, with minimal overhead of integrating existing code.</p>
-<p><strong>Caveat:</strong> The platform is in an early alpha stage and is developed by a small group of developers. Although core functionality is implemented and the platform has been used in &gt;20 experimental sessions including simultaneous recording of EEG, ECoG, LFP and other signal modalities, please be aware that bugs are still likely and thorough testing of every setup is required.</p>
+<p>The platform and first performance evaluations are published in <a href="https://iopscience.iop.org/article/10.1088/1741-2552/adbb20">Dold et al., 2025, J. Neural Eng. 22 026029</a></p>
+<blockquote class="blockquote">
+<p>[!IMPORTANT] The platform is in an early stage and is developed by a small group of developers. Although core functionality is implemented and the platform has been used in &gt;30 experimental sessions including simultaneous recording of EEG, ECoG, LFP and other signal modalities, please be aware that bugs still might occur and thorough testing is required.</p>
+</blockquote>
 <p>The target users are developers of experimental setups who require customized software components, or who just want to have full control over the functionality of data I/O, algorithmic processing, and/or on stimulation and feedback. For this user group, Dareplane aims to provide a minimalistic framework which allows to develop and integrate bespoke modules in a simple way. It is a mind-child of the <a href="https://suckless.org/">https://suckless.org/</a> philosophy and tries to adapt it in a pragmatic manner with research in the focus.</p>
 <p>If you are looking for a setup that is more or less ready to use out of the box, you will be better of using a more mature framework which is oriented towards more <em>plug-and-play</em> components. In any case it is good to have a look at the <a href="#other-frameworks">other frameworks</a> section.</p>
 <section id="the-design-philosophy-of-dareplane" class="level2">
@@ -640,7 +555,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="for-python-modules-development" class="level3">
 <h3 class="anchored" data-anchor-id="for-python-modules-development">For python modules / development</h3>
 <p>If you are building your modules in python, or using the existing python modules, the <a href="https://pypi.org/project/dareplane-utils/"><code>dareplane-utils</code></a> python module will provide some core functionality which most modules will need.</p>
-<pre><code>pip install dareplane-utils</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pip install dareplane<span class="op">-</span>utils</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The module provides basic functionality around TCP servers, logging, and collecting data from LSL streams.</p>
 <section id="control-room-module" class="level4">
 <h4 class="anchored" data-anchor-id="control-room-module">Control Room module</h4>
@@ -648,9 +563,22 @@ ul.task-list li input[type="checkbox"] {
 </section>
 </section>
 </section>
-<section id="getting-started-1" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started-1">Getting started</h2>
-<p>Refer to the <code>./examples</code> documents to so see a minimalistic setup and guidance on how to develop your own modules.</p>
+<section id="citation" class="level2">
+<h2 class="anchored" data-anchor-id="citation">Citation</h2>
+<p>If you use Dareplane in your work, please cite the following paper:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">Dold_2025</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">doi</span> = {10.1088/1741-2552/adbb20},</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">url</span> = {https://dx.doi.org/10.1088/1741-2552/adbb20},</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span> = {2025},</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">month</span> = {mar},</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">publisher</span> = {IOP Publishing},</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">volume</span> = {22},</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">number</span> = {2},</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">pages</span> = {026029},</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span> = {Dold, Matthias and Pereira, Joana and Sajonz, Bastian and Coenen, Volker A and Thielen, Jordy and Janssen, Marcus L F and Tangermann, Michael},</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span> = {Dareplane: a modular open-source software platform for BCI research with application in closed-loop deep brain stimulation},</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">journal</span> = {Journal of Neural Engineering},</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="other-frameworks" class="level2">
 <h2 class="anchored" data-anchor-id="other-frameworks">Other frameworks</h2>

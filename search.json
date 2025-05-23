@@ -4,451 +4,134 @@
     "href": "about/quarto_documentation_setup.html",
     "title": "Documentation setup",
     "section": "",
-    "text": "The documentation for Dareplane is generated with Quarto and quartodoc. The later is used to automatically generate API documentation for python modules. Quarto uses a central _quarto.yml file to configure the documentation.\n\n\n\nCurrently the Home section is sourced from the main.qmd file as directly including the README.md did not work. As I could not get the logo to work properly (neither could I just ignore). The basic idea was from the quarto docs. -&gt; the problems is simply that quarto did non load the logo for the dark theme… check once I added theming properly"
+    "text": "The documentation for Dareplane is generated with Quarto and quartodoc. The later is used to automatically generate API documentation for python modules. quarto uses a central _quarto.yml file to configure the documentation.\nFor the Dareplane documentation, https://github.com/bsdlab/Dareplane is the main repository, and the /docs folder therein should be considered the root for all quarto related steps.\n\n\n\n\n\n\nIn harmony with the general Dareplane coding philosophy, we want every module to be standalone, with very limited requirements for interoperability. This also holds for the documentation. The only requirement for the automated documentation process to be able to pick up the documentation is that there exists a _quarto.yml file in the root directory, which contains a least a section for quartodoc. E.g.:\nquartodoc:\n  package: \"dp-control-room\"\n  source_dir: \"control_room\"   # should point the the folder containing the python code\n  title: \"Documentation control room\"\nWith this setup, you can first create your documentation on a per module level, making sure it works with quartodoc build. For debugging, it might be handy to add a general quarto website section on the per module _quarto.yml file. This can be done without interference with the generation on the across modules documentation, as the latter is only using the quartodoc part.\nIn the build across multiple modules, the Makefile has the following build steps defined:\n\ngenerate the main.qmd dynamically from the README.md\nextract the repositories from the first table in the main.qmd, taking the first column and expecting markdown notation for links\ndownload each repository into a /docs/modules/* directory\nbuild with quartodoc build within each /docs/modules/* folder\n\nOnce the quartodoc part in each /docs/modules/* is done, we can use quartop preview (or the github publish action for Dareplane) to build the quarto website from within /docs for Dareplane. All modules will be included as we can specify a Documentation subsection with a glob in _quarto.yml:\nwebsite:  \n sidebar:\n    - id: \"main\"\n      contents:\n        - section: \"Documentation\"\n          contents:\n            - subsection:\n              auto: modules/*/index.qmd"
   },
   {
-    "objectID": "about/quarto_documentation_setup.html#todo",
-    "href": "about/quarto_documentation_setup.html#todo",
+    "objectID": "about/quarto_documentation_setup.html#how-to-document-your-module",
+    "href": "about/quarto_documentation_setup.html#how-to-document-your-module",
     "title": "Documentation setup",
     "section": "",
-    "text": "Currently the Home section is sourced from the main.qmd file as directly including the README.md did not work. As I could not get the logo to work properly (neither could I just ignore). The basic idea was from the quarto docs. -&gt; the problems is simply that quarto did non load the logo for the dark theme… check once I added theming properly"
+    "text": "In harmony with the general Dareplane coding philosophy, we want every module to be standalone, with very limited requirements for interoperability. This also holds for the documentation. The only requirement for the automated documentation process to be able to pick up the documentation is that there exists a _quarto.yml file in the root directory, which contains a least a section for quartodoc. E.g.:\nquartodoc:\n  package: \"dp-control-room\"\n  source_dir: \"control_room\"   # should point the the folder containing the python code\n  title: \"Documentation control room\"\nWith this setup, you can first create your documentation on a per module level, making sure it works with quartodoc build. For debugging, it might be handy to add a general quarto website section on the per module _quarto.yml file. This can be done without interference with the generation on the across modules documentation, as the latter is only using the quartodoc part.\nIn the build across multiple modules, the Makefile has the following build steps defined:\n\ngenerate the main.qmd dynamically from the README.md\nextract the repositories from the first table in the main.qmd, taking the first column and expecting markdown notation for links\ndownload each repository into a /docs/modules/* directory\nbuild with quartodoc build within each /docs/modules/* folder\n\nOnce the quartodoc part in each /docs/modules/* is done, we can use quartop preview (or the github publish action for Dareplane) to build the quarto website from within /docs for Dareplane. All modules will be included as we can specify a Documentation subsection with a glob in _quarto.yml:\nwebsite:  \n sidebar:\n    - id: \"main\"\n      contents:\n        - section: \"Documentation\"\n          contents:\n            - subsection:\n              auto: modules/*/index.qmd"
   },
   {
-    "objectID": "reference/ringbuffer.RingBuffer.html",
-    "href": "reference/ringbuffer.RingBuffer.html",
-    "title": "ringbuffer.RingBuffer",
+    "objectID": "libraries/dareplane_utils/time.partial_sleep.html",
+    "href": "libraries/dareplane_utils/time.partial_sleep.html",
+    "title": "time.partial_sleep",
     "section": "",
-    "text": "general.ringbuffer.RingBuffer(self, shape, dtype=np.float32)\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nbuffer\nnp.ndarray\nthe data buffer\n\n\nbuffer_t\nnp.ndarray\nthe time buffer\n\n\nlast_t\nfloat\nlatest time stamp\n\n\ncurr_i\nint\nindex of the latest data point int the buffer\n\n\nlogger\nlogging.Logger\nthe logger used for warnings and debug messages\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nshape\ntuple[int, int, …]\nshape of the buffer needs to be at least 2D (n_samples, n_features), arbitrary further dimensions can be added\nrequired\n\n\ndtype\ntype\na numpy data type for the buffer\nnp.float32\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nadd_continuous_buffer\nSlice samples should not be necessary &gt;&gt;&gt; as we add continuously\n\n\nget_insert_slices\nGet slices mapping data from the samples to the buffer\n\n\n\n\n\ngeneral.ringbuffer.RingBuffer.add_continuous_buffer(\n    slice_buffer,\n    samples,\n    times,\n)\nSlice samples should not be necessary &gt;&gt;&gt; as we add continuously + slice selection from lists is slow\n\n\n\ngeneral.ringbuffer.RingBuffer.get_insert_slices(len_samples)\nGet slices mapping data from the samples to the buffer\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nlen_samples\nint\nnumber of samples to add\nrequired\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\ntuple[list[slice], list[slice], int]",
+    "text": "time.partial_sleep\ndareplane_utils.general.time.partial_sleep(s, start, nsteps=30)\nSleep for 90% of s or up to 30ms to the end, whatever is longer",
     "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
       "General",
-      "ringbuffer.RingBuffer"
+      "time.partial_sleep"
     ]
   },
   {
-    "objectID": "reference/ringbuffer.RingBuffer.html#attributes",
-    "href": "reference/ringbuffer.RingBuffer.html#attributes",
-    "title": "ringbuffer.RingBuffer",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nbuffer\nnp.ndarray\nthe data buffer\n\n\nbuffer_t\nnp.ndarray\nthe time buffer\n\n\nlast_t\nfloat\nlatest time stamp\n\n\ncurr_i\nint\nindex of the latest data point int the buffer\n\n\nlogger\nlogging.Logger\nthe logger used for warnings and debug messages",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "General",
-      "ringbuffer.RingBuffer"
-    ]
-  },
-  {
-    "objectID": "reference/ringbuffer.RingBuffer.html#parameters",
-    "href": "reference/ringbuffer.RingBuffer.html#parameters",
-    "title": "ringbuffer.RingBuffer",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nshape\ntuple[int, int, …]\nshape of the buffer needs to be at least 2D (n_samples, n_features), arbitrary further dimensions can be added\nrequired\n\n\ndtype\ntype\na numpy data type for the buffer\nnp.float32",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "General",
-      "ringbuffer.RingBuffer"
-    ]
-  },
-  {
-    "objectID": "reference/ringbuffer.RingBuffer.html#methods",
-    "href": "reference/ringbuffer.RingBuffer.html#methods",
-    "title": "ringbuffer.RingBuffer",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nadd_continuous_buffer\nSlice samples should not be necessary &gt;&gt;&gt; as we add continuously\n\n\nget_insert_slices\nGet slices mapping data from the samples to the buffer\n\n\n\n\n\ngeneral.ringbuffer.RingBuffer.add_continuous_buffer(\n    slice_buffer,\n    samples,\n    times,\n)\nSlice samples should not be necessary &gt;&gt;&gt; as we add continuously + slice selection from lists is slow\n\n\n\ngeneral.ringbuffer.RingBuffer.get_insert_slices(len_samples)\nGet slices mapping data from the samples to the buffer\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nlen_samples\nint\nnumber of samples to add\nrequired\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\ntuple[list[slice], list[slice], int]",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "General",
-      "ringbuffer.RingBuffer"
-    ]
-  },
-  {
-    "objectID": "reference/StreamWatcher.html",
-    "href": "reference/StreamWatcher.html",
-    "title": "StreamWatcher",
-    "section": "",
-    "text": "stream_watcher.lsl_stream_watcher.StreamWatcher(\n    self,\n    name='',\n    buffer_size_s=2,\n    logger=logger,\n)\n\n\n\n\n\nName\nDescription\n\n\n\n\nconnect_to_stream\nEither use the self.name or a provided identifier dict to hook up\n\n\ndisconnect\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\nupdate_numeric\nLook for new data and update the buffer\n\n\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(\n    identifier=None,\n)\nEither use the self.name or a provided identifier dict to hook up with an LSL stream, they should coincide\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()\nLook for new data and update the buffer",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Streaming data",
-      "StreamWatcher"
-    ]
-  },
-  {
-    "objectID": "reference/StreamWatcher.html#methods",
-    "href": "reference/StreamWatcher.html#methods",
-    "title": "StreamWatcher",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nconnect_to_stream\nEither use the self.name or a provided identifier dict to hook up\n\n\ndisconnect\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\nupdate_numeric\nLook for new data and update the buffer\n\n\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(\n    identifier=None,\n)\nEither use the self.name or a provided identifier dict to hook up with an LSL stream, they should coincide\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\n\nstream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()\nLook for new data and update the buffer",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Streaming data",
-      "StreamWatcher"
-    ]
-  },
-  {
-    "objectID": "reference/index.html",
-    "href": "reference/index.html",
-    "title": "Docs",
-    "section": "",
-    "text": "Utility functions for Python regarding common components which can be usefull for multiple Dareplane modules.\n\n\nThe server components can be used from dareplane_utils.default_server.server\n\n\n\nDefaultServer\nThe default server which is being used and modified by pther dareplane\n\n\n\n\n\n\nLogging components which add a TCP handler to a logger derived from Python’s standard logging.Logger. This allows to the dp-control-room to create a single consolidated log-file.\n\n\n\nlogger.get_logger\nGet a configured logger.\n\n\nserver.LogRecordStreamHandler\nHandler for a streaming logging request.\n\n\nserver.LogRecordSocketReceiver\nSimple TCP socket-based logging receiver suitable for testing.\n\n\nserver.modify_root_logger\n\n\n\n\n\n\n\nDareplane relies mostly on the lab streaming layer (LSL) for streaming data. A central element of the dareplane-utils is the StreamWatcher which is a ring buffer to read from streams. Currently we only have a StreamWatcher for LSL implemented, using pylsl and inlets defined therein.\n\n\n\nStreamWatcher\n\n\n\nget_streams_names\nGet a list of all available lsl stream names.\n\n\npylsl_xmlelement_to_dict\nThe pylsl XMLElement is hard to investigate -&gt; cast to a dict for\n\n\nget_channel_names\n\n\n\n\n\n\n\nGeneral utility functions and classes\n\n\n\nringbuffer.RingBuffer\n\n\n\ntime.sleep_s\nSleep for a specified duration with partial sleep optimization.\n\n\ntime.partial_sleep\nSleep for 90% of s or up to 30ms to the end, whatever is longer\n\n\ntime.full_speed\n\n\n\nevent_loop.EventLoop",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "Docs"
-    ]
-  },
-  {
-    "objectID": "reference/index.html#dareplane_utils",
-    "href": "reference/index.html#dareplane_utils",
-    "title": "Docs",
-    "section": "",
-    "text": "Utility functions for Python regarding common components which can be usefull for multiple Dareplane modules.\n\n\nThe server components can be used from dareplane_utils.default_server.server\n\n\n\nDefaultServer\nThe default server which is being used and modified by pther dareplane\n\n\n\n\n\n\nLogging components which add a TCP handler to a logger derived from Python’s standard logging.Logger. This allows to the dp-control-room to create a single consolidated log-file.\n\n\n\nlogger.get_logger\nGet a configured logger.\n\n\nserver.LogRecordStreamHandler\nHandler for a streaming logging request.\n\n\nserver.LogRecordSocketReceiver\nSimple TCP socket-based logging receiver suitable for testing.\n\n\nserver.modify_root_logger\n\n\n\n\n\n\n\nDareplane relies mostly on the lab streaming layer (LSL) for streaming data. A central element of the dareplane-utils is the StreamWatcher which is a ring buffer to read from streams. Currently we only have a StreamWatcher for LSL implemented, using pylsl and inlets defined therein.\n\n\n\nStreamWatcher\n\n\n\nget_streams_names\nGet a list of all available lsl stream names.\n\n\npylsl_xmlelement_to_dict\nThe pylsl XMLElement is hard to investigate -&gt; cast to a dict for\n\n\nget_channel_names\n\n\n\n\n\n\n\nGeneral utility functions and classes\n\n\n\nringbuffer.RingBuffer\n\n\n\ntime.sleep_s\nSleep for a specified duration with partial sleep optimization.\n\n\ntime.partial_sleep\nSleep for 90% of s or up to 30ms to the end, whatever is longer\n\n\ntime.full_speed\n\n\n\nevent_loop.EventLoop",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "Docs"
-    ]
-  },
-  {
-    "objectID": "reference/DefaultServer.html",
-    "href": "reference/DefaultServer.html",
-    "title": "DefaultServer",
-    "section": "",
-    "text": "default_server.server.DefaultServer(\n    self,\n    port=8080,\n    ip='0.0.0.0',\n    nlisten=10,\n    name='default_server',\n    thread_stopper=stop_thread,\n    proc_stopper=stop_process,\n    msg_interpreter=interpret_msg,\n    pcommand_map=dict(),\n    current_conn=None,\n    server_socket=None,\n    threads=dict(),\n    processes=dict(),\n    is_listening=False,\n    logger=get_logger(__name__),\n)\nThe default server which is being used and modified by pther dareplane projects\n\n\n\n\n\nName\nDescription\n\n\n\n\ndefault_msg_interpretation\nThis contains the default interpretation\n\n\nhandle_msg\ninterpret the message\n\n\nmsg_interpretation\nInterpret the message and perform book keeping if necessary\n\n\nshutdown\nShutdown the server and close all connections\n\n\n\n\n\ndefault_server.server.DefaultServer.default_msg_interpretation(msg)\nThis contains the default interpretation\n\n\n\ndefault_server.server.DefaultServer.handle_msg(msg)\ninterpret the message\n\n\n\ndefault_server.server.DefaultServer.msg_interpretation(msg)\nInterpret the message and perform book keeping if necessary\n\n\n\ndefault_server.server.DefaultServer.shutdown()\nShutdown the server and close all connections",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Server",
-      "DefaultServer"
-    ]
-  },
-  {
-    "objectID": "reference/DefaultServer.html#methods",
-    "href": "reference/DefaultServer.html#methods",
-    "title": "DefaultServer",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\ndefault_msg_interpretation\nThis contains the default interpretation\n\n\nhandle_msg\ninterpret the message\n\n\nmsg_interpretation\nInterpret the message and perform book keeping if necessary\n\n\nshutdown\nShutdown the server and close all connections\n\n\n\n\n\ndefault_server.server.DefaultServer.default_msg_interpretation(msg)\nThis contains the default interpretation\n\n\n\ndefault_server.server.DefaultServer.handle_msg(msg)\ninterpret the message\n\n\n\ndefault_server.server.DefaultServer.msg_interpretation(msg)\nInterpret the message and perform book keeping if necessary\n\n\n\ndefault_server.server.DefaultServer.shutdown()\nShutdown the server and close all connections",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Server",
-      "DefaultServer"
-    ]
-  },
-  {
-    "objectID": "reference/server.LogRecordSocketReceiver.html",
-    "href": "reference/server.LogRecordSocketReceiver.html",
-    "title": "server.LogRecordSocketReceiver",
-    "section": "",
-    "text": "server.LogRecordSocketReceiver\nlogging.server.LogRecordSocketReceiver(\n    self,\n    host='localhost',\n    port=logging.handlers.DEFAULT_TCP_LOGGING_PORT,\n    handler=LogRecordStreamHandler,\n    logfile=Path('default_socket.log'),\n)\nSimple TCP socket-based logging receiver suitable for testing.",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Logging",
-      "server.LogRecordSocketReceiver"
-    ]
-  },
-  {
-    "objectID": "reference/get_streams_names.html",
-    "href": "reference/get_streams_names.html",
-    "title": "get_streams_names",
-    "section": "",
-    "text": "stream_watcher.lsl_stream_watcher.get_streams_names()\nGet a list of all available lsl stream names.\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nstreams\nlist[str]\nnames of all available LSL streams",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Streaming data",
-      "get_streams_names"
-    ]
-  },
-  {
-    "objectID": "reference/get_streams_names.html#returns",
-    "href": "reference/get_streams_names.html#returns",
-    "title": "get_streams_names",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nstreams\nlist[str]\nnames of all available LSL streams",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Streaming data",
-      "get_streams_names"
-    ]
-  },
-  {
-    "objectID": "reference/pylsl_xmlelement_to_dict.html",
-    "href": "reference/pylsl_xmlelement_to_dict.html",
-    "title": "pylsl_xmlelement_to_dict",
-    "section": "",
-    "text": "pylsl_xmlelement_to_dict\nstream_watcher.lsl_stream_watcher.pylsl_xmlelement_to_dict(inf)\nThe pylsl XMLElement is hard to investigate -&gt; cast to a dict for simplicity",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Streaming data",
-      "pylsl_xmlelement_to_dict"
-    ]
-  },
-  {
-    "objectID": "reference/server.LogRecordStreamHandler.html",
-    "href": "reference/server.LogRecordStreamHandler.html",
-    "title": "server.LogRecordStreamHandler",
-    "section": "",
-    "text": "logging.server.LogRecordStreamHandler()\nHandler for a streaming logging request.\nThis basically logs the record using whatever logging policy is configured locally.\n\n\n\n\n\nName\nDescription\n\n\n\n\nhandle\nHandle multiple requests - each expected to be a 4-byte length,\n\n\n\n\n\nlogging.server.LogRecordStreamHandler.handle()\nHandle multiple requests - each expected to be a 4-byte length, followed by the LogRecord in pickle format. Logs the record according to whatever policy is configured locally.",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Logging",
-      "server.LogRecordStreamHandler"
-    ]
-  },
-  {
-    "objectID": "reference/server.LogRecordStreamHandler.html#methods",
-    "href": "reference/server.LogRecordStreamHandler.html#methods",
-    "title": "server.LogRecordStreamHandler",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nhandle\nHandle multiple requests - each expected to be a 4-byte length,\n\n\n\n\n\nlogging.server.LogRecordStreamHandler.handle()\nHandle multiple requests - each expected to be a 4-byte length, followed by the LogRecord in pickle format. Logs the record according to whatever policy is configured locally.",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Logging",
-      "server.LogRecordStreamHandler"
-    ]
-  },
-  {
-    "objectID": "examples/index.html",
-    "href": "examples/index.html",
-    "title": "Dareplane",
-    "section": "",
-    "text": "Creating modules\n\n\n\n  \n    \n        \n            Hello world from Dareplane\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n       \n        Building your first module based of the strawmen module.\n\n      \n      \n        \n          View example\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nSetup scripts\n\n\n\n  \n    \n        \n            c-VEP experiment\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n       \n        Walk through the [setup script for c-VEP BCI](https://github.com/thijor/dp-cvep).\n\n      \n      \n        \n          View example\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "examples.html",
-    "href": "examples.html",
-    "title": "Examples",
-    "section": "",
-    "text": "Here will be an examples page",
-    "crumbs": [
-      "Home",
-      "Modules"
-    ]
-  },
-  {
-    "objectID": "examples.html#placeholder",
-    "href": "examples.html#placeholder",
-    "title": "Examples",
-    "section": "",
-    "text": "Here will be an examples page",
-    "crumbs": [
-      "Home",
-      "Modules"
-    ]
-  },
-  {
-    "objectID": "examples/hello_world.html",
-    "href": "examples/hello_world.html",
-    "title": "Hello World for Dareplane with python modules",
-    "section": "",
-    "text": "This example will guide you through the process of creating a simple motor imagery task as a Dareplane module and then hook it up with a mock-up data streamer as well as LSL recording. Completing this example you will have a data source (mockup only), a paradigm providing visual queues and markers and finally recording of markers and streaming data with LSL into an *.xdf file.\n\n\nInstall the dareplane-utils to make use of the default TCP server. E.g. via pip install dareplane-utils.\n\n\n\nFirst, lets decide to call the module dp-mi-paradigm. The prefix of dp- for Dareplane is arbitrary and you can of course choose not to use it.\n\n\nTo start, get the dp-strawman-module and read the README.md therein carefully. After that you should know how to build upon the strawman. So lets rename the relevant folders. The content of our new module folder ./dp-mi-paradigm should then look like this:\n├── LICENSE\n├── README.md\n├── api\n│   └── server.py\n├── configs\n├── mi_paradigm\n│   ├── main.py\n│   └── utils\n│       └── logging.py\n└── tests\n\n\n\nFor our paradigm we decide to show simple instructions for motor imagination of left (L) and right ( R) hand movement by displaying letters ‘L’ and ‘R’ as well as a fixation cross ‘+’ using psychopy. In addition, we want to send markers to an LSL stream capturing when a direction is shown.\nSo our ./mi_paradigm/main.py could look like this.\n```python ./mi_paradigm/main.py\nfrom fire import Fire import time import random import pylsl from psychopy.visual import TextStim, Window\nfrom mi_paradigm.utils.logging import logger\nlogger.setLevel(10)\nBG_COLOR = (0, 0, 0) TEXT_COLOR = (1, 0, 0)"
-  },
-  {
-    "objectID": "examples/hello_world.html#get-the-dareplane-pyutils",
-    "href": "examples/hello_world.html#get-the-dareplane-pyutils",
-    "title": "Hello World for Dareplane with python modules",
-    "section": "",
-    "text": "Install the dareplane-utils to make use of the default TCP server. E.g. via pip install dareplane-utils."
-  },
-  {
-    "objectID": "examples/hello_world.html#building-the-paradigm-module",
-    "href": "examples/hello_world.html#building-the-paradigm-module",
-    "title": "Hello World for Dareplane with python modules",
-    "section": "",
-    "text": "First, lets decide to call the module dp-mi-paradigm. The prefix of dp- for Dareplane is arbitrary and you can of course choose not to use it.\n\n\nTo start, get the dp-strawman-module and read the README.md therein carefully. After that you should know how to build upon the strawman. So lets rename the relevant folders. The content of our new module folder ./dp-mi-paradigm should then look like this:\n├── LICENSE\n├── README.md\n├── api\n│   └── server.py\n├── configs\n├── mi_paradigm\n│   ├── main.py\n│   └── utils\n│       └── logging.py\n└── tests\n\n\n\nFor our paradigm we decide to show simple instructions for motor imagination of left (L) and right ( R) hand movement by displaying letters ‘L’ and ‘R’ as well as a fixation cross ‘+’ using psychopy. In addition, we want to send markers to an LSL stream capturing when a direction is shown.\nSo our ./mi_paradigm/main.py could look like this.\n```python ./mi_paradigm/main.py\nfrom fire import Fire import time import random import pylsl from psychopy.visual import TextStim, Window\nfrom mi_paradigm.utils.logging import logger\nlogger.setLevel(10)\nBG_COLOR = (0, 0, 0) TEXT_COLOR = (1, 0, 0)"
-  },
-  {
-    "objectID": "examples/hello_world.html#running-your-module-from-the-control-room",
-    "href": "examples/hello_world.html#running-your-module-from-the-control-room",
-    "title": "Hello World for Dareplane with python modules",
-    "section": "Running your module from the control room",
-    "text": "Running your module from the control room\nIt is now time to integrate the dp-mi-paradigm with other modules. This is done using the dp-control-room. If you do not yet have it, clone it from git and place it e.g. in the parent directory of pd-mi-paradigm. So that you have the pd-mi-paradigm and pd-control-room paradigm in the same folder. Make sure to have all dependencies of the control room installed. Try pip install -r requirements.txt from within the pd-control-room folder.\nThen move into the dp-control-room directory and create a config at ./configs/mi_experiment.toml with the following content:\n```toml ./configs/mi_experiment.toml [python] modules_root = ‘../’"
-  },
-  {
-    "objectID": "examples/c-VEP_setup.html",
-    "href": "examples/c-VEP_setup.html",
-    "title": "c-VEP demo setup script",
-    "section": "",
-    "text": "c-VEP demo setup script\nIn this example, we walk over the details of the c-VEP demo setup script.\nSetup scripts for Dareplane provide an easy way to configure and share a full experimental setup. The idea is to download and configure all necessary components from scratch. Together with version control, this makes it easy to reproduce experiments and share them with others.\n\nPre requisists\n\nLSL Lab recorder is installed"
-  },
-  {
-    "objectID": "reference/time.sleep_s.html",
-    "href": "reference/time.sleep_s.html",
-    "title": "time.sleep_s",
-    "section": "",
-    "text": "general.time.sleep_s(s, partial_sleep_threshold=0.0005, nsteps=30)\nSleep for a specified duration with partial sleep optimization.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ns\nfloat\nThe total duration to sleep in seconds.\nrequired\n\n\npartial_sleep_threshold\nfloat\nThe threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations s above the threshold, the optimization is applied.\n0.0005\n\n\nnsteps\nint\nThe number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to nsteps &gt; 4.\n30",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "General",
-      "time.sleep_s"
-    ]
-  },
-  {
-    "objectID": "reference/time.sleep_s.html#parameters",
-    "href": "reference/time.sleep_s.html#parameters",
-    "title": "time.sleep_s",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ns\nfloat\nThe total duration to sleep in seconds.\nrequired\n\n\npartial_sleep_threshold\nfloat\nThe threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations s above the threshold, the optimization is applied.\n0.0005\n\n\nnsteps\nint\nThe number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to nsteps &gt; 4.\n30",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "General",
-      "time.sleep_s"
-    ]
-  },
-  {
-    "objectID": "reference/time.full_speed.html",
-    "href": "reference/time.full_speed.html",
-    "title": "time.full_speed",
-    "section": "",
-    "text": "time.full_speed\ngeneral.time.full_speed(s, start)",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "General",
-      "time.full_speed"
-    ]
-  },
-  {
-    "objectID": "reference/event_loop.EventLoop.html",
-    "href": "reference/event_loop.EventLoop.html",
-    "title": "event_loop.EventLoop",
-    "section": "",
-    "text": "general.event_loop.EventLoop(self, dt_s, stop_event=Event(), ctx=None)\n\n\n\n\n\nName\nDescription\n\n\n\n\nvalidate_callback\nCheck that every callback accepts at least a kwarg with ‘ctx’\n\n\n\n\n\ngeneral.event_loop.EventLoop.validate_callback(cb)\nCheck that every callback accepts at least a kwarg with ‘ctx’",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "General",
-      "event_loop.EventLoop"
-    ]
-  },
-  {
-    "objectID": "reference/event_loop.EventLoop.html#methods",
-    "href": "reference/event_loop.EventLoop.html#methods",
-    "title": "event_loop.EventLoop",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nvalidate_callback\nCheck that every callback accepts at least a kwarg with ‘ctx’\n\n\n\n\n\ngeneral.event_loop.EventLoop.validate_callback(cb)\nCheck that every callback accepts at least a kwarg with ‘ctx’",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "General",
-      "event_loop.EventLoop"
-    ]
-  },
-  {
-    "objectID": "reference/get_channel_names.html",
-    "href": "reference/get_channel_names.html",
-    "title": "get_channel_names",
-    "section": "",
-    "text": "get_channel_names\nstream_watcher.lsl_stream_watcher.get_channel_names(inf)",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Streaming data",
-      "get_channel_names"
-    ]
-  },
-  {
-    "objectID": "reference/logger.get_logger.html",
-    "href": "reference/logger.get_logger.html",
-    "title": "logger.get_logger",
-    "section": "",
-    "text": "logging.logger.get_logger(\n    name,\n    add_console_handler=False,\n    colors=colors,\n    no_socket_handler=False,\n)\nGet a configured logger.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nname\nstr\nThe name of the logger.\nrequired\n\n\nadd_console_handler\nbool\nIf True, add a console handler to the logger (default is False).\nFalse\n\n\ncolors\ndict\nA dictionary of colors for log levels (default is colors).\ncolors\n\n\nno_socket_handler\nbool\nIf True, opt out of adding a socket handler for TCP streaming (default is False).\nFalse\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nlogging.Logger\nThe configured logger.",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Logging",
-      "logger.get_logger"
-    ]
-  },
-  {
-    "objectID": "reference/logger.get_logger.html#parameters",
-    "href": "reference/logger.get_logger.html#parameters",
-    "title": "logger.get_logger",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nname\nstr\nThe name of the logger.\nrequired\n\n\nadd_console_handler\nbool\nIf True, add a console handler to the logger (default is False).\nFalse\n\n\ncolors\ndict\nA dictionary of colors for log levels (default is colors).\ncolors\n\n\nno_socket_handler\nbool\nIf True, opt out of adding a socket handler for TCP streaming (default is False).\nFalse",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Logging",
-      "logger.get_logger"
-    ]
-  },
-  {
-    "objectID": "reference/logger.get_logger.html#returns",
-    "href": "reference/logger.get_logger.html#returns",
-    "title": "logger.get_logger",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nlogging.Logger\nThe configured logger.",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
-      "Logging",
-      "logger.get_logger"
-    ]
-  },
-  {
-    "objectID": "reference/server.modify_root_logger.html",
-    "href": "reference/server.modify_root_logger.html",
+    "objectID": "libraries/dareplane_utils/server.modify_root_logger.html",
+    "href": "libraries/dareplane_utils/server.modify_root_logger.html",
     "title": "server.modify_root_logger",
     "section": "",
-    "text": "server.modify_root_logger\nlogging.server.modify_root_logger(logfile)",
+    "text": "server.modify_root_logger\ndareplane_utils.logging.server.modify_root_logger(logfile)",
     "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
       "Logging",
       "server.modify_root_logger"
     ]
   },
   {
-    "objectID": "reference/time.partial_sleep.html",
-    "href": "reference/time.partial_sleep.html",
-    "title": "time.partial_sleep",
+    "objectID": "libraries/dareplane_utils/logger.get_logger.html",
+    "href": "libraries/dareplane_utils/logger.get_logger.html",
+    "title": "logger.get_logger",
     "section": "",
-    "text": "time.partial_sleep\ngeneral.time.partial_sleep(s, start, nsteps=30)\nSleep for 90% of s or up to 30ms to the end, whatever is longer",
+    "text": "dareplane_utils.logging.logger.get_logger(\n    name,\n    add_console_handler=False,\n    colors=colors,\n    no_socket_handler=False,\n)\nGet a configured logger.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nname\nstr\nThe name of the logger.\nrequired\n\n\nadd_console_handler\nbool\nIf True, add a console handler to the logger (default is False).\nFalse\n\n\ncolors\ndict\nA dictionary of colors for log levels (default is colors).\ncolors\n\n\nno_socket_handler\nbool\nIf True, opt out of adding a socket handler for TCP streaming (default is False).\nFalse\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nlogging.Logger\nThe configured logger.",
     "crumbs": [
-      "Home",
-      "Documentation",
-      "`dareplane_utils`",
+      "Logging",
+      "logger.get_logger"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/logger.get_logger.html#parameters",
+    "href": "libraries/dareplane_utils/logger.get_logger.html#parameters",
+    "title": "logger.get_logger",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nname\nstr\nThe name of the logger.\nrequired\n\n\nadd_console_handler\nbool\nIf True, add a console handler to the logger (default is False).\nFalse\n\n\ncolors\ndict\nA dictionary of colors for log levels (default is colors).\ncolors\n\n\nno_socket_handler\nbool\nIf True, opt out of adding a socket handler for TCP streaming (default is False).\nFalse",
+    "crumbs": [
+      "Logging",
+      "logger.get_logger"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/logger.get_logger.html#returns",
+    "href": "libraries/dareplane_utils/logger.get_logger.html#returns",
+    "title": "logger.get_logger",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nlogging.Logger\nThe configured logger.",
+    "crumbs": [
+      "Logging",
+      "logger.get_logger"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/get_channel_names.html",
+    "href": "libraries/dareplane_utils/get_channel_names.html",
+    "title": "get_channel_names",
+    "section": "",
+    "text": "get_channel_names\ndareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names(inf)",
+    "crumbs": [
+      "Streaming data",
+      "get_channel_names"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/event_loop.EventLoop.html",
+    "href": "libraries/dareplane_utils/event_loop.EventLoop.html",
+    "title": "event_loop.EventLoop",
+    "section": "",
+    "text": "dareplane_utils.general.event_loop.EventLoop(\n    self,\n    dt_s,\n    stop_event=Event(),\n    ctx=None,\n)\n\n\n\n\n\nName\nDescription\n\n\n\n\nvalidate_callback\nCheck that every callback accepts at least a kwarg with ‘ctx’\n\n\n\n\n\ndareplane_utils.general.event_loop.EventLoop.validate_callback(cb)\nCheck that every callback accepts at least a kwarg with ‘ctx’",
+    "crumbs": [
       "General",
-      "time.partial_sleep"
+      "event_loop.EventLoop"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/event_loop.EventLoop.html#methods",
+    "href": "libraries/dareplane_utils/event_loop.EventLoop.html#methods",
+    "title": "event_loop.EventLoop",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nvalidate_callback\nCheck that every callback accepts at least a kwarg with ‘ctx’\n\n\n\n\n\ndareplane_utils.general.event_loop.EventLoop.validate_callback(cb)\nCheck that every callback accepts at least a kwarg with ‘ctx’",
+    "crumbs": [
+      "General",
+      "event_loop.EventLoop"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/time.full_speed.html",
+    "href": "libraries/dareplane_utils/time.full_speed.html",
+    "title": "time.full_speed",
+    "section": "",
+    "text": "time.full_speed\ndareplane_utils.general.time.full_speed(s, start)",
+    "crumbs": [
+      "General",
+      "time.full_speed"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/time.sleep_s.html",
+    "href": "libraries/dareplane_utils/time.sleep_s.html",
+    "title": "time.sleep_s",
+    "section": "",
+    "text": "dareplane_utils.general.time.sleep_s(\n    s,\n    partial_sleep_threshold=0.0005,\n    nsteps=30,\n)\nSleep for a specified duration with partial sleep optimization.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ns\nfloat\nThe total duration to sleep in seconds.\nrequired\n\n\npartial_sleep_threshold\nfloat\nThe threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations s above the threshold, the optimization is applied.\n0.0005\n\n\nnsteps\nint\nThe number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to nsteps &gt; 4.\n30",
+    "crumbs": [
+      "General",
+      "time.sleep_s"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/time.sleep_s.html#parameters",
+    "href": "libraries/dareplane_utils/time.sleep_s.html#parameters",
+    "title": "time.sleep_s",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ns\nfloat\nThe total duration to sleep in seconds.\nrequired\n\n\npartial_sleep_threshold\nfloat\nThe threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations s above the threshold, the optimization is applied.\n0.0005\n\n\nnsteps\nint\nThe number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to nsteps &gt; 4.\n30",
+    "crumbs": [
+      "General",
+      "time.sleep_s"
     ]
   },
   {
@@ -456,7 +139,7 @@
     "href": "main.html",
     "title": "Dareplane",
     "section": "",
-    "text": "Dareplane is a modular and broad technology agnostic open source software platform for brain-computer interface research. LSL is used for data communication and TCP sockets for module communication. The platform is designed to be minimalistic and to allow for easy development of custom modules, with minimal overhead of integrating existing code.\nCaveat: The platform is in an early alpha stage and is developed by a small group of developers. Although core functionality is implemented and the platform has been used in &gt;20 experimental sessions including simultaneous recording of EEG, ECoG, LFP and other signal modalities, please be aware that bugs are still likely and thorough testing of every setup is required.\nThe target users are developers of experimental setups who require customized software components, or who just want to have full control over the functionality of data I/O, algorithmic processing, and/or on stimulation and feedback. For this user group, Dareplane aims to provide a minimalistic framework which allows to develop and integrate bespoke modules in a simple way. It is a mind-child of the https://suckless.org/ philosophy and tries to adapt it in a pragmatic manner with research in the focus.\nIf you are looking for a setup that is more or less ready to use out of the box, you will be better of using a more mature framework which is oriented towards more plug-and-play components. In any case it is good to have a look at the other frameworks section.",
+    "text": "Dareplane is a modular and broad technology agnostic open source software platform for brain-computer interface research. LSL is used for data communication and TCP sockets for module communication. The platform is designed to be minimalistic and to allow for easy development of custom modules, with minimal overhead of integrating existing code.\nThe platform and first performance evaluations are published in Dold et al., 2025, J. Neural Eng. 22 026029\nThe target users are developers of experimental setups who require customized software components, or who just want to have full control over the functionality of data I/O, algorithmic processing, and/or on stimulation and feedback. For this user group, Dareplane aims to provide a minimalistic framework which allows to develop and integrate bespoke modules in a simple way. It is a mind-child of the https://suckless.org/ philosophy and tries to adapt it in a pragmatic manner with research in the focus.\nIf you are looking for a setup that is more or less ready to use out of the box, you will be better of using a more mature framework which is oriented towards more plug-and-play components. In any case it is good to have a look at the other frameworks section.",
     "crumbs": [
       "Home",
       "Introduction"
@@ -496,11 +179,11 @@
     ]
   },
   {
-    "objectID": "main.html#getting-started-1",
-    "href": "main.html#getting-started-1",
+    "objectID": "main.html#citation",
+    "href": "main.html#citation",
     "title": "Dareplane",
-    "section": "Getting started",
-    "text": "Getting started\nRefer to the ./examples documents to so see a minimalistic setup and guidance on how to develop your own modules.",
+    "section": "Citation",
+    "text": "Citation\nIf you use Dareplane in your work, please cite the following paper:\n@article{Dold_2025,\n  doi = {10.1088/1741-2552/adbb20},\n  url = {https://dx.doi.org/10.1088/1741-2552/adbb20},\n  year = {2025},\n  month = {mar},\n  publisher = {IOP Publishing},\n  volume = {22},\n  number = {2},\n  pages = {026029},\n  author = {Dold, Matthias and Pereira, Joana and Sajonz, Bastian and Coenen, Volker A and Thielen, Jordy and Janssen, Marcus L F and Tangermann, Michael},\n  title = {Dareplane: a modular open-source software platform for BCI research with application in closed-loop deep brain stimulation},\n  journal = {Journal of Neural Engineering},\n}",
     "crumbs": [
       "Home",
       "Introduction"
@@ -515,6 +198,397 @@
     "crumbs": [
       "Home",
       "Introduction"
+    ]
+  },
+  {
+    "objectID": "modules/index.html",
+    "href": "modules/index.html",
+    "title": "Dareplane",
+    "section": "",
+    "text": "Utility librarires\nCollection of libraries providing functionality to Dareplane\n\n\n  \n    \n        \n            dareplane-utils\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n       \n        Python module with various utility functions for Dareplane modules\n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nSingle module documentation\nDareplane is structured in individual module, each providing its own documentation\n\n\n  \n    \n        \n            dp-strawman-module\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-control-room\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-lsl-recording\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-mockup-streamer\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-copydraw\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-multiband-regression\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-bollinger-control\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-ao-communication\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-ao-stimulator\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-arduino-stimulator\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-picoscope-streamer\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-passthrough\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-threshold-controller\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-cortec-bic\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-cvep-speller\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-cvep-decoder\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/utils.logserver.html",
+    "href": "modules/dp-control-room/reference/utils.logserver.html",
+    "title": "utils.logserver",
+    "section": "",
+    "text": "utils.logserver\nutils.logserver"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/processes.html",
+    "href": "modules/dp-control-room/reference/processes.html",
+    "title": "processes",
+    "section": "",
+    "text": "processes\n\n\n\n\n\nName\nDescription\n\n\n\n\nclose_child_processes\nClose all child processes of a Popen instance\n\n\nstart_container\nGiven the configs for python, create subprocesses running the given modules\n\n\n\n\n\nprocesses.close_child_processes(process)\nClose all child processes of a Popen instance\n\n\n\nprocesses.start_container(\n    module_name,\n    ip,\n    port,\n    loglevel=10,\n    modules_root_path=Path('.'),\n    start_kwargs={},\n)\nGiven the configs for python, create subprocesses running the given modules\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nsubprocess.Popen"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/processes.html#functions",
+    "href": "modules/dp-control-room/reference/processes.html#functions",
+    "title": "processes",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nclose_child_processes\nClose all child processes of a Popen instance\n\n\nstart_container\nGiven the configs for python, create subprocesses running the given modules\n\n\n\n\n\nprocesses.close_child_processes(process)\nClose all child processes of a Popen instance\n\n\n\nprocesses.start_container(\n    module_name,\n    ip,\n    port,\n    loglevel=10,\n    modules_root_path=Path('.'),\n    start_kwargs={},\n)\nGiven the configs for python, create subprocesses running the given modules\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nsubprocess.Popen"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.callbacks.html",
+    "href": "modules/dp-control-room/reference/gui.callbacks.html",
+    "title": "gui.callbacks",
+    "section": "",
+    "text": "gui.callbacks\n\n\n\n\n\nName\nDescription\n\n\n\n\nadd_callbacks\nAdd callbacks to a given app\n\n\nadd_json_verification_cb\nCheck the json strings in each inbox\n\n\nevaluate_templates\nIf a dictionary contains $ templates in its values,\n\n\nmake_ao_payload_from_json\nTransform a json string to pipe separated list of values only\n\n\n\n\n\ngui.callbacks.add_callbacks(app, modules, macros=None)\nAdd callbacks to a given app\n\n\n\ngui.callbacks.add_json_verification_cb(app, modules, macros)\nCheck the json strings in each inbox\n\n\n\ngui.callbacks.evaluate_templates(d)\nIf a dictionary contains $ templates in its values, replace them with the variable\n\n\n\ngui.callbacks.make_ao_payload_from_json(json_payload)\nTransform a json string to pipe separated list of values only"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.callbacks.html#functions",
+    "href": "modules/dp-control-room/reference/gui.callbacks.html#functions",
+    "title": "gui.callbacks",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nadd_callbacks\nAdd callbacks to a given app\n\n\nadd_json_verification_cb\nCheck the json strings in each inbox\n\n\nevaluate_templates\nIf a dictionary contains $ templates in its values,\n\n\nmake_ao_payload_from_json\nTransform a json string to pipe separated list of values only\n\n\n\n\n\ngui.callbacks.add_callbacks(app, modules, macros=None)\nAdd callbacks to a given app\n\n\n\ngui.callbacks.add_json_verification_cb(app, modules, macros)\nCheck the json strings in each inbox\n\n\n\ngui.callbacks.evaluate_templates(d)\nIf a dictionary contains $ templates in its values, replace them with the variable\n\n\n\ngui.callbacks.make_ao_payload_from_json(json_payload)\nTransform a json string to pipe separated list of values only"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/socket.html",
+    "href": "modules/dp-control-room/reference/socket.html",
+    "title": "socket",
+    "section": "",
+    "text": "socket\nsocket"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/connection.html",
+    "href": "modules/dp-control-room/reference/connection.html",
+    "title": "connection",
+    "section": "",
+    "text": "connection\nconnection"
+  },
+  {
+    "objectID": "examples/c-VEP_setup.html",
+    "href": "examples/c-VEP_setup.html",
+    "title": "c-VEP demo setup script",
+    "section": "",
+    "text": "c-VEP demo setup script\nIn this example, we walk over the details of the c-VEP demo setup script.\nSetup scripts for Dareplane provide an easy way to configure and share a full experimental setup. The idea is to download and configure all necessary components from scratch. Together with version control, this makes it easy to reproduce experiments and share them with others.\n\nPre requisists\n\nLSL Lab recorder is installed"
+  },
+  {
+    "objectID": "examples/hello_world.html",
+    "href": "examples/hello_world.html",
+    "title": "Hello World for Dareplane with python modules",
+    "section": "",
+    "text": "This example will guide you through the process of creating a simple motor imagery task as a Dareplane module and then hook it up with a mock-up data streamer as well as LSL recording. Completing this example you will have a data source (mockup only), a paradigm providing visual queues and markers and finally recording of markers and streaming data with LSL into an *.xdf file.\n\n\nInstall the dareplane-utils to make use of the default TCP server. E.g. via pip install dareplane-utils.\n\n\n\nFirst, lets decide to call the module dp-mi-paradigm. The prefix of dp- for Dareplane is arbitrary and you can of course choose not to use it.\n\n\nTo start, get the dp-strawman-module and read the README.md therein carefully. After that you should know how to build upon the strawman. So lets rename the relevant folders. The content of our new module folder ./dp-mi-paradigm should then look like this:\n├── LICENSE\n├── README.md\n├── api\n│   └── server.py\n├── configs\n├── mi_paradigm\n│   ├── main.py\n│   └── utils\n│       └── logging.py\n└── tests\n\n\n\nFor our paradigm we decide to show simple instructions for motor imagination of left (L) and right ( R) hand movement by displaying letters ‘L’ and ‘R’ as well as a fixation cross ‘+’ using psychopy. In addition, we want to send markers to an LSL stream capturing when a direction is shown.\nSo our ./mi_paradigm/main.py could look like this.\n```python ./mi_paradigm/main.py\nfrom fire import Fire import time import random import pylsl from psychopy.visual import TextStim, Window\nfrom mi_paradigm.utils.logging import logger\nlogger.setLevel(10)\nBG_COLOR = (0, 0, 0) TEXT_COLOR = (1, 0, 0)"
+  },
+  {
+    "objectID": "examples/hello_world.html#get-the-dareplane-pyutils",
+    "href": "examples/hello_world.html#get-the-dareplane-pyutils",
+    "title": "Hello World for Dareplane with python modules",
+    "section": "",
+    "text": "Install the dareplane-utils to make use of the default TCP server. E.g. via pip install dareplane-utils."
+  },
+  {
+    "objectID": "examples/hello_world.html#building-the-paradigm-module",
+    "href": "examples/hello_world.html#building-the-paradigm-module",
+    "title": "Hello World for Dareplane with python modules",
+    "section": "",
+    "text": "First, lets decide to call the module dp-mi-paradigm. The prefix of dp- for Dareplane is arbitrary and you can of course choose not to use it.\n\n\nTo start, get the dp-strawman-module and read the README.md therein carefully. After that you should know how to build upon the strawman. So lets rename the relevant folders. The content of our new module folder ./dp-mi-paradigm should then look like this:\n├── LICENSE\n├── README.md\n├── api\n│   └── server.py\n├── configs\n├── mi_paradigm\n│   ├── main.py\n│   └── utils\n│       └── logging.py\n└── tests\n\n\n\nFor our paradigm we decide to show simple instructions for motor imagination of left (L) and right ( R) hand movement by displaying letters ‘L’ and ‘R’ as well as a fixation cross ‘+’ using psychopy. In addition, we want to send markers to an LSL stream capturing when a direction is shown.\nSo our ./mi_paradigm/main.py could look like this.\n```python ./mi_paradigm/main.py\nfrom fire import Fire import time import random import pylsl from psychopy.visual import TextStim, Window\nfrom mi_paradigm.utils.logging import logger\nlogger.setLevel(10)\nBG_COLOR = (0, 0, 0) TEXT_COLOR = (1, 0, 0)"
+  },
+  {
+    "objectID": "examples/hello_world.html#running-your-module-from-the-control-room",
+    "href": "examples/hello_world.html#running-your-module-from-the-control-room",
+    "title": "Hello World for Dareplane with python modules",
+    "section": "Running your module from the control room",
+    "text": "Running your module from the control room\nIt is now time to integrate the dp-mi-paradigm with other modules. This is done using the dp-control-room. If you do not yet have it, clone it from git and place it e.g. in the parent directory of pd-mi-paradigm. So that you have the pd-mi-paradigm and pd-control-room paradigm in the same folder. Make sure to have all dependencies of the control room installed. Try pip install -r requirements.txt from within the pd-control-room folder.\nThen move into the dp-control-room directory and create a config at ./configs/mi_experiment.toml with the following content:\n```toml ./configs/mi_experiment.toml [python] modules_root = ‘../’"
+  },
+  {
+    "objectID": "examples/index.html",
+    "href": "examples/index.html",
+    "title": "Dareplane",
+    "section": "",
+    "text": "Creating modules\n\n\n\n  \n    \n        \n            Hello world from Dareplane\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n       \n        Building your first module based of the strawmen module.\n\n      \n      \n        \n          View example\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nSetup scripts\n\n\n\n  \n    \n        \n            c-VEP experiment\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n       \n        Walk through the [setup script for c-VEP BCI](https://github.com/thijor/dp-cvep).\n\n      \n      \n        \n          View example\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nNo matching items",
+    "crumbs": [
+      "Home",
+      "Examples"
+    ]
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.app.html",
+    "href": "modules/dp-control-room/reference/gui.app.html",
+    "title": "gui.app",
+    "section": "",
+    "text": "gui.app\ngui.app"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/utils.logging.html",
+    "href": "modules/dp-control-room/reference/utils.logging.html",
+    "title": "utils.logging",
+    "section": "",
+    "text": "utils.logging\nutils.logging"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/index.html",
+    "href": "modules/dp-control-room/reference/index.html",
+    "title": "Documentation control room",
+    "section": "",
+    "text": "The control room is one way of composing Dareplane modules to experimental setups. \n\nThe github repository for this module is located at: https://github.com/bsdlab/dp-control-room/tree/main\n\n\n\nThe main script to start and spawn the control_room.\n\n\n\nmain\n\n\n\n\n\n\n\nUI components implemented in dash are the core of the control room.\n\n\n\ngui.app\n\n\n\ngui.callbacks\n\n\n\ngui.layout\n\n\n\n\n\n\n\nThe control_room spawns and manages the life-times of other python modules.\n\n\n\nprocesses\n\n\n\nconnection\n\n\n\nsocket\n\n\n\n\n\n\n\nThe control_room also routes control_room callbacks, which allow intermodule communication if this is not solved by using something like LSL.\n\n\n\ncallbacks\n\n\n\n\n\n\n\nUtils of the control_room concern mainly logging. This relates to providing a TCP that listenes on the standard port for python logging (9020), and therefore consolidates all logging messages shared this way. E.g., when using dareplane-utils and the from dareplane_utils.logging.logger import get_logger.\n\n\n\nutils.logging\n\n\n\nutils.logserver",
+    "crumbs": [
+      "Home",
+      "Documentation",
+      "Dp Control Room",
+      "Documentation control room"
+    ]
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/index.html#control-room-functionality",
+    "href": "modules/dp-control-room/reference/index.html#control-room-functionality",
+    "title": "Documentation control room",
+    "section": "",
+    "text": "The control room is one way of composing Dareplane modules to experimental setups. \n\nThe github repository for this module is located at: https://github.com/bsdlab/dp-control-room/tree/main\n\n\n\nThe main script to start and spawn the control_room.\n\n\n\nmain\n\n\n\n\n\n\n\nUI components implemented in dash are the core of the control room.\n\n\n\ngui.app\n\n\n\ngui.callbacks\n\n\n\ngui.layout\n\n\n\n\n\n\n\nThe control_room spawns and manages the life-times of other python modules.\n\n\n\nprocesses\n\n\n\nconnection\n\n\n\nsocket\n\n\n\n\n\n\n\nThe control_room also routes control_room callbacks, which allow intermodule communication if this is not solved by using something like LSL.\n\n\n\ncallbacks\n\n\n\n\n\n\n\nUtils of the control_room concern mainly logging. This relates to providing a TCP that listenes on the standard port for python logging (9020), and therefore consolidates all logging messages shared this way. E.g., when using dareplane-utils and the from dareplane_utils.logging.logger import get_logger.\n\n\n\nutils.logging\n\n\n\nutils.logserver",
+    "crumbs": [
+      "Home",
+      "Documentation",
+      "Dp Control Room",
+      "Documentation control room"
+    ]
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.html",
+    "href": "modules/dp-control-room/reference/gui.layout.html",
+    "title": "gui.layout",
+    "section": "",
+    "text": "gui.layout\ngui.layout"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/main.html",
+    "href": "modules/dp-control-room/reference/main.html",
+    "title": "main",
+    "section": "",
+    "text": "main\nmain"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/callbacks.html",
+    "href": "modules/dp-control-room/reference/callbacks.html",
+    "title": "callbacks",
+    "section": "",
+    "text": "callbacks\ncallbacks"
+  },
+  {
+    "objectID": "modules/dp-ao-communication/AUTHORS.html",
+    "href": "modules/dp-ao-communication/AUTHORS.html",
+    "title": "Contributors to dp-ao-communication",
+    "section": "",
+    "text": "Aron Distelzweig\n\nImplementation\n\nMatthias Dold\n\nDesign\nReworking build chain to make from cmake\nFull refactoring for C++23 and meson.build"
+  },
+  {
+    "objectID": "modules/dp-ao-communication/AUTHORS.html#contributor-sorted-alphabetically",
+    "href": "modules/dp-ao-communication/AUTHORS.html#contributor-sorted-alphabetically",
+    "title": "Contributors to dp-ao-communication",
+    "section": "",
+    "text": "Aron Distelzweig\n\nImplementation\n\nMatthias Dold\n\nDesign\nReworking build chain to make from cmake\nFull refactoring for C++23 and meson.build"
+  },
+  {
+    "objectID": "libraries/dareplane_utils/server.LogRecordStreamHandler.html",
+    "href": "libraries/dareplane_utils/server.LogRecordStreamHandler.html",
+    "title": "server.LogRecordStreamHandler",
+    "section": "",
+    "text": "dareplane_utils.logging.server.LogRecordStreamHandler()\nHandler for a streaming logging request.\nThis basically logs the record using whatever logging policy is configured locally.\n\n\n\n\n\nName\nDescription\n\n\n\n\nhandle\nHandle multiple requests - each expected to be a 4-byte length,\n\n\n\n\n\ndareplane_utils.logging.server.LogRecordStreamHandler.handle()\nHandle multiple requests - each expected to be a 4-byte length, followed by the LogRecord in pickle format. Logs the record according to whatever policy is configured locally.",
+    "crumbs": [
+      "Logging",
+      "server.LogRecordStreamHandler"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/server.LogRecordStreamHandler.html#methods",
+    "href": "libraries/dareplane_utils/server.LogRecordStreamHandler.html#methods",
+    "title": "server.LogRecordStreamHandler",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nhandle\nHandle multiple requests - each expected to be a 4-byte length,\n\n\n\n\n\ndareplane_utils.logging.server.LogRecordStreamHandler.handle()\nHandle multiple requests - each expected to be a 4-byte length, followed by the LogRecord in pickle format. Logs the record according to whatever policy is configured locally.",
+    "crumbs": [
+      "Logging",
+      "server.LogRecordStreamHandler"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/pylsl_xmlelement_to_dict.html",
+    "href": "libraries/dareplane_utils/pylsl_xmlelement_to_dict.html",
+    "title": "pylsl_xmlelement_to_dict",
+    "section": "",
+    "text": "pylsl_xmlelement_to_dict\ndareplane_utils.stream_watcher.lsl_stream_watcher.pylsl_xmlelement_to_dict(inf)\nThe pylsl XMLElement is hard to investigate -&gt; cast to a dict for simplicity",
+    "crumbs": [
+      "Streaming data",
+      "pylsl_xmlelement_to_dict"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/get_streams_names.html",
+    "href": "libraries/dareplane_utils/get_streams_names.html",
+    "title": "get_streams_names",
+    "section": "",
+    "text": "dareplane_utils.stream_watcher.lsl_stream_watcher.get_streams_names()\nGet a list of all available lsl stream names.\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nstreams\nlist[str]\nnames of all available LSL streams",
+    "crumbs": [
+      "Streaming data",
+      "get_streams_names"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/get_streams_names.html#returns",
+    "href": "libraries/dareplane_utils/get_streams_names.html#returns",
+    "title": "get_streams_names",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nstreams\nlist[str]\nnames of all available LSL streams",
+    "crumbs": [
+      "Streaming data",
+      "get_streams_names"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/server.LogRecordSocketReceiver.html",
+    "href": "libraries/dareplane_utils/server.LogRecordSocketReceiver.html",
+    "title": "server.LogRecordSocketReceiver",
+    "section": "",
+    "text": "server.LogRecordSocketReceiver\ndareplane_utils.logging.server.LogRecordSocketReceiver(\n    self,\n    host='localhost',\n    port=logging.handlers.DEFAULT_TCP_LOGGING_PORT,\n    handler=LogRecordStreamHandler,\n    logfile=Path('default_socket.log'),\n)\nSimple TCP socket-based logging receiver suitable for testing.",
+    "crumbs": [
+      "Logging",
+      "server.LogRecordSocketReceiver"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/DefaultServer.html",
+    "href": "libraries/dareplane_utils/DefaultServer.html",
+    "title": "DefaultServer",
+    "section": "",
+    "text": "dareplane_utils.default_server.server.DefaultServer(\n    self,\n    port=8080,\n    ip='0.0.0.0',\n    nlisten=10,\n    name='default_server',\n    thread_stopper=stop_thread,\n    proc_stopper=stop_process,\n    msg_interpreter=interpret_msg,\n    pcommand_map=dict(),\n    current_conn=None,\n    server_socket=None,\n    threads=dict(),\n    processes=dict(),\n    is_listening=False,\n    logger=get_logger(__name__),\n)\nThe default server which is being used and modified by pther dareplane projects\n\n\n\n\n\nName\nDescription\n\n\n\n\ndefault_msg_interpretation\nThis contains the default interpretation\n\n\nhandle_msg\ninterpret the message\n\n\nmsg_interpretation\nInterpret the message and perform book keeping if necessary\n\n\nshutdown\nShutdown the server and close all connections\n\n\n\n\n\ndareplane_utils.default_server.server.DefaultServer.default_msg_interpretation(\n    msg,\n)\nThis contains the default interpretation\n\n\n\ndareplane_utils.default_server.server.DefaultServer.handle_msg(msg)\ninterpret the message\n\n\n\ndareplane_utils.default_server.server.DefaultServer.msg_interpretation(msg)\nInterpret the message and perform book keeping if necessary\n\n\n\ndareplane_utils.default_server.server.DefaultServer.shutdown()\nShutdown the server and close all connections",
+    "crumbs": [
+      "Server",
+      "DefaultServer"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/DefaultServer.html#methods",
+    "href": "libraries/dareplane_utils/DefaultServer.html#methods",
+    "title": "DefaultServer",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\ndefault_msg_interpretation\nThis contains the default interpretation\n\n\nhandle_msg\ninterpret the message\n\n\nmsg_interpretation\nInterpret the message and perform book keeping if necessary\n\n\nshutdown\nShutdown the server and close all connections\n\n\n\n\n\ndareplane_utils.default_server.server.DefaultServer.default_msg_interpretation(\n    msg,\n)\nThis contains the default interpretation\n\n\n\ndareplane_utils.default_server.server.DefaultServer.handle_msg(msg)\ninterpret the message\n\n\n\ndareplane_utils.default_server.server.DefaultServer.msg_interpretation(msg)\nInterpret the message and perform book keeping if necessary\n\n\n\ndareplane_utils.default_server.server.DefaultServer.shutdown()\nShutdown the server and close all connections",
+    "crumbs": [
+      "Server",
+      "DefaultServer"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/index.html",
+    "href": "libraries/dareplane_utils/index.html",
+    "title": "Documentation for dareplane_utils",
+    "section": "",
+    "text": "The server components can be used from dareplane_utils.default_server.server\n\n\n\nDefaultServer\nThe default server which is being used and modified by pther dareplane\n\n\n\n\n\n\nLogging components which add a TCP handler to a logger derived from Python’s standard logging.Logger. This allows to the dp-control-room to create a single consolidated log-file.\n\n\n\nlogger.get_logger\nGet a configured logger.\n\n\nserver.LogRecordStreamHandler\nHandler for a streaming logging request.\n\n\nserver.LogRecordSocketReceiver\nSimple TCP socket-based logging receiver suitable for testing.\n\n\nserver.modify_root_logger\n\n\n\n\n\n\n\nDareplane relies mostly on the lab streaming layer (LSL) for streaming data. A central element of the dareplane-utils is the StreamWatcher which is a ring buffer to read from streams. Currently we only have a StreamWatcher for LSL implemented, using pylsl and inlets defined therein.\n\n\n\nStreamWatcher\n\n\n\nget_streams_names\nGet a list of all available lsl stream names.\n\n\npylsl_xmlelement_to_dict\nThe pylsl XMLElement is hard to investigate -&gt; cast to a dict for\n\n\nget_channel_names\n\n\n\n\n\n\n\nGeneral utility functions and classes\n\n\n\nringbuffer.RingBuffer\n\n\n\ntime.sleep_s\nSleep for a specified duration with partial sleep optimization.\n\n\ntime.partial_sleep\nSleep for 90% of s or up to 30ms to the end, whatever is longer\n\n\ntime.full_speed\n\n\n\nevent_loop.EventLoop",
+    "crumbs": [
+      "Home",
+      "Documentation",
+      "dareplane-utils"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/index.html#server",
+    "href": "libraries/dareplane_utils/index.html#server",
+    "title": "Documentation for dareplane_utils",
+    "section": "",
+    "text": "The server components can be used from dareplane_utils.default_server.server\n\n\n\nDefaultServer\nThe default server which is being used and modified by pther dareplane",
+    "crumbs": [
+      "Home",
+      "Documentation",
+      "dareplane-utils"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/index.html#logging",
+    "href": "libraries/dareplane_utils/index.html#logging",
+    "title": "Documentation for dareplane_utils",
+    "section": "",
+    "text": "Logging components which add a TCP handler to a logger derived from Python’s standard logging.Logger. This allows to the dp-control-room to create a single consolidated log-file.\n\n\n\nlogger.get_logger\nGet a configured logger.\n\n\nserver.LogRecordStreamHandler\nHandler for a streaming logging request.\n\n\nserver.LogRecordSocketReceiver\nSimple TCP socket-based logging receiver suitable for testing.\n\n\nserver.modify_root_logger",
+    "crumbs": [
+      "Home",
+      "Documentation",
+      "dareplane-utils"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/index.html#streaming-data",
+    "href": "libraries/dareplane_utils/index.html#streaming-data",
+    "title": "Documentation for dareplane_utils",
+    "section": "",
+    "text": "Dareplane relies mostly on the lab streaming layer (LSL) for streaming data. A central element of the dareplane-utils is the StreamWatcher which is a ring buffer to read from streams. Currently we only have a StreamWatcher for LSL implemented, using pylsl and inlets defined therein.\n\n\n\nStreamWatcher\n\n\n\nget_streams_names\nGet a list of all available lsl stream names.\n\n\npylsl_xmlelement_to_dict\nThe pylsl XMLElement is hard to investigate -&gt; cast to a dict for\n\n\nget_channel_names",
+    "crumbs": [
+      "Home",
+      "Documentation",
+      "dareplane-utils"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/index.html#general",
+    "href": "libraries/dareplane_utils/index.html#general",
+    "title": "Documentation for dareplane_utils",
+    "section": "",
+    "text": "General utility functions and classes\n\n\n\nringbuffer.RingBuffer\n\n\n\ntime.sleep_s\nSleep for a specified duration with partial sleep optimization.\n\n\ntime.partial_sleep\nSleep for 90% of s or up to 30ms to the end, whatever is longer\n\n\ntime.full_speed\n\n\n\nevent_loop.EventLoop",
+    "crumbs": [
+      "Home",
+      "Documentation",
+      "dareplane-utils"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/StreamWatcher.html",
+    "href": "libraries/dareplane_utils/StreamWatcher.html",
+    "title": "StreamWatcher",
+    "section": "",
+    "text": "dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher(\n    self,\n    name='',\n    buffer_size_s=2,\n    logger=logger,\n)\n\n\n\n\n\nName\nDescription\n\n\n\n\nconnect_to_stream\nEither use the self.name or a provided identifier dict to hook up\n\n\ndisconnect\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\nupdate_numeric\nLook for new data and update the buffer\n\n\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(\n    identifier=None,\n)\nEither use the self.name or a provided identifier dict to hook up with an LSL stream, they should coincide\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()\nLook for new data and update the buffer",
+    "crumbs": [
+      "Streaming data",
+      "StreamWatcher"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/StreamWatcher.html#methods",
+    "href": "libraries/dareplane_utils/StreamWatcher.html#methods",
+    "title": "StreamWatcher",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nconnect_to_stream\nEither use the self.name or a provided identifier dict to hook up\n\n\ndisconnect\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\nupdate_numeric\nLook for new data and update the buffer\n\n\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(\n    identifier=None,\n)\nEither use the self.name or a provided identifier dict to hook up with an LSL stream, they should coincide\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()\nLook for new data and update the buffer",
+    "crumbs": [
+      "Streaming data",
+      "StreamWatcher"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/ringbuffer.RingBuffer.html",
+    "href": "libraries/dareplane_utils/ringbuffer.RingBuffer.html",
+    "title": "ringbuffer.RingBuffer",
+    "section": "",
+    "text": "dareplane_utils.general.ringbuffer.RingBuffer(self, shape, dtype=np.float32)\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nbuffer\nnp.ndarray\nthe data buffer\n\n\nbuffer_t\nnp.ndarray\nthe time buffer\n\n\nlast_t\nfloat\nlatest time stamp\n\n\ncurr_i\nint\nindex of the latest data point int the buffer\n\n\nlogger\nlogging.Logger\nthe logger used for warnings and debug messages\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nshape\ntuple[int, int, …]\nshape of the buffer needs to be at least 2D (n_samples, n_features), arbitrary further dimensions can be added\nrequired\n\n\ndtype\ntype\na numpy data type for the buffer\nnp.float32\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nadd_continuous_buffer\nSlice samples should not be necessary &gt;&gt;&gt; as we add continuously\n\n\nget_insert_slices\nGet slices mapping data from the samples to the buffer\n\n\n\n\n\ndareplane_utils.general.ringbuffer.RingBuffer.add_continuous_buffer(\n    slice_buffer,\n    samples,\n    times,\n)\nSlice samples should not be necessary &gt;&gt;&gt; as we add continuously + slice selection from lists is slow\n\n\n\ndareplane_utils.general.ringbuffer.RingBuffer.get_insert_slices(len_samples)\nGet slices mapping data from the samples to the buffer\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nlen_samples\nint\nnumber of samples to add\nrequired\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\ntuple[list[slice], list[slice], int]",
+    "crumbs": [
+      "General",
+      "ringbuffer.RingBuffer"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/ringbuffer.RingBuffer.html#attributes",
+    "href": "libraries/dareplane_utils/ringbuffer.RingBuffer.html#attributes",
+    "title": "ringbuffer.RingBuffer",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nbuffer\nnp.ndarray\nthe data buffer\n\n\nbuffer_t\nnp.ndarray\nthe time buffer\n\n\nlast_t\nfloat\nlatest time stamp\n\n\ncurr_i\nint\nindex of the latest data point int the buffer\n\n\nlogger\nlogging.Logger\nthe logger used for warnings and debug messages",
+    "crumbs": [
+      "General",
+      "ringbuffer.RingBuffer"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/ringbuffer.RingBuffer.html#parameters",
+    "href": "libraries/dareplane_utils/ringbuffer.RingBuffer.html#parameters",
+    "title": "ringbuffer.RingBuffer",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nshape\ntuple[int, int, …]\nshape of the buffer needs to be at least 2D (n_samples, n_features), arbitrary further dimensions can be added\nrequired\n\n\ndtype\ntype\na numpy data type for the buffer\nnp.float32",
+    "crumbs": [
+      "General",
+      "ringbuffer.RingBuffer"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/ringbuffer.RingBuffer.html#methods",
+    "href": "libraries/dareplane_utils/ringbuffer.RingBuffer.html#methods",
+    "title": "ringbuffer.RingBuffer",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nadd_continuous_buffer\nSlice samples should not be necessary &gt;&gt;&gt; as we add continuously\n\n\nget_insert_slices\nGet slices mapping data from the samples to the buffer\n\n\n\n\n\ndareplane_utils.general.ringbuffer.RingBuffer.add_continuous_buffer(\n    slice_buffer,\n    samples,\n    times,\n)\nSlice samples should not be necessary &gt;&gt;&gt; as we add continuously + slice selection from lists is slow\n\n\n\ndareplane_utils.general.ringbuffer.RingBuffer.get_insert_slices(len_samples)\nGet slices mapping data from the samples to the buffer\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nlen_samples\nint\nnumber of samples to add\nrequired\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\ntuple[list[slice], list[slice], int]",
+    "crumbs": [
+      "General",
+      "ringbuffer.RingBuffer"
     ]
   }
 ]
