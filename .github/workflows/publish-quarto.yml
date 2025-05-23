@@ -42,9 +42,18 @@ jobs:
         run: |
           python -m pip install dareplane-utils
 
-      - name: Build references
+      - name: Build libraries documentation
         run: |
+          cd docs
           quartodoc build
+
+      - name: Creating resources with make
+        run: |
+          cd docs
+          make clean
+          make main
+          make modules.csv
+          make docs-gallery
 
       # NOTE: If Publishing to GitHub Pages, set the permissions correctly (see top of this yaml)
       - name: Publish to GitHub Pages (and render)

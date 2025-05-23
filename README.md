@@ -6,7 +6,10 @@
 
 Dareplane is a modular and broad technology agnostic open source software platform for brain-computer interface research. [LSL](https://labstreaminglayer.org) is used for data communication and `TCP` sockets for module communication. The platform is designed to be minimalistic and to allow for easy development of custom modules, with minimal overhead of integrating existing code.
 
-**Caveat:** The platform is in an early alpha stage and is developed by a small group of developers. Although core functionality is implemented and the platform has been used in >20 experimental sessions including simultaneous recording of EEG, ECoG, LFP and other signal modalities, please be aware that bugs are still likely and thorough testing of every setup is required.
+The platform and first performance evaluations are published in [Dold et al., 2025, J. Neural Eng. 22 026029](https://iopscience.iop.org/article/10.1088/1741-2552/adbb20)
+
+> [!IMPORTANT]
+> The platform is in an early stage and is developed by a small group of developers. Although core functionality is implemented and the platform has been used in >30 experimental sessions including simultaneous recording of EEG, ECoG, LFP and other signal modalities, please be aware that bugs still might occur and thorough testing is required.
 
 The target users are developers of experimental setups who require customized software components, or who just want to have full control over the functionality of data I/O, algorithmic processing, and/or on stimulation and feedback. For this user group, Dareplane aims to provide a minimalistic framework which allows to develop and integrate bespoke modules in a simple way. It is a mind-child of the [https://suckless.org/](https://suckless.org/) philosophy and tries to adapt it in a pragmatic manner with research in the focus.
 
@@ -54,7 +57,7 @@ A good starting point is the [cVEP experiment](https://github.com/thijor/dp-cvep
 
 If you are building your modules in python, or using the existing python modules, the [`dareplane-utils`](https://pypi.org/project/dareplane-utils/) python module will provide some core functionality which most modules will need.
 
-```
+```python
 pip install dareplane-utils
 ```
 
@@ -65,10 +68,25 @@ The module provides basic functionality around TCP servers, logging, and collect
 The [`control room`](https://github.com/bsdlab/dp-control-room) module is the central piece for composition of modules to a full setup.
 Modules you need in your experiment are added within a setup configuration file (see `./examples` and the documentation in the [`control room`](https://github.com/bsdlab/dp-control-room))
 
-## Getting started
+## Citation
 
-Refer to the `./examples` documents to so see a minimalistic setup and guidance on how to develop
-your own modules.
+If you use Dareplane in your work, please cite the following paper:
+
+```bibtex
+@article{Dold_2025,
+  doi = {10.1088/1741-2552/adbb20},
+  url = {https://dx.doi.org/10.1088/1741-2552/adbb20},
+  year = {2025},
+  month = {mar},
+  publisher = {IOP Publishing},
+  volume = {22},
+  number = {2},
+  pages = {026029},
+  author = {Dold, Matthias and Pereira, Joana and Sajonz, Bastian and Coenen, Volker A and Thielen, Jordy and Janssen, Marcus L F and Tangermann, Michael},
+  title = {Dareplane: a modular open-source software platform for BCI research with application in closed-loop deep brain stimulation},
+  journal = {Journal of Neural Engineering},
+}
+```
 
 ## Other frameworks
 

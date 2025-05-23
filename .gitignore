@@ -8,7 +8,9 @@ _site/
 reference/
 objects.json
 src/
-docs/modules
+libraries/
+docs/modules/dp-*
+docs/modules/gallery.yml
 docs/modules.csv
 docs/modules_docs
 

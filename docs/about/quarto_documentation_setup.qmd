@@ -1,9 +1,49 @@
 # Documentation setup
 
-The documentation for Dareplane is generated with [Quarto](https://quarto.org/) and [quartodoc](https://machow.github.io/quartodoc). The later is used to automatically generate API documentation for python modules. [Quarto](https://quarto.org/) uses a central `_quarto.yml` file to configure the documentation.
+The documentation for Dareplane is generated with [Quarto](https://quarto.org/) and [quartodoc](https://machow.github.io/quartodoc). The later is used to automatically generate API documentation for python modules. [quarto](https://quarto.org/) uses a central `_quarto.yml` file to configure the documentation.
+
+For the Dareplane documentation, [https://github.com/bsdlab/Dareplane](https://github.com/bsdlab/Dareplane) is the main repository, and the `/docs` folder therein should be considered the root for all [quarto](https://quarto.org/) related steps.
+
+## Schematic of the generation process
+
+![](/assets/quarto_for_dareplane.excalidraw.png)
+
+## How to document your module
+
+In harmony with the general Dareplane coding philosophy, we want every module to be standalone, with very limited requirements for interoperability. This also holds for the documentation.
+The only requirement for the [automated documentation process](https://github.com/bsdlab/Dareplane/blob/gh-pages-dev/.github/workflows/publish-quarto.yml) to be able to pick up the documentation is that there exists a `_quarto.yml` file in the root directory, which contains a least a section for `quartodoc`.
+E.g.:
+
+```yml
+quartodoc:
+  package: "dp-control-room"
+  source_dir: "control_room"   # should point the the folder containing the python code
+  title: "Documentation control room"
+
+```
+
+With this setup, you can first create your documentation on a per module level, making sure it works with `quartodoc build`.
+For debugging, it might be handy to add a general quarto website section on the per module `_quarto.yml` file. This can be done without interference with the generation on the across modules documentation, as the latter is only using the `quartodoc` part.
+
+In the build across multiple modules, the [`Makefile`](https://github.com/bsdlab/Dareplane/blob/main/docs/Makefile) has the following build steps defined:
+
+- generate the [`main.qmd`](https://github.com/bsdlab/Dareplane/blob/main/docs/main.qmd) dynamically from the [`README.md`](https://github.com/bsdlab/Dareplane/tree/main)
+- extract the repositories from the first table in the [`main.qmd`](https://github.com/bsdlab/Dareplane/blob/main/docs/main.qmd), taking the first column and expecting markdown notation for links
+- download each repository into a `/docs/modules/*` directory
+- build with `quartodoc build` within each `/docs/modules/*` folder
+
+Once the `quartodoc` part in each `/docs/modules/*` is done, we can use `quartop preview` (or the [github publish action for Dareplane](https://github.com/bsdlab/Dareplane/blob/gh-pages-dev/.github/workflows/publish-quarto.yml)) to build the quarto website from within [`/docs`](https://github.com/bsdlab/Dareplane/tree/main/docs) for Dareplane.
+All modules will be included as we can specify a `Documentation` subsection with a glob in [`_quarto.yml`](https://github.com/bsdlab/Dareplane/blob/gh-pages-dev/docs/_quarto.yml):
+
+```yml
+website:  
+ sidebar:
+    - id: "main"
+      contents:
+        - section: "Documentation"
+          contents:
+            - subsection:
+              auto: modules/*/index.qmd
+```
 
 
-## TODO
-
-- [ ] Currently the `Home` section is sourced from the `main.qmd` file as directly including the `README.md` did not work. As I could not get the logo to work properly (neither could I just ignore). The basic idea was from the [quarto docs](https://quarto.org/docs/authoring/includes.html).
-  -> the problems is simply that quarto did non load the logo for the dark theme... check once I added theming properly

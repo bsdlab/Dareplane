@@ -22,7 +22,7 @@ website:
         href: main.qmd
 
       - text: Documentation
-        href: reference/
+        href: modules/index.qmd
 
       - text: Examples
         href: examples/index.qmd
@@ -44,7 +44,7 @@ website:
 
   sidebar:
     - id: "main"
-      file: "reference/_sidebar.yml"
+      file: "libraries/dareplane_utils/_sidebar.yml"
       # logo: ""
       style: docked
       search: true
@@ -55,22 +55,17 @@ website:
         - text: "Modules"
           href: examples.qmd
         - text: "Examples"
-          href: examples.qmd
+          href: examples/index.qmd
         - section: "Documentation"
           contents:
+            - text: "dareplane-utils"
+              href: "libraries/dareplane_utils/index.qmd"
             - subsection:
-              auto: modules_docs/*/index.qmd
-          # contents:
-          #   - text: "dareplane-utils"
-          #     href: "reference/index.qmd"
-
-# sidebar:
-#   file: reference/_sidebar.yml
+              auto: modules/*/reference/index.qmd
 
 # tell quarto to read the generated sidebar
 metadata-files:
-  - reference/_sidebar.yml
-  # - modules_docs/dp-control-room/_sidebar.yml
+  - libraries/dareplane_utils/_sidebar.yml
 
 # tell quarto to read the generated styles
 format:
@@ -82,20 +77,20 @@ format:
     toc-location: right
     toc-title: "On this page"
 
+# --- the quartodoc part for libraries to be installed
 quartodoc:
   # the name used to import the package you want to create reference docs for
-  package: "Dareplane"
+  package: "Dareplane utils"
+  dir: "libraries/dareplane_utils"
 
   title: "Documentation for `dareplane_utils`"
 
   options:
     signature_name: full
 
-  # out_index: _api_index.qmd
-
   # write sidebar and style data -> where quartodoc writes its content without impacting quarto
   sidebar:
-    file: "reference/_sidebar.yml"
+    file: "libraries/dareplane_utils/_sidebar.yml"
     # logo: ""
     # style: docked
     # search: true
@@ -111,13 +106,10 @@ quartodoc:
     #     contents:
     #       - "{{ contents }}"
 
-  css: reference/_styles-quartodoc.css
+  css: libraries/dareplane_utils/_styles-quartodoc.css
 
   sections:
-    - title: "`dareplane_utils`"
-      desc: Utility functions for Python regarding common components which can be usefull for multiple Dareplane modules.
-
-    - subtitle: Server
+    - title: Server
       desc: The server components can be used from `dareplane_utils.default_server.server`
       package: dareplane_utils.default_server.server
       contents:
@@ -125,7 +117,7 @@ quartodoc:
         # you can refer to anything: class methods, modules, etc..
         - DefaultServer
 
-    - subtitle: Logging
+    - title: Logging
       desc: |
         Logging components which add a TCP handler to a logger derived from Python's standard `logging.Logger`. This allows to
         the [dp-control-room](https://github.com/bsdlab/dp-control-room) to create a single consolidated log-file.
@@ -139,7 +131,7 @@ quartodoc:
         - server.LogRecordSocketReceiver
         - server.modify_root_logger
 
-    - subtitle: Streaming data
+    - title: Streaming data
       desc: |
         Dareplane relies mostly on the [lab streaming layer (LSL)](https://labstreaminglayer.org/#/) for streaming data. A central element of the  [`dareplane-utils`](https://pypi.org/project/dareplane-utils/)
         is the [`StreamWatcher`](https://github.com/matthiasdold/dareplane-pyutils/blob/main/src/dareplane_utils/stream_watcher/lsl_stream_watcher.py) which is a ring buffer to read from streams. Currently we only
@@ -154,7 +146,7 @@ quartodoc:
         - pylsl_xmlelement_to_dict
         - get_channel_names
 
-    - subtitle: General
+    - title: General
       desc: |
         General utility functions and classes
 
