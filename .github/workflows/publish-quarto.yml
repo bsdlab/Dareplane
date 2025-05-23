@@ -44,12 +44,10 @@ jobs:
 
       - name: Build libraries documentation
         run: |
-          cd docs
           quartodoc build
 
       - name: Creating resources with make
         run: |
-          cd docs
           make clean
           make main
           make modules.csv
