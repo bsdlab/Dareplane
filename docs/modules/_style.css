@@ -4,6 +4,15 @@
 
 .gallery-entry__img-container {
   padding: 5px;
+  max-height: 20vh;
+}
+
+.gallery-entry__img-container img {
+  display: block;
+  max-height: 20vh;
+  max-width: 100%;
+  width: auto;
+  margin: auto;
 }
 
 .gallery-entry a {
