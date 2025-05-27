@@ -137,7 +137,7 @@ window.Quarto = {
 <link rel="stylesheet" href="_style.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar docked nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -317,11 +317,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../main.html"> 
+    <a class="nav-link active" href="../main.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../modules/index.html" aria-current="page"> 
+    <a class="nav-link" href="../modules/index.html"> 
 <span class="menu-text">Documentation</span></a>
   </li>  
   <li class="nav-item">
@@ -361,10 +361,109 @@ window.Quarto = {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/single_dareplane_logo.svg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../main.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modules/" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Modules</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Documentation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../libraries/dareplane_utils/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">dareplane-utils</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dp Control Room</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modules/dp-control-room/reference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Documentation control room</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dp Stroop</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modules/dp-stroop/reference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Documentation for the Stroop task</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
@@ -424,7 +523,7 @@ window.Quarto = {
     </div>
     <a href="dp-strawman-module/reference/index.qmd" target="_blank">
     <div class="gallery-entry__img-container">
-        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+        <img src="dp-strawman-module/assets/thumbnail.png" alt="" class="card-img-top gallery-entry__img">
     </div>
     </a>
     <div class="card-footer gallery-entry__body bg-light">
@@ -451,7 +550,7 @@ window.Quarto = {
     </div>
     <a href="../modules/dp-control-room/reference/index.html" target="_blank">
     <div class="gallery-entry__img-container">
-        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+        <img src="dp-control-room/assets/thumbnail.png" alt="" class="card-img-top gallery-entry__img">
     </div>
     </a>
     <div class="card-footer gallery-entry__body bg-light">
@@ -532,7 +631,7 @@ window.Quarto = {
     </div>
     <a href="dp-copydraw/reference/index.qmd" target="_blank">
     <div class="gallery-entry__img-container">
-        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+        <img src="dp-copydraw/assets/thumbnail.png" alt="" class="card-img-top gallery-entry__img">
     </div>
     </a>
     <div class="card-footer gallery-entry__body bg-light">
@@ -559,7 +658,7 @@ window.Quarto = {
     </div>
     <a href="dp-multiband-regression/reference/index.qmd" target="_blank">
     <div class="gallery-entry__img-container">
-        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+        <img src="dp-multiband-regression/assets/thumbnail.png" alt="" class="card-img-top gallery-entry__img">
     </div>
     </a>
     <div class="card-footer gallery-entry__body bg-light">
@@ -613,7 +712,7 @@ window.Quarto = {
     </div>
     <a href="dp-ao-communication/reference/index.qmd" target="_blank">
     <div class="gallery-entry__img-container">
-        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+        <img src="dp-ao-communication/assets/thumbnail.png" alt="" class="card-img-top gallery-entry__img">
     </div>
     </a>
     <div class="card-footer gallery-entry__body bg-light">
@@ -634,40 +733,13 @@ window.Quarto = {
 
   <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="9">
     <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
-        <a href="dp-ao-stimulator/reference/index.qmd" class="card-text" target="_blank">
-            dp-ao-stimulator
-        </a>
-    </div>
-    <a href="dp-ao-stimulator/reference/index.qmd" target="_blank">
-    <div class="gallery-entry__img-container">
-        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
-    </div>
-    </a>
-    <div class="card-footer gallery-entry__body bg-light">
-    
-      
-      
-      <ul>
-        <li>
-          <a href="dp-ao-stimulator/reference/index.qmd" target="_blank">View documentation</a>
-        </li>
-
-         
-
-      </ul>
-    </div>
-    
-  </div>
-
-  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="10">
-    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
         <a href="dp-arduino-stimulator/reference/index.qmd" class="card-text" target="_blank">
             dp-arduino-stimulator
         </a>
     </div>
     <a href="dp-arduino-stimulator/reference/index.qmd" target="_blank">
     <div class="gallery-entry__img-container">
-        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+        <img src="dp-arduino-stimulator/assets/thumbnail.png" alt="" class="card-img-top gallery-entry__img">
     </div>
     </a>
     <div class="card-footer gallery-entry__body bg-light">
@@ -686,7 +758,7 @@ window.Quarto = {
     
   </div>
 
-  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="11">
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="10">
     <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
         <a href="dp-picoscope-streamer/reference/index.qmd" class="card-text" target="_blank">
             dp-picoscope-streamer
@@ -694,7 +766,7 @@ window.Quarto = {
     </div>
     <a href="dp-picoscope-streamer/reference/index.qmd" target="_blank">
     <div class="gallery-entry__img-container">
-        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+        <img src="dp-picoscope-streamer/assets/thumbnail.png" alt="" class="card-img-top gallery-entry__img">
     </div>
     </a>
     <div class="card-footer gallery-entry__body bg-light">
@@ -713,7 +785,7 @@ window.Quarto = {
     
   </div>
 
-  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="12">
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="11">
     <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
         <a href="dp-passthrough/reference/index.qmd" class="card-text" target="_blank">
             dp-passthrough
@@ -740,7 +812,7 @@ window.Quarto = {
     
   </div>
 
-  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="13">
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="12">
     <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
         <a href="dp-threshold-controller/reference/index.qmd" class="card-text" target="_blank">
             dp-threshold-controller
@@ -767,7 +839,7 @@ window.Quarto = {
     
   </div>
 
-  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="14">
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="13">
     <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
         <a href="dp-cortec-bic/reference/index.qmd" class="card-text" target="_blank">
             dp-cortec-bic
@@ -775,7 +847,7 @@ window.Quarto = {
     </div>
     <a href="dp-cortec-bic/reference/index.qmd" target="_blank">
     <div class="gallery-entry__img-container">
-        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+        <img src="dp-cortec-bic/assets/thumbnail.png" alt="" class="card-img-top gallery-entry__img">
     </div>
     </a>
     <div class="card-footer gallery-entry__body bg-light">
@@ -794,7 +866,7 @@ window.Quarto = {
     
   </div>
 
-  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="15">
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="14">
     <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
         <a href="dp-cvep-speller/reference/index.qmd" class="card-text" target="_blank">
             dp-cvep-speller
@@ -802,7 +874,7 @@ window.Quarto = {
     </div>
     <a href="dp-cvep-speller/reference/index.qmd" target="_blank">
     <div class="gallery-entry__img-container">
-        <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
+        <img src="dp-cvep-speller/assets/thumbnail.png" alt="" class="card-img-top gallery-entry__img">
     </div>
     </a>
     <div class="card-footer gallery-entry__body bg-light">
@@ -821,13 +893,40 @@ window.Quarto = {
     
   </div>
 
-  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="16">
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="15">
     <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
-        <a href="dp-cvep-decoder/reference/index.qmd" class="card-text" target="_blank">
-            dp-cvep-decoder
+        <a href="../modules/dp-stroop/reference/index.html" class="card-text" target="_blank">
+            dp-stroop
         </a>
     </div>
-    <a href="dp-cvep-decoder/reference/index.qmd" target="_blank">
+    <a href="../modules/dp-stroop/reference/index.html" target="_blank">
+    <div class="gallery-entry__img-container">
+        <img src="dp-stroop/assets/thumbnail.png" alt="" class="card-img-top gallery-entry__img">
+    </div>
+    </a>
+    <div class="card-footer gallery-entry__body bg-light">
+    
+      
+      
+      <ul>
+        <li>
+          <a href="../modules/dp-stroop/reference/index.html" target="_blank">View documentation</a>
+        </li>
+
+         
+
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="card gallery-entry border-1 rounded-3 g-col-12 g-col-sm-6 g-col-md-4 mb-2" data-index="16">
+    <div class="card-header py-1 px-2 border-bottom border-1 bg-light">
+        <a href="dp-c-sdl2-example/reference/index.qmd" class="card-text" target="_blank">
+            dp-c-sdl2-example
+        </a>
+    </div>
+    <a href="dp-c-sdl2-example/reference/index.qmd" target="_blank">
     <div class="gallery-entry__img-container">
         <img src="../assets/single_dareplane_logo.svg" alt="" class="card-img-top gallery-entry__img">
     </div>
@@ -838,7 +937,7 @@ window.Quarto = {
       
       <ul>
         <li>
-          <a href="dp-cvep-decoder/reference/index.qmd" target="_blank">View documentation</a>
+          <a href="dp-c-sdl2-example/reference/index.qmd" target="_blank">View documentation</a>
         </li>
 
          

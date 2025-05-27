@@ -352,22 +352,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#initialize-the-project" id="toc-initialize-the-project" class="nav-link" data-scroll-target="#initialize-the-project">Initialize the project</a></li>
   <li><a href="#develop-the-paradigm" id="toc-develop-the-paradigm" class="nav-link" data-scroll-target="#develop-the-paradigm">Develop the paradigm</a></li>
+  <li><a href="#wrapping-the-server-around" id="toc-wrapping-the-server-around" class="nav-link" data-scroll-target="#wrapping-the-server-around">Wrapping the server around</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#timing-parameters" id="toc-timing-parameters" class="nav-link" data-scroll-target="#timing-parameters">timing parameters</a></li>
-  <li><a href="#lsl-outlet---for-convenience-we-also-display-to-the-logger" id="toc-lsl-outlet---for-convenience-we-also-display-to-the-logger" class="nav-link" data-scroll-target="#lsl-outlet---for-convenience-we-also-display-to-the-logger">LSL outlet - for convenience we also display to the logger</a></li>
-  <li><a href="#sometimes-is-is-more-convenient-to-have-a-paradigm-instance-which-can-be" id="toc-sometimes-is-is-more-convenient-to-have-a-paradigm-instance-which-can-be" class="nav-link" data-scroll-target="#sometimes-is-is-more-convenient-to-have-a-paradigm-instance-which-can-be">Sometimes is is more convenient to have a paradigm instance which can be</a></li>
-  <li><a href="#kept-alive-globally.-this-especially-holds-if-the-server-we-will-wrap-around" id="toc-kept-alive-globally.-this-especially-holds-if-the-server-we-will-wrap-around" class="nav-link" data-scroll-target="#kept-alive-globally.-this-especially-holds-if-the-server-we-will-wrap-around">kept alive globally. This especially holds if the server we will wrap around</a></li>
-  <li><a href="#this-module-will-not-call-psychopy-in-a-subprocess" id="toc-this-module-will-not-call-psychopy-in-a-subprocess" class="nav-link" data-scroll-target="#this-module-will-not-call-psychopy-in-a-subprocess">this module will not call psychopy in a subprocess</a></li>
-  <li><a href="#so-for-the-example-add-a-class" id="toc-so-for-the-example-add-a-class" class="nav-link" data-scroll-target="#so-for-the-example-add-a-class">–&gt; So for the example, add a class</a>
-  <ul class="collapse">
-  <li><a href="#running-your-module-from-the-control-room" id="toc-running-your-module-from-the-control-room" class="nav-link" data-scroll-target="#running-your-module-from-the-control-room">Running your module from the control room</a></li>
-  </ul></li>
-  <li><a href="#used-modules" id="toc-used-modules" class="nav-link" data-scroll-target="#used-modules">——————– used modules —————————————</a>
+  <li><a href="#running-your-module-from-the-control-room" id="toc-running-your-module-from-the-control-room" class="nav-link" data-scroll-target="#running-your-module-from-the-control-room">Running your module from the control room</a>
   <ul class="collapse">
   <li><a href="#composing-the-module-with-others" id="toc-composing-the-module-with-others" class="nav-link" data-scroll-target="#composing-the-module-with-others">Composing the module with others</a></li>
   </ul></li>
-  <li><a href="#used-modules-1" id="toc-used-modules-1" class="nav-link" data-scroll-target="#used-modules-1">——————– used modules —————————————</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -406,154 +397,205 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="develop-the-paradigm">Develop the paradigm</h3>
 <p>For our paradigm we decide to show simple instructions for motor imagination of left (L) and right ( R) hand movement by displaying letters ‘L’ and ‘R’ as well as a fixation cross ‘+’ using <a href="https://www.psychopy.org/"><code>psychopy</code></a>. In addition, we want to send markers to an <a href="https://labstreaminglayer.org/#/">LSL</a> stream capturing when a direction is shown.</p>
 <p>So our <code>./mi_paradigm/main.py</code> could look like this.</p>
-<p>```python ./mi_paradigm/main.py</p>
-<p>from fire import Fire import time import random import pylsl from psychopy.visual import TextStim, Window</p>
-<p>from mi_paradigm.utils.logging import logger</p>
-<p>logger.setLevel(10)</p>
-<p>BG_COLOR = (0, 0, 0) TEXT_COLOR = (1, 0, 0)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fire <span class="im">import</span> Fire</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pylsl</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> psychopy.visual <span class="im">import</span> TextStim, Window</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mi_paradigm.utils.logging <span class="im">import</span> logger</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>logger.setLevel(<span class="dv">10</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>BG_COLOR <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>TEXT_COLOR <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># timing parameters</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>t_pre <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>t_show <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>t_post <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># LSL outlet - for convenience we also display to the logger</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Outlet:</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.logger <span class="op">=</span> logger</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        info <span class="op">=</span> pylsl.StreamInfo(name<span class="op">=</span><span class="st">"markers"</span>, channel_format<span class="op">=</span><span class="st">"string"</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.outlet <span class="op">=</span> pylsl.StreamOutlet(info)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> push_sample(<span class="va">self</span>, sample: <span class="bu">str</span>):</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.logger.debug(<span class="ss">f"Pushing sample </span><span class="sc">{</span>sample<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.outlet.push_sample([sample])</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Sometimes is is more convenient to have a paradigm instance which can be</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># kept alive globally. This especially holds if the server we will wrap around</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># this module will not call psychopy in a subprocess</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># --&gt; So for the example, add a class</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Paradigm:</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.open_window()</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> open_window(<span class="va">self</span>):</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.win <span class="op">=</span> Window((<span class="dv">800</span>, <span class="dv">600</span>), screen<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span>BG_COLOR)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.rstim <span class="op">=</span> TextStim(win<span class="op">=</span><span class="va">self</span>.win, text<span class="op">=</span><span class="st">"R"</span>, color<span class="op">=</span>TEXT_COLOR)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.lstim <span class="op">=</span> TextStim(win<span class="op">=</span><span class="va">self</span>.win, text<span class="op">=</span><span class="st">"L"</span>, color<span class="op">=</span>TEXT_COLOR)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.fix_cross <span class="op">=</span> TextStim(win<span class="op">=</span><span class="va">self</span>.win, text<span class="op">=</span><span class="st">"+"</span>, color<span class="op">=</span>TEXT_COLOR)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> close_window(<span class="va">self</span>):</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.win.close()</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_mi_task(paradigm: Paradigm, nrepetitions: <span class="bu">int</span> <span class="op">=</span> <span class="dv">4</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    outlet <span class="op">=</span> Outlet()</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    win <span class="op">=</span> paradigm.win</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    fix_cross <span class="op">=</span> paradigm.fix_cross</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    rstim <span class="op">=</span> paradigm.rstim</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    lstim <span class="op">=</span> paradigm.lstim</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    fix_cross.draw()</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    win.flip()</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create a balanced set</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    directions <span class="op">=</span> [<span class="st">"R"</span>] <span class="op">*</span> (nrepetitions <span class="op">//</span> <span class="dv">2</span>) <span class="op">+</span> [<span class="st">"L"</span>] <span class="op">*</span> (nrepetitions <span class="op">//</span> <span class="dv">2</span>)</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    random.shuffle(directions)</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, <span class="bu">dir</span> <span class="kw">in</span> <span class="bu">enumerate</span>(directions):</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>        fix_cross.draw()</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>        win.flip()</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>        outlet.push_sample(<span class="st">"new_trial"</span>)</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>        time.sleep(t_pre)</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">dir</span> <span class="op">==</span> <span class="st">"R"</span>:</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>            rstim.draw()</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>            lstim.draw()</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>        win.flip()</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>        outlet.push_sample(<span class="bu">dir</span>)</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>        <span class="co"># clear screen and sleep for post</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>        time.sleep(t_show)</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>        win.flip()</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>        outlet.push_sample(<span class="st">"cleared"</span>)</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>        win.flip()</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>        time.sleep(t_post)</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> functools <span class="im">import</span> partial</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    pdm <span class="op">=</span> Paradigm()</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    Fire(partial(run_mi_task, pdm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This should be all we need for being able to test the paradigm via <code>python -m mi_paradigm.main</code>. Test it like this and make sure it works (especially installing requirements!).</p>
 </section>
-</section>
-</section>
-<section id="timing-parameters" class="level1">
-<h1>timing parameters</h1>
-<p>t_pre = 1 t_show = 1 t_post = 1</p>
-</section>
-<section id="lsl-outlet---for-convenience-we-also-display-to-the-logger" class="level1">
-<h1>LSL outlet - for convenience we also display to the logger</h1>
-<p>class Outlet: def <strong>init</strong>(self): self.logger = logger info = pylsl.StreamInfo(name=“markers”, channel_format=“string”) self.outlet = pylsl.StreamOutlet(info)</p>
-<pre><code>def push_sample(self, sample: str):
-    self.logger.debug(f"Pushing sample {sample}")
-    self.outlet.push_sample([sample])</code></pre>
-</section>
-<section id="sometimes-is-is-more-convenient-to-have-a-paradigm-instance-which-can-be" class="level1">
-<h1>Sometimes is is more convenient to have a paradigm instance which can be</h1>
-</section>
-<section id="kept-alive-globally.-this-especially-holds-if-the-server-we-will-wrap-around" class="level1">
-<h1>kept alive globally. This especially holds if the server we will wrap around</h1>
-</section>
-<section id="this-module-will-not-call-psychopy-in-a-subprocess" class="level1">
-<h1>this module will not call psychopy in a subprocess</h1>
-</section>
-<section id="so-for-the-example-add-a-class" class="level1">
-<h1>–&gt; So for the example, add a class</h1>
-<p>class Paradigm: def <strong>init</strong>(self): self.open_window()</p>
-<pre><code>def open_window(self):
-    self.win = Window((800, 600), screen=1, color=BG_COLOR)
-    self.rstim = TextStim(win=self.win, text="R", color=TEXT_COLOR)
-    self.lstim = TextStim(win=self.win, text="L", color=TEXT_COLOR)
-    self.fix_cross = TextStim(win=self.win, text="+", color=TEXT_COLOR)
-
-def close_window(self):
-    self.win.close()</code></pre>
-<p>def run_mi_task(paradigm: Paradigm, nrepetitions: int = 4) -&gt; int: outlet = Outlet() win = paradigm.win fix_cross = paradigm.fix_cross rstim = paradigm.rstim lstim = paradigm.lstim</p>
-<pre><code>fix_cross.draw()
-win.flip()
-
-# create a balanced set
-directions = ["R"] * (nrepetitions // 2) + ["L"] * (nrepetitions // 2)
-random.shuffle(directions)
-
-for i, dir in enumerate(directions):
-    fix_cross.draw()
-    win.flip()
-    outlet.push_sample("new_trial")
-
-    time.sleep(t_pre)
-
-    if dir == "R":
-        rstim.draw()
-    else:
-        lstim.draw()
-
-    win.flip()
-    outlet.push_sample(dir)
-
-    # clear screen and sleep for post
-    time.sleep(t_show)
-    win.flip()
-    outlet.push_sample("cleared")
-
-    win.flip()
-    time.sleep(t_post)
-
-return 0</code></pre>
-<p>if <strong>name</strong> == “<strong>main</strong>”:</p>
-<pre><code>from functools import partial
-pdm = Paradigm()
-Fire(partial(run_mi_task, pdm))</code></pre>
-<pre><code>
-This should be all we need for being able to test the paradigm via `python -m mi_paradigm.main`. Test it like this and make sure it works (especially installing requirements!).
-
-### Wrapping the server around
-
-Next we need to add the server which will allow communication within a Dareplane setup. This requires just a few lines and since we started from the strawman, it actually just requires us to properly import the `run_mi_task` and `Paradigm`, intializing a `Paradigm` instance and adding it to the primary commands dictionary in `./api/server.py`, partially defining the correct `Paradigm` instance.
-
-```python ./api/server
-from fire import Fire
-
-from functools import partial
-from mi_paradigm.main import run_mi_task, Paradigm
-from mi_paradigm.utils.logging import logger
-
-from dareplane_utils.default_server.server import DefaultServer
-
-
-def main(port: int = 8080, ip: str = "127.0.0.1", loglevel: int = 30):
-    pdm = Paradigm()
-
-    logger.setLevel(loglevel)
-    logger.debug("Paradigm created")
-
-    # partial is used so taht the function call will use the pdm instance
-    pcommand_map = {"RUN": partial(run_mi_task, pdm)}
-
-   # ... rest is left unchanged</code></pre>
+<section id="wrapping-the-server-around" class="level3">
+<h3 class="anchored" data-anchor-id="wrapping-the-server-around">Wrapping the server around</h3>
+<p>Next we need to add the server which will allow communication within a Dareplane setup. This requires just a few lines and since we started from the strawman, it actually just requires us to properly import the <code>run_mi_task</code> and <code>Paradigm</code>, intializing a <code>Paradigm</code> instance and adding it to the primary commands dictionary in <code>./api/server.py</code>, partially defining the correct <code>Paradigm</code> instance.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fire <span class="im">import</span> Fire</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mi_paradigm.main <span class="im">import</span> run_mi_task, Paradigm</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mi_paradigm.utils.logging <span class="im">import</span> logger</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dareplane_utils.default_server.server <span class="im">import</span> DefaultServer</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main(port: <span class="bu">int</span> <span class="op">=</span> <span class="dv">8080</span>, ip: <span class="bu">str</span> <span class="op">=</span> <span class="st">"127.0.0.1"</span>, loglevel: <span class="bu">int</span> <span class="op">=</span> <span class="dv">30</span>):</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    pdm <span class="op">=</span> Paradigm()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    logger.setLevel(loglevel)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    logger.debug(<span class="st">"Paradigm created"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># partial is used so taht the function call will use the pdm instance</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    pcommand_map <span class="op">=</span> {<span class="st">"RUN"</span>: partial(run_mi_task, pdm)}</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>   <span class="co"># ... rest is left unchanged</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now you are ready for the next level of testing, which is to make sure, we can run the task via the server. Just spawn up the server with <code>python -m api.server</code> and connect via e.g.&nbsp;<code>telnet 127.0.0.1 8080</code>. Then send the <code>RUN</code> command in telnet and verify that the paradigm is played correctly.</p>
 <p>Once this is successful, you have completed your first Dareplane module. Congratulations !</p>
+</section>
+</section>
 <section id="running-your-module-from-the-control-room" class="level2">
 <h2 class="anchored" data-anchor-id="running-your-module-from-the-control-room">Running your module from the control room</h2>
 <p>It is now time to integrate the <code>dp-mi-paradigm</code> with other modules. This is done using the <a href="https://github.com/bsdlab/dp-control-room"><code>dp-control-room</code></a>. If you do not yet have it, clone it from git and place it e.g.&nbsp;in the parent directory of <code>pd-mi-paradigm</code>. So that you have the <code>pd-mi-paradigm</code> and <code>pd-control-room</code> paradigm in the same folder. Make sure to have all dependencies of the control room installed. Try <code>pip install -r requirements.txt</code> from within the <code>pd-control-room</code> folder.</p>
 <p>Then move into the <code>dp-control-room</code> directory and create a config at <code>./configs/mi_experiment.toml</code> with the following content:</p>
-<p>```toml ./configs/mi_experiment.toml [python] modules_root = ‘../’</p>
-</section>
-</section>
-<section id="used-modules" class="level1">
-<h1>——————– used modules —————————————</h1>
-<p>[python.modules.dp-mi-paradigm] type = ‘paradigm’ port = 8081 ip = ‘127.0.0.1’ loglevel = 10</p>
-<pre><code>
-Then change the config which is loaded by the control room for convenience. So within `./control_room/main.py` we place:
-
-```python ./control_room/main.py
-
-setup_cfg_path: Path = Path("./configs/mi_experiment.toml").resolve()
-</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[python]</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">modules_root</span> <span class="op">=</span> <span class="st">'</span><span class="vs">../</span><span class="st">'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># -------------------- used modules ---------------------------------------</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">[python.modules.dp-mi-paradigm]</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="dt">type</span> <span class="op">=</span> <span class="st">'</span><span class="vs">paradigm</span><span class="st">'</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="dt">port</span> <span class="op">=</span> <span class="dv">8081</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="dt">ip</span> <span class="op">=</span> <span class="st">'</span><span class="vs">127.0.0.1</span><span class="st">'</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="dt">loglevel</span> <span class="op">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then change the config which is loaded by the control room for convenience. So within <code>./control_room/main.py</code> we place:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>setup_cfg_path: Path <span class="op">=</span> Path(<span class="st">"./configs/mi_experiment.toml"</span>).resolve()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now spawn up the control_room by calling <code>python rcr.py</code> or <code>python -m control_room.main</code>. You should now be able to see the control_room at <code>127.0.0.1:8050</code> within your browser. Make sure you see the <code>mi_experiment</code> section and a <code>RUN</code> button. If you click the button, you should see the paradigm being played.</p>
 <section id="composing-the-module-with-others" class="level3">
 <h3 class="anchored" data-anchor-id="composing-the-module-with-others">Composing the module with others</h3>
 <p>As a final step, we add other modules and create a macro to control all with a single button push. So get the <a href="https://github.com/bsdlab/dp-mockup-streamer"><code>dp-mockup-streamer</code></a> and the <a href="https://github.com/bsdlab/dp-lsl-recording"><code>dp-lsl-recording</code></a> module and place them in the same parent directory as the other modules.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dp-control-room</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dp-lsl-recording</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dp-mockup-streamer</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> dp-mi-paradigm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dp-control-room</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dp-lsl-recording</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dp-mockup-streamer</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> dp-mi-paradigm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Also install the requirements for the other two modules via <code>pip install -r requirements.txt</code> within each of the folders.</p>
 <p>Then add the following to the <code>./configs/mi_experiment.toml</code> config:</p>
-<p>```toml ./configs/mi_experiment.toml [python] modules_root = ‘../’</p>
-</section>
-</section>
-<section id="used-modules-1" class="level1">
-<h1>——————– used modules —————————————</h1>
-<p>[python.modules.dp-mi-paradigm] type = ‘paradigm’ port = 8081 ip = ‘127.0.0.1’ loglevel = 10</p>
-<p>[python.modules.dp-mockup-streamer] type = ‘source’ port = 8082 ip = ‘127.0.0.1’ loglevel = 10</p>
-<p>[python.modules.dp-lsl-recording] type = ‘paradigm’ port = 8083 ip = ‘127.0.0.1’ loglevel = 10</p>
-<p>[macros.start_test] name = ‘START_TEST’ description = ‘start all modules for simulation’ delay_s = 1 [macros.start_test.default_json] nrep = 6 [macros.start_test.cmds] # variable names are arbitrary, the commands will be executes in the same order as they are read by tomllib com1 = [‘dp-mockup-streamer’, ‘START_RANDOM’] com2 = [‘dp-lsl-recording’, ‘SELECT_ALL’] com4 = [‘dp-lsl-recording’, ‘RECORD’] com5 = [‘dp-mi-paradigm’, ‘RUN’, ‘nrepetitions=nrep’]</p>
-<p>[macros.stop] name = ‘STOP_TEST’ description = ‘Send a stop command to all involved modules’ [macros.stop.cmds] com1 = [‘dp-lsl-recording’, ‘STOPRECORD’]</p>
-<p>```</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[python]</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">modules_root</span> <span class="op">=</span> <span class="st">'</span><span class="vs">../</span><span class="st">'</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># -------------------- used modules ---------------------------------------</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">[python.modules.dp-mi-paradigm]</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="dt">type</span> <span class="op">=</span> <span class="st">'</span><span class="vs">paradigm</span><span class="st">'</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="dt">port</span> <span class="op">=</span> <span class="dv">8081</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="dt">ip</span> <span class="op">=</span> <span class="st">'</span><span class="vs">127.0.0.1</span><span class="st">'</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="dt">loglevel</span> <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="kw">[python.modules.dp-mockup-streamer]</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="dt">type</span> <span class="op">=</span> <span class="st">'</span><span class="vs">source</span><span class="st">'</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="dt">port</span> <span class="op">=</span> <span class="dv">8082</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="dt">ip</span> <span class="op">=</span> <span class="st">'</span><span class="vs">127.0.0.1</span><span class="st">'</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="dt">loglevel</span> <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="kw">[python.modules.dp-lsl-recording]</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="dt">type</span> <span class="op">=</span> <span class="st">'</span><span class="vs">paradigm</span><span class="st">'</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="dt">port</span> <span class="op">=</span> <span class="dv">8083</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="dt">ip</span> <span class="op">=</span> <span class="st">'</span><span class="vs">127.0.0.1</span><span class="st">'</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="dt">loglevel</span> <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="kw">[macros.start_test]</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">'</span><span class="vs">START_TEST</span><span class="st">'</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="dt">description</span> <span class="op">=</span> <span class="st">'</span><span class="vs">start all modules for simulation</span><span class="st">'</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="dt">delay_s</span> <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="kw">[macros.start_test.default_json]</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="dt">nrep</span> <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="kw">[macros.start_test.cmds]</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co"># variable names are arbitrary, the commands will be executes in the same order as they are read by tomllib</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="dt">com1</span> <span class="op">=</span> <span class="op">[</span><span class="st">'</span><span class="vs">dp-mockup-streamer</span><span class="st">'</span><span class="op">,</span> <span class="st">'</span><span class="vs">START_RANDOM</span><span class="st">'</span><span class="op">]</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="dt">com2</span> <span class="op">=</span> <span class="op">[</span><span class="st">'</span><span class="vs">dp-lsl-recording</span><span class="st">'</span><span class="op">,</span> <span class="st">'</span><span class="vs">SELECT_ALL</span><span class="st">'</span><span class="op">]</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="dt">com4</span> <span class="op">=</span> <span class="op">[</span><span class="st">'</span><span class="vs">dp-lsl-recording</span><span class="st">'</span><span class="op">,</span> <span class="st">'</span><span class="vs">RECORD</span><span class="st">'</span><span class="op">]</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="dt">com5</span> <span class="op">=</span> <span class="op">[</span><span class="st">'</span><span class="vs">dp-mi-paradigm</span><span class="st">'</span><span class="op">,</span> <span class="st">'</span><span class="vs">RUN</span><span class="st">'</span><span class="op">,</span> <span class="st">'</span><span class="vs">nrepetitions=nrep</span><span class="st">'</span><span class="op">]</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="kw">[macros.stop]</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">'</span><span class="vs">STOP_TEST</span><span class="st">'</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="dt">description</span> <span class="op">=</span> <span class="st">'</span><span class="vs">Send a stop command to all involved modules</span><span class="st">'</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="kw">[macros.stop.cmds]</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="dt">com1</span> <span class="op">=</span> <span class="op">[</span><span class="st">'</span><span class="vs">dp-lsl-recording</span><span class="st">'</span><span class="op">,</span> <span class="st">'</span><span class="vs">STOPRECORD</span><span class="st">'</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For more details about how create a config for <code>dp-control-room</code>, please be referred to the <a href="https://github.com/bsdlab/dp-control-room">README</a>.</p>
 <p>Before we restart the control room to check our new configuration including the macro, we need to start the <a href="https://github.com/labstreaminglayer/App-LabRecorder">LabRecorder</a>. Otherwise the we will not be able to start the control room GUI. (<em>Note</em> - this is a temporary necessity. In later versions of the <code>dp-lsl-recording</code> module, this will be done automatically).</p>
 <p>Now restart the control room from within <code>dp-control-room</code> by using <code>python rcr.py</code> and you should see a <code>Macro</code> section on the GUI at <code>127.0.0.1:8050</code>.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

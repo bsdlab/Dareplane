@@ -373,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./modules/" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Modules</span></a>
   </div>
 </li>
@@ -415,6 +415,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dp Stroop</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modules/dp-stroop/reference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Documentation for the Stroop task</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
       </ul>
   </li>
     </ul>
@@ -428,11 +445,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#the-design-philosophy-of-dareplane" id="toc-the-design-philosophy-of-dareplane" class="nav-link active" data-scroll-target="#the-design-philosophy-of-dareplane">The design philosophy of Dareplane</a></li>
-  <li><a href="#overview-of-the-dareplane-projects-and-individual-modules" id="toc-overview-of-the-dareplane-projects-and-individual-modules" class="nav-link" data-scroll-target="#overview-of-the-dareplane-projects-and-individual-modules">Overview of the Dareplane projects and individual modules</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a>
+  <li><a href="#overview-of-the-dareplane-projects-and-individual-modules" id="toc-overview-of-the-dareplane-projects-and-individual-modules" class="nav-link" data-scroll-target="#overview-of-the-dareplane-projects-and-individual-modules">Overview of the Dareplane projects and individual modules</a>
   <ul class="collapse">
   <li><a href="#for-python-modules-development" id="toc-for-python-modules-development" class="nav-link" data-scroll-target="#for-python-modules-development">For python modules / development</a></li>
   </ul></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a></li>
   <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
   <li><a href="#other-frameworks" id="toc-other-frameworks" class="nav-link" data-scroll-target="#other-frameworks">Other frameworks</a></li>
   </ul>
@@ -454,7 +471,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Dareplane is a modular and broad technology agnostic open source software platform for brain-computer interface research. <a href="https://labstreaminglayer.org">LSL</a> is used for data communication and <code>TCP</code> sockets for module communication. The platform is designed to be minimalistic and to allow for easy development of custom modules, with minimal overhead of integrating existing code.</p>
 <p>The platform and first performance evaluations are published in <a href="https://iopscience.iop.org/article/10.1088/1741-2552/adbb20">Dold et al., 2025, J. Neural Eng. 22 026029</a></p>
 <blockquote class="blockquote">
-<p>[!IMPORTANT] The platform is in an early stage and is developed by a small group of developers. Although core functionality is implemented and the platform has been used in &gt;30 experimental sessions including simultaneous recording of EEG, ECoG, LFP and other signal modalities, please be aware that bugs still might occur and thorough testing is required.</p>
+<p>[!IMPORTANT] The platform is in an early stage and is developed by a small group of developers. Although core functionality is implemented and the platform has been used in &gt;50 experimental sessions including simultaneous recording of EEG, ECoG, LFP and other signal modalities, please be aware that bugs still might occur and thorough testing is required.</p>
 </blockquote>
 <p>The target users are developers of experimental setups who require customized software components, or who just want to have full control over the functionality of data I/O, algorithmic processing, and/or on stimulation and feedback. For this user group, Dareplane aims to provide a minimalistic framework which allows to develop and integrate bespoke modules in a simple way. It is a mind-child of the <a href="https://suckless.org/">https://suckless.org/</a> philosophy and tries to adapt it in a pragmatic manner with research in the focus.</p>
 <p>If you are looking for a setup that is more or less ready to use out of the box, you will be better of using a more mature framework which is oriented towards more <em>plug-and-play</em> components. In any case it is good to have a look at the <a href="#other-frameworks">other frameworks</a> section.</p>
@@ -515,43 +532,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>a C++ module interacting with the <a href="https://www.alphaomega-eng.com/Neuro-Omega-System">Alpha Omega</a>’s API</td>
 </tr>
 <tr class="odd">
-<td><a href="https://github.com/bsdlab/dp-ao-stimulator">dp-ao-stimulator</a></td>
-<td>python module to trigger stimulation via dp-ao-communication</td>
-</tr>
-<tr class="even">
 <td><a href="https://github.com/bsdlab/dp-arduino-stimulator">dp-arduino-stimulator</a></td>
 <td>module to use an Arduino as a mock-up of a neuro-stimulator</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://github.com/bsdlab/dp-picoscope-streamer">dp-picoscope-streamer</a></td>
 <td>module to stream data from a Picoscope to <a href="https://labstreaminglayer.org">LSL</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://github.com/bsdlab/dp-passthrough">dp-passthrough</a></td>
 <td>a simple passthrough Dareplane module for performance testing</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://github.com/bsdlab/dp-threshold-controller">dp-threshold-controller</a></td>
 <td>a threshold control module with grace periods</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://github.com/bsdlab/dp-cortec-bic">dp-cortec-bic</a></td>
 <td>module to interact with the API of the CorTec BrainInterchange</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://github.com/thijor/dp-cvep-speller">dp-cvep-speller</a></td>
 <td>a c-VEP speller paradigm module</td>
 </tr>
+<tr class="odd">
+<td><a href="https://github.com/bsdlab/dp-stroop">dp-stroop</a></td>
+<td>A classical and modified version of the Stroop color word task.</td>
+</tr>
 <tr class="even">
-<td><a href="https://github.com/thijor/dp-cvep-decoder">dp-cvep-decoder</a></td>
-<td>decoding module for a c-VEP speller, using rCCA</td>
+<td><a href="https://github.com/bsdlab/dp-c-sdl2-example">dp-c-sdl2-example</a></td>
+<td>Prototype of creating a paradigm application with <a href="https://www.libsdl.org/">SDL</a> in pure C.</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
-<p>A good starting point is the <a href="https://github.com/thijor/dp-cvep">cVEP experiment</a>, which contains a setup script that downloads and configures a cVEP speller, outlining how modules need to be configured for interaction.</p>
+<!-- ### Remove the decoder for now as the repo needs some tinkering with the .git to remove very large blobs. The docs build is very slow otherwise -->
+<!-- | [dp-cvep-decoder](https://github.com/thijor/dp-cvep-decoder)                 | decoding module for a c-VEP speller, using rCCA                                                                    | -->
 <section id="for-python-modules-development" class="level3">
 <h3 class="anchored" data-anchor-id="for-python-modules-development">For python modules / development</h3>
 <p>If you are building your modules in python, or using the existing python modules, the <a href="https://pypi.org/project/dareplane-utils/"><code>dareplane-utils</code></a> python module will provide some core functionality which most modules will need.</p>
@@ -562,6 +577,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The <a href="https://github.com/bsdlab/dp-control-room"><code>control room</code></a> module is the central piece for composition of modules to a full setup. Modules you need in your experiment are added within a setup configuration file (see <code>./examples</code> and the documentation in the <a href="https://github.com/bsdlab/dp-control-room"><code>control room</code></a>)</p>
 </section>
 </section>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
+<p>A good starting point is the <a href="https://github.com/thijor/dp-cvep">c-VEP experiment</a>, which contains a setup script that downloads and configures a cVEP speller, outlining how modules need to be configured for interaction.</p>
 </section>
 <section id="citation" class="level2">
 <h2 class="anchored" data-anchor-id="citation">Citation</h2>
