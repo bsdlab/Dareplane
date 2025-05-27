@@ -105,7 +105,7 @@ clean:
 	rm -rf _site reference
 	rm -rf modules/dp-*
 	rm -rf modules/gallery.yml
-	rm main.qmd
+	rm -f main.qmd
 
 quartodoc:
 	quartodoc
