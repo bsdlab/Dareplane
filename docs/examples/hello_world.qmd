@@ -34,7 +34,7 @@ For our paradigm we decide to show simple instructions for motor imagination of 
 
 So our `./mi_paradigm/main.py` could look like this.
 
-```python ./mi_paradigm/main.py
+```python
 
 from fire import Fire
 import time
@@ -138,7 +138,7 @@ This should be all we need for being able to test the paradigm via `python -m mi
 
 Next we need to add the server which will allow communication within a Dareplane setup. This requires just a few lines and since we started from the strawman, it actually just requires us to properly import the `run_mi_task` and `Paradigm`, intializing a `Paradigm` instance and adding it to the primary commands dictionary in `./api/server.py`, partially defining the correct `Paradigm` instance.
 
-```python ./api/server
+```python
 from fire import Fire
 
 from functools import partial
@@ -170,7 +170,7 @@ It is now time to integrate the `dp-mi-paradigm` with other modules. This is don
 
 Then move into the `dp-control-room` directory and create a config at `./configs/mi_experiment.toml` with the following content:
 
-```toml ./configs/mi_experiment.toml
+```toml
 [python]
 modules_root = '../'
 
@@ -185,7 +185,7 @@ loglevel = 10
 
 Then change the config which is loaded by the control room for convenience. So within `./control_room/main.py` we place:
 
-```python ./control_room/main.py
+```python
 
 setup_cfg_path: Path = Path("./configs/mi_experiment.toml").resolve()
 
@@ -209,7 +209,7 @@ Also install the requirements for the other two modules via `pip install -r requ
 
 Then add the following to the `./configs/mi_experiment.toml` config:
 
-```toml ./configs/mi_experiment.toml
+```toml
 [python]
 modules_root = '../'
 

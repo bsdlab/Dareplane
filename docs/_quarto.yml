@@ -14,128 +14,130 @@ theme:
 website:
   title: "Dareplane"
   site-url: "https://bsdlab.github.io/Dareplane/" # makes site links work on your remote site
+
   navbar:
     title: false # do not show title on navbar as well -> too many Dareplanes otherwise
     logo-href: main.html
     left:
       - text: Home
         href: main.qmd
-#       - text: Documentation
-#         href: modules/index.qmd
-#
-#       - text: Examples
-#         href: examples/index.qmd
-#
-#       - text: About
-#         menu:
-#           - href: about/quarto_documentation_setup.qmd
-#             text: Quarto setup
-#
-#     right:
-#       - icon: github
-#         menu:
-#           - text: Source Code
-#             href: https://github.com/bsdlab/Dareplane
-#
-#   sidebar:
-#     - id: "main"
-#       file: "libraries/dareplane_utils/_sidebar.yml"
-#       style: docked
-#       search: true
-#       collapse-level: 2
-#       contents:
-#         - text: "Introduction"
-#           href: main.qmd
-#         - text: "Modules"
-#           href: examples.qmd
-#         - text: "Examples"
-#           href: examples/index.qmd
-#         - section: "Documentation"
-#           contents:
-#             - text: "dareplane-utils"
-#               href: "libraries/dareplane_utils/index.qmd"
-#             - subsection:
-#               auto: modules/*/reference/index.qmd
-#
-# # tell quarto to read the generated sidebar
-# metadata-files:
-#   - libraries/dareplane_utils/_sidebar.yml
-#
-# # tell quarto to read the generated styles
-# format:
-#   html:
-#     # css:               # not loading a specific one to avoid conflicts as docs are generated over multiple repos
-#     # - reference/_styles-quartodoc.css
-#     # - modules_docs/dp-control-room/_styles-quartodoc.yml
-#     toc: true
-#     toc-location: right
-#     toc-title: "On this page"
-#
-# # --- the quartodoc part for libraries to be installed
-# quartodoc:
-#   # the name used to import the package you want to create reference docs for
-#   package: "Dareplane utils"
-#   dir: "libraries/dareplane_utils"
-#
-#   title: "Documentation for `dareplane_utils`"
-#
-#   options:
-#     signature_name: full
-#
-#   # write sidebar and style data -> where quartodoc writes its content without impacting quarto
-#   sidebar:
-#     file: "libraries/dareplane_utils/_sidebar.yml"
-#
-#   css: libraries/dareplane_utils/_styles-quartodoc.css
-#
-#   sections:
-#     - title: Server
-#       desc: The server components can be used from `dareplane_utils.default_server.server`
-#       package: dareplane_utils.default_server.server
-#       contents:
-#         # the functions being documented in the package.
-#         # you can refer to anything: class methods, modules, etc..
-#         - DefaultServer
-#
-#     - title: Logging
-#       desc: |
-#         Logging components which add a TCP handler to a logger derived from Python's standard `logging.Logger`. This allows to
-#         the [dp-control-room](https://github.com/bsdlab/dp-control-room) to create a single consolidated log-file.
-#
-#       package: dareplane_utils.logging
-#       contents:
-#         # the functions being documented in the package.
-#         # you can refer to anything: class methods, modules, etc..
-#         - logger.get_logger
-#         - server.LogRecordStreamHandler
-#         - server.LogRecordSocketReceiver
-#         - server.modify_root_logger
-#
-#     - title: Streaming data
-#       desc: |
-#         Dareplane relies mostly on the [lab streaming layer (LSL)](https://labstreaminglayer.org/#/) for streaming data. A central element of the  [`dareplane-utils`](https://pypi.org/project/dareplane-utils/)
-#         is the [`StreamWatcher`](https://github.com/matthiasdold/dareplane-pyutils/blob/main/src/dareplane_utils/stream_watcher/lsl_stream_watcher.py) which is a ring buffer to read from streams. Currently we only
-#         have a `StreamWatcher` for LSL implemented, using `pylsl` and inlets defined therein.
-#
-#       package: dareplane_utils.stream_watcher.lsl_stream_watcher
-#       contents:
-#         # the functions being documented in the package.
-#         # you can refer to anything: class methods, modules, etc..
-#         - StreamWatcher
-#         - get_streams_names
-#         - pylsl_xmlelement_to_dict
-#         - get_channel_names
-#
-#     - title: General
-#       desc: |
-#         General utility functions and classes
-#
-#       package: dareplane_utils.general
-#       contents:
-#         # the functions being documented in the package.
-#         # you can refer to anything: class methods, modules, etc..
-#         - ringbuffer.RingBuffer
-#         - time.sleep_s
-#         - time.partial_sleep
-#         - time.full_speed
-#         - event_loop.EventLoop
+
+      - text: Documentation
+        href: modules/index.qmd
+
+      - text: Examples
+        href: examples/index.qmd
+
+      - text: About
+        menu:
+          - href: about/quarto_documentation_setup.qmd
+            text: Quarto setup
+
+    right:
+      - icon: github
+        menu:
+          - text: Source Code
+            href: https://github.com/bsdlab/Dareplane
+
+  sidebar:
+    - id: "main"
+      file: "libraries/dareplane_utils/_sidebar.yml"
+      style: docked
+      search: true
+      collapse-level: 2
+      contents:
+        - text: "Introduction"
+          href: main.qmd
+        - text: "Modules"
+          href: modules/
+        - text: "Examples"
+          href: examples/index.qmd
+        - section: "Documentation"
+          contents:
+            - text: "dareplane-utils"
+              href: "libraries/dareplane_utils/index.qmd"
+            - subsection:
+              auto: modules/*/reference/index.qmd
+
+# tell quarto to read the generated sidebar
+metadata-files:
+  - libraries/dareplane_utils/_sidebar.yml
+
+# tell quarto to read the generated styles
+format:
+  html:
+    # css:               # not loading a specific one to avoid conflicts as docs are generated over multiple repos
+    # - reference/_styles-quartodoc.css
+    # - modules_docs/dp-control-room/_styles-quartodoc.yml
+    toc: true
+    toc-location: right
+    toc-title: "On this page"
+
+# --- the quartodoc part for libraries to be installed
+quartodoc:
+  # the name used to import the package you want to create reference docs for
+  package: "Dareplane utils"
+  dir: "libraries/dareplane_utils"
+
+  title: "Documentation for `dareplane_utils`"
+
+  options:
+    signature_name: full
+
+  # write sidebar and style data -> where quartodoc writes its content without impacting quarto
+  sidebar:
+    file: "libraries/dareplane_utils/_sidebar.yml"
+
+  css: libraries/dareplane_utils/_styles-quartodoc.css
+
+  sections:
+    - title: Server
+      desc: The server components can be used from `dareplane_utils.default_server.server`
+      package: dareplane_utils.default_server.server
+      contents:
+        # the functions being documented in the package.
+        # you can refer to anything: class methods, modules, etc..
+        - DefaultServer
+
+    - title: Logging
+      desc: |
+        Logging components which add a TCP handler to a logger derived from Python's standard `logging.Logger`. This allows to
+        the [dp-control-room](https://github.com/bsdlab/dp-control-room) to create a single consolidated log-file.
+
+      package: dareplane_utils.logging
+      contents:
+        # the functions being documented in the package.
+        # you can refer to anything: class methods, modules, etc..
+        - logger.get_logger
+        - server.LogRecordStreamHandler
+        - server.LogRecordSocketReceiver
+        - server.modify_root_logger
+
+    - title: Streaming data
+      desc: |
+        Dareplane relies mostly on the [lab streaming layer (LSL)](https://labstreaminglayer.org/#/) for streaming data. A central element of the  [`dareplane-utils`](https://pypi.org/project/dareplane-utils/)
+        is the [`StreamWatcher`](https://github.com/matthiasdold/dareplane-pyutils/blob/main/src/dareplane_utils/stream_watcher/lsl_stream_watcher.py) which is a ring buffer to read from streams. Currently we only
+        have a `StreamWatcher` for LSL implemented, using `pylsl` and inlets defined therein.
+
+      package: dareplane_utils.stream_watcher.lsl_stream_watcher
+      contents:
+        # the functions being documented in the package.
+        # you can refer to anything: class methods, modules, etc..
+        - StreamWatcher
+        - get_streams_names
+        - pylsl_xmlelement_to_dict
+        - get_channel_names
+
+    - title: General
+      desc: |
+        General utility functions and classes
+
+      package: dareplane_utils.general
+      contents:
+        # the functions being documented in the package.
+        # you can refer to anything: class methods, modules, etc..
+        - ringbuffer.RingBuffer
+        - time.sleep_s
+        - time.partial_sleep
+        - time.full_speed
+        - event_loop.EventLoop

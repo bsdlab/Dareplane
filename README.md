@@ -40,18 +40,17 @@ The implications of these design goals are:
 | [dp-multiband-regression](https://github.com/bsdlab/dp-multiband-regression) | module to perform a multiband regression based on a multichannel data stream                                       |
 | [dp-bollinger-control](https://github.com/bsdlab/dp-bollinger-control)       | a [Bollinger Band](https://en.wikipedia.org/wiki/Bollinger_Bands) control module                                   |
 | [dp-ao-communicatio](https://github.com/bsdlab/dp-ao-communication)          | a C++ module interacting with the [Alpha Omega](https://www.alphaomega-eng.com/Neuro-Omega-System)'s API           |
-| [dp-ao-stimulator](https://github.com/bsdlab/dp-ao-stimulator)               | python module to trigger stimulation via dp-ao-communication                                                       |
 | [dp-arduino-stimulator](https://github.com/bsdlab/dp-arduino-stimulator)     | module to use an Arduino as a mock-up of a neuro-stimulator                                                        |
 | [dp-picoscope-streamer](https://github.com/bsdlab/dp-picoscope-streamer)     | module to stream data from a Picoscope to [LSL](https://labstreaminglayer.org)                                     |
 | [dp-passthrough](https://github.com/bsdlab/dp-passthrough)                   | a simple passthrough Dareplane module for performance testing                                                      |
 | [dp-threshold-controller](https://github.com/bsdlab/dp-threshold-controller) | a threshold control module with grace periods                                                                      |
 | [dp-cortec-bic](https://github.com/bsdlab/dp-cortec-bic)                     | module to interact with the API of the CorTec BrainInterchange                                                     |
 | [dp-cvep-speller](https://github.com/thijor/dp-cvep-speller)                 | a c-VEP speller paradigm module                                                                                    |
-| [dp-cvep-decoder](https://github.com/thijor/dp-cvep-decoder)                 | decoding module for a c-VEP speller, using rCCA                                                                    |
+| [dp-stroop](https://github.com/bsdlab/dp-stroop)                             | A classical and modified version of the Stroop color word task.                                                    |
+| [dp-c-sdl2-example](https://github.com/bsdlab/dp-c-sdl2-example)             | Prototype of creating a paradigm application with [SDL](https://www.libsdl.org/) in pure C.                        |
 
-## Getting started
-
-A good starting point is the [c-VEP experiment](https://github.com/thijor/dp-cvep), which contains a setup script that downloads and configures a cVEP speller, outlining how modules need to be configured for interaction.
+<!-- ### Remove the decoder for now as the repo needs some tinkering with the .git to remove very large blobs. The docs build is very slow otherwise -->
+<!-- | [dp-cvep-decoder](https://github.com/thijor/dp-cvep-decoder)                 | decoding module for a c-VEP speller, using rCCA                                                                    | -->
 
 ### For python modules / development
 
@@ -67,6 +66,10 @@ The module provides basic functionality around TCP servers, logging, and collect
 
 The [`control room`](https://github.com/bsdlab/dp-control-room) module is the central piece for composition of modules to a full setup.
 Modules you need in your experiment are added within a setup configuration file (see `./examples` and the documentation in the [`control room`](https://github.com/bsdlab/dp-control-room))
+
+## Getting started
+
+A good starting point is the [c-VEP experiment](https://github.com/thijor/dp-cvep), which contains a setup script that downloads and configures a cVEP speller, outlining how modules need to be configured for interaction.
 
 ## Citation
 

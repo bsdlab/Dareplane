@@ -8,6 +8,49 @@ For the Dareplane documentation, [https://github.com/bsdlab/Dareplane](https://g
 
 ![](/assets/quarto_for_dareplane.excalidraw.png)
 
+## Run the documentation build locally
+
+To run the docs building for all modules, clone [https://github.com/bsdlab/Dareplane](https://github.com/bsdlab/Dareplane) and `cd docs`.
+
+In the build across multiple modules, the [`Makefile`](https://github.com/bsdlab/Dareplane/blob/main/docs/Makefile) has the following build steps defined:
+
+- generate the [`main.qmd`](https://github.com/bsdlab/Dareplane/blob/main/docs/main.qmd) dynamically from the [`README.md`](https://github.com/bsdlab/Dareplane/tree/main)
+- extract the repositories from the first table in the [`main.qmd`](https://github.com/bsdlab/Dareplane/blob/main/docs/main.qmd), taking the first column and expecting markdown notation for links
+- download each repository into a `/docs/modules/*` directory
+- build with `quartodoc build` within each `/docs/modules/*` folder
+
+To create a fresh build, execute the following:
+```bash
+make clean
+````
+
+```bash
+make main   # copy README -> main.qmd
+````
+
+```bash
+make modules.csv # extract the repos
+````
+
+```bash
+make docs-gallery # build the docs within each module
+````
+
+Once the `quartodoc` part in each `/docs/modules/*` is done (`make docs-gallery`), we can use `quartop preview` (or the [github publish action for Dareplane](https://github.com/bsdlab/Dareplane/blob/gh-pages-dev/.github/workflows/publish-quarto.yml)) to build the quarto website from within [`/docs`](https://github.com/bsdlab/Dareplane/tree/main/docs) for Dareplane.
+All modules will be included as we can specify a `Documentation` subsection with a glob in [`_quarto.yml`](https://github.com/bsdlab/Dareplane/blob/gh-pages-dev/docs/_quarto.yml):
+
+```yml
+website:  
+ sidebar:
+    - id: "main"
+      contents:
+        - section: "Documentation"
+          contents:
+            - subsection:
+              auto: modules/*/index.qmd
+```
+
+
 ## How to document your module
 
 In harmony with the general Dareplane coding philosophy, we want every module to be standalone, with very limited requirements for interoperability. This also holds for the documentation.
@@ -22,28 +65,110 @@ quartodoc:
 
 ```
 
-With this setup, you can first create your documentation on a per module level, making sure it works with `quartodoc build`.
-For debugging, it might be handy to add a general quarto website section on the per module `_quarto.yml` file. This can be done without interference with the generation on the across modules documentation, as the latter is only using the `quartodoc` part.
+With this setup, you can first create your documentation on a per module level, making sure it works with `quartodoc build`. The `quartodoc build` command will use doc-strings of the python functions and classes to dynamically create markdown documentation pages.
 
-In the build across multiple modules, the [`Makefile`](https://github.com/bsdlab/Dareplane/blob/main/docs/Makefile) has the following build steps defined:
+For debugging, it might be handy to add a general quarto website section on the per module `_quarto.yml` file. See the [Single module quarto](#Single-module-quarto) section for an example.
 
-- generate the [`main.qmd`](https://github.com/bsdlab/Dareplane/blob/main/docs/main.qmd) dynamically from the [`README.md`](https://github.com/bsdlab/Dareplane/tree/main)
-- extract the repositories from the first table in the [`main.qmd`](https://github.com/bsdlab/Dareplane/blob/main/docs/main.qmd), taking the first column and expecting markdown notation for links
-- download each repository into a `/docs/modules/*` directory
-- build with `quartodoc build` within each `/docs/modules/*` folder
+This can be done without interference with the generation on the across modules documentation, as the latter is only using the `quartodoc` part.
 
-Once the `quartodoc` part in each `/docs/modules/*` is done, we can use `quartop preview` (or the [github publish action for Dareplane](https://github.com/bsdlab/Dareplane/blob/gh-pages-dev/.github/workflows/publish-quarto.yml)) to build the quarto website from within [`/docs`](https://github.com/bsdlab/Dareplane/tree/main/docs) for Dareplane.
-All modules will be included as we can specify a `Documentation` subsection with a glob in [`_quarto.yml`](https://github.com/bsdlab/Dareplane/blob/gh-pages-dev/docs/_quarto.yml):
+
+### Single module quarto
+
+This section provides an example of how we would document a single Dareplane module.
+
+Let us assume we are documenting the [dp-stroop](https://github.com/bsdlab/dp-stroop/tree/main/stroop_task) module.
+
+#### Initial `_quarto.yml`
+
+Start out by creating the `_quarto.yml` file, containing a `quartodoc` section with an entry for the [`run_paradigm_cli`](https://github.com/bsdlab/dp-stroop/blob/67f5e5cab919c0aeafc6d03ea8b12760ec5f1687/stroop_task/main.py#L158) function:
 
 ```yml
-website:  
- sidebar:
+quartodoc:
+  package: "dp-stroop"       # name of the package
+  source_dir: "stroop_task"  # as the source code is within this folder
+
+  title: "Documentation for the Stroop task"
+
+  options:
+    signature_name: full
+
+  # write sidebar where quartodoc writes its content without impacting quarto
+  sidebar:
+    file: "_stroop_sidebar.yml"
+
+  sections:
+    - title: "The Stroop task"
+      desc: |
+        :::{.callout-info}
+        The github repository for this module is located at:
+        [https://github.com/bsdlab/dp-stroop](https://github.com/bsdlab/dp-stroop)
+        :::
+
+    - subtitle: Modified Stroop task
+      package: stroop_task
+      desc: The main script to start the Stroop task from command line.
+      contents:
+        - main.run_paradigm_cli
+```
+
+#### Build the documentation
+
+Now we can build the documentation with `quartodoc build`. This will create a `./reference` folder with the documentation. 
+
+Add the `./reference` folder and `objects.json` to the `.gitignore` to avoid cluttering of the repo. Docs will be generated dynamically.
+
+```bash
+echo reference/ >> .gitignore
+echo objects.json >> .gitignore
+echo _site/ >> .gitignore       # will be created from `quarto preview` see next step
+```
+
+#### Add a standalone website section
+
+With having the `quartodoc` section in the `_quarto.yml`, we already have everything we need, but it is hard validate that the documentation builds as intended.
+The most straight forward solution is to add a `website` section to the `_quarto.yml`, which then allow to debug with `quarto preview`:
+
+```yml
+project:
+  type: website
+
+website:
+  sidebar:
     - id: "main"
       contents:
         - section: "Documentation"
           contents:
-            - subsection:
-              auto: modules/*/index.qmd
+            - reference/index.qmd
 ```
+
+Then run:
+
+```bash
+quarto preview
+```
+
+This will open a browser window with the documentation. 
+
+
+#### Continue adding more content
+
+Now it is up to adding more sections to the documentation, which can be done by enriching the `contents:` of the `quartodoc` section in the `_quarto.yml`.
+
+```yml
+      contents:
+        - main.run_paradigm_cli
+        - context.StroopContext
+```
+
+__Note__: 
+
+- While the [quarto](https://quarto.org/) part will update dynamically (hot reloading),  [quartodoc](https://machow.github.io/quartodoc) will need to be recompiled every time you add to the `quartodoc` section of the `_quarto.yml`.
+
+
+- The `quarto preview` might spawn not at the root of the created website but on a specific functions/classed documentation page. Simply prune the path in the browser to get to the root. E.g., from `http://localhost:6901/reference/main.run_paradigm_cli.html` to `http://localhost:6901/`
+
+- `quartodoc` will add documentation for methods from each method's own doc string. Avoid having a `methods` doc string section on the class wide doc string as this will lead to a `NotImplementedError` from `griffe`.
+
+
 
 
