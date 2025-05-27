@@ -51,7 +51,7 @@ The implications of these design goals are:
 
 ## Getting started
 
-A good starting point is the [cVEP experiment](https://github.com/thijor/dp-cvep), which contains a setup script that downloads and configures a cVEP speller, outlining how modules need to be configured for interaction.
+A good starting point is the [c-VEP experiment](https://github.com/thijor/dp-cvep), which contains a setup script that downloads and configures a cVEP speller, outlining how modules need to be configured for interaction.
 
 ### For python modules / development
 

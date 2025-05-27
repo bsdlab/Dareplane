@@ -31,10 +31,6 @@ website:
         menu:
           - href: about/quarto_documentation_setup.qmd
             text: Quarto setup
-          # - href: https://bsdlab.github.io/Dareplane/about.html#contributing
-          #   text: Contributing
-          # - href: https://bsdlab.github.io/Dareplane/about.html#license
-          #   text: License-
 
     right:
       - icon: github
@@ -45,7 +41,6 @@ website:
   sidebar:
     - id: "main"
       file: "libraries/dareplane_utils/_sidebar.yml"
-      # logo: ""
       style: docked
       search: true
       collapse-level: 2
@@ -91,20 +86,6 @@ quartodoc:
   # write sidebar and style data -> where quartodoc writes its content without impacting quarto
   sidebar:
     file: "libraries/dareplane_utils/_sidebar.yml"
-    # logo: ""
-    # style: docked
-    # search: true
-    # collapse-level: 2
-    # contents:
-    #   - text: "Introduction"
-    #     href: main.qmd
-    #   - text: "Modules"
-    #     href: examples.qmd
-    #   - text: "Examples"
-    #     href: examples.qmd
-    #   - section: "Documentation"
-    #     contents:
-    #       - "{{ contents }}"
 
   css: libraries/dareplane_utils/_styles-quartodoc.css
 
