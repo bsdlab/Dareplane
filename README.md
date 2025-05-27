@@ -9,7 +9,7 @@ Dareplane is a modular and broad technology agnostic open source software platfo
 The platform and first performance evaluations are published in [Dold et al., 2025, J. Neural Eng. 22 026029](https://iopscience.iop.org/article/10.1088/1741-2552/adbb20)
 
 > [!IMPORTANT]
-> The platform is in an early stage and is developed by a small group of developers. Although core functionality is implemented and the platform has been used in >30 experimental sessions including simultaneous recording of EEG, ECoG, LFP and other signal modalities, please be aware that bugs still might occur and thorough testing is required.
+> The platform is in an early stage and is developed by a small group of developers. Although core functionality is implemented and the platform has been used in >50 experimental sessions including simultaneous recording of EEG, ECoG, LFP and other signal modalities, please be aware that bugs still might occur and thorough testing is required.
 
 The target users are developers of experimental setups who require customized software components, or who just want to have full control over the functionality of data I/O, algorithmic processing, and/or on stimulation and feedback. For this user group, Dareplane aims to provide a minimalistic framework which allows to develop and integrate bespoke modules in a simple way. It is a mind-child of the [https://suckless.org/](https://suckless.org/) philosophy and tries to adapt it in a pragmatic manner with research in the focus.
 
