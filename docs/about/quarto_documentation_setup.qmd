@@ -139,6 +139,10 @@ website:
         - section: "Documentation"
           contents:
             - reference/index.qmd
+
+metadata-files:
+  - reference/_stroop_sidebar.yml
+
 ```
 
 Then run:
