@@ -515,6 +515,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream" id="toc-dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream" class="nav-link" data-scroll-target="#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream">connect_to_stream</a></li>
   <li><a href="#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect" id="toc-dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect" class="nav-link" data-scroll-target="#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect">disconnect</a></li>
+  <li><a href="#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_char_p" id="toc-dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_char_p" class="nav-link" data-scroll-target="#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_char_p">update_char_p</a></li>
   <li><a href="#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric" id="toc-dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric" class="nav-link" data-scroll-target="#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric">update_numeric</a></li>
   </ul></li>
   </ul></li>
@@ -555,8 +556,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Destroying the inlet will disconnect -&gt; see pylsl.pylsl.py</td>
 </tr>
 <tr class="odd">
+<td><a href="#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_char_p">update_char_p</a></td>
+<td>Look for new data on the LSL inlet and update the buffer, processing for strings</td>
+</tr>
+<tr class="even">
 <td><a href="#dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric">update_numeric</a></td>
-<td>Look for new data and update the buffer</td>
+<td>Look for new data on the LSL inlet and update the buffer</td>
 </tr>
 </tbody>
 </table>
@@ -572,10 +577,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Destroying the inlet will disconnect -&gt; see pylsl.pylsl.py</p>
 </section>
+<section id="dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_char_p" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_char_p">update_char_p</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_char_p()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Look for new data on the LSL inlet and update the buffer, processing for strings</p>
+</section>
 <section id="dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric" class="level3">
 <h3 class="anchored" data-anchor-id="dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric">update_numeric</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Look for new data and update the buffer</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Look for new data on the LSL inlet and update the buffer</p>
 
 
 </section>

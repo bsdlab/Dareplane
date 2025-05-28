@@ -511,8 +511,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#dareplane_utils.general.event_loop.EventLoop" id="toc-dareplane_utils.general.event_loop.EventLoop" class="nav-link active" data-scroll-target="#dareplane_utils.general.event_loop.EventLoop">event_loop.EventLoop</a>
   <ul class="collapse">
+  <li><a href="#attributes" id="toc-attributes" class="nav-link" data-scroll-target="#attributes">Attributes</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul class="collapse">
+  <li><a href="#dareplane_utils.general.event_loop.EventLoop.add_callback" id="toc-dareplane_utils.general.event_loop.EventLoop.add_callback" class="nav-link" data-scroll-target="#dareplane_utils.general.event_loop.EventLoop.add_callback">add_callback</a></li>
+  <li><a href="#dareplane_utils.general.event_loop.EventLoop.add_callback_once" id="toc-dareplane_utils.general.event_loop.EventLoop.add_callback_once" class="nav-link" data-scroll-target="#dareplane_utils.general.event_loop.EventLoop.add_callback_once">add_callback_once</a></li>
+  <li><a href="#dareplane_utils.general.event_loop.EventLoop.add_callbacks" id="toc-dareplane_utils.general.event_loop.EventLoop.add_callbacks" class="nav-link" data-scroll-target="#dareplane_utils.general.event_loop.EventLoop.add_callbacks">add_callbacks</a></li>
+  <li><a href="#dareplane_utils.general.event_loop.EventLoop.add_callbacks_once" id="toc-dareplane_utils.general.event_loop.EventLoop.add_callbacks_once" class="nav-link" data-scroll-target="#dareplane_utils.general.event_loop.EventLoop.add_callbacks_once">add_callbacks_once</a></li>
+  <li><a href="#dareplane_utils.general.event_loop.EventLoop.add_delayed_callback_once" id="toc-dareplane_utils.general.event_loop.EventLoop.add_delayed_callback_once" class="nav-link" data-scroll-target="#dareplane_utils.general.event_loop.EventLoop.add_delayed_callback_once">add_delayed_callback_once</a></li>
+  <li><a href="#dareplane_utils.general.event_loop.EventLoop.run" id="toc-dareplane_utils.general.event_loop.EventLoop.run" class="nav-link" data-scroll-target="#dareplane_utils.general.event_loop.EventLoop.run">run</a></li>
   <li><a href="#dareplane_utils.general.event_loop.EventLoop.validate_callback" id="toc-dareplane_utils.general.event_loop.EventLoop.validate_callback" class="nav-link" data-scroll-target="#dareplane_utils.general.event_loop.EventLoop.validate_callback">validate_callback</a></li>
   </ul></li>
   </ul></li>
@@ -531,9 +539,108 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.event_loop.EventLoop(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    dt_s,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    stop_event<span class="op">=</span>Event(),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    stop_event<span class="op">=</span><span class="va">None</span>,</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    ctx<span class="op">=</span><span class="va">None</span>,</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A class that implements a custom event loop with precise timing.</p>
+<p>The EventLoop uses dareplane_utils.general.time.sleep_s for more precise sleep timing at the expense of CPU usage.</p>
+<p>Callbacks are the means of interacting with the event loop. There are two types of callbacks:</p>
+<ul>
+<li><p>Periodic callbacks: These are executed at regular intervals.</p></li>
+<li><p>One-time callbacks: These are executed once and then removed from the list of callbacks. One-time callback can furthermore be scheduled to run at a specific time in the future.</p></li>
+</ul>
+<p>Callbacks can be any callable function, which usually gets one argument <code>ctx</code> - a context object, that can be of type any. This ensures that any type of input can be implemented. See the example section for more details.</p>
+<section id="attributes" class="level2 doc-section doc-section-attributes">
+<h2 class="doc-section doc-section-attributes anchored" data-anchor-id="attributes">Attributes</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>dt_s</td>
+<td>float</td>
+<td>The time interval in seconds between callback executions.</td>
+</tr>
+<tr class="even">
+<td>stop_event</td>
+<td>threading.Event</td>
+<td>An event that, when set, signals the event loop to stop.</td>
+</tr>
+<tr class="odd">
+<td>last_run_ts</td>
+<td>float</td>
+<td>The timestamp of the last callback execution.</td>
+</tr>
+<tr class="even">
+<td>callbacks</td>
+<td>list[Callable]</td>
+<td>A list of periodic callback functions.</td>
+</tr>
+<tr class="odd">
+<td>callbacks_once</td>
+<td>list[Callable]</td>
+<td>A list of one-time callback functions.</td>
+</tr>
+<tr class="even">
+<td>delayed_callbacks_once</td>
+<td>list[DelayedCallback]</td>
+<td>A list of delayed one-time callback functions.</td>
+</tr>
+<tr class="odd">
+<td>ctx</td>
+<td>Any</td>
+<td>A context object that is passed to the callback functions.</td>
+</tr>
+<tr class="even">
+<td>now</td>
+<td>float</td>
+<td>The current timestamp as of time.perf_counter(). Used for time keeping internally.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="examples" class="level2 doc-section doc-section-examples">
+<h2 class="doc-section doc-section-examples anchored" data-anchor-id="examples">Examples</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> no_arg_callback():</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>...     <span class="bu">print</span>(<span class="st">"Running with no args"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> evloop <span class="op">=</span> EventLoop(dt_s<span class="op">=</span><span class="fl">0.1</span>)  <span class="co"># process callbacks every 100ms</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> evloop.add_callback_once(<span class="kw">lambda</span> ctx: no_arg_callback())</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># just to stop the loop after 1s</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> evloop.add_delayed_callback_once(cb<span class="op">=</span><span class="kw">lambda</span> ctx: evloop.stop_event.<span class="bu">set</span>(), dt<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> evloop.run()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Running <span class="cf">with</span> no args</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># </span><span class="al">NOTE</span><span class="co">: This example is left to explain how wrapping works. Creating a wrapper is no longer necessary</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="co">#       if no `ctx` is an arg / kwargs, the event_loop.validate_callback() will automatically create</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="co">#       a wrapper version for you.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> custom_arg_and_kwarg_callback(a, b<span class="op">=</span><span class="dv">1</span>, c<span class="op">=</span><span class="dv">2</span>):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>...     <span class="bu">print</span>(<span class="ss">f"Running with </span><span class="sc">{</span>a<span class="op">=</span><span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>b<span class="op">=</span><span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>c<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> wrapped_custom_arg_and_kwargs(ctx: <span class="bu">dict</span>):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>...     custom_arg_and_kwarg_callback(ctx[<span class="st">"a"</span>], b<span class="op">=</span>ctx[<span class="st">"b"</span>], c<span class="op">=</span>ctx[<span class="st">"c"</span>])</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> evloop <span class="op">=</span> EventLoop(dt_s<span class="op">=</span><span class="fl">0.1</span>, ctx<span class="op">=</span>{<span class="st">"a"</span>: <span class="dv">11</span>, <span class="st">"b"</span>: <span class="dv">22</span>, <span class="st">"c"</span>: <span class="dv">33</span>})</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> evloop.add_callback_once(wrapped_custom_arg_and_kwargs)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># just to stop the loop after 1s</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> evloop.add_delayed_callback_once(cb<span class="op">=</span><span class="kw">lambda</span> ctx: evloop.stop_event.<span class="bu">set</span>(), dt<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> evloop.run()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>Running <span class="cf">with</span> a<span class="op">=</span><span class="dv">11</span>, b<span class="op">=</span><span class="dv">22</span>, c<span class="op">=</span><span class="dv">33</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
 <table class="caption-top table">
@@ -545,15 +652,201 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
+<td><a href="#dareplane_utils.general.event_loop.EventLoop.add_callback">add_callback</a></td>
+<td>Add a periodic callback to the event loop.</td>
+</tr>
+<tr class="even">
+<td><a href="#dareplane_utils.general.event_loop.EventLoop.add_callback_once">add_callback_once</a></td>
+<td>Add a one-time callback to the event loop.</td>
+</tr>
+<tr class="odd">
+<td><a href="#dareplane_utils.general.event_loop.EventLoop.add_callbacks">add_callbacks</a></td>
+<td>A convenience function to add multiple periodic callbacks to the event loop.</td>
+</tr>
+<tr class="even">
+<td><a href="#dareplane_utils.general.event_loop.EventLoop.add_callbacks_once">add_callbacks_once</a></td>
+<td>Convenience function to add multiple one-time callbacks to the event loop.</td>
+</tr>
+<tr class="odd">
+<td><a href="#dareplane_utils.general.event_loop.EventLoop.add_delayed_callback_once">add_delayed_callback_once</a></td>
+<td>Add a one-time callback to the event loop that is evaluated after a delay.</td>
+</tr>
+<tr class="even">
+<td><a href="#dareplane_utils.general.event_loop.EventLoop.run">run</a></td>
+<td>Run the event loop, evaluating the callback every <code>self.dt_s</code> seconds</td>
+</tr>
+<tr class="odd">
 <td><a href="#dareplane_utils.general.event_loop.EventLoop.validate_callback">validate_callback</a></td>
-<td>Check that every callback accepts at least a kwarg with ‘ctx’</td>
+<td>Check that every callback accepts at least a kwarg with ‘ctx’.</td>
 </tr>
 </tbody>
 </table>
+<section id="dareplane_utils.general.event_loop.EventLoop.add_callback" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.general.event_loop.EventLoop.add_callback">add_callback</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.event_loop.EventLoop.add_callback(cb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Add a periodic callback to the event loop.</p>
+<section id="parameters" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cb</td>
+<td>Callable</td>
+<td>The callback function to be added.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dareplane_utils.general.event_loop.EventLoop.add_callback_once" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.general.event_loop.EventLoop.add_callback_once">add_callback_once</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.event_loop.EventLoop.add_callback_once(cb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Add a one-time callback to the event loop.</p>
+<section id="parameters-1" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-1">Parameters</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cb</td>
+<td>Callable</td>
+<td>The callback function to be added.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dareplane_utils.general.event_loop.EventLoop.add_callbacks" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.general.event_loop.EventLoop.add_callbacks">add_callbacks</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.event_loop.EventLoop.add_callbacks(cbs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A convenience function to add multiple periodic callbacks to the event loop.</p>
+<section id="parameters-2" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-2">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 22%">
+<col style="width: 53%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cbs</td>
+<td>list[Callable]</td>
+<td>A list of callback functions to be added.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dareplane_utils.general.event_loop.EventLoop.add_callbacks_once" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.general.event_loop.EventLoop.add_callbacks_once">add_callbacks_once</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.event_loop.EventLoop.add_callbacks_once(cbs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Convenience function to add multiple one-time callbacks to the event loop.</p>
+<section id="parameters-3" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-3">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 22%">
+<col style="width: 53%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cbs</td>
+<td>list[Callable]</td>
+<td>A list of callback functions to be added.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dareplane_utils.general.event_loop.EventLoop.add_delayed_callback_once" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.general.event_loop.EventLoop.add_delayed_callback_once">add_delayed_callback_once</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.event_loop.EventLoop.add_delayed_callback_once(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    cb,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    dt<span class="op">=</span><span class="fl">0.0</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Add a one-time callback to the event loop that is evaluated after a delay.</p>
+<section id="parameters-4" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-4">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 70%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cb</td>
+<td>Callable</td>
+<td>The callback function to be added.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>dt</td>
+<td>float</td>
+<td>The delay in seconds before the callback is executed. Defaults to 0.0.</td>
+<td><code>0.0</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dareplane_utils.general.event_loop.EventLoop.run" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.general.event_loop.EventLoop.run">run</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.event_loop.EventLoop.run()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run the event loop, evaluating the callback every <code>self.dt_s</code> seconds</p>
+</section>
 <section id="dareplane_utils.general.event_loop.EventLoop.validate_callback" class="level3">
 <h3 class="anchored" data-anchor-id="dareplane_utils.general.event_loop.EventLoop.validate_callback">validate_callback</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.event_loop.EventLoop.validate_callback(cb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Check that every callback accepts at least a kwarg with ‘ctx’</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.event_loop.EventLoop.validate_callback(cb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check that every callback accepts at least a kwarg with ‘ctx’. More kwargs are possible.</p>
 
 
 </section>

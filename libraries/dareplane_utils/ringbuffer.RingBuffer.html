@@ -513,10 +513,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#attributes" id="toc-attributes" class="nav-link" data-scroll-target="#attributes">Attributes</a></li>
   <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul class="collapse">
   <li><a href="#dareplane_utils.general.ringbuffer.RingBuffer.add_continuous_buffer" id="toc-dareplane_utils.general.ringbuffer.RingBuffer.add_continuous_buffer" class="nav-link" data-scroll-target="#dareplane_utils.general.ringbuffer.RingBuffer.add_continuous_buffer">add_continuous_buffer</a></li>
+  <li><a href="#dareplane_utils.general.ringbuffer.RingBuffer.add_samples" id="toc-dareplane_utils.general.ringbuffer.RingBuffer.add_samples" class="nav-link" data-scroll-target="#dareplane_utils.general.ringbuffer.RingBuffer.add_samples">add_samples</a></li>
   <li><a href="#dareplane_utils.general.ringbuffer.RingBuffer.get_insert_slices" id="toc-dareplane_utils.general.ringbuffer.RingBuffer.get_insert_slices" class="nav-link" data-scroll-target="#dareplane_utils.general.ringbuffer.RingBuffer.get_insert_slices">get_insert_slices</a></li>
+  <li><a href="#dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer" id="toc-dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer" class="nav-link" data-scroll-target="#dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer">unfold_buffer</a></li>
+  <li><a href="#dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer_t" id="toc-dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer_t" class="nav-link" data-scroll-target="#dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer_t">unfold_buffer_t</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -532,13 +536,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dareplane_utils.general.ringbuffer.RingBuffer" class="level1">
 <h1>ringbuffer.RingBuffer</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.ringbuffer.RingBuffer(<span class="va">self</span>, shape, dtype<span class="op">=</span>np.float32)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A simple numpy ring buffer for data and timestamps.</p>
+<p>This class implements a ring buffer using numpy arrays to store data and corresponding timestamps. It is designed to efficiently handle a fixed-size buffer with FIFO (First In, First Out) behavior. The buffer can be used to store and retrieve data samples along with their timestamps.</p>
 <section id="attributes" class="level2 doc-section doc-section-attributes">
 <h2 class="doc-section doc-section-attributes anchored" data-anchor-id="attributes">Attributes</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 21%">
-<col style="width: 65%">
+<col style="width: 12%">
+<col style="width: 20%">
+<col style="width: 66%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -551,27 +557,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td>buffer</td>
 <td>np.ndarray</td>
-<td>the data buffer</td>
+<td>The data buffer.</td>
 </tr>
 <tr class="even">
 <td>buffer_t</td>
 <td>np.ndarray</td>
-<td>the time buffer</td>
+<td>The time buffer.</td>
 </tr>
 <tr class="odd">
 <td>last_t</td>
 <td>float</td>
-<td>latest time stamp</td>
+<td>The latest timestamp.</td>
 </tr>
 <tr class="even">
 <td>curr_i</td>
 <td>int</td>
-<td>index of the latest data point int the buffer</td>
+<td>The index of the latest data point in the buffer.</td>
 </tr>
 <tr class="odd">
 <td>logger</td>
 <td>logging.Logger</td>
-<td>the logger used for warnings and debug messages</td>
+<td>The logger used for warnings and debug messages.</td>
 </tr>
 </tbody>
 </table>
@@ -580,9 +586,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 5%">
-<col style="width: 15%">
-<col style="width: 70%">
+<col style="width: 4%">
+<col style="width: 11%">
+<col style="width: 75%">
 <col style="width: 8%">
 </colgroup>
 <thead>
@@ -596,18 +602,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td>shape</td>
-<td>tuple[int, int, …]</td>
-<td>shape of the buffer needs to be at least 2D (n_samples, n_features), arbitrary further dimensions can be added</td>
+<td>tuple[int, int]</td>
+<td>The shape of the buffer, which needs to be at least 2D (n_samples, n_features). Arbitrary further dimensions can be added.</td>
 <td><em>required</em></td>
 </tr>
 <tr class="even">
 <td>dtype</td>
 <td>type</td>
-<td>a numpy data type for the buffer</td>
+<td>A numpy data type for the buffer. Defaults to np.float32.</td>
 <td><code>np.float32</code></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="examples" class="level2 doc-section doc-section-examples">
+<h2 class="doc-section doc-section-examples anchored" data-anchor-id="examples">Examples</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> rb <span class="op">=</span> RingBuffer(shape<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">3</span>), dtype<span class="op">=</span>np.float32)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> samples <span class="op">=</span> [np.random.rand(<span class="dv">3</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> times <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">5</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> rb.add_samples(samples, times)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(rb.<span class="bu">buffer</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>[[<span class="fl">0.6456422</span>  <span class="fl">0.6063579</span>  <span class="fl">0.46437985</span>]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.77531135</span> <span class="fl">0.12675048</span> <span class="fl">0.10201751</span>]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.05525873</span> <span class="fl">0.5852236</span>  <span class="fl">0.09854987</span>]</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.7515863</span>  <span class="fl">0.20880483</span> <span class="fl">0.7236128</span> ]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.7157382</span>  <span class="fl">0.55806357</span> <span class="fl">0.6247236</span> ]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.</span>         <span class="fl">0.</span>         <span class="fl">0.</span>        ]</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.</span>         <span class="fl">0.</span>         <span class="fl">0.</span>        ]</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.</span>         <span class="fl">0.</span>         <span class="fl">0.</span>        ]</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.</span>         <span class="fl">0.</span>         <span class="fl">0.</span>        ]</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.</span>         <span class="fl">0.</span>         <span class="fl">0.</span>        ]]</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(rb.buffer_t)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.</span> <span class="fl">1.</span> <span class="fl">2.</span> <span class="fl">3.</span> <span class="fl">4.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span>]</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(rb.unfold_buffer())  <span class="co"># most recent sample is index=-1, second to most recent index=-2, etc.</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>[[<span class="fl">0.</span>         <span class="fl">0.</span>         <span class="fl">0.</span>        ]</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.</span>         <span class="fl">0.</span>         <span class="fl">0.</span>        ]</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.</span>         <span class="fl">0.</span>         <span class="fl">0.</span>        ]</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.</span>         <span class="fl">0.</span>         <span class="fl">0.</span>        ]</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.</span>         <span class="fl">0.</span>         <span class="fl">0.</span>        ]</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.6456422</span>  <span class="fl">0.6063579</span>  <span class="fl">0.46437985</span>]</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.77531135</span> <span class="fl">0.12675048</span> <span class="fl">0.10201751</span>]</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.05525873</span> <span class="fl">0.5852236</span>  <span class="fl">0.09854987</span>]</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.7515863</span>  <span class="fl">0.20880483</span> <span class="fl">0.7236128</span> ]</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.7157382</span>  <span class="fl">0.55806357</span> <span class="fl">0.6247236</span> ]]</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(rb.unfold_buffer_t())</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">1.</span> <span class="fl">2.</span> <span class="fl">3.</span> <span class="fl">4.</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> samples2 <span class="op">=</span> [np.random.rand(<span class="dv">3</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>)]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> times2 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">8</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> rb.add_samples(samples2, times2)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(rb.buffer_t)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>[<span class="fl">5.</span> <span class="fl">6.</span> <span class="fl">7.</span> <span class="fl">3.</span> <span class="fl">4.</span> <span class="fl">0.</span> <span class="fl">1.</span> <span class="fl">2.</span> <span class="fl">3.</span> <span class="fl">4.</span>]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(rb.unfold_buffer_t())</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>[<span class="fl">3.</span> <span class="fl">4.</span> <span class="fl">0.</span> <span class="fl">1.</span> <span class="fl">2.</span> <span class="fl">3.</span> <span class="fl">4.</span> <span class="fl">5.</span> <span class="fl">6.</span> <span class="fl">7.</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
@@ -624,23 +675,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Slice samples should not be necessary &gt;&gt;&gt; as we add continuously</td>
 </tr>
 <tr class="even">
+<td><a href="#dareplane_utils.general.ringbuffer.RingBuffer.add_samples">add_samples</a></td>
+<td>Add samples to the buffer and progress the index</td>
+</tr>
+<tr class="odd">
 <td><a href="#dareplane_utils.general.ringbuffer.RingBuffer.get_insert_slices">get_insert_slices</a></td>
 <td>Get slices mapping data from the samples to the buffer</td>
+</tr>
+<tr class="even">
+<td><a href="#dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer">unfold_buffer</a></td>
+<td>Unfold the buffer to return the data in chronological order.</td>
+</tr>
+<tr class="odd">
+<td><a href="#dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer_t">unfold_buffer_t</a></td>
+<td>Unfold the buffer_t (time stamp buffer) to return time stamps in chronological order.</td>
 </tr>
 </tbody>
 </table>
 <section id="dareplane_utils.general.ringbuffer.RingBuffer.add_continuous_buffer" class="level3">
 <h3 class="anchored" data-anchor-id="dareplane_utils.general.ringbuffer.RingBuffer.add_continuous_buffer">add_continuous_buffer</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.ringbuffer.RingBuffer.add_continuous_buffer(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    slice_buffer,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    samples,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    times,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.ringbuffer.RingBuffer.add_continuous_buffer(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    slice_buffer,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    samples,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    times,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Slice samples should not be necessary &gt;&gt;&gt; as we add continuously + slice selection from lists is slow</p>
+</section>
+<section id="dareplane_utils.general.ringbuffer.RingBuffer.add_samples" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.general.ringbuffer.RingBuffer.add_samples">add_samples</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.ringbuffer.RingBuffer.add_samples(samples, times)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Add samples to the buffer and progress the index</p>
 </section>
 <section id="dareplane_utils.general.ringbuffer.RingBuffer.get_insert_slices" class="level3">
 <h3 class="anchored" data-anchor-id="dareplane_utils.general.ringbuffer.RingBuffer.get_insert_slices">get_insert_slices</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.ringbuffer.RingBuffer.get_insert_slices(len_samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.ringbuffer.RingBuffer.get_insert_slices(len_samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Get slices mapping data from the samples to the buffer</p>
 <section id="parameters-1" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-1">Parameters</h4>
@@ -678,6 +746,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td></td>
 <td>tuple[list[slice], list[slice], int]</td>
 <td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer">unfold_buffer</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Unfold the buffer to return the data in chronological order.</p>
+<p>This method returns the data in the buffer in chronological order, ending with the most recent sample.</p>
+<section id="returns-1" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-1">Returns</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>np.ndarray</td>
+<td>The unfolded data buffer.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer_t" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer_t">unfold_buffer_t</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.general.ringbuffer.RingBuffer.unfold_buffer_t()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Unfold the buffer_t (time stamp buffer) to return time stamps in chronological order.</p>
+<p>This method returns the time stamps in the buffer in chronological order, ending with the most recent time stamp.</p>
+<section id="returns-2" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-2">Returns</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>np.ndarray</td>
+<td>The unfolded data buffer.</td>
 </tr>
 </tbody>
 </table>

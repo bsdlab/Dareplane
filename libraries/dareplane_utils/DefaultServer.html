@@ -511,12 +511,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#dareplane_utils.default_server.server.DefaultServer" id="toc-dareplane_utils.default_server.server.DefaultServer" class="nav-link active" data-scroll-target="#dareplane_utils.default_server.server.DefaultServer">DefaultServer</a>
   <ul class="collapse">
+  <li><a href="#attributes" id="toc-attributes" class="nav-link" data-scroll-target="#attributes">Attributes</a></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul class="collapse">
   <li><a href="#dareplane_utils.default_server.server.DefaultServer.default_msg_interpretation" id="toc-dareplane_utils.default_server.server.DefaultServer.default_msg_interpretation" class="nav-link" data-scroll-target="#dareplane_utils.default_server.server.DefaultServer.default_msg_interpretation">default_msg_interpretation</a></li>
   <li><a href="#dareplane_utils.default_server.server.DefaultServer.handle_msg" id="toc-dareplane_utils.default_server.server.DefaultServer.handle_msg" class="nav-link" data-scroll-target="#dareplane_utils.default_server.server.DefaultServer.handle_msg">handle_msg</a></li>
+  <li><a href="#dareplane_utils.default_server.server.DefaultServer.init_server" id="toc-dareplane_utils.default_server.server.DefaultServer.init_server" class="nav-link" data-scroll-target="#dareplane_utils.default_server.server.DefaultServer.init_server">init_server</a></li>
   <li><a href="#dareplane_utils.default_server.server.DefaultServer.msg_interpretation" id="toc-dareplane_utils.default_server.server.DefaultServer.msg_interpretation" class="nav-link" data-scroll-target="#dareplane_utils.default_server.server.DefaultServer.msg_interpretation">msg_interpretation</a></li>
   <li><a href="#dareplane_utils.default_server.server.DefaultServer.shutdown" id="toc-dareplane_utils.default_server.server.DefaultServer.shutdown" class="nav-link" data-scroll-target="#dareplane_utils.default_server.server.DefaultServer.shutdown">shutdown</a></li>
+  <li><a href="#dareplane_utils.default_server.server.DefaultServer.start_listening" id="toc-dareplane_utils.default_server.server.DefaultServer.start_listening" class="nav-link" data-scroll-target="#dareplane_utils.default_server.server.DefaultServer.start_listening">start_listening</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -548,7 +551,96 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    is_listening<span class="op">=</span><span class="va">False</span>,</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    logger<span class="op">=</span>get_logger(<span class="va">__name__</span>),</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The default server which is being used and modified by pther dareplane projects</p>
+<p>A class representing a default server used and modified by other Dareplane projects. This server handles incoming TCP connections, interprets messages, and manages threads and processes.</p>
+<section id="attributes" class="level2 doc-section doc-section-attributes">
+<h2 class="doc-section doc-section-attributes anchored" data-anchor-id="attributes">Attributes</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 40%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>port</td>
+<td>int</td>
+<td>The port number on which the server listens. Default is 8080.</td>
+</tr>
+<tr class="even">
+<td>ip</td>
+<td>str</td>
+<td>The IP address on which the server listens. Default is “0.0.0.0”.</td>
+</tr>
+<tr class="odd">
+<td>nlisten</td>
+<td>int</td>
+<td>The maximum number of queued connections. Default is 10.</td>
+</tr>
+<tr class="even">
+<td>name</td>
+<td>str</td>
+<td>The name of the server. Default is “default_server”.</td>
+</tr>
+<tr class="odd">
+<td>thread_stopper</td>
+<td>Callable</td>
+<td>A function to stop threads. Default is <code>stop_thread</code>.</td>
+</tr>
+<tr class="even">
+<td>proc_stopper</td>
+<td>Callable</td>
+<td>A function to stop processes. Default is <code>stop_process</code>.</td>
+</tr>
+<tr class="odd">
+<td>msg_interpreter</td>
+<td>Callable</td>
+<td>A function to interpret messages. Default is <code>interpret_msg</code>.</td>
+</tr>
+<tr class="even">
+<td>pcommand_map</td>
+<td>dict</td>
+<td>A dictionary mapping commands to their handlers.</td>
+</tr>
+<tr class="odd">
+<td>current_conn</td>
+<td>socket.socket | None</td>
+<td>The current active connection.</td>
+</tr>
+<tr class="even">
+<td>server_socket</td>
+<td>socket.socket | None</td>
+<td>The server socket.</td>
+</tr>
+<tr class="odd">
+<td>threads</td>
+<td>dict[str, tuple[threading.Thread, threading.Event]]</td>
+<td>A dictionary of active threads and their stop events.</td>
+</tr>
+<tr class="even">
+<td>processes</td>
+<td>dict[str, subprocess.Popen]</td>
+<td>A dictionary of active subprocesses.</td>
+</tr>
+<tr class="odd">
+<td>is_listening</td>
+<td>bool</td>
+<td>A flag indicating whether the server is currently listening.</td>
+</tr>
+<tr class="even">
+<td>logger</td>
+<td>Logger</td>
+<td>The logger for the server.</td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
 <table class="caption-top table">
@@ -561,19 +653,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td><a href="#dareplane_utils.default_server.server.DefaultServer.default_msg_interpretation">default_msg_interpretation</a></td>
-<td>This contains the default interpretation</td>
+<td>Interpret default messages.</td>
 </tr>
 <tr class="even">
 <td><a href="#dareplane_utils.default_server.server.DefaultServer.handle_msg">handle_msg</a></td>
-<td>interpret the message</td>
+<td>Interpret the incoming message.</td>
 </tr>
 <tr class="odd">
+<td><a href="#dareplane_utils.default_server.server.DefaultServer.init_server">init_server</a></td>
+<td>Initialize the server socket and set up the stop event.</td>
+</tr>
+<tr class="even">
 <td><a href="#dareplane_utils.default_server.server.DefaultServer.msg_interpretation">msg_interpretation</a></td>
 <td>Interpret the message and perform book keeping if necessary</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#dareplane_utils.default_server.server.DefaultServer.shutdown">shutdown</a></td>
 <td>Shutdown the server and close all connections</td>
+</tr>
+<tr class="even">
+<td><a href="#dareplane_utils.default_server.server.DefaultServer.start_listening">start_listening</a></td>
+<td>Start the server and listen for incoming connections.</td>
 </tr>
 </tbody>
 </table>
@@ -582,22 +682,143 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.default_server.server.DefaultServer.default_msg_interpretation(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    msg,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This contains the default interpretation</p>
+<p>Interpret default messages.</p>
+<p>This method handles default commands such as stopping processes or threads, closing the server, and retrieving the list of available commands. It logs relevant information and performs the necessary actions based on the received message.</p>
+<section id="parameters" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 59%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>msg</td>
+<td>bytes</td>
+<td>The incoming message to be interpreted.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 79%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>bool</td>
+<td>True if the message was a default command, False otherwise.</td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 <section id="dareplane_utils.default_server.server.DefaultServer.handle_msg" class="level3">
 <h3 class="anchored" data-anchor-id="dareplane_utils.default_server.server.DefaultServer.handle_msg">handle_msg</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.default_server.server.DefaultServer.handle_msg(msg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>interpret the message</p>
+<p>Interpret the incoming message.</p>
+<p>This method processes the incoming message, checks if it is a concatenation of multiple commands, and handles each command individually. It also logs the received message and handles any errors that occur during message processing.</p>
+<section id="parameters-1" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-1">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 59%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>msg</td>
+<td>bytes</td>
+<td>The incoming message to be interpreted.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dareplane_utils.default_server.server.DefaultServer.init_server" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.default_server.server.DefaultServer.init_server">init_server</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.default_server.server.DefaultServer.init_server(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    stop_event<span class="op">=</span>threading.Event(),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Initialize the server socket and set up the stop event.</p>
+<p>This method creates a socket, sets socket options, binds the socket to the specified IP and port, and sets it to listen for incoming connections. It also initializes a threading event to control the server’s listening state.</p>
+<section id="parameters-2" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-2">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 65%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>stop_event</td>
+<td>threading.Event</td>
+<td>A threading event to control the server’s listening state. Default is a new threading.Event.</td>
+<td><code>threading.Event()</code></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 <section id="dareplane_utils.default_server.server.DefaultServer.msg_interpretation" class="level3">
 <h3 class="anchored" data-anchor-id="dareplane_utils.default_server.server.DefaultServer.msg_interpretation">msg_interpretation</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.default_server.server.DefaultServer.msg_interpretation(msg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.default_server.server.DefaultServer.msg_interpretation(msg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Interpret the message and perform book keeping if necessary</p>
 </section>
 <section id="dareplane_utils.default_server.server.DefaultServer.shutdown" class="level3">
 <h3 class="anchored" data-anchor-id="dareplane_utils.default_server.server.DefaultServer.shutdown">shutdown</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.default_server.server.DefaultServer.shutdown()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.default_server.server.DefaultServer.shutdown()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Shutdown the server and close all connections</p>
+</section>
+<section id="dareplane_utils.default_server.server.DefaultServer.start_listening" class="level3">
+<h3 class="anchored" data-anchor-id="dareplane_utils.default_server.server.DefaultServer.start_listening">start_listening</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.default_server.server.DefaultServer.start_listening()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Start the server and listen for incoming connections.</p>
+<p>This method enters a loop where it waits for incoming TCP connections. When a connection is accepted, it handles incoming messages until the server is stopped. The method also manages the server’s listening state and logs relevant information.</p>
 
 
 </section>

@@ -509,7 +509,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names" id="toc-dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names" class="nav-link active" data-scroll-target="#dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names">get_channel_names</a></li>
+  <li><a href="#dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names" id="toc-dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names" class="nav-link active" data-scroll-target="#dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names">get_channel_names</a>
+  <ul class="collapse">
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
+  <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -523,8 +527,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names" class="level1">
 <h1>get_channel_names</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.stream_watcher.lsl_stream_watcher.get_channel_names(inf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Extract channel names from the LSL stream info.</p>
+<p>This function parses the XML metadata of the LSL stream info to extract the channel names. If the channel information is not available, it returns default channel names in the format “ch_1”, “ch_2”, etc.</p>
+<section id="parameters" class="level2 doc-section doc-section-parameters">
+<h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 19%">
+<col style="width: 58%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>inf</td>
+<td>pylsl.StreamInfo</td>
+<td>The LSL stream info object containing the metadata.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns" class="level2 doc-section doc-section-returns">
+<h2 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 16%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>list[str]</td>
+<td>A list of channel names extracted from the stream info.</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
