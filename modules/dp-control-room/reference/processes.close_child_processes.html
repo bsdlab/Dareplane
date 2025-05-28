@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>processes – Dareplane</title>
+<title>processes.close_child_processes – Dareplane</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,9 +77,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-083966fab483341b80272ffbd41d3d84.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-0fc807406a3664e7d13a9e6fc8ae2cee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-083966fab483341b80272ffbd41d3d84.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-02faab8b0468390dfe27fe0e4344f365.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-4f5317bed83e40a2408bc2fdbcc84453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-02faab8b0468390dfe27fe0e4344f365.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -345,14 +345,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#control_room.processes" id="toc-control_room.processes" class="nav-link active" data-scroll-target="#control_room.processes">processes</a>
-  <ul class="collapse">
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a>
-  <ul class="collapse">
-  <li><a href="#control_room.processes.close_child_processes" id="toc-control_room.processes.close_child_processes" class="nav-link" data-scroll-target="#control_room.processes.close_child_processes">close_child_processes</a></li>
-  <li><a href="#control_room.processes.start_container" id="toc-control_room.processes.start_container" class="nav-link" data-scroll-target="#control_room.processes.start_container">start_container</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#control_room.processes.close_child_processes" id="toc-control_room.processes.close_child_processes" class="nav-link active" data-scroll-target="#control_room.processes.close_child_processes">processes.close_child_processes</a></li>
   </ul>
 </nav>
     </div>
@@ -363,68 +356,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="control_room.processes" class="level1">
-<h1>processes</h1>
-<p><code>processes</code></p>
-<section id="functions" class="level2">
-<h2 class="anchored" data-anchor-id="functions">Functions</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="#control_room.processes.close_child_processes">close_child_processes</a></td>
-<td>Close all child processes of a Popen instance</td>
-</tr>
-<tr class="even">
-<td><a href="#control_room.processes.start_container">start_container</a></td>
-<td>Given the configs for python, create subprocesses running the given modules</td>
-</tr>
-</tbody>
-</table>
-<section id="control_room.processes.close_child_processes" class="level3">
-<h3 class="anchored" data-anchor-id="control_room.processes.close_child_processes">close_child_processes</h3>
+<section id="control_room.processes.close_child_processes" class="level1">
+<h1>processes.close_child_processes</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>processes.close_child_processes(process)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Close all child processes of a Popen instance</p>
-</section>
-<section id="control_room.processes.start_container" class="level3">
-<h3 class="anchored" data-anchor-id="control_room.processes.start_container">start_container</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>processes.start_container(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    module_name,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    ip,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    port,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    loglevel<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    modules_root_path<span class="op">=</span>Path(<span class="st">'.'</span>),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    start_kwargs<span class="op">=</span>{},</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Given the configs for python, create subprocesses running the given modules</p>
-<section id="returns" class="level4 doc-section doc-section-returns">
-<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h4>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td>subprocess.Popen</td>
-<td></td>
-</tr>
-</tbody>
-</table>
 
 
-</section>
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->

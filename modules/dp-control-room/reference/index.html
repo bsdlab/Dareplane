@@ -42,9 +42,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-083966fab483341b80272ffbd41d3d84.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-0fc807406a3664e7d13a9e6fc8ae2cee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-083966fab483341b80272ffbd41d3d84.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-02faab8b0468390dfe27fe0e4344f365.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-4f5317bed83e40a2408bc2fdbcc84453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-02faab8b0468390dfe27fe0e4344f365.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -436,7 +436,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="control-room-functionality">Control room functionality</h2>
 <p>The control room is one way of composing Dareplane modules to experimental setups. <img src="https://raw.githubusercontent.com/bsdlab/dp-control-room/refs/heads/main/assets/sketch_gui.svg" class="img-fluid" alt="schematic_image"></p>
 <div class="callout-info">
-<p>The github repository for this module is located at: <a href="https://github.com/bsdlab/dp-control-room/tree/main">https://github.com/bsdlab/dp-control-room/tree/main</a></p>
+<p>The github repository for this module is located at: <a href="https://github.com/bsdlab/dp-control-room/">https://github.com/bsdlab/dp-control-room/</a></p>
 </div>
 <section id="main" class="level3">
 <h3 class="anchored" data-anchor-id="main">Main</h3>
@@ -444,8 +444,20 @@ ul.task-list li input[type="checkbox"] {
 <table class="caption-top table">
 <tbody>
 <tr class="odd">
-<td><a href="../../../modules/dp-control-room/reference/main.html#control_room.main">main</a></td>
-<td></td>
+<td><a href="../../../modules/dp-control-room/reference/main.run_control_room.html#control_room.main.run_control_room">main.run_control_room</a></td>
+<td>Run the control room application with the given setup configuration.</td>
+</tr>
+<tr class="even">
+<td><a href="../../../modules/dp-control-room/reference/main.close_down_connections.html#control_room.main.close_down_connections">main.close_down_connections</a></td>
+<td>Close all ModuleConnection instances.</td>
+</tr>
+<tr class="odd">
+<td><a href="../../../modules/dp-control-room/reference/main.initialize_python_modules.html#control_room.main.initialize_python_modules">main.initialize_python_modules</a></td>
+<td>Initialize Python modules based on the provided configurations.</td>
+</tr>
+<tr class="even">
+<td><a href="../../../modules/dp-control-room/reference/main.initialize_exe_modules.html#control_room.main.initialize_exe_modules">main.initialize_exe_modules</a></td>
+<td>Initialize modules provided with an executable target. NOT WORKING ATM.</td>
 </tr>
 </tbody>
 </table>
@@ -456,16 +468,48 @@ ul.task-list li input[type="checkbox"] {
 <table class="caption-top table">
 <tbody>
 <tr class="odd">
-<td><a href="../../../modules/dp-control-room/reference/gui.app.html#control_room.gui.app">gui.app</a></td>
-<td></td>
+<td><a href="../../../modules/dp-control-room/reference/gui.app.build_app.html#control_room.gui.app.build_app">gui.app.build_app</a></td>
+<td>Build and configure a Dash web application for the control room.</td>
 </tr>
 <tr class="even">
-<td><a href="../../../modules/dp-control-room/reference/gui.callbacks.html#control_room.gui.callbacks">gui.callbacks</a></td>
-<td></td>
+<td><a href="../../../modules/dp-control-room/reference/gui.callbacks.add_json_verification_cb.html#control_room.gui.callbacks.add_json_verification_cb">gui.callbacks.add_json_verification_cb</a></td>
+<td>Add a callback to the Dash app to verify JSON strings in input fields.</td>
 </tr>
 <tr class="odd">
-<td><a href="../../../modules/dp-control-room/reference/gui.layout.html#control_room.gui.layout">gui.layout</a></td>
-<td></td>
+<td><a href="../../../modules/dp-control-room/reference/gui.callbacks.add_macros_sender.html#control_room.gui.callbacks.add_macros_sender">gui.callbacks.add_macros_sender</a></td>
+<td>Add a callbacks to dynamically to macro sections on a Dash app.</td>
+</tr>
+<tr class="even">
+<td><a href="../../../modules/dp-control-room/reference/gui.callbacks.evaluate_templates.html#control_room.gui.callbacks.evaluate_templates">gui.callbacks.evaluate_templates</a></td>
+<td>If a dictionary contains $<some_name> templates in its values,</some_name></td>
+</tr>
+<tr class="odd">
+<td><a href="../../../modules/dp-control-room/reference/gui.callbacks.add_pcomm_sender.html#control_room.gui.callbacks.add_pcomm_sender">gui.callbacks.add_pcomm_sender</a></td>
+<td>Add a callback to the Dash app to send pcomm commands to modules.</td>
+</tr>
+<tr class="even">
+<td><a href="../../../modules/dp-control-room/reference/gui.layout.get_layout.html#control_room.gui.layout.get_layout">gui.layout.get_layout</a></td>
+<td>Generate the layout for the control room application.</td>
+</tr>
+<tr class="odd">
+<td><a href="../../../modules/dp-control-room/reference/gui.layout.create_macro_tile.html#control_room.gui.layout.create_macro_tile">gui.layout.create_macro_tile</a></td>
+<td>Create a tile containing buttons for each macro.</td>
+</tr>
+<tr class="even">
+<td><a href="../../../modules/dp-control-room/reference/gui.layout.get_macro_button_input_pair.html#control_room.gui.layout.get_macro_button_input_pair">gui.layout.get_macro_button_input_pair</a></td>
+<td>Create a macro button and input pair for a given macro configuration.</td>
+</tr>
+<tr class="odd">
+<td><a href="../../../modules/dp-control-room/reference/gui.layout.get_log_stream_tile.html#control_room.gui.layout.get_log_stream_tile">gui.layout.get_log_stream_tile</a></td>
+<td>Create the tile showing the last lines of the log file</td>
+</tr>
+<tr class="even">
+<td><a href="../../../modules/dp-control-room/reference/gui.layout.get_module_tile_layout.html#control_room.gui.layout.get_module_tile_layout">gui.layout.get_module_tile_layout</a></td>
+<td>Create the tile showing the individual modules</td>
+</tr>
+<tr class="odd">
+<td><a href="../../../modules/dp-control-room/reference/gui.layout.get_pcomm_button_input_pair.html#control_room.gui.layout.get_pcomm_button_input_pair">gui.layout.get_pcomm_button_input_pair</a></td>
+<td>Create pairs of buttons and inputs for each pcommand</td>
 </tr>
 </tbody>
 </table>
@@ -476,14 +520,18 @@ ul.task-list li input[type="checkbox"] {
 <table class="caption-top table">
 <tbody>
 <tr class="odd">
-<td><a href="../../../modules/dp-control-room/reference/processes.html#control_room.processes">processes</a></td>
-<td></td>
+<td><a href="../../../modules/dp-control-room/reference/processes.close_child_processes.html#control_room.processes.close_child_processes">processes.close_child_processes</a></td>
+<td>Close all child processes of a Popen instance</td>
 </tr>
 <tr class="even">
+<td><a href="../../../modules/dp-control-room/reference/processes.start_container.html#control_room.processes.start_container">processes.start_container</a></td>
+<td>Start a container for a given module.</td>
+</tr>
+<tr class="odd">
 <td><a href="../../../modules/dp-control-room/reference/connection.html#control_room.connection">connection</a></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="../../../modules/dp-control-room/reference/socket.html#control_room.socket">socket</a></td>
 <td></td>
 </tr>
@@ -496,8 +544,8 @@ ul.task-list li input[type="checkbox"] {
 <table class="caption-top table">
 <tbody>
 <tr class="odd">
-<td><a href="../../../modules/dp-control-room/reference/callbacks.html#control_room.callbacks">callbacks</a></td>
-<td></td>
+<td><a href="../../../modules/dp-control-room/reference/callbacks.CallbackBroker.html#control_room.callbacks.CallbackBroker">callbacks.CallbackBroker</a></td>
+<td>A class to handle callbacks from socket clients.</td>
 </tr>
 </tbody>
 </table>
@@ -505,18 +553,6 @@ ul.task-list li input[type="checkbox"] {
 <section id="logging" class="level3">
 <h3 class="anchored" data-anchor-id="logging">Logging</h3>
 <p>Utils of the control_room concern mainly logging. This relates to providing a TCP that listenes on the standard port for python logging (9020), and therefore consolidates all logging messages shared this way. E.g., when using <a href="https://github.com/matthiasdold/dareplane-pyutils"><code>dareplane-utils</code></a> and the <code>from dareplane_utils.logging.logger import get_logger</code>.</p>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td><a href="../../../modules/dp-control-room/reference/utils.logging.html#control_room.utils.logging">utils.logging</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="../../../modules/dp-control-room/reference/utils.logserver.html#control_room.utils.logserver">utils.logserver</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 
 
 </section>

@@ -1,10 +1,10 @@
 [
   {
-    "listing": "/modules/index.html",
+    "listing": "/examples/index.html",
     "items": []
   },
   {
-    "listing": "/examples/index.html",
+    "listing": "/modules/index.html",
     "items": []
   }
 ]

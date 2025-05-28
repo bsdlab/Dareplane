@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>gui.callbacks – Dareplane</title>
+<title>main.run_control_room – Dareplane</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,9 +77,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-083966fab483341b80272ffbd41d3d84.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-0fc807406a3664e7d13a9e6fc8ae2cee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-083966fab483341b80272ffbd41d3d84.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-02faab8b0468390dfe27fe0e4344f365.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-4f5317bed83e40a2408bc2fdbcc84453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-02faab8b0468390dfe27fe0e4344f365.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -345,15 +345,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#control_room.gui.callbacks" id="toc-control_room.gui.callbacks" class="nav-link active" data-scroll-target="#control_room.gui.callbacks">gui.callbacks</a>
+  <li><a href="#control_room.main.run_control_room" id="toc-control_room.main.run_control_room" class="nav-link active" data-scroll-target="#control_room.main.run_control_room">main.run_control_room</a>
   <ul class="collapse">
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a>
-  <ul class="collapse">
-  <li><a href="#control_room.gui.callbacks.add_callbacks" id="toc-control_room.gui.callbacks.add_callbacks" class="nav-link" data-scroll-target="#control_room.gui.callbacks.add_callbacks">add_callbacks</a></li>
-  <li><a href="#control_room.gui.callbacks.add_json_verification_cb" id="toc-control_room.gui.callbacks.add_json_verification_cb" class="nav-link" data-scroll-target="#control_room.gui.callbacks.add_json_verification_cb">add_json_verification_cb</a></li>
-  <li><a href="#control_room.gui.callbacks.evaluate_templates" id="toc-control_room.gui.callbacks.evaluate_templates" class="nav-link" data-scroll-target="#control_room.gui.callbacks.evaluate_templates">evaluate_templates</a></li>
-  <li><a href="#control_room.gui.callbacks.make_ao_payload_from_json" id="toc-control_room.gui.callbacks.make_ao_payload_from_json" class="nav-link" data-scroll-target="#control_room.gui.callbacks.make_ao_payload_from_json">make_ao_payload_from_json</a></li>
-  </ul></li>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -365,59 +359,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="control_room.gui.callbacks" class="level1">
-<h1>gui.callbacks</h1>
-<p><code>gui.callbacks</code></p>
-<section id="functions" class="level2">
-<h2 class="anchored" data-anchor-id="functions">Functions</h2>
+<section id="control_room.main.run_control_room" class="level1">
+<h1>main.run_control_room</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>main.run_control_room(setup_cfg_path<span class="op">=</span>setup_cfg_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run the control room application with the given setup configuration.</p>
+<p>This function initializes the control room application, starts the module servers, connects clients to the servers, and sets up the callback broker. It also creates and runs the Dash app for the GUI.</p>
+<section id="parameters" class="level2 doc-section doc-section-parameters">
+<h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 6%">
+<col style="width: 63%">
+<col style="width: 15%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Name</th>
+<th>Type</th>
 <th>Description</th>
+<th>Default</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="#control_room.gui.callbacks.add_callbacks">add_callbacks</a></td>
-<td>Add callbacks to a given app</td>
-</tr>
-<tr class="even">
-<td><a href="#control_room.gui.callbacks.add_json_verification_cb">add_json_verification_cb</a></td>
-<td>Check the json strings in each inbox</td>
-</tr>
-<tr class="odd">
-<td><a href="#control_room.gui.callbacks.evaluate_templates">evaluate_templates</a></td>
-<td>If a dictionary contains $<some_name> templates in its values,</some_name></td>
-</tr>
-<tr class="even">
-<td><a href="#control_room.gui.callbacks.make_ao_payload_from_json">make_ao_payload_from_json</a></td>
-<td>Transform a json string to pipe separated list of values only</td>
+<td>setup_cfg_path</td>
+<td>str</td>
+<td>The path to the setup configuration file. Defaults to <code>setup_cfg_path</code>.</td>
+<td><code>setup_cfg_path</code></td>
 </tr>
 </tbody>
 </table>
-<section id="control_room.gui.callbacks.add_callbacks" class="level3">
-<h3 class="anchored" data-anchor-id="control_room.gui.callbacks.add_callbacks">add_callbacks</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>gui.callbacks.add_callbacks(app, modules, macros<span class="op">=</span><span class="va">None</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Add callbacks to a given app</p>
-</section>
-<section id="control_room.gui.callbacks.add_json_verification_cb" class="level3">
-<h3 class="anchored" data-anchor-id="control_room.gui.callbacks.add_json_verification_cb">add_json_verification_cb</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gui.callbacks.add_json_verification_cb(app, modules, macros)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Check the json strings in each inbox</p>
-</section>
-<section id="control_room.gui.callbacks.evaluate_templates" class="level3">
-<h3 class="anchored" data-anchor-id="control_room.gui.callbacks.evaluate_templates">evaluate_templates</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gui.callbacks.evaluate_templates(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If a dictionary contains $<some_name> templates in its values, replace them with the variable</some_name></p>
-</section>
-<section id="control_room.gui.callbacks.make_ao_payload_from_json" class="level3">
-<h3 class="anchored" data-anchor-id="control_room.gui.callbacks.make_ao_payload_from_json">make_ao_payload_from_json</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>gui.callbacks.make_ao_payload_from_json(json_payload)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Transform a json string to pipe separated list of values only</p>
 
 
-</section>
 </section>
 </section>
 

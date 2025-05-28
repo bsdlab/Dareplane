@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>get_streams_names – Dareplane</title>
+<title>gui.callbacks.add_json_verification_cb – Dareplane</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,28 +58,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../..//assets/favicon_dareplane_logo.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-02faab8b0468390dfe27fe0e4344f365.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-4f5317bed83e40a2408bc2fdbcc84453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-02faab8b0468390dfe27fe0e4344f365.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//assets/favicon_dareplane_logo.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-02faab8b0468390dfe27fe0e4344f365.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-4f5317bed83e40a2408bc2fdbcc84453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-02faab8b0468390dfe27fe0e4344f365.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -281,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="main.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../assets/favicon_dareplane_logo.png" alt="" class="navbar-logo">
+    <img src="../../../assets/favicon_dareplane_logo.png" alt="" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -291,15 +291,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../main.html"> 
+    <a class="nav-link" href="../../../main.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../modules/index.html"> 
+    <a class="nav-link" href="../../../modules/index.html"> 
 <span class="menu-text">Documentation</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../examples/index.html"> 
+    <a class="nav-link" href="../../../examples/index.html"> 
 <span class="menu-text">Examples</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -308,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
         <li>
-    <a class="dropdown-item" href="../../about/quarto_documentation_setup.html">
+    <a class="dropdown-item" href="../../../about/quarto_documentation_setup.html">
  <span class="dropdown-text">Quarto setup</span></a>
   </li>  
     </ul>
@@ -335,198 +335,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../libraries/dareplane_utils/StreamWatcher.html">Streaming data</a></li><li class="breadcrumb-item"><a href="../../libraries/dareplane_utils/get_streams_names.html">get_streams_names</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../assets/single_dareplane_logo.svg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
-      </a>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Documentation for <code>dareplane_utils</code></span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Server</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/DefaultServer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">DefaultServer</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Logging</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/logger.get_logger.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">logger.get_logger</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/server.LogRecordStreamHandler.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">server.LogRecordStreamHandler</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/server.LogRecordSocketReceiver.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">server.LogRecordSocketReceiver</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/server.modify_root_logger.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">server.modify_root_logger</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Streaming data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/StreamWatcher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">StreamWatcher</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/get_streams_names.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">get_streams_names</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/pylsl_xmlelement_to_dict.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">pylsl_xmlelement_to_dict</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/get_channel_names.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">get_channel_names</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">General</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/ringbuffer.RingBuffer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ringbuffer.RingBuffer</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/time.sleep_s.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">time.sleep_s</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/time.partial_sleep.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">time.partial_sleep</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/time.full_speed.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">time.full_speed</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../libraries/dareplane_utils/event_loop.EventLoop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">event_loop.EventLoop</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#dareplane_utils.stream_watcher.lsl_stream_watcher.get_streams_names" id="toc-dareplane_utils.stream_watcher.lsl_stream_watcher.get_streams_names" class="nav-link active" data-scroll-target="#dareplane_utils.stream_watcher.lsl_stream_watcher.get_streams_names">get_streams_names</a>
+  <li><a href="#control_room.gui.callbacks.add_json_verification_cb" id="toc-control_room.gui.callbacks.add_json_verification_cb" class="nav-link active" data-scroll-target="#control_room.gui.callbacks.add_json_verification_cb">gui.callbacks.add_json_verification_cb</a>
   <ul class="collapse">
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
   <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../libraries/dareplane_utils/StreamWatcher.html">Streaming data</a></li><li class="breadcrumb-item"><a href="../../libraries/dareplane_utils/get_streams_names.html">get_streams_names</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
 
-<section id="dareplane_utils.stream_watcher.lsl_stream_watcher.get_streams_names" class="level1">
-<h1>get_streams_names</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dareplane_utils.stream_watcher.lsl_stream_watcher.get_streams_names()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Get a list of all available lsl stream names.</p>
+<section id="control_room.gui.callbacks.add_json_verification_cb" class="level1">
+<h1>gui.callbacks.add_json_verification_cb</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>gui.callbacks.add_json_verification_cb(app, modules, macros)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Add a callback to the Dash app to verify JSON strings in input fields.</p>
+<p>This function sets up a callback that checks whether the input values in specified input fields are valid JSON strings. It updates the class names of the input fields based on the validity of the JSON, which should result in a color change.</p>
+<section id="parameters" class="level2 doc-section doc-section-parameters">
+<h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 17%">
+<col style="width: 68%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>app</td>
+<td>Dash</td>
+<td>The Dash application to which the callback will be added.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>modules</td>
+<td>list[ModuleConnection]</td>
+<td>A list of ModuleConnection objects representing the modules to be included in the application.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="odd">
+<td>macros</td>
+<td>dict | None</td>
+<td>A dictionary containing macro definitions to be used in the application. If None, no macros are used.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="returns" class="level2 doc-section doc-section-returns">
 <h2 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h2>
 <table class="caption-top table">
@@ -539,9 +416,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>streams</td>
-<td>list[str]</td>
-<td>names of all available LSL streams</td>
+<td></td>
+<td>Dash</td>
+<td>The Dash application with the added callback.</td>
 </tr>
 </tbody>
 </table>

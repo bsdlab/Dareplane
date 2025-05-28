@@ -1,45 +1,359 @@
 [
   {
-    "objectID": "about/quarto_documentation_setup.html",
-    "href": "about/quarto_documentation_setup.html",
-    "title": "Documentation setup",
+    "objectID": "modules/dp-ao-communication/AUTHORS.html",
+    "href": "modules/dp-ao-communication/AUTHORS.html",
+    "title": "Contributors to dp-ao-communication",
     "section": "",
-    "text": "The documentation for Dareplane is generated with Quarto and quartodoc. The later is used to automatically generate API documentation for python modules. quarto uses a central _quarto.yml file to configure the documentation.\nFor the Dareplane documentation, https://github.com/bsdlab/Dareplane is the main repository, and the /docs folder therein should be considered the root for all quarto related steps.\n\n\n\n\n\n\nTo run the docs building for all modules, clone https://github.com/bsdlab/Dareplane and cd docs.\nIn the build across multiple modules, the Makefile has the following build steps defined:\n\ngenerate the main.qmd dynamically from the README.md\nextract the repositories from the first table in the main.qmd, taking the first column and expecting markdown notation for links\ndownload each repository into a /docs/modules/* directory\nbuild with quartodoc build within each /docs/modules/* folder\n\nTo create a fresh build, execute the following:\nmake clean\nmake main   # copy README -&gt; main.qmd\nmake modules.csv # extract the repos\nmake docs-gallery # build the docs within each module\nOnce the quartodoc part in each /docs/modules/* is done (make docs-gallery), we can use quartop preview (or the github publish action for Dareplane) to build the quarto website from within /docs for Dareplane. All modules will be included as we can specify a Documentation subsection with a glob in _quarto.yml:\nwebsite:  \n sidebar:\n    - id: \"main\"\n      contents:\n        - section: \"Documentation\"\n          contents:\n            - subsection:\n              auto: modules/*/index.qmd\n\n\n\nIn harmony with the general Dareplane coding philosophy, we want every module to be standalone, with very limited requirements for interoperability. This also holds for the documentation. The only requirement for the automated documentation process to be able to pick up the documentation is that there exists a _quarto.yml file in the root directory, which contains a least a section for quartodoc. E.g.:\nquartodoc:\n  package: \"dp-control-room\"\n  source_dir: \"control_room\"   # should point the the folder containing the python code\n  title: \"Documentation control room\"\nWith this setup, you can first create your documentation on a per module level, making sure it works with quartodoc build. The quartodoc build command will use doc-strings of the python functions and classes to dynamically create markdown documentation pages.\nFor debugging, it might be handy to add a general quarto website section on the per module _quarto.yml file. See the Single module quarto section for an example.\nThis can be done without interference with the generation on the across modules documentation, as the latter is only using the quartodoc part.\n\n\nThis section provides an example of how we would document a single Dareplane module.\nLet us assume we are documenting the dp-stroop module.\n\n\nStart out by creating the _quarto.yml file, containing a quartodoc section with an entry for the run_paradigm_cli function:\nquartodoc:\n  package: \"dp-stroop\"       # name of the package\n  source_dir: \"stroop_task\"  # as the source code is within this folder\n\n  title: \"Documentation for the Stroop task\"\n\n  options:\n    signature_name: full\n\n  # write sidebar where quartodoc writes its content without impacting quarto\n  sidebar:\n    file: \"_stroop_sidebar.yml\"\n\n  sections:\n    - title: \"The Stroop task\"\n      desc: |\n        :::{.callout-info}\n        The github repository for this module is located at:\n        [https://github.com/bsdlab/dp-stroop](https://github.com/bsdlab/dp-stroop)\n        :::\n\n    - subtitle: Modified Stroop task\n      package: stroop_task\n      desc: The main script to start the Stroop task from command line.\n      contents:\n        - main.run_paradigm_cli\n\n\n\nNow we can build the documentation with quartodoc build. This will create a ./reference folder with the documentation.\nAdd the ./reference folder and objects.json to the .gitignore to avoid cluttering of the repo. Docs will be generated dynamically.\necho reference/ &gt;&gt; .gitignore\necho objects.json &gt;&gt; .gitignore\necho _site/ &gt;&gt; .gitignore       # will be created from `quarto preview` see next step\n\n\n\nWith having the quartodoc section in the _quarto.yml, we already have everything we need, but it is hard validate that the documentation builds as intended. The most straight forward solution is to add a website section to the _quarto.yml, which then allow to debug with quarto preview:\nproject:\n  type: website\n\nwebsite:\n  sidebar:\n    - id: \"main\"\n      contents:\n        - section: \"Documentation\"\n          contents:\n            - reference/index.qmd\n\nmetadata-files:\n  - reference/_stroop_sidebar.yml\nThen run:\nquarto preview\nThis will open a browser window with the documentation.\n\n\n\nNow it is up to adding more sections to the documentation, which can be done by enriching the contents: of the quartodoc section in the _quarto.yml.\n      contents:\n        - main.run_paradigm_cli\n        - context.StroopContext\nNote:\n\nWhile the quarto part will update dynamically (hot reloading), quartodoc will need to be recompiled every time you add to the quartodoc section of the _quarto.yml.\nThe quarto preview might spawn not at the root of the created website but on a specific functions/classed documentation page. Simply prune the path in the browser to get to the root. E.g., from http://localhost:6901/reference/main.run_paradigm_cli.html to http://localhost:6901/\nquartodoc will add documentation for methods from each method’s own doc string. Avoid having a methods doc string section on the class wide doc string as this will lead to a NotImplementedError from griffe."
+    "text": "Aron Distelzweig\n\nImplementation\n\nMatthias Dold\n\nDesign\nReworking build chain to make from cmake\nFull refactoring for C++23 and meson.build"
   },
   {
-    "objectID": "about/quarto_documentation_setup.html#run-the-documentation-build-locally",
-    "href": "about/quarto_documentation_setup.html#run-the-documentation-build-locally",
-    "title": "Documentation setup",
+    "objectID": "modules/dp-ao-communication/AUTHORS.html#contributor-sorted-alphabetically",
+    "href": "modules/dp-ao-communication/AUTHORS.html#contributor-sorted-alphabetically",
+    "title": "Contributors to dp-ao-communication",
     "section": "",
-    "text": "To run the docs building for all modules, clone https://github.com/bsdlab/Dareplane and cd docs.\nIn the build across multiple modules, the Makefile has the following build steps defined:\n\ngenerate the main.qmd dynamically from the README.md\nextract the repositories from the first table in the main.qmd, taking the first column and expecting markdown notation for links\ndownload each repository into a /docs/modules/* directory\nbuild with quartodoc build within each /docs/modules/* folder\n\nTo create a fresh build, execute the following:\nmake clean\nmake main   # copy README -&gt; main.qmd\nmake modules.csv # extract the repos\nmake docs-gallery # build the docs within each module\nOnce the quartodoc part in each /docs/modules/* is done (make docs-gallery), we can use quartop preview (or the github publish action for Dareplane) to build the quarto website from within /docs for Dareplane. All modules will be included as we can specify a Documentation subsection with a glob in _quarto.yml:\nwebsite:  \n sidebar:\n    - id: \"main\"\n      contents:\n        - section: \"Documentation\"\n          contents:\n            - subsection:\n              auto: modules/*/index.qmd"
+    "text": "Aron Distelzweig\n\nImplementation\n\nMatthias Dold\n\nDesign\nReworking build chain to make from cmake\nFull refactoring for C++23 and meson.build"
   },
   {
-    "objectID": "about/quarto_documentation_setup.html#how-to-document-your-module",
-    "href": "about/quarto_documentation_setup.html#how-to-document-your-module",
-    "title": "Documentation setup",
+    "objectID": "modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html",
+    "href": "modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html",
+    "title": "task_manager.StroopTaskStateManager",
     "section": "",
-    "text": "In harmony with the general Dareplane coding philosophy, we want every module to be standalone, with very limited requirements for interoperability. This also holds for the documentation. The only requirement for the automated documentation process to be able to pick up the documentation is that there exists a _quarto.yml file in the root directory, which contains a least a section for quartodoc. E.g.:\nquartodoc:\n  package: \"dp-control-room\"\n  source_dir: \"control_room\"   # should point the the folder containing the python code\n  title: \"Documentation control room\"\nWith this setup, you can first create your documentation on a per module level, making sure it works with quartodoc build. The quartodoc build command will use doc-strings of the python functions and classes to dynamically create markdown documentation pages.\nFor debugging, it might be handy to add a general quarto website section on the per module _quarto.yml file. See the Single module quarto section for an example.\nThis can be done without interference with the generation on the across modules documentation, as the latter is only using the quartodoc part.\n\n\nThis section provides an example of how we would document a single Dareplane module.\nLet us assume we are documenting the dp-stroop module.\n\n\nStart out by creating the _quarto.yml file, containing a quartodoc section with an entry for the run_paradigm_cli function:\nquartodoc:\n  package: \"dp-stroop\"       # name of the package\n  source_dir: \"stroop_task\"  # as the source code is within this folder\n\n  title: \"Documentation for the Stroop task\"\n\n  options:\n    signature_name: full\n\n  # write sidebar where quartodoc writes its content without impacting quarto\n  sidebar:\n    file: \"_stroop_sidebar.yml\"\n\n  sections:\n    - title: \"The Stroop task\"\n      desc: |\n        :::{.callout-info}\n        The github repository for this module is located at:\n        [https://github.com/bsdlab/dp-stroop](https://github.com/bsdlab/dp-stroop)\n        :::\n\n    - subtitle: Modified Stroop task\n      package: stroop_task\n      desc: The main script to start the Stroop task from command line.\n      contents:\n        - main.run_paradigm_cli\n\n\n\nNow we can build the documentation with quartodoc build. This will create a ./reference folder with the documentation.\nAdd the ./reference folder and objects.json to the .gitignore to avoid cluttering of the repo. Docs will be generated dynamically.\necho reference/ &gt;&gt; .gitignore\necho objects.json &gt;&gt; .gitignore\necho _site/ &gt;&gt; .gitignore       # will be created from `quarto preview` see next step\n\n\n\nWith having the quartodoc section in the _quarto.yml, we already have everything we need, but it is hard validate that the documentation builds as intended. The most straight forward solution is to add a website section to the _quarto.yml, which then allow to debug with quarto preview:\nproject:\n  type: website\n\nwebsite:\n  sidebar:\n    - id: \"main\"\n      contents:\n        - section: \"Documentation\"\n          contents:\n            - reference/index.qmd\n\nmetadata-files:\n  - reference/_stroop_sidebar.yml\nThen run:\nquarto preview\nThis will open a browser window with the documentation.\n\n\n\nNow it is up to adding more sections to the documentation, which can be done by enriching the contents: of the quartodoc section in the _quarto.yml.\n      contents:\n        - main.run_paradigm_cli\n        - context.StroopContext\nNote:\n\nWhile the quarto part will update dynamically (hot reloading), quartodoc will need to be recompiled every time you add to the quartodoc section of the _quarto.yml.\nThe quarto preview might spawn not at the root of the created website but on a specific functions/classed documentation page. Simply prune the path in the browser to get to the root. E.g., from http://localhost:6901/reference/main.run_paradigm_cli.html to http://localhost:6901/\nquartodoc will add documentation for methods from each method’s own doc string. Avoid having a methods doc string section on the class wide doc string as this will lead to a NotImplementedError from griffe."
+    "text": "stroop_task.task_manager.StroopTaskStateManager(self, ctx, random_wait=False)\nA state manager for the Stroop task providing callbacks for state transitions from: fixation -&gt; stimulus -&gt; random.wait -&gt; fixation …\nAdditionally, there is an instructions and end state.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nctx\nStroopContext\nThe context under which to operate.\n\n\ntransition_map\ndict\nA dictionary mapping state names to their corresponding callback methods.\n\n\nnext_state_transition\nNone\nPlaceholder for the next state transition.\n\n\nstates\nlist\nA list of states in the order they will appear.\n\n\ncurrent_state\nstr\nThe current state of the task.\n\n\ndown_pressed\nbool\nA flag indicating whether the down arrow key is pressed.\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nend_block\nEnd the block and log the results\n\n\nnext_state\nTransition to the next state. dt is only for compliance with pyglet\n\n\nrandom_wait\nUsing the clock scheduler as sub ms accuracy is not needed anyways\n\n\nshow_stimulus\nShow the next stimulus in the self.ctx.block_stimuli list\n\n\nstart_block\nStart a block of trials\n\n\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.end_block()\nEnd the block and log the results\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.next_state(dt=0.0)\nTransition to the next state. dt is only for compliance with pyglet callback signature\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.random_wait()\nUsing the clock scheduler as sub ms accuracy is not needed anyways\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.show_stimulus()\nShow the next stimulus in the self.ctx.block_stimuli list\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.start_block()\nStart a block of trials"
   },
   {
-    "objectID": "libraries/dareplane_utils/time.partial_sleep.html",
-    "href": "libraries/dareplane_utils/time.partial_sleep.html",
-    "title": "time.partial_sleep",
+    "objectID": "modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html#attributes",
+    "href": "modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html#attributes",
+    "title": "task_manager.StroopTaskStateManager",
     "section": "",
-    "text": "time.partial_sleep\ndareplane_utils.general.time.partial_sleep(s, start, nsteps=30)\nSleep for 90% of s or up to 30ms to the end, whatever is longer",
+    "text": "Name\nType\nDescription\n\n\n\n\nctx\nStroopContext\nThe context under which to operate.\n\n\ntransition_map\ndict\nA dictionary mapping state names to their corresponding callback methods.\n\n\nnext_state_transition\nNone\nPlaceholder for the next state transition.\n\n\nstates\nlist\nA list of states in the order they will appear.\n\n\ncurrent_state\nstr\nThe current state of the task.\n\n\ndown_pressed\nbool\nA flag indicating whether the down arrow key is pressed."
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html#methods",
+    "href": "modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html#methods",
+    "title": "task_manager.StroopTaskStateManager",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nend_block\nEnd the block and log the results\n\n\nnext_state\nTransition to the next state. dt is only for compliance with pyglet\n\n\nrandom_wait\nUsing the clock scheduler as sub ms accuracy is not needed anyways\n\n\nshow_stimulus\nShow the next stimulus in the self.ctx.block_stimuli list\n\n\nstart_block\nStart a block of trials\n\n\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.end_block()\nEnd the block and log the results\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.next_state(dt=0.0)\nTransition to the next state. dt is only for compliance with pyglet callback signature\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.random_wait()\nUsing the clock scheduler as sub ms accuracy is not needed anyways\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.show_stimulus()\nShow the next stimulus in the self.ctx.block_stimuli list\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.start_block()\nStart a block of trials"
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/main.run_paradigm_cli.html",
+    "href": "modules/dp-stroop/reference/main.run_paradigm_cli.html",
+    "title": "main.run_paradigm_cli",
+    "section": "",
+    "text": "stroop_task.main.run_paradigm_cli(\n    n_trials=60,\n    language='english',\n    logger_level=None,\n    focus='color',\n    write_to_serial=False,\n    random_wait=False,\n    classical=False,\n    classic_stroop_time_s=45,\n    show_fps=False,\n)\nStarting the Stroop paradigm standalone in a pyglet window\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nn_trials\nint (default: 60)\nNumber of trials to run in a block. Should be a multiple of 12 to ensure proper balancing\n60\n\n\nlanguage\nstr (default: \"english\")\nLanguage to use. Currently available: - “english” - “dutch” - “german”\n'english'\n\n\nlogger_level\nstr | None (default: None)\nConfiguration level for the logger. This will overwrite the value from configs/logging.yaml. Common python logging names are accepted: DEBUG, INFO, WARNING, ERROR\nNone\n\n\nfocus\nstr (default: \"color\")\nWhether the task was to focus on text or on color for the upper word. Just used in logging. Currently not implemented! -&gt; always focus on color\n'color'\n\n\nwrite_to_serial\nbool (default: False)\nIf True, the marker writer will also consider the configuration for the serial output. Not used if no serial marker hardware is connected.\nFalse\n\n\nrandom_wait\nbool (default: False)\nIf True, a random wait will be done between trials instead of waiting for the key down press. Timed as configured in configs/task.yaml.\nFalse\n\n\nclassical\nbool (default: False)\nIf True, the classical stroop paradigm will be run with displaying the color words on the screen as a table and the subject is asked to read as many as possible in a given time interval. Ask them to name the color of the font.\nFalse\n\n\nclassic_stroop_time_s\nfloat (default: 45)\nTime in seconds for the classical stroop task. Used if classical is True.\n45\n\n\nshow_fps\nbool\nIf True, the FPS will be shown on the screen.\nFalse"
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/main.run_paradigm_cli.html#parameters",
+    "href": "modules/dp-stroop/reference/main.run_paradigm_cli.html#parameters",
+    "title": "main.run_paradigm_cli",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nn_trials\nint (default: 60)\nNumber of trials to run in a block. Should be a multiple of 12 to ensure proper balancing\n60\n\n\nlanguage\nstr (default: \"english\")\nLanguage to use. Currently available: - “english” - “dutch” - “german”\n'english'\n\n\nlogger_level\nstr | None (default: None)\nConfiguration level for the logger. This will overwrite the value from configs/logging.yaml. Common python logging names are accepted: DEBUG, INFO, WARNING, ERROR\nNone\n\n\nfocus\nstr (default: \"color\")\nWhether the task was to focus on text or on color for the upper word. Just used in logging. Currently not implemented! -&gt; always focus on color\n'color'\n\n\nwrite_to_serial\nbool (default: False)\nIf True, the marker writer will also consider the configuration for the serial output. Not used if no serial marker hardware is connected.\nFalse\n\n\nrandom_wait\nbool (default: False)\nIf True, a random wait will be done between trials instead of waiting for the key down press. Timed as configured in configs/task.yaml.\nFalse\n\n\nclassical\nbool (default: False)\nIf True, the classical stroop paradigm will be run with displaying the color words on the screen as a table and the subject is asked to read as many as possible in a given time interval. Ask them to name the color of the font.\nFalse\n\n\nclassic_stroop_time_s\nfloat (default: 45)\nTime in seconds for the classical stroop task. Used if classical is True.\n45\n\n\nshow_fps\nbool\nIf True, the FPS will be shown on the screen.\nFalse"
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/utils.marker.utf8_write.html",
+    "href": "modules/dp-stroop/reference/utils.marker.utf8_write.html",
+    "title": "utils.marker.utf8_write",
+    "section": "",
+    "text": "stroop_task.utils.marker.utf8_write(port, data)\nConverts integer data into a UTF-8 byte string and writes it to the specified serial port.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nport\nserial.Serial\nThe serial port object to which the data will be written.\nrequired\n\n\ndata\nint\nThe integer data to be written to the serial port.\nrequired\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nint\nThe number of bytes written to the serial port."
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/utils.marker.utf8_write.html#parameters",
+    "href": "modules/dp-stroop/reference/utils.marker.utf8_write.html#parameters",
+    "title": "utils.marker.utf8_write",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nport\nserial.Serial\nThe serial port object to which the data will be written.\nrequired\n\n\ndata\nint\nThe integer data to be written to the serial port.\nrequired"
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/utils.marker.utf8_write.html#returns",
+    "href": "modules/dp-stroop/reference/utils.marker.utf8_write.html#returns",
+    "title": "utils.marker.utf8_write",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nint\nThe number of bytes written to the serial port."
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/context.StroopContext.html",
+    "href": "modules/dp-stroop/reference/context.StroopContext.html",
+    "title": "context.StroopContext",
+    "section": "",
+    "text": "stroop_task.context.StroopContext(\n    self,\n    language,\n    word_color_dict=dict(),\n    msgs=dict(),\n    startblock_mrk=64,\n    endblock_mrk=64,\n    starttrial_mrk=2,\n    endtrial_mrk=4,\n    congruent_mrk=0,\n    incongruent_mrk=0,\n    lift_off_mrk=8,\n    reaction_mrk=16,\n    timeout_mrk=16,\n    stimulus_time_s=3.0,\n    pre_stimulus_time_s=1.0,\n    wait_time_min_s=1.0,\n    wait_time_max_s=2.0,\n    instruction_time_s=1000.0,\n    results_show_time_s=5.0,\n    arrow_down_press_to_continue_s=0.5,\n    classical_timeout_s=45,\n    focus='color',\n    reactions=list(),\n    block_stimuli=list(),\n    known_stimuli=dict(),\n    current_stimulus_idx=0,\n    current_stimuli=list(),\n    white_y_offset_px=100,\n    font_size=36,\n    instruction_font_size=16,\n    fullscreen=False,\n    screen_width=800,\n    screen_height=600,\n    tic=0,\n    tic_down=0,\n    marker_writer=get_marker_writer(),\n    has_window_attached=False,\n)\nA class to represent the context for the Stroop task.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nlanguage\nstr\nThe language setting for the Stroop task.\n\n\nword_color_dict\ndict\nA dictionary mapping words to their corresponding colors. See configs/.yaml.\n\n\nmsgs\ndict\nA dictionary containing messages for the Stroop task. See configs/.yaml.\n\n\nstartblock_mrk\nint\nMarker for the start of a block. See configs/task.yaml.\n\n\nendblock_mrk\nint\nMarker for the end of a block. See configs/task.yaml.\n\n\nstarttrial_mrk\nint\nMarker for the start of a trial. See configs/task.yaml.\n\n\nendtrial_mrk\nint\nMarker for the end of a trial. See configs/task.yaml.\n\n\ncongruent_mrk\nint\nMarker for congruent stimuli. See configs/task.yaml.\n\n\nincongruent_mrk\nint\nMarker for incongruent stimuli. See configs/task.yaml.\n\n\nlift_off_mrk\nint\nMarker for lift-off. See configs/task.yaml.\n\n\nreaction_mrk\nint\nMarker for reaction. See configs/task.yaml.\n\n\ntimeout_mrk\nint\nMarker for timeout. See configs/task.yaml.\n\n\nstimulus_time_s\nfloat\nDuration in seconds for stimulus presentation. See configs/task.yaml.\n\n\npre_stimulus_time_s\nfloat\nDuration in seconds for pre-stimulus interval. See configs/task.yaml.\n\n\nwait_time_min_s\nfloat\nMinimum wait time in seconds. See configs/task.yaml.\n\n\nwait_time_max_s\nfloat\nMaximum wait time in seconds. See configs/task.yaml.\n\n\ninstruction_time_s\nfloat\nDuration in seconds for instruction display. See configs/task.yaml.\n\n\nresults_show_time_s\nfloat\nDuration in seconds for results display. See configs/task.yaml.\n\n\narrow_down_press_to_continue_s\nfloat\nDuration in seconds for arrow down press to continue. See configs/task.yaml.\n\n\nclassical_timeout_s\nfloat\nTimeout duration in seconds for classical tasks. See configs/task.yaml.\n\n\nfocus\nLiteral['text', 'color']\nFocus of the Stroop task, either “text” or “color”.\n\n\nreactions\nlist\nList to track reactions.\n\n\nblock_stimuli\nlist\nList of stimuli for the current block.\n\n\nknown_stimuli\ndict\nDictionary of known stimuli.\n\n\ncurrent_stimulus_idx\nint\nIndex of the current stimulus.\n\n\ncurrent_stimuli\nlist\nList of current stimuli for drawing.\n\n\nwhite_y_offset_px\nint\nY-offset in pixels for white stimuli. See configs/gui.\n\n\nfont_size\nint\nFont size for stimuli. See configs/gui.\n\n\ninstruction_font_size\nint\nFont size for instructions. See configs/gui.\n\n\nfullscreen\nbool\nFlag for fullscreen mode. See configs/gui.\n\n\nscreen_width\nint\nWidth of the screen. See configs/gui.\n\n\nscreen_height\nint\nHeight of the screen. See configs/gui.\n\n\ntic\nfloat\nTime keeping variable.\n\n\ntic_down\nfloat\nTime keeping variable for countdown.\n\n\nmarker_writer\nMarkerWriter\nMarker writer for the Stroop task.\n\n\nhas_window_attached\nbool\nFlag indicating if a window is attached.\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nadd_instruction_screen_batch\nLoad all components and add them to an intro batch\n\n\nclose_context\nClose the context stopping all pyglet elements\n\n\ncreate_classical_examples_to_batch\nNot the full table just a few examples for the instruction screen\n\n\ncreate_classical_table_stimulus\nCreate a classical table stimulus for the Stroop task.\n\n\ncreate_stimuli\nCreate stimuli for the stroop task using WORD_COLOR_PAIRS from self.word_color_dict\n\n\ninit_block_stimuli\nInitialize a block of trials by modifying a context. The stimuli will\n\n\n\n\n\nstroop_task.context.StroopContext.add_instruction_screen_batch(\n    random_wait=False,\n)\nLoad all components and add them to an intro batch\n\n\n\nstroop_task.context.StroopContext.close_context()\nClose the context stopping all pyglet elements\n\n\n\nstroop_task.context.StroopContext.create_classical_examples_to_batch(batch)\nNot the full table just a few examples for the instruction screen\n\n\n\nstroop_task.context.StroopContext.create_classical_table_stimulus(\n    n_stimuli=60,\n    n_per_row=6,\n    perc_incongruent=0.33,\n)\nCreate a classical table stimulus for the Stroop task.\nThis method generates a table of stimuli for the Stroop task, where each stimulus is either congruent or incongruent based on the specified percentage. The stimuli are arranged in rows and columns, and the table is stored in the known_stimuli dictionary under the key “classical_batch”. The labels for each stimulus are also stored under the key “classical_labels”.\nThe generated table is saved as a CSV file in the stroop_task/assets directory to cache the layout. This will speed up the loading.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nn_stimuli\nint\nThe total number of stimuli to generate. Default is 60.\n60\n\n\nn_per_row\nint\nThe number of stimuli per row in the table. Default is 6.\n6\n\n\nperc_incongruent\nfloat\nThe percentage of incongruent stimuli in the table. Default is 0.33.\n0.33\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nNone\n\n\n\n\n\n\n\n\nstroop_task.context.StroopContext.create_stimuli(random_wait=False)\nCreate stimuli for the stroop task using WORD_COLOR_PAIRS from self.word_color_dict\n\n\n\nstroop_task.context.StroopContext.init_block_stimuli(n_trials)\nInitialize a block of trials by modifying a context. The stimuli will be accessible in ctx.block_stimuli as list of tuples (word, pyglet.text.Label, pyglet.shapes.Rectangle, pyglet.shapes.Rectangle, str) The shapes are the squares that will be shown left and right of the word, while the final string indicates the correct direction\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nn_trials\nint\nnumber of trials per block\nrequired"
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/context.StroopContext.html#attributes",
+    "href": "modules/dp-stroop/reference/context.StroopContext.html#attributes",
+    "title": "context.StroopContext",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nlanguage\nstr\nThe language setting for the Stroop task.\n\n\nword_color_dict\ndict\nA dictionary mapping words to their corresponding colors. See configs/.yaml.\n\n\nmsgs\ndict\nA dictionary containing messages for the Stroop task. See configs/.yaml.\n\n\nstartblock_mrk\nint\nMarker for the start of a block. See configs/task.yaml.\n\n\nendblock_mrk\nint\nMarker for the end of a block. See configs/task.yaml.\n\n\nstarttrial_mrk\nint\nMarker for the start of a trial. See configs/task.yaml.\n\n\nendtrial_mrk\nint\nMarker for the end of a trial. See configs/task.yaml.\n\n\ncongruent_mrk\nint\nMarker for congruent stimuli. See configs/task.yaml.\n\n\nincongruent_mrk\nint\nMarker for incongruent stimuli. See configs/task.yaml.\n\n\nlift_off_mrk\nint\nMarker for lift-off. See configs/task.yaml.\n\n\nreaction_mrk\nint\nMarker for reaction. See configs/task.yaml.\n\n\ntimeout_mrk\nint\nMarker for timeout. See configs/task.yaml.\n\n\nstimulus_time_s\nfloat\nDuration in seconds for stimulus presentation. See configs/task.yaml.\n\n\npre_stimulus_time_s\nfloat\nDuration in seconds for pre-stimulus interval. See configs/task.yaml.\n\n\nwait_time_min_s\nfloat\nMinimum wait time in seconds. See configs/task.yaml.\n\n\nwait_time_max_s\nfloat\nMaximum wait time in seconds. See configs/task.yaml.\n\n\ninstruction_time_s\nfloat\nDuration in seconds for instruction display. See configs/task.yaml.\n\n\nresults_show_time_s\nfloat\nDuration in seconds for results display. See configs/task.yaml.\n\n\narrow_down_press_to_continue_s\nfloat\nDuration in seconds for arrow down press to continue. See configs/task.yaml.\n\n\nclassical_timeout_s\nfloat\nTimeout duration in seconds for classical tasks. See configs/task.yaml.\n\n\nfocus\nLiteral['text', 'color']\nFocus of the Stroop task, either “text” or “color”.\n\n\nreactions\nlist\nList to track reactions.\n\n\nblock_stimuli\nlist\nList of stimuli for the current block.\n\n\nknown_stimuli\ndict\nDictionary of known stimuli.\n\n\ncurrent_stimulus_idx\nint\nIndex of the current stimulus.\n\n\ncurrent_stimuli\nlist\nList of current stimuli for drawing.\n\n\nwhite_y_offset_px\nint\nY-offset in pixels for white stimuli. See configs/gui.\n\n\nfont_size\nint\nFont size for stimuli. See configs/gui.\n\n\ninstruction_font_size\nint\nFont size for instructions. See configs/gui.\n\n\nfullscreen\nbool\nFlag for fullscreen mode. See configs/gui.\n\n\nscreen_width\nint\nWidth of the screen. See configs/gui.\n\n\nscreen_height\nint\nHeight of the screen. See configs/gui.\n\n\ntic\nfloat\nTime keeping variable.\n\n\ntic_down\nfloat\nTime keeping variable for countdown.\n\n\nmarker_writer\nMarkerWriter\nMarker writer for the Stroop task.\n\n\nhas_window_attached\nbool\nFlag indicating if a window is attached."
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/context.StroopContext.html#methods",
+    "href": "modules/dp-stroop/reference/context.StroopContext.html#methods",
+    "title": "context.StroopContext",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nadd_instruction_screen_batch\nLoad all components and add them to an intro batch\n\n\nclose_context\nClose the context stopping all pyglet elements\n\n\ncreate_classical_examples_to_batch\nNot the full table just a few examples for the instruction screen\n\n\ncreate_classical_table_stimulus\nCreate a classical table stimulus for the Stroop task.\n\n\ncreate_stimuli\nCreate stimuli for the stroop task using WORD_COLOR_PAIRS from self.word_color_dict\n\n\ninit_block_stimuli\nInitialize a block of trials by modifying a context. The stimuli will\n\n\n\n\n\nstroop_task.context.StroopContext.add_instruction_screen_batch(\n    random_wait=False,\n)\nLoad all components and add them to an intro batch\n\n\n\nstroop_task.context.StroopContext.close_context()\nClose the context stopping all pyglet elements\n\n\n\nstroop_task.context.StroopContext.create_classical_examples_to_batch(batch)\nNot the full table just a few examples for the instruction screen\n\n\n\nstroop_task.context.StroopContext.create_classical_table_stimulus(\n    n_stimuli=60,\n    n_per_row=6,\n    perc_incongruent=0.33,\n)\nCreate a classical table stimulus for the Stroop task.\nThis method generates a table of stimuli for the Stroop task, where each stimulus is either congruent or incongruent based on the specified percentage. The stimuli are arranged in rows and columns, and the table is stored in the known_stimuli dictionary under the key “classical_batch”. The labels for each stimulus are also stored under the key “classical_labels”.\nThe generated table is saved as a CSV file in the stroop_task/assets directory to cache the layout. This will speed up the loading.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nn_stimuli\nint\nThe total number of stimuli to generate. Default is 60.\n60\n\n\nn_per_row\nint\nThe number of stimuli per row in the table. Default is 6.\n6\n\n\nperc_incongruent\nfloat\nThe percentage of incongruent stimuli in the table. Default is 0.33.\n0.33\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nNone\n\n\n\n\n\n\n\n\nstroop_task.context.StroopContext.create_stimuli(random_wait=False)\nCreate stimuli for the stroop task using WORD_COLOR_PAIRS from self.word_color_dict\n\n\n\nstroop_task.context.StroopContext.init_block_stimuli(n_trials)\nInitialize a block of trials by modifying a context. The stimuli will be accessible in ctx.block_stimuli as list of tuples (word, pyglet.text.Label, pyglet.shapes.Rectangle, pyglet.shapes.Rectangle, str) The shapes are the squares that will be shown left and right of the word, while the final string indicates the correct direction\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nn_trials\nint\nnumber of trials per block\nrequired"
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/main.run_paradigm.html",
+    "href": "modules/dp-stroop/reference/main.run_paradigm.html",
+    "title": "main.run_paradigm",
+    "section": "",
+    "text": "stroop_task.main.run_paradigm(\n    n_trials=60,\n    language='english',\n    logger_level=None,\n    focus='color',\n    write_to_serial=True,\n    random_wait=False,\n    show_fps=False,\n)\nRun the two-word Stroop task paradigm.\nThis function sets up and runs the two-word Stroop task paradigm using the Pyglet library. It initializes the logging configuration, creates the context for the Stroop task, sets up the window, and manages the task state. The function also adds the drawing callbacks and starts the task after a short delay.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nn_trials\nint\nThe number of trials to run in a block - needs to be an integer divisible by 6 for balancing. Default is 60.\n60\n\n\nlanguage\nstr\nThe language setting for the Stroop task. Default is “english”.\n'english'\n\n\nlogger_level\nstr | None\nThe logging level to set for the logger. If None, the level from the configuration file is used. Default is None.\nNone\n\n\nfocus\nstr\nThe focus of the task, either “text” or “color”. Default is “color”.\n'color'\n\n\nwrite_to_serial\nbool\nWhether to write markers to a serial port. Default is True.\nTrue\n\n\nrandom_wait\nbool\nWhether to use a random wait between trials. Default is False. If false, the user is required to push the arrow-down button for at least 500ms to start the next trial. If true, a random inter-trial-interval will be used. See configs/task.yaml and the wait_time_min_s and wait_time_max_s values therein.\nFalse\n\n\nshow_fps\nbool\nWhether to show the frames per second (FPS) on the screen. Default is False.\nFalse\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nNone"
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/main.run_paradigm.html#parameters",
+    "href": "modules/dp-stroop/reference/main.run_paradigm.html#parameters",
+    "title": "main.run_paradigm",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nn_trials\nint\nThe number of trials to run in a block - needs to be an integer divisible by 6 for balancing. Default is 60.\n60\n\n\nlanguage\nstr\nThe language setting for the Stroop task. Default is “english”.\n'english'\n\n\nlogger_level\nstr | None\nThe logging level to set for the logger. If None, the level from the configuration file is used. Default is None.\nNone\n\n\nfocus\nstr\nThe focus of the task, either “text” or “color”. Default is “color”.\n'color'\n\n\nwrite_to_serial\nbool\nWhether to write markers to a serial port. Default is True.\nTrue\n\n\nrandom_wait\nbool\nWhether to use a random wait between trials. Default is False. If false, the user is required to push the arrow-down button for at least 500ms to start the next trial. If true, a random inter-trial-interval will be used. See configs/task.yaml and the wait_time_min_s and wait_time_max_s values therein.\nFalse\n\n\nshow_fps\nbool\nWhether to show the frames per second (FPS) on the screen. Default is False.\nFalse"
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/main.run_paradigm.html#returns",
+    "href": "modules/dp-stroop/reference/main.run_paradigm.html#returns",
+    "title": "main.run_paradigm",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nNone"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.get_pcomm_button_input_pair.html",
+    "href": "modules/dp-control-room/reference/gui.layout.get_pcomm_button_input_pair.html",
+    "title": "gui.layout.get_pcomm_button_input_pair",
+    "section": "",
+    "text": "gui.layout.get_pcomm_button_input_pair\ngui.layout.get_pcomm_button_input_pair(pcomm_name, mod_name, conn)\nCreate pairs of buttons and inputs for each pcommand"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.get_layout.html",
+    "href": "modules/dp-control-room/reference/gui.layout.get_layout.html",
+    "title": "gui.layout.get_layout",
+    "section": "",
+    "text": "gui.layout.get_layout(modules, macros)\nGenerate the layout for the control room application.\nThis function creates the overall layout of the control room application, including headers, module tiles, and other UI components. It integrates modules and macros into the layout.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nmodules\nlist[ModuleConnection]\nA list of ModuleConnection objects representing the modules to be included in the application.\nrequired\n\n\nmacros\ndict | None\nA dictionary containing macro definitions to be used in the application. If None, no macros are used.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nhtml.Div\nA Dash HTML Div containing the entire layout of the control room application."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.get_layout.html#parameters",
+    "href": "modules/dp-control-room/reference/gui.layout.get_layout.html#parameters",
+    "title": "gui.layout.get_layout",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nmodules\nlist[ModuleConnection]\nA list of ModuleConnection objects representing the modules to be included in the application.\nrequired\n\n\nmacros\ndict | None\nA dictionary containing macro definitions to be used in the application. If None, no macros are used.\nrequired"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.get_layout.html#returns",
+    "href": "modules/dp-control-room/reference/gui.layout.get_layout.html#returns",
+    "title": "gui.layout.get_layout",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nhtml.Div\nA Dash HTML Div containing the entire layout of the control room application."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.get_macro_button_input_pair.html",
+    "href": "modules/dp-control-room/reference/gui.layout.get_macro_button_input_pair.html",
+    "title": "gui.layout.get_macro_button_input_pair",
+    "section": "",
+    "text": "gui.layout.get_macro_button_input_pair(mc)\nCreate a macro button and input pair for a given macro configuration.\nThis function generates a Dash HTML Div containing a button and an input field for a specified macro. The button is labeled with the macro’s name, and the input field is pre-filled with a default JSON value if provided in the macro configuration.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nmc\ndict\nA dictionary containing the macro configuration. The dictionary should have the following structure: { “name”: str, “default_json”: dict | None }\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nhtml.Div\nA Dash HTML Div containing a button and an input field for the macro."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.get_macro_button_input_pair.html#parameters",
+    "href": "modules/dp-control-room/reference/gui.layout.get_macro_button_input_pair.html#parameters",
+    "title": "gui.layout.get_macro_button_input_pair",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nmc\ndict\nA dictionary containing the macro configuration. The dictionary should have the following structure: { “name”: str, “default_json”: dict | None }\nrequired"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.get_macro_button_input_pair.html#returns",
+    "href": "modules/dp-control-room/reference/gui.layout.get_macro_button_input_pair.html#returns",
+    "title": "gui.layout.get_macro_button_input_pair",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nhtml.Div\nA Dash HTML Div containing a button and an input field for the macro."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/callbacks.CallbackBroker.html",
+    "href": "modules/dp-control-room/reference/callbacks.CallbackBroker.html",
+    "title": "callbacks.CallbackBroker",
+    "section": "",
+    "text": "callbacks.CallbackBroker(\n    self,\n    mod_connections=dict(),\n    stop_event=threading.Event(),\n)\nA class to handle callbacks from socket clients.\nThis class manages connections to various modules and listens for callbacks on these connections. It processes the received messages and forwards them to the appropriate target modules.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nmod_connections\ndict[str, ModuleConnection]\nA dictionary mapping module names to their connections.\n\n\nstop_event\nthreading.Event\nAn event to signal the stopping of the callback listening loop.\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\ncheck_for_callback\nCheck for callbacks on the given socket.\n\n\nlisten_for_callbacks\nStart listening for callbacks from connected modules.\n\n\n\n\n\ncallbacks.CallbackBroker.check_for_callback(msocket, mod_name)\nCheck for callbacks on the given socket.\nThis method reads messages from the provided socket and processes them. If a valid callback message is received, it is forwarded to the appropriate target module. The method handles message formatting and validation.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nmsocket\nsocket\nThe socket to check for callbacks.\nrequired\n\n\nmod_name\nstr\nThe name of the module associated with the socket.\nrequired\n\n\n\n\n\n\nThis method ignores fully blank messages and common start bytes.\n\n\n\n\ncallbacks.CallbackBroker.listen_for_callbacks()\nStart listening for callbacks from connected modules.\nThis method runs in a loop, checking each connected module for callbacks. If a callback is received, it is processed and forwarded to the appropriate target module. The loop continues until the stop event is set.\n\n\nThis loop could be a performance bottleneck if multiple modules need to be checked. Consider creating a whitelist of modules to be checked for callbacks."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/callbacks.CallbackBroker.html#attributes",
+    "href": "modules/dp-control-room/reference/callbacks.CallbackBroker.html#attributes",
+    "title": "callbacks.CallbackBroker",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nmod_connections\ndict[str, ModuleConnection]\nA dictionary mapping module names to their connections.\n\n\nstop_event\nthreading.Event\nAn event to signal the stopping of the callback listening loop."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/callbacks.CallbackBroker.html#methods",
+    "href": "modules/dp-control-room/reference/callbacks.CallbackBroker.html#methods",
+    "title": "callbacks.CallbackBroker",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\ncheck_for_callback\nCheck for callbacks on the given socket.\n\n\nlisten_for_callbacks\nStart listening for callbacks from connected modules.\n\n\n\n\n\ncallbacks.CallbackBroker.check_for_callback(msocket, mod_name)\nCheck for callbacks on the given socket.\nThis method reads messages from the provided socket and processes them. If a valid callback message is received, it is forwarded to the appropriate target module. The method handles message formatting and validation.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nmsocket\nsocket\nThe socket to check for callbacks.\nrequired\n\n\nmod_name\nstr\nThe name of the module associated with the socket.\nrequired\n\n\n\n\n\n\nThis method ignores fully blank messages and common start bytes.\n\n\n\n\ncallbacks.CallbackBroker.listen_for_callbacks()\nStart listening for callbacks from connected modules.\nThis method runs in a loop, checking each connected module for callbacks. If a callback is received, it is processed and forwarded to the appropriate target module. The loop continues until the stop event is set.\n\n\nThis loop could be a performance bottleneck if multiple modules need to be checked. Consider creating a whitelist of modules to be checked for callbacks."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.callbacks.add_macros_sender.html",
+    "href": "modules/dp-control-room/reference/gui.callbacks.add_macros_sender.html",
+    "title": "gui.callbacks.add_macros_sender",
+    "section": "",
+    "text": "gui.callbacks.add_macros_sender(app, modules, macros)\nAdd a callbacks to dynamically to macro sections on a Dash app.\nAs macros are defined in the config file used to run the app, we do not know their names and dash elements a priori. This function loops over all macro sections and given their configs, add the appropriate callback to execute the macro commands.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\napp\nDash\nThe Dash application to which the callback will be added.\nrequired\n\n\nmodules\nlist[ModuleConnection]\nA list of ModuleConnection objects representing the modules to be included in the application.\nrequired\n\n\nmacros\ndict\nA dictionary containing macro definitions to be used in the application.\nrequired\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nDash\nThe Dash application with the added callback."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.callbacks.add_macros_sender.html#parameters",
+    "href": "modules/dp-control-room/reference/gui.callbacks.add_macros_sender.html#parameters",
+    "title": "gui.callbacks.add_macros_sender",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\napp\nDash\nThe Dash application to which the callback will be added.\nrequired\n\n\nmodules\nlist[ModuleConnection]\nA list of ModuleConnection objects representing the modules to be included in the application.\nrequired\n\n\nmacros\ndict\nA dictionary containing macro definitions to be used in the application.\nrequired"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.callbacks.add_macros_sender.html#returns",
+    "href": "modules/dp-control-room/reference/gui.callbacks.add_macros_sender.html#returns",
+    "title": "gui.callbacks.add_macros_sender",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nDash\nThe Dash application with the added callback."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.create_macro_tile.html",
+    "href": "modules/dp-control-room/reference/gui.layout.create_macro_tile.html",
+    "title": "gui.layout.create_macro_tile",
+    "section": "",
+    "text": "gui.layout.create_macro_tile(macros)\nCreate a tile containing buttons for each macro.\nThis function generates a Dash HTML Div that includes a button for each macro defined in the provided dictionary. Each button is labeled with the macro’s name and is part of a tile layout.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nmacros\ndict\nA dictionary containing macro definitions. Each key-value pair in the dictionary represents a macro, where the key is the macro name and the value is a dictionary containing macro-specific configurations.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nhtml.Div\nA Dash HTML Div containing a tile with buttons for each macro."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.create_macro_tile.html#parameters",
+    "href": "modules/dp-control-room/reference/gui.layout.create_macro_tile.html#parameters",
+    "title": "gui.layout.create_macro_tile",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nmacros\ndict\nA dictionary containing macro definitions. Each key-value pair in the dictionary represents a macro, where the key is the macro name and the value is a dictionary containing macro-specific configurations.\nrequired"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.create_macro_tile.html#returns",
+    "href": "modules/dp-control-room/reference/gui.layout.create_macro_tile.html#returns",
+    "title": "gui.layout.create_macro_tile",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nhtml.Div\nA Dash HTML Div containing a tile with buttons for each macro."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/socket.html",
+    "href": "modules/dp-control-room/reference/socket.html",
+    "title": "socket",
+    "section": "",
+    "text": "socket\n\n\n\n\n\nName\nDescription\n\n\n\n\ncreate_socket_client\nCreate a socket client and attempt to connect to a specified host and port.\n\n\n\n\n\nsocket.create_socket_client(host_ip, port, retry_connection_after_s=1)\nCreate a socket client and attempt to connect to a specified host and port.\nThis function attempts to establish a TCP connection to the specified host and port. It retries the connection up to a maximum number of times (3) if the connection is refused. If the connection is successful, the socket object is returned.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nhost_ip\nstr\nThe IP address of the host to connect to.\nrequired\n\n\nport\nint\nThe port number on the host to connect to.\nrequired\n\n\nretry_connection_after_s\nfloat\nThe number of seconds to wait between connection attempts, by default 1.\n1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nsocket.socket\nA socket object representing the connection to the host.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nConnectionRefusedError\nIf the connection is refused after the maximum number of 3 retries."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/socket.html#functions",
+    "href": "modules/dp-control-room/reference/socket.html#functions",
+    "title": "socket",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\ncreate_socket_client\nCreate a socket client and attempt to connect to a specified host and port.\n\n\n\n\n\nsocket.create_socket_client(host_ip, port, retry_connection_after_s=1)\nCreate a socket client and attempt to connect to a specified host and port.\nThis function attempts to establish a TCP connection to the specified host and port. It retries the connection up to a maximum number of times (3) if the connection is refused. If the connection is successful, the socket object is returned.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nhost_ip\nstr\nThe IP address of the host to connect to.\nrequired\n\n\nport\nint\nThe port number on the host to connect to.\nrequired\n\n\nretry_connection_after_s\nfloat\nThe number of seconds to wait between connection attempts, by default 1.\n1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nsocket.socket\nA socket object representing the connection to the host.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nConnectionRefusedError\nIf the connection is refused after the maximum number of 3 retries."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.callbacks.add_json_verification_cb.html",
+    "href": "modules/dp-control-room/reference/gui.callbacks.add_json_verification_cb.html",
+    "title": "gui.callbacks.add_json_verification_cb",
+    "section": "",
+    "text": "gui.callbacks.add_json_verification_cb(app, modules, macros)\nAdd a callback to the Dash app to verify JSON strings in input fields.\nThis function sets up a callback that checks whether the input values in specified input fields are valid JSON strings. It updates the class names of the input fields based on the validity of the JSON, which should result in a color change.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\napp\nDash\nThe Dash application to which the callback will be added.\nrequired\n\n\nmodules\nlist[ModuleConnection]\nA list of ModuleConnection objects representing the modules to be included in the application.\nrequired\n\n\nmacros\ndict | None\nA dictionary containing macro definitions to be used in the application. If None, no macros are used.\nrequired\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nDash\nThe Dash application with the added callback."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.callbacks.add_json_verification_cb.html#parameters",
+    "href": "modules/dp-control-room/reference/gui.callbacks.add_json_verification_cb.html#parameters",
+    "title": "gui.callbacks.add_json_verification_cb",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\napp\nDash\nThe Dash application to which the callback will be added.\nrequired\n\n\nmodules\nlist[ModuleConnection]\nA list of ModuleConnection objects representing the modules to be included in the application.\nrequired\n\n\nmacros\ndict | None\nA dictionary containing macro definitions to be used in the application. If None, no macros are used.\nrequired"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.callbacks.add_json_verification_cb.html#returns",
+    "href": "modules/dp-control-room/reference/gui.callbacks.add_json_verification_cb.html#returns",
+    "title": "gui.callbacks.add_json_verification_cb",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nDash\nThe Dash application with the added callback."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.get_log_stream_tile.html",
+    "href": "modules/dp-control-room/reference/gui.layout.get_log_stream_tile.html",
+    "title": "gui.layout.get_log_stream_tile",
+    "section": "",
+    "text": "gui.layout.get_log_stream_tile\ngui.layout.get_log_stream_tile(logfile_name)\nCreate the tile showing the last lines of the log file"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/main.run_control_room.html",
+    "href": "modules/dp-control-room/reference/main.run_control_room.html",
+    "title": "main.run_control_room",
+    "section": "",
+    "text": "main.run_control_room(setup_cfg_path=setup_cfg_path)\nRun the control room application with the given setup configuration.\nThis function initializes the control room application, starts the module servers, connects clients to the servers, and sets up the callback broker. It also creates and runs the Dash app for the GUI.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nsetup_cfg_path\nstr\nThe path to the setup configuration file. Defaults to setup_cfg_path.\nsetup_cfg_path"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/main.run_control_room.html#parameters",
+    "href": "modules/dp-control-room/reference/main.run_control_room.html#parameters",
+    "title": "main.run_control_room",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nsetup_cfg_path\nstr\nThe path to the setup configuration file. Defaults to setup_cfg_path.\nsetup_cfg_path"
+  },
+  {
+    "objectID": "libraries/dareplane_utils/pylsl_xmlelement_to_dict.html",
+    "href": "libraries/dareplane_utils/pylsl_xmlelement_to_dict.html",
+    "title": "pylsl_xmlelement_to_dict",
+    "section": "",
+    "text": "pylsl_xmlelement_to_dict\ndareplane_utils.stream_watcher.lsl_stream_watcher.pylsl_xmlelement_to_dict(inf)\nThe pylsl XMLElement is hard to investigate -&gt; cast to a dict for simplicity",
     "crumbs": [
-      "General",
-      "time.partial_sleep"
+      "Streaming data",
+      "pylsl_xmlelement_to_dict"
     ]
   },
   {
-    "objectID": "libraries/dareplane_utils/server.modify_root_logger.html",
-    "href": "libraries/dareplane_utils/server.modify_root_logger.html",
-    "title": "server.modify_root_logger",
+    "objectID": "libraries/dareplane_utils/get_streams_names.html",
+    "href": "libraries/dareplane_utils/get_streams_names.html",
+    "title": "get_streams_names",
     "section": "",
-    "text": "server.modify_root_logger\ndareplane_utils.logging.server.modify_root_logger(logfile)",
+    "text": "dareplane_utils.stream_watcher.lsl_stream_watcher.get_streams_names()\nGet a list of all available lsl stream names.\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nstreams\nlist[str]\nnames of all available LSL streams",
     "crumbs": [
-      "Logging",
-      "server.modify_root_logger"
+      "Streaming data",
+      "get_streams_names"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/get_streams_names.html#returns",
+    "href": "libraries/dareplane_utils/get_streams_names.html#returns",
+    "title": "get_streams_names",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nstreams\nlist[str]\nnames of all available LSL streams",
+    "crumbs": [
+      "Streaming data",
+      "get_streams_names"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/time.sleep_s.html",
+    "href": "libraries/dareplane_utils/time.sleep_s.html",
+    "title": "time.sleep_s",
+    "section": "",
+    "text": "dareplane_utils.general.time.sleep_s(\n    s,\n    partial_sleep_threshold=0.0005,\n    nsteps=30,\n)\nSleep for a specified duration with partial sleep optimization.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ns\nfloat\nThe total duration to sleep in seconds.\nrequired\n\n\npartial_sleep_threshold\nfloat\nThe threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations s above the threshold, the optimization is applied.\n0.0005\n\n\nnsteps\nint\nThe number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to nsteps &gt; 4.\n30",
+    "crumbs": [
+      "General",
+      "time.sleep_s"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/time.sleep_s.html#parameters",
+    "href": "libraries/dareplane_utils/time.sleep_s.html#parameters",
+    "title": "time.sleep_s",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ns\nfloat\nThe total duration to sleep in seconds.\nrequired\n\n\npartial_sleep_threshold\nfloat\nThe threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations s above the threshold, the optimization is applied.\n0.0005\n\n\nnsteps\nint\nThe number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to nsteps &gt; 4.\n30",
+    "crumbs": [
+      "General",
+      "time.sleep_s"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/StreamWatcher.html",
+    "href": "libraries/dareplane_utils/StreamWatcher.html",
+    "title": "StreamWatcher",
+    "section": "",
+    "text": "dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher(\n    self,\n    name='',\n    buffer_size_s=2,\n    logger=logger,\n)\n\n\n\n\n\nName\nDescription\n\n\n\n\nconnect_to_stream\nEither use the self.name or a provided identifier dict to hook up\n\n\ndisconnect\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\nupdate_char_p\nLook for new data on the LSL inlet and update the buffer, processing for strings\n\n\nupdate_numeric\nLook for new data on the LSL inlet and update the buffer\n\n\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(\n    identifier=None,\n)\nEither use the self.name or a provided identifier dict to hook up with an LSL stream, they should coincide\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_char_p()\nLook for new data on the LSL inlet and update the buffer, processing for strings\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()\nLook for new data on the LSL inlet and update the buffer",
+    "crumbs": [
+      "Streaming data",
+      "StreamWatcher"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/StreamWatcher.html#methods",
+    "href": "libraries/dareplane_utils/StreamWatcher.html#methods",
+    "title": "StreamWatcher",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nconnect_to_stream\nEither use the self.name or a provided identifier dict to hook up\n\n\ndisconnect\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\nupdate_char_p\nLook for new data on the LSL inlet and update the buffer, processing for strings\n\n\nupdate_numeric\nLook for new data on the LSL inlet and update the buffer\n\n\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(\n    identifier=None,\n)\nEither use the self.name or a provided identifier dict to hook up with an LSL stream, they should coincide\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_char_p()\nLook for new data on the LSL inlet and update the buffer, processing for strings\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()\nLook for new data on the LSL inlet and update the buffer",
+    "crumbs": [
+      "Streaming data",
+      "StreamWatcher"
     ]
   },
   {
@@ -109,6 +423,17 @@
     ]
   },
   {
+    "objectID": "libraries/dareplane_utils/server.modify_root_logger.html",
+    "href": "libraries/dareplane_utils/server.modify_root_logger.html",
+    "title": "server.modify_root_logger",
+    "section": "",
+    "text": "server.modify_root_logger\ndareplane_utils.logging.server.modify_root_logger(logfile)",
+    "crumbs": [
+      "Logging",
+      "server.modify_root_logger"
+    ]
+  },
+  {
     "objectID": "libraries/dareplane_utils/event_loop.EventLoop.html",
     "href": "libraries/dareplane_utils/event_loop.EventLoop.html",
     "title": "event_loop.EventLoop",
@@ -153,37 +478,39 @@
     ]
   },
   {
-    "objectID": "libraries/dareplane_utils/time.full_speed.html",
-    "href": "libraries/dareplane_utils/time.full_speed.html",
-    "title": "time.full_speed",
+    "objectID": "examples/c-VEP_setup.html",
+    "href": "examples/c-VEP_setup.html",
+    "title": "c-VEP demo setup script",
     "section": "",
-    "text": "time.full_speed\ndareplane_utils.general.time.full_speed(s, start)",
-    "crumbs": [
-      "General",
-      "time.full_speed"
-    ]
+    "text": "In this example, we walk over the details of the c-VEP demo setup script.\nSetup scripts for Dareplane provide an easy way to configure and share a full experimental setup. The idea is to download and configure all necessary components from scratch. Together with version control, this makes it easy to reproduce experiments and share them with others.\n\n\n\nMake a conda environment with Python 3.10 (not higher, as PsychoPy needs 3.10) as follows:\n\nconda create --name dp-cvep python=3.10.15\n\nActivate the dp-cvep conda environment as follows:\n\nconda activate dp-cvep\n\nRun one of the setup scripts to download all required modules. See below for explanations of the individual setup scripts and when to use which.\n\npython setup_cvep_demo_antneuro.py\npython setup_cvep_demo_biosemi.py\npython setup_cvep_demo_mockup.py\n\nAfter downloading the modules using the setup script, install all the requirements of each of the downloaded Dareplane modules (control room, LSL recorder, speller, decoder, potentially mockup stream). Do so by changing the directory to the module root that contains the requirements.txt and do the following, still from within the active dp-cvep environment:\n\npip install -r requirements.txt\n\nInstall the LSL Lab Recorder. Make sure it is running on the background.\n\n\n\nWe go over the functional components of the setup script for the biosemi setup. Check out the source code to see everything\nNOTE: For just using the setup script, you can skip ahead to the Demo section.\n\n\nfrom pathlib import Path\nimport shutil\nimport subprocess\nimport sys\n\n# ----------------------------------------------------------------------------\n# Install requirements\n# ----------------------------------------------------------------------------\n\nrequirements = [\"GitPython\", \"toml\"]\n\nfor req in requirements:\n    try:\n        __import__(req)\n    except ImportError:\n        subprocess.check_call([sys.executable, \"-m\", \"pip\", \"install\", req])\n\nfrom git import Repo\nimport toml\n\n\n\nSETUP_FOLDER_NAME = \"cvep_speller_env\"\nBRANCH_NAME = SETUP_FOLDER_NAME  # used within each module\n\nCONTROL_ROOM_URL = \"https://github.com/bsdlab/dp-control-room.git\"\nDECODER_URL = \"https://github.com/thijor/dp-cvep-decoder.git\"\nSPELLER_URL = \"https://github.com/thijor/dp-cvep-speller.git\"\nLSL_URL = \"https://github.com/bsdlab/dp-lsl-recording.git\"\n\nDATA_STREAM_NAME = \"BioSemi\"\nMARKER_STREAM_NAME = \"cvep-speller-stream\"\nDECODER_STREAM_NAME = \"cvep-decoder-stream\"\n\n\n\nrepos = []\nrepo_dirs = [\"dp-control-room\", \"dp-cvep-decoder\", \"dp-cvep-speller\", \"dp-lsl-recording\"]\nfor url, repo_dir in zip([CONTROL_ROOM_URL, DECODER_URL, SPELLER_URL, LSL_URL], repo_dirs):\n    cmd = f'git clone -v -- {url} {SETUP_FOLDER_NAME}/{repo_dir}'\n    subprocess.run(cmd, shell=True)\n    repos.append(Repo(root_dir / repo_dir))\n\n\n\ncontrol_room_cfg = f\"\"\"\n\n[python]\nmodules_root = '../'                                                            \n\n\n# -------------------- c-VEP Decoder  ---------------------------------------\n[python.modules.dp-cvep-decoder]                                        \n    type = 'decoding'\n    port = 8083\n    ip = '127.0.0.1'\n\n....\nPuttinig it to the right folder\ncontrol_room_cfg_pth = Path(\"./cvep_speller_env/dp-control-room/configs/cvep_speller.toml\")\nwith open(control_room_cfg_pth, \"w\") as f:\n    f.write(control_room_cfg)\n\n\n\ndecoder_cfg_pth = root_dir.joinpath(\"dp-cvep-decoder/configs/decoder.toml\")\ncfg = toml.load(decoder_cfg_pth)\n\ncfg[\"data\"][\"data_root\"] = str(DATA_DIR.resolve())\ncfg[\"data\"][\"selected_channels\"] = [\"EX1\", \"EX2\", \"EX3\", \"EX4\", \"EX5\", \"EX6\", \"EX7\"]\ncfg[\"data\"][\"capfile\"] = str(root_dir.joinpath(\"dp-cvep-decoder/cvep_decoder/caps/biosemi7.loc\").resolve())\n\n\n\n# ----------------------------------------------------------------------------\n# Create single run script in the control room\n# ----------------------------------------------------------------------------\n\nplatform = sys.platform\nsuffix = \".ps1\" if platform == \"win32\" else \".sh\"\n\nscript_file = root_dir.resolve() / \"dp-control-room\" / f\"run_cvep_experiment{suffix}\"\n\nwith open(script_file, \"w\") as f:\n    f.write(f'python -m control_room.main --setup_cfg_path=\"{control_room_cfg_pth.resolve()}\"')\n\n\n\n\n\nThe following describes how to avtually use the setup script to run the c-VEP demo.\n\n\nThis demo has been set up for the ANTneuro Eego amplifier together with one of the DCC lab’s demo laptops. It uses 7 electrodes (Fpz, Cz, Pz, POz, Oz, O1, O2) and a screen with a 60 Hz presentation rate and 1920 x 1080 resolution.\nDuring the setup, use:\npython setup_cvep_demo_antneuro.py\n\n\n\nThis demo has been set up for the Biosemi Active2 amplifier together with the DCC lab setup in MM 01.422. It uses 7 EX electrodes (Fpz, Cz, POz, Oz, Iz, O1, O2) and a screen with a 60 Hz presentation rate and 2560 x 1440 resolution.\nDuring the setup, use:\npython setup_cvep_demo_biosemi.py\n\n\n\nThis demo has been set up for when no EEG amplifier is available, for instance for testing. It uses 7 mock electrodes.\nDuring the setup, use:\npython setup_cvep_demo_mockup.py\nThis setup includes the Dareplane mockup streamer. To start it, in a separate terminal, in the same dp-cvep conda environment, run the mockup streamer from its module root as follows:\npython -m mockup_streamer.random_cli --stream_name=\"mockup\" --sfreq=512\n\n\n\nIf you want to run the with other settings, please consider the speller config in dp-cvep-speller/configs/speller.toml and the decoder config in dp-cvep-decoder/configs/decoder.toml. For instance: - In the speller: - The screen ID to open the speller UI at the correct screen: speller.screen.id = 1 - The screen resolution of that screen: speller.screen.resolution = [1920, 1080] - The screen refresh rate of that screen: speller.screen.refresh_rate_hz = 60 - In the decoder: - The selected channels: data.selected_channels = [0, 1, 2, 3, 4, 5, 6] - The channel cap and locations: data.capfile = antneuro7.loc\n\n\n\n\nMake sure you have the LSL Lab Recorder running.\nActivate the dp-cvep conda environment as follows:\n\nconda activate dp-cvep\n\nIn the control room directory, find the file run_cvep_experiment. In it is a Python command to start the control room. Run it from the control room root:\n\npython -m control_room.main --setup_cfg_path=\"path/to/dp-control-room/configs/cvep_speller.toml\"\n\nOpen a browser and go to localhost:8050. You should see the control room. If you started the EEG source (actual or simulated), you should see this at the left top.\nTraining\n\nTo start the training phase, in this order, press TRAINING in the dp-cvep-speller (starts the speller UI) and RUN TRAINING in the Macros (starts the LSL recording).\nThe speller waits for a keypress to continue, press key c.\nThe speller runs 10 cued trials (indicated by green cues), then stops.\nPress STOP LSL RECORDING in the macros (stops the LSL recording and saves the data).\nThe speller waits for a keypress to finish, press key c.\nNote, you can press key q or escape to stop the speller at any time manually.\n\nCalibration\n\nNow you have supervised training data, so we can calibrate the model. Press FIT MODEL in the dp-cvep-decoder (calibrated the model). It prints the performance in the log (left bottom), and shows a figure.\nClose the figure to continue.\nThe calibrated classifier is saved to file automatically.\n\nOnline\n\nTo start the online phase, in this order, press LOAD MODEL in dp-cvep-decoder (loads the trained model), CONNECT DECODER in dp-cvep-decoder (starts the decoder), ONLINE in dp-cvep-speller (starts the speller UI), DECODE ONLINE in dp-cvep-decoder (starts decoding), RUN ONLINE in Macros (starts the LSL recording).\nThe speller waits for a keypress to continue, press key c.\nThe speller runs 999 trials, then stops. The classifier is applied using dynamic stopping, so trials will stop as soon as possible. If a symbol is selected, it is highlighted in blue and added to the text. If the ! symbols is spelled twice in a row, the speller is stopped. The &lt;- symbol performs a backspace. The &lt;&lt; symbol clears the sentence. The &gt;&gt; symbol accepts the autocomplete. The symbol showing a speaker activates text2speech with the currently spelled sentence.\nThe speller waits for a keypress to finish, press key c.\nNote, you can press q or escape to stop the speller at any time manually.\n\n\n\n\n\n\nThere are some known issues and “solutions”: - If you do not get the control room started, try the following: - Kill all Python processes (e.g., hold ctrl+c, and/or pkill -f python), and restart. - Make sure there are no other LSL streams running yet (e.g., the EEG/mockup stream). Start the control room first. Only when the control room is alive, start any other streams. - First start without the LSL recorder, it crashes. Then restart with the Recorder, then it works. Magic. - If you ran FIT MODEL and you get the error saying ‘No training files found’, double-check the saved data in the data directory. For instance, the file should have capitals for P001 and S001, which are lowercase depending on the LSL Recorder version. - If you just ran the speller (either TRAINING or ONLINE), and want to run it again, it might complain that it ‘wants to add keys that already exist’. Somehow the speller is not closed fully the previous time, so cannot reopen. Kill everything and restart the control room. - If you just ran ONLINE and stopped the speller in any way, the decoder will still be running. Depending on your needs, stop the decoder by pressing STOP in dp-cvep-decoder. - If you run the online phase and want to record the data, pressing RUN ONLINE might crash the decoder stream. A workaround is to not press RUN ONLINE, but instead record manually via the LSL Recorder app.\n\n\n\n\nDold, M., Pereira, J., Sajonz, B., Coenen, V. A., Thielen, J., Janssen, M. L., & Tangermann, M. (2025). Dareplane: a modular open-source software platform for BCI research with application in closed-loop deep brain stimulation. Journal of Neural Engineering, 22(2), 026029. doi: 10.1088/1741-2552/adbb20\nThielen, J., Van Den Broek, P., Farquhar, J., & Desain, P. (2015). Broad-band visually evoked potentials: re(con)volution in brain-computer interfacing. PLOS One, 10(7), e0133797. doi: 10.1371/journal.pone.0133797\nThielen, J., Marsman, P., Farquhar, J., & Desain, P. (2021). From full calibration to zero training for a code-modulated visual evoked potentials for brain–computer interface. Journal of Neural Engineering, 18(5), 056007. doi: 0.1088/1741-2552/abecef"
   },
   {
-    "objectID": "libraries/dareplane_utils/time.sleep_s.html",
-    "href": "libraries/dareplane_utils/time.sleep_s.html",
-    "title": "time.sleep_s",
+    "objectID": "examples/c-VEP_setup.html#setup",
+    "href": "examples/c-VEP_setup.html#setup",
+    "title": "c-VEP demo setup script",
     "section": "",
-    "text": "dareplane_utils.general.time.sleep_s(\n    s,\n    partial_sleep_threshold=0.0005,\n    nsteps=30,\n)\nSleep for a specified duration with partial sleep optimization.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ns\nfloat\nThe total duration to sleep in seconds.\nrequired\n\n\npartial_sleep_threshold\nfloat\nThe threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations s above the threshold, the optimization is applied.\n0.0005\n\n\nnsteps\nint\nThe number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to nsteps &gt; 4.\n30",
-    "crumbs": [
-      "General",
-      "time.sleep_s"
-    ]
+    "text": "Make a conda environment with Python 3.10 (not higher, as PsychoPy needs 3.10) as follows:\n\nconda create --name dp-cvep python=3.10.15\n\nActivate the dp-cvep conda environment as follows:\n\nconda activate dp-cvep\n\nRun one of the setup scripts to download all required modules. See below for explanations of the individual setup scripts and when to use which.\n\npython setup_cvep_demo_antneuro.py\npython setup_cvep_demo_biosemi.py\npython setup_cvep_demo_mockup.py\n\nAfter downloading the modules using the setup script, install all the requirements of each of the downloaded Dareplane modules (control room, LSL recorder, speller, decoder, potentially mockup stream). Do so by changing the directory to the module root that contains the requirements.txt and do the following, still from within the active dp-cvep environment:\n\npip install -r requirements.txt\n\nInstall the LSL Lab Recorder. Make sure it is running on the background.\n\n\n\nWe go over the functional components of the setup script for the biosemi setup. Check out the source code to see everything\nNOTE: For just using the setup script, you can skip ahead to the Demo section.\n\n\nfrom pathlib import Path\nimport shutil\nimport subprocess\nimport sys\n\n# ----------------------------------------------------------------------------\n# Install requirements\n# ----------------------------------------------------------------------------\n\nrequirements = [\"GitPython\", \"toml\"]\n\nfor req in requirements:\n    try:\n        __import__(req)\n    except ImportError:\n        subprocess.check_call([sys.executable, \"-m\", \"pip\", \"install\", req])\n\nfrom git import Repo\nimport toml\n\n\n\nSETUP_FOLDER_NAME = \"cvep_speller_env\"\nBRANCH_NAME = SETUP_FOLDER_NAME  # used within each module\n\nCONTROL_ROOM_URL = \"https://github.com/bsdlab/dp-control-room.git\"\nDECODER_URL = \"https://github.com/thijor/dp-cvep-decoder.git\"\nSPELLER_URL = \"https://github.com/thijor/dp-cvep-speller.git\"\nLSL_URL = \"https://github.com/bsdlab/dp-lsl-recording.git\"\n\nDATA_STREAM_NAME = \"BioSemi\"\nMARKER_STREAM_NAME = \"cvep-speller-stream\"\nDECODER_STREAM_NAME = \"cvep-decoder-stream\"\n\n\n\nrepos = []\nrepo_dirs = [\"dp-control-room\", \"dp-cvep-decoder\", \"dp-cvep-speller\", \"dp-lsl-recording\"]\nfor url, repo_dir in zip([CONTROL_ROOM_URL, DECODER_URL, SPELLER_URL, LSL_URL], repo_dirs):\n    cmd = f'git clone -v -- {url} {SETUP_FOLDER_NAME}/{repo_dir}'\n    subprocess.run(cmd, shell=True)\n    repos.append(Repo(root_dir / repo_dir))\n\n\n\ncontrol_room_cfg = f\"\"\"\n\n[python]\nmodules_root = '../'                                                            \n\n\n# -------------------- c-VEP Decoder  ---------------------------------------\n[python.modules.dp-cvep-decoder]                                        \n    type = 'decoding'\n    port = 8083\n    ip = '127.0.0.1'\n\n....\nPuttinig it to the right folder\ncontrol_room_cfg_pth = Path(\"./cvep_speller_env/dp-control-room/configs/cvep_speller.toml\")\nwith open(control_room_cfg_pth, \"w\") as f:\n    f.write(control_room_cfg)\n\n\n\ndecoder_cfg_pth = root_dir.joinpath(\"dp-cvep-decoder/configs/decoder.toml\")\ncfg = toml.load(decoder_cfg_pth)\n\ncfg[\"data\"][\"data_root\"] = str(DATA_DIR.resolve())\ncfg[\"data\"][\"selected_channels\"] = [\"EX1\", \"EX2\", \"EX3\", \"EX4\", \"EX5\", \"EX6\", \"EX7\"]\ncfg[\"data\"][\"capfile\"] = str(root_dir.joinpath(\"dp-cvep-decoder/cvep_decoder/caps/biosemi7.loc\").resolve())\n\n\n\n# ----------------------------------------------------------------------------\n# Create single run script in the control room\n# ----------------------------------------------------------------------------\n\nplatform = sys.platform\nsuffix = \".ps1\" if platform == \"win32\" else \".sh\"\n\nscript_file = root_dir.resolve() / \"dp-control-room\" / f\"run_cvep_experiment{suffix}\"\n\nwith open(script_file, \"w\") as f:\n    f.write(f'python -m control_room.main --setup_cfg_path=\"{control_room_cfg_pth.resolve()}\"')"
   },
   {
-    "objectID": "libraries/dareplane_utils/time.sleep_s.html#parameters",
-    "href": "libraries/dareplane_utils/time.sleep_s.html#parameters",
-    "title": "time.sleep_s",
+    "objectID": "examples/c-VEP_setup.html#demo",
+    "href": "examples/c-VEP_setup.html#demo",
+    "title": "c-VEP demo setup script",
     "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ns\nfloat\nThe total duration to sleep in seconds.\nrequired\n\n\npartial_sleep_threshold\nfloat\nThe threshold duration above which partial sleep optimization is applied, by default 0.0005. I.e., only for durations s above the threshold, the optimization is applied.\n0.0005\n\n\nnsteps\nint\nThe number of steps for partial sleep, by default 30. Empirical testing showed very good accuracy for 30. If you want to optimize for CPU load, reduce to nsteps &gt; 4.\n30",
-    "crumbs": [
-      "General",
-      "time.sleep_s"
-    ]
+    "text": "The following describes how to avtually use the setup script to run the c-VEP demo.\n\n\nThis demo has been set up for the ANTneuro Eego amplifier together with one of the DCC lab’s demo laptops. It uses 7 electrodes (Fpz, Cz, Pz, POz, Oz, O1, O2) and a screen with a 60 Hz presentation rate and 1920 x 1080 resolution.\nDuring the setup, use:\npython setup_cvep_demo_antneuro.py\n\n\n\nThis demo has been set up for the Biosemi Active2 amplifier together with the DCC lab setup in MM 01.422. It uses 7 EX electrodes (Fpz, Cz, POz, Oz, Iz, O1, O2) and a screen with a 60 Hz presentation rate and 2560 x 1440 resolution.\nDuring the setup, use:\npython setup_cvep_demo_biosemi.py\n\n\n\nThis demo has been set up for when no EEG amplifier is available, for instance for testing. It uses 7 mock electrodes.\nDuring the setup, use:\npython setup_cvep_demo_mockup.py\nThis setup includes the Dareplane mockup streamer. To start it, in a separate terminal, in the same dp-cvep conda environment, run the mockup streamer from its module root as follows:\npython -m mockup_streamer.random_cli --stream_name=\"mockup\" --sfreq=512\n\n\n\nIf you want to run the with other settings, please consider the speller config in dp-cvep-speller/configs/speller.toml and the decoder config in dp-cvep-decoder/configs/decoder.toml. For instance: - In the speller: - The screen ID to open the speller UI at the correct screen: speller.screen.id = 1 - The screen resolution of that screen: speller.screen.resolution = [1920, 1080] - The screen refresh rate of that screen: speller.screen.refresh_rate_hz = 60 - In the decoder: - The selected channels: data.selected_channels = [0, 1, 2, 3, 4, 5, 6] - The channel cap and locations: data.capfile = antneuro7.loc\n\n\n\n\nMake sure you have the LSL Lab Recorder running.\nActivate the dp-cvep conda environment as follows:\n\nconda activate dp-cvep\n\nIn the control room directory, find the file run_cvep_experiment. In it is a Python command to start the control room. Run it from the control room root:\n\npython -m control_room.main --setup_cfg_path=\"path/to/dp-control-room/configs/cvep_speller.toml\"\n\nOpen a browser and go to localhost:8050. You should see the control room. If you started the EEG source (actual or simulated), you should see this at the left top.\nTraining\n\nTo start the training phase, in this order, press TRAINING in the dp-cvep-speller (starts the speller UI) and RUN TRAINING in the Macros (starts the LSL recording).\nThe speller waits for a keypress to continue, press key c.\nThe speller runs 10 cued trials (indicated by green cues), then stops.\nPress STOP LSL RECORDING in the macros (stops the LSL recording and saves the data).\nThe speller waits for a keypress to finish, press key c.\nNote, you can press key q or escape to stop the speller at any time manually.\n\nCalibration\n\nNow you have supervised training data, so we can calibrate the model. Press FIT MODEL in the dp-cvep-decoder (calibrated the model). It prints the performance in the log (left bottom), and shows a figure.\nClose the figure to continue.\nThe calibrated classifier is saved to file automatically.\n\nOnline\n\nTo start the online phase, in this order, press LOAD MODEL in dp-cvep-decoder (loads the trained model), CONNECT DECODER in dp-cvep-decoder (starts the decoder), ONLINE in dp-cvep-speller (starts the speller UI), DECODE ONLINE in dp-cvep-decoder (starts decoding), RUN ONLINE in Macros (starts the LSL recording).\nThe speller waits for a keypress to continue, press key c.\nThe speller runs 999 trials, then stops. The classifier is applied using dynamic stopping, so trials will stop as soon as possible. If a symbol is selected, it is highlighted in blue and added to the text. If the ! symbols is spelled twice in a row, the speller is stopped. The &lt;- symbol performs a backspace. The &lt;&lt; symbol clears the sentence. The &gt;&gt; symbol accepts the autocomplete. The symbol showing a speaker activates text2speech with the currently spelled sentence.\nThe speller waits for a keypress to finish, press key c.\nNote, you can press q or escape to stop the speller at any time manually."
+  },
+  {
+    "objectID": "examples/c-VEP_setup.html#troubleshooting",
+    "href": "examples/c-VEP_setup.html#troubleshooting",
+    "title": "c-VEP demo setup script",
+    "section": "",
+    "text": "There are some known issues and “solutions”: - If you do not get the control room started, try the following: - Kill all Python processes (e.g., hold ctrl+c, and/or pkill -f python), and restart. - Make sure there are no other LSL streams running yet (e.g., the EEG/mockup stream). Start the control room first. Only when the control room is alive, start any other streams. - First start without the LSL recorder, it crashes. Then restart with the Recorder, then it works. Magic. - If you ran FIT MODEL and you get the error saying ‘No training files found’, double-check the saved data in the data directory. For instance, the file should have capitals for P001 and S001, which are lowercase depending on the LSL Recorder version. - If you just ran the speller (either TRAINING or ONLINE), and want to run it again, it might complain that it ‘wants to add keys that already exist’. Somehow the speller is not closed fully the previous time, so cannot reopen. Kill everything and restart the control room. - If you just ran ONLINE and stopped the speller in any way, the decoder will still be running. Depending on your needs, stop the decoder by pressing STOP in dp-cvep-decoder. - If you run the online phase and want to record the data, pressing RUN ONLINE might crash the decoder stream. A workaround is to not press RUN ONLINE, but instead record manually via the LSL Recorder app."
+  },
+  {
+    "objectID": "examples/c-VEP_setup.html#references",
+    "href": "examples/c-VEP_setup.html#references",
+    "title": "c-VEP demo setup script",
+    "section": "",
+    "text": "Dold, M., Pereira, J., Sajonz, B., Coenen, V. A., Thielen, J., Janssen, M. L., & Tangermann, M. (2025). Dareplane: a modular open-source software platform for BCI research with application in closed-loop deep brain stimulation. Journal of Neural Engineering, 22(2), 026029. doi: 10.1088/1741-2552/adbb20\nThielen, J., Van Den Broek, P., Farquhar, J., & Desain, P. (2015). Broad-band visually evoked potentials: re(con)volution in brain-computer interfacing. PLOS One, 10(7), e0133797. doi: 10.1371/journal.pone.0133797\nThielen, J., Marsman, P., Farquhar, J., & Desain, P. (2021). From full calibration to zero training for a code-modulated visual evoked potentials for brain–computer interface. Journal of Neural Engineering, 18(5), 056007. doi: 0.1088/1741-2552/abecef"
   },
   {
     "objectID": "main.html",
@@ -252,165 +579,25 @@
     ]
   },
   {
-    "objectID": "modules/index.html",
-    "href": "modules/index.html",
-    "title": "Dareplane",
+    "objectID": "about/quarto_documentation_setup.html",
+    "href": "about/quarto_documentation_setup.html",
+    "title": "Documentation setup",
     "section": "",
-    "text": "Utility librarires\nCollection of libraries providing functionality to Dareplane\n\n\n  \n    \n        \n            dareplane-utils\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n       \n        Python module with various utility functions for Dareplane modules\n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nSingle module documentation\nDareplane is structured in individual module, each providing its own documentation\n\n\n  \n    \n        \n            dp-strawman-module\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-control-room\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-lsl-recording\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-mockup-streamer\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-copydraw\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-multiband-regression\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-bollinger-control\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-ao-communication\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-arduino-stimulator\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-picoscope-streamer\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-passthrough\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-threshold-controller\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-cortec-bic\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-cvep-speller\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-stroop\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-c-sdl2-example\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nNo matching items"
+    "text": "The documentation for Dareplane is generated with Quarto and quartodoc. The later is used to automatically generate API documentation for python modules. quarto uses a central _quarto.yml file to configure the documentation.\nFor the Dareplane documentation, https://github.com/bsdlab/Dareplane is the main repository, and the /docs folder therein should be considered the root for all quarto related steps.\n\n\n\n\n\n\nTo run the docs building for all modules, clone https://github.com/bsdlab/Dareplane and cd docs.\nIn the build across multiple modules, the Makefile has the following build steps defined:\n\ngenerate the main.qmd dynamically from the README.md\nextract the repositories from the first table in the main.qmd, taking the first column and expecting markdown notation for links\ndownload each repository into a /docs/modules/* directory\nbuild with quartodoc build within each /docs/modules/* folder\n\nTo create a fresh build, execute the following:\nmake clean\nmake main   # copy README -&gt; main.qmd\nmake modules.csv # extract the repos\nmake docs-gallery # build the docs within each module\nOnce the quartodoc part in each /docs/modules/* is done (make docs-gallery), we can use quartop preview (or the github publish action for Dareplane) to build the quarto website from within /docs for Dareplane. All modules will be included as we can specify a Documentation subsection with a glob in _quarto.yml:\nwebsite:  \n sidebar:\n    - id: \"main\"\n      contents:\n        - section: \"Documentation\"\n          contents:\n            - subsection:\n              auto: modules/*/index.qmd\n\n\n\nIn harmony with the general Dareplane coding philosophy, we want every module to be standalone, with very limited requirements for interoperability. This also holds for the documentation. The only requirement for the automated documentation process to be able to pick up the documentation is that there exists a _quarto.yml file in the root directory, which contains a least a section for quartodoc. E.g.:\nquartodoc:\n  package: \"dp-control-room\"\n  source_dir: \"control_room\"   # should point the the folder containing the python code\n  title: \"Documentation control room\"\nWith this setup, you can first create your documentation on a per module level, making sure it works with quartodoc build. The quartodoc build command will use doc-strings of the python functions and classes to dynamically create markdown documentation pages.\nFor debugging, it might be handy to add a general quarto website section on the per module _quarto.yml file. See the Single module quarto section for an example.\nThis can be done without interference with the generation on the across modules documentation, as the latter is only using the quartodoc part.\n\n\nThis section provides an example of how we would document a single Dareplane module.\nLet us assume we are documenting the dp-stroop module.\n\n\nStart out by creating the _quarto.yml file, containing a quartodoc section with an entry for the run_paradigm_cli function:\nquartodoc:\n  package: \"dp-stroop\"       # name of the package\n  source_dir: \"stroop_task\"  # as the source code is within this folder\n\n  title: \"Documentation for the Stroop task\"\n\n  options:\n    signature_name: full\n\n  # write sidebar where quartodoc writes its content without impacting quarto\n  sidebar:\n    file: \"_stroop_sidebar.yml\"\n\n  sections:\n    - title: \"The Stroop task\"\n      desc: |\n        :::{.callout-info}\n        The github repository for this module is located at:\n        [https://github.com/bsdlab/dp-stroop](https://github.com/bsdlab/dp-stroop)\n        :::\n\n    - subtitle: Modified Stroop task\n      package: stroop_task\n      desc: The main script to start the Stroop task from command line.\n      contents:\n        - main.run_paradigm_cli\n\n\n\nNow we can build the documentation with quartodoc build. This will create a ./reference folder with the documentation.\nAdd the ./reference folder and objects.json to the .gitignore to avoid cluttering of the repo. Docs will be generated dynamically.\necho reference/ &gt;&gt; .gitignore\necho objects.json &gt;&gt; .gitignore\necho _site/ &gt;&gt; .gitignore       # will be created from `quarto preview` see next step\n\n\n\nWith having the quartodoc section in the _quarto.yml, we already have everything we need, but it is hard validate that the documentation builds as intended. The most straight forward solution is to add a website section to the _quarto.yml, which then allow to debug with quarto preview:\nproject:\n  type: website\n\nwebsite:\n  sidebar:\n    - id: \"main\"\n      contents:\n        - section: \"Documentation\"\n          contents:\n            - reference/index.qmd\n\nmetadata-files:\n  - reference/_stroop_sidebar.yml\nThen run:\nquarto preview\nThis will open a browser window with the documentation.\n\n\n\nNow it is up to adding more sections to the documentation, which can be done by enriching the contents: of the quartodoc section in the _quarto.yml.\n      contents:\n        - main.run_paradigm_cli\n        - context.StroopContext\nNote:\n\nWhile the quarto part will update dynamically (hot reloading), quartodoc will need to be recompiled every time you add to the quartodoc section of the _quarto.yml.\nThe quarto preview might spawn not at the root of the created website but on a specific functions/classed documentation page. Simply prune the path in the browser to get to the root. E.g., from http://localhost:6901/reference/main.run_paradigm_cli.html to http://localhost:6901/\nquartodoc will add documentation for methods from each method’s own doc string. Avoid having a methods doc string section on the class wide doc string as this will lead to a NotImplementedError from griffe."
   },
   {
-    "objectID": "modules/dp-stroop/reference/utils.marker.MarkerWriter.html",
-    "href": "modules/dp-stroop/reference/utils.marker.MarkerWriter.html",
-    "title": "utils.marker.MarkerWriter",
+    "objectID": "about/quarto_documentation_setup.html#run-the-documentation-build-locally",
+    "href": "about/quarto_documentation_setup.html#run-the-documentation-build-locally",
+    "title": "Documentation setup",
     "section": "",
-    "text": "stroop_task.utils.marker.MarkerWriter(\n    self,\n    write_to_serial=True,\n    write_to_lsl=True,\n    write_to_logger=False,\n    serial_port='COM4',\n    utf8_encoded=True,\n)\nClass for interacting with the virtual serial port provided by the BV TriggerBox and an LSL marker stream\n\n\n\n\n\nName\nDescription\n\n\n\n\nwrite\nFor this paradigm the writer will have the potential for separate markers for LSL and the parallel port\n\n\n\n\n\nstroop_task.utils.marker.MarkerWriter.write(data, lsl_marker=None)\nFor this paradigm the writer will have the potential for separate markers for LSL and the parallel port\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndata\n\ndata to be written to the serial port\nrequired\n\n\nlsl_marker\nstr | None\nif None, the data is written to the serial port and the LSL stream otherwise the lsl_marker is written to the LSL stream\nNone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nbyteswritten\nint\nnumber of bytes written to the serial port if self.serial_writer is defined"
+    "text": "To run the docs building for all modules, clone https://github.com/bsdlab/Dareplane and cd docs.\nIn the build across multiple modules, the Makefile has the following build steps defined:\n\ngenerate the main.qmd dynamically from the README.md\nextract the repositories from the first table in the main.qmd, taking the first column and expecting markdown notation for links\ndownload each repository into a /docs/modules/* directory\nbuild with quartodoc build within each /docs/modules/* folder\n\nTo create a fresh build, execute the following:\nmake clean\nmake main   # copy README -&gt; main.qmd\nmake modules.csv # extract the repos\nmake docs-gallery # build the docs within each module\nOnce the quartodoc part in each /docs/modules/* is done (make docs-gallery), we can use quartop preview (or the github publish action for Dareplane) to build the quarto website from within /docs for Dareplane. All modules will be included as we can specify a Documentation subsection with a glob in _quarto.yml:\nwebsite:  \n sidebar:\n    - id: \"main\"\n      contents:\n        - section: \"Documentation\"\n          contents:\n            - subsection:\n              auto: modules/*/index.qmd"
   },
   {
-    "objectID": "modules/dp-stroop/reference/utils.marker.MarkerWriter.html#methods",
-    "href": "modules/dp-stroop/reference/utils.marker.MarkerWriter.html#methods",
-    "title": "utils.marker.MarkerWriter",
+    "objectID": "about/quarto_documentation_setup.html#how-to-document-your-module",
+    "href": "about/quarto_documentation_setup.html#how-to-document-your-module",
+    "title": "Documentation setup",
     "section": "",
-    "text": "Name\nDescription\n\n\n\n\nwrite\nFor this paradigm the writer will have the potential for separate markers for LSL and the parallel port\n\n\n\n\n\nstroop_task.utils.marker.MarkerWriter.write(data, lsl_marker=None)\nFor this paradigm the writer will have the potential for separate markers for LSL and the parallel port\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndata\n\ndata to be written to the serial port\nrequired\n\n\nlsl_marker\nstr | None\nif None, the data is written to the serial port and the LSL stream otherwise the lsl_marker is written to the LSL stream\nNone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nbyteswritten\nint\nnumber of bytes written to the serial port if self.serial_writer is defined"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/index.html",
-    "href": "modules/dp-stroop/reference/index.html",
-    "title": "Documentation for the Stroop task",
-    "section": "",
-    "text": "The github repository for this module is located at: https://github.com/bsdlab/dp-stroop\n\n\n\nThe main script to start the Stroop task from command line.\n\n\n\nmain.run_paradigm_cli\nStarting the Stroop paradigm standalone in a pyglet window\n\n\nmain.run_paradigm\nRun the two-word Stroop task paradigm.\n\n\nmain.run_paradigm_classical\nThe arrangement and colors where drawn randomly once, but are then fixed\n\n\ncontext.StroopContext\nA class to represent the context for the Stroop task.\n\n\ntask_manager.StroopTaskStateManager\nA state manager for the Stroop task providing callbacks for state transitions from:\n\n\nutils.marker.utf8_write\nConverts integer data into a UTF-8 byte string\n\n\nutils.marker.port_writer\nWrites data to a serial port with a specified pulse width.\n\n\nutils.marker.MarkerWriter\nClass for interacting with the virtual serial",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "Dp Stroop",
-      "Documentation for the Stroop task"
-    ]
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/index.html#the-stroop-task",
-    "href": "modules/dp-stroop/reference/index.html#the-stroop-task",
-    "title": "Documentation for the Stroop task",
-    "section": "",
-    "text": "The github repository for this module is located at: https://github.com/bsdlab/dp-stroop\n\n\n\nThe main script to start the Stroop task from command line.\n\n\n\nmain.run_paradigm_cli\nStarting the Stroop paradigm standalone in a pyglet window\n\n\nmain.run_paradigm\nRun the two-word Stroop task paradigm.\n\n\nmain.run_paradigm_classical\nThe arrangement and colors where drawn randomly once, but are then fixed\n\n\ncontext.StroopContext\nA class to represent the context for the Stroop task.\n\n\ntask_manager.StroopTaskStateManager\nA state manager for the Stroop task providing callbacks for state transitions from:\n\n\nutils.marker.utf8_write\nConverts integer data into a UTF-8 byte string\n\n\nutils.marker.port_writer\nWrites data to a serial port with a specified pulse width.\n\n\nutils.marker.MarkerWriter\nClass for interacting with the virtual serial",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "Dp Stroop",
-      "Documentation for the Stroop task"
-    ]
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/main.run_paradigm.html",
-    "href": "modules/dp-stroop/reference/main.run_paradigm.html",
-    "title": "main.run_paradigm",
-    "section": "",
-    "text": "stroop_task.main.run_paradigm(\n    n_trials=60,\n    language='english',\n    logger_level=None,\n    focus='color',\n    write_to_serial=True,\n    random_wait=False,\n    show_fps=False,\n)\nRun the two-word Stroop task paradigm.\nThis function sets up and runs the two-word Stroop task paradigm using the Pyglet library. It initializes the logging configuration, creates the context for the Stroop task, sets up the window, and manages the task state. The function also adds the drawing callbacks and starts the task after a short delay.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nn_trials\nint\nThe number of trials to run in a block - needs to be an integer divisible by 6 for balancing. Default is 60.\n60\n\n\nlanguage\nstr\nThe language setting for the Stroop task. Default is “english”.\n'english'\n\n\nlogger_level\nstr | None\nThe logging level to set for the logger. If None, the level from the configuration file is used. Default is None.\nNone\n\n\nfocus\nstr\nThe focus of the task, either “text” or “color”. Default is “color”.\n'color'\n\n\nwrite_to_serial\nbool\nWhether to write markers to a serial port. Default is True.\nTrue\n\n\nrandom_wait\nbool\nWhether to use a random wait between trials. Default is False. If false, the user is required to push the arrow-down button for at least 500ms to start the next trial. If true, a random inter-trial-interval will be used. See configs/task.yaml and the wait_time_min_s and wait_time_max_s values therein.\nFalse\n\n\nshow_fps\nbool\nWhether to show the frames per second (FPS) on the screen. Default is False.\nFalse\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nNone"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/main.run_paradigm.html#parameters",
-    "href": "modules/dp-stroop/reference/main.run_paradigm.html#parameters",
-    "title": "main.run_paradigm",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nn_trials\nint\nThe number of trials to run in a block - needs to be an integer divisible by 6 for balancing. Default is 60.\n60\n\n\nlanguage\nstr\nThe language setting for the Stroop task. Default is “english”.\n'english'\n\n\nlogger_level\nstr | None\nThe logging level to set for the logger. If None, the level from the configuration file is used. Default is None.\nNone\n\n\nfocus\nstr\nThe focus of the task, either “text” or “color”. Default is “color”.\n'color'\n\n\nwrite_to_serial\nbool\nWhether to write markers to a serial port. Default is True.\nTrue\n\n\nrandom_wait\nbool\nWhether to use a random wait between trials. Default is False. If false, the user is required to push the arrow-down button for at least 500ms to start the next trial. If true, a random inter-trial-interval will be used. See configs/task.yaml and the wait_time_min_s and wait_time_max_s values therein.\nFalse\n\n\nshow_fps\nbool\nWhether to show the frames per second (FPS) on the screen. Default is False.\nFalse"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/main.run_paradigm.html#returns",
-    "href": "modules/dp-stroop/reference/main.run_paradigm.html#returns",
-    "title": "main.run_paradigm",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nNone"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/utils.marker.port_writer.html",
-    "href": "modules/dp-stroop/reference/utils.marker.port_writer.html",
-    "title": "utils.marker.port_writer",
-    "section": "",
-    "text": "stroop_task.utils.marker.port_writer(port, data, pulsewidth=0.01)\nWrites data to a serial port with a specified pulse width.\nThis function is typically used for writing to the BrainVision trigger box. It writes the actual data to the port, waits for the specified pulse width, and then writes a zero byte to the port.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nport\nserial.Serial\nThe serial port object to which the data will be written.\nrequired\n\n\ndata\nlist[int] | int\nThe data to be written to the serial port. Can be a single integer or a list of integers.\nrequired\n\n\npulsewidth\nfloat\nThe duration in seconds to wait between writing the actual data and the zero byte. Default is 0.01 seconds.\n0.01\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nint\nThe number of bytes written to the serial port."
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/utils.marker.port_writer.html#parameters",
-    "href": "modules/dp-stroop/reference/utils.marker.port_writer.html#parameters",
-    "title": "utils.marker.port_writer",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nport\nserial.Serial\nThe serial port object to which the data will be written.\nrequired\n\n\ndata\nlist[int] | int\nThe data to be written to the serial port. Can be a single integer or a list of integers.\nrequired\n\n\npulsewidth\nfloat\nThe duration in seconds to wait between writing the actual data and the zero byte. Default is 0.01 seconds.\n0.01"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/utils.marker.port_writer.html#returns",
-    "href": "modules/dp-stroop/reference/utils.marker.port_writer.html#returns",
-    "title": "utils.marker.port_writer",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nint\nThe number of bytes written to the serial port."
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/callbacks.html",
-    "href": "modules/dp-control-room/reference/callbacks.html",
-    "title": "callbacks",
-    "section": "",
-    "text": "callbacks\ncallbacks"
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/main.html",
-    "href": "modules/dp-control-room/reference/main.html",
-    "title": "main",
-    "section": "",
-    "text": "main\nmain"
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/gui.layout.html",
-    "href": "modules/dp-control-room/reference/gui.layout.html",
-    "title": "gui.layout",
-    "section": "",
-    "text": "gui.layout\ngui.layout"
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/index.html",
-    "href": "modules/dp-control-room/reference/index.html",
-    "title": "Documentation control room",
-    "section": "",
-    "text": "The control room is one way of composing Dareplane modules to experimental setups. \n\nThe github repository for this module is located at: https://github.com/bsdlab/dp-control-room/tree/main\n\n\n\nThe main script to start and spawn the control_room.\n\n\n\nmain\n\n\n\n\n\n\n\nUI components implemented in dash are the core of the control room.\n\n\n\ngui.app\n\n\n\ngui.callbacks\n\n\n\ngui.layout\n\n\n\n\n\n\n\nThe control_room spawns and manages the life-times of other python modules.\n\n\n\nprocesses\n\n\n\nconnection\n\n\n\nsocket\n\n\n\n\n\n\n\nThe control_room also routes control_room callbacks, which allow intermodule communication if this is not solved by using something like LSL.\n\n\n\ncallbacks\n\n\n\n\n\n\n\nUtils of the control_room concern mainly logging. This relates to providing a TCP that listenes on the standard port for python logging (9020), and therefore consolidates all logging messages shared this way. E.g., when using dareplane-utils and the from dareplane_utils.logging.logger import get_logger.\n\n\n\nutils.logging\n\n\n\nutils.logserver",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "Dp Control Room",
-      "Documentation control room"
-    ]
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/index.html#control-room-functionality",
-    "href": "modules/dp-control-room/reference/index.html#control-room-functionality",
-    "title": "Documentation control room",
-    "section": "",
-    "text": "The control room is one way of composing Dareplane modules to experimental setups. \n\nThe github repository for this module is located at: https://github.com/bsdlab/dp-control-room/tree/main\n\n\n\nThe main script to start and spawn the control_room.\n\n\n\nmain\n\n\n\n\n\n\n\nUI components implemented in dash are the core of the control room.\n\n\n\ngui.app\n\n\n\ngui.callbacks\n\n\n\ngui.layout\n\n\n\n\n\n\n\nThe control_room spawns and manages the life-times of other python modules.\n\n\n\nprocesses\n\n\n\nconnection\n\n\n\nsocket\n\n\n\n\n\n\n\nThe control_room also routes control_room callbacks, which allow intermodule communication if this is not solved by using something like LSL.\n\n\n\ncallbacks\n\n\n\n\n\n\n\nUtils of the control_room concern mainly logging. This relates to providing a TCP that listenes on the standard port for python logging (9020), and therefore consolidates all logging messages shared this way. E.g., when using dareplane-utils and the from dareplane_utils.logging.logger import get_logger.\n\n\n\nutils.logging\n\n\n\nutils.logserver",
-    "crumbs": [
-      "Home",
-      "Documentation",
-      "Dp Control Room",
-      "Documentation control room"
-    ]
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/utils.logging.html",
-    "href": "modules/dp-control-room/reference/utils.logging.html",
-    "title": "utils.logging",
-    "section": "",
-    "text": "utils.logging\nutils.logging"
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/gui.app.html",
-    "href": "modules/dp-control-room/reference/gui.app.html",
-    "title": "gui.app",
-    "section": "",
-    "text": "gui.app\ngui.app"
-  },
-  {
-    "objectID": "examples/index.html",
-    "href": "examples/index.html",
-    "title": "Dareplane",
-    "section": "",
-    "text": "Creating modules\n\n\n\n  \n    \n        \n            Hello world from Dareplane\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n       \n        Building your first module based of the strawmen module.\n\n      \n      \n        \n          View example\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nSetup scripts\n\n\n\n  \n    \n        \n            c-VEP experiment\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n       \n        Walk through the [setup script for c-VEP BCI](https://github.com/thijor/dp-cvep).\n\n      \n      \n        \n          View example\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nNo matching items",
-    "crumbs": [
-      "Home",
-      "Examples"
-    ]
+    "text": "In harmony with the general Dareplane coding philosophy, we want every module to be standalone, with very limited requirements for interoperability. This also holds for the documentation. The only requirement for the automated documentation process to be able to pick up the documentation is that there exists a _quarto.yml file in the root directory, which contains a least a section for quartodoc. E.g.:\nquartodoc:\n  package: \"dp-control-room\"\n  source_dir: \"control_room\"   # should point the the folder containing the python code\n  title: \"Documentation control room\"\nWith this setup, you can first create your documentation on a per module level, making sure it works with quartodoc build. The quartodoc build command will use doc-strings of the python functions and classes to dynamically create markdown documentation pages.\nFor debugging, it might be handy to add a general quarto website section on the per module _quarto.yml file. See the Single module quarto section for an example.\nThis can be done without interference with the generation on the across modules documentation, as the latter is only using the quartodoc part.\n\n\nThis section provides an example of how we would document a single Dareplane module.\nLet us assume we are documenting the dp-stroop module.\n\n\nStart out by creating the _quarto.yml file, containing a quartodoc section with an entry for the run_paradigm_cli function:\nquartodoc:\n  package: \"dp-stroop\"       # name of the package\n  source_dir: \"stroop_task\"  # as the source code is within this folder\n\n  title: \"Documentation for the Stroop task\"\n\n  options:\n    signature_name: full\n\n  # write sidebar where quartodoc writes its content without impacting quarto\n  sidebar:\n    file: \"_stroop_sidebar.yml\"\n\n  sections:\n    - title: \"The Stroop task\"\n      desc: |\n        :::{.callout-info}\n        The github repository for this module is located at:\n        [https://github.com/bsdlab/dp-stroop](https://github.com/bsdlab/dp-stroop)\n        :::\n\n    - subtitle: Modified Stroop task\n      package: stroop_task\n      desc: The main script to start the Stroop task from command line.\n      contents:\n        - main.run_paradigm_cli\n\n\n\nNow we can build the documentation with quartodoc build. This will create a ./reference folder with the documentation.\nAdd the ./reference folder and objects.json to the .gitignore to avoid cluttering of the repo. Docs will be generated dynamically.\necho reference/ &gt;&gt; .gitignore\necho objects.json &gt;&gt; .gitignore\necho _site/ &gt;&gt; .gitignore       # will be created from `quarto preview` see next step\n\n\n\nWith having the quartodoc section in the _quarto.yml, we already have everything we need, but it is hard validate that the documentation builds as intended. The most straight forward solution is to add a website section to the _quarto.yml, which then allow to debug with quarto preview:\nproject:\n  type: website\n\nwebsite:\n  sidebar:\n    - id: \"main\"\n      contents:\n        - section: \"Documentation\"\n          contents:\n            - reference/index.qmd\n\nmetadata-files:\n  - reference/_stroop_sidebar.yml\nThen run:\nquarto preview\nThis will open a browser window with the documentation.\n\n\n\nNow it is up to adding more sections to the documentation, which can be done by enriching the contents: of the quartodoc section in the _quarto.yml.\n      contents:\n        - main.run_paradigm_cli\n        - context.StroopContext\nNote:\n\nWhile the quarto part will update dynamically (hot reloading), quartodoc will need to be recompiled every time you add to the quartodoc section of the _quarto.yml.\nThe quarto preview might spawn not at the root of the created website but on a specific functions/classed documentation page. Simply prune the path in the browser to get to the root. E.g., from http://localhost:6901/reference/main.run_paradigm_cli.html to http://localhost:6901/\nquartodoc will add documentation for methods from each method’s own doc string. Avoid having a methods doc string section on the class wide doc string as this will lead to a NotImplementedError from griffe."
   },
   {
     "objectID": "examples/hello_world.html",
@@ -441,158 +628,15 @@
     "text": "It is now time to integrate the dp-mi-paradigm with other modules. This is done using the dp-control-room. If you do not yet have it, clone it from git and place it e.g. in the parent directory of pd-mi-paradigm. So that you have the pd-mi-paradigm and pd-control-room paradigm in the same folder. Make sure to have all dependencies of the control room installed. Try pip install -r requirements.txt from within the pd-control-room folder.\nThen move into the dp-control-room directory and create a config at ./configs/mi_experiment.toml with the following content:\n[python]\nmodules_root = '../'\n\n# -------------------- used modules ---------------------------------------\n\n[python.modules.dp-mi-paradigm]\ntype = 'paradigm'\nport = 8081\nip = '127.0.0.1'\nloglevel = 10\nThen change the config which is loaded by the control room for convenience. So within ./control_room/main.py we place:\n\nsetup_cfg_path: Path = Path(\"./configs/mi_experiment.toml\").resolve()\nNow spawn up the control_room by calling python rcr.py or python -m control_room.main. You should now be able to see the control_room at 127.0.0.1:8050 within your browser. Make sure you see the mi_experiment section and a RUN button. If you click the button, you should see the paradigm being played.\n\n\nAs a final step, we add other modules and create a macro to control all with a single button push. So get the dp-mockup-streamer and the dp-lsl-recording module and place them in the same parent directory as the other modules.\n.\n├── dp-control-room\n├── dp-lsl-recording\n├── dp-mockup-streamer\n└── dp-mi-paradigm\nAlso install the requirements for the other two modules via pip install -r requirements.txt within each of the folders.\nThen add the following to the ./configs/mi_experiment.toml config:\n[python]\nmodules_root = '../'\n\n# -------------------- used modules ---------------------------------------\n\n[python.modules.dp-mi-paradigm]\ntype = 'paradigm'\nport = 8081\nip = '127.0.0.1'\nloglevel = 10\n\n[python.modules.dp-mockup-streamer]\ntype = 'source'\nport = 8082\nip = '127.0.0.1'\nloglevel = 10\n\n[python.modules.dp-lsl-recording]\ntype = 'paradigm'\nport = 8083\nip = '127.0.0.1'\nloglevel = 10\n\n\n[macros.start_test]\nname = 'START_TEST'\ndescription = 'start all modules for simulation'\ndelay_s = 1\n[macros.start_test.default_json]\nnrep = 6\n[macros.start_test.cmds]\n# variable names are arbitrary, the commands will be executes in the same order as they are read by tomllib\ncom1 = ['dp-mockup-streamer', 'START_RANDOM']\ncom2 = ['dp-lsl-recording', 'SELECT_ALL']\ncom4 = ['dp-lsl-recording', 'RECORD']\ncom5 = ['dp-mi-paradigm', 'RUN', 'nrepetitions=nrep']\n\n[macros.stop]\nname = 'STOP_TEST'\ndescription = 'Send a stop command to all involved modules'\n[macros.stop.cmds]\ncom1 = ['dp-lsl-recording', 'STOPRECORD']\nFor more details about how create a config for dp-control-room, please be referred to the README.\nBefore we restart the control room to check our new configuration including the macro, we need to start the LabRecorder. Otherwise the we will not be able to start the control room GUI. (Note - this is a temporary necessity. In later versions of the dp-lsl-recording module, this will be done automatically).\nNow restart the control room from within dp-control-room by using python rcr.py and you should see a Macro section on the GUI at 127.0.0.1:8050."
   },
   {
-    "objectID": "examples/c-VEP_setup.html",
-    "href": "examples/c-VEP_setup.html",
-    "title": "c-VEP demo setup script",
+    "objectID": "examples/index.html",
+    "href": "examples/index.html",
+    "title": "Dareplane",
     "section": "",
-    "text": "c-VEP demo setup script\nIn this example, we walk over the details of the c-VEP demo setup script.\nSetup scripts for Dareplane provide an easy way to configure and share a full experimental setup. The idea is to download and configure all necessary components from scratch. Together with version control, this makes it easy to reproduce experiments and share them with others.\n\nPre requisists\n\nLSL Lab recorder is installed"
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/connection.html",
-    "href": "modules/dp-control-room/reference/connection.html",
-    "title": "connection",
-    "section": "",
-    "text": "connection\nconnection"
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/socket.html",
-    "href": "modules/dp-control-room/reference/socket.html",
-    "title": "socket",
-    "section": "",
-    "text": "socket\nsocket"
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/gui.callbacks.html",
-    "href": "modules/dp-control-room/reference/gui.callbacks.html",
-    "title": "gui.callbacks",
-    "section": "",
-    "text": "gui.callbacks\n\n\n\n\n\nName\nDescription\n\n\n\n\nadd_callbacks\nAdd callbacks to a given app\n\n\nadd_json_verification_cb\nCheck the json strings in each inbox\n\n\nevaluate_templates\nIf a dictionary contains $ templates in its values,\n\n\nmake_ao_payload_from_json\nTransform a json string to pipe separated list of values only\n\n\n\n\n\ngui.callbacks.add_callbacks(app, modules, macros=None)\nAdd callbacks to a given app\n\n\n\ngui.callbacks.add_json_verification_cb(app, modules, macros)\nCheck the json strings in each inbox\n\n\n\ngui.callbacks.evaluate_templates(d)\nIf a dictionary contains $ templates in its values, replace them with the variable\n\n\n\ngui.callbacks.make_ao_payload_from_json(json_payload)\nTransform a json string to pipe separated list of values only"
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/gui.callbacks.html#functions",
-    "href": "modules/dp-control-room/reference/gui.callbacks.html#functions",
-    "title": "gui.callbacks",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nadd_callbacks\nAdd callbacks to a given app\n\n\nadd_json_verification_cb\nCheck the json strings in each inbox\n\n\nevaluate_templates\nIf a dictionary contains $ templates in its values,\n\n\nmake_ao_payload_from_json\nTransform a json string to pipe separated list of values only\n\n\n\n\n\ngui.callbacks.add_callbacks(app, modules, macros=None)\nAdd callbacks to a given app\n\n\n\ngui.callbacks.add_json_verification_cb(app, modules, macros)\nCheck the json strings in each inbox\n\n\n\ngui.callbacks.evaluate_templates(d)\nIf a dictionary contains $ templates in its values, replace them with the variable\n\n\n\ngui.callbacks.make_ao_payload_from_json(json_payload)\nTransform a json string to pipe separated list of values only"
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/processes.html",
-    "href": "modules/dp-control-room/reference/processes.html",
-    "title": "processes",
-    "section": "",
-    "text": "processes\n\n\n\n\n\nName\nDescription\n\n\n\n\nclose_child_processes\nClose all child processes of a Popen instance\n\n\nstart_container\nGiven the configs for python, create subprocesses running the given modules\n\n\n\n\n\nprocesses.close_child_processes(process)\nClose all child processes of a Popen instance\n\n\n\nprocesses.start_container(\n    module_name,\n    ip,\n    port,\n    loglevel=10,\n    modules_root_path=Path('.'),\n    start_kwargs={},\n)\nGiven the configs for python, create subprocesses running the given modules\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nsubprocess.Popen"
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/processes.html#functions",
-    "href": "modules/dp-control-room/reference/processes.html#functions",
-    "title": "processes",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nclose_child_processes\nClose all child processes of a Popen instance\n\n\nstart_container\nGiven the configs for python, create subprocesses running the given modules\n\n\n\n\n\nprocesses.close_child_processes(process)\nClose all child processes of a Popen instance\n\n\n\nprocesses.start_container(\n    module_name,\n    ip,\n    port,\n    loglevel=10,\n    modules_root_path=Path('.'),\n    start_kwargs={},\n)\nGiven the configs for python, create subprocesses running the given modules\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nsubprocess.Popen"
-  },
-  {
-    "objectID": "modules/dp-control-room/reference/utils.logserver.html",
-    "href": "modules/dp-control-room/reference/utils.logserver.html",
-    "title": "utils.logserver",
-    "section": "",
-    "text": "utils.logserver\nutils.logserver"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/context.StroopContext.html",
-    "href": "modules/dp-stroop/reference/context.StroopContext.html",
-    "title": "context.StroopContext",
-    "section": "",
-    "text": "stroop_task.context.StroopContext(\n    self,\n    language,\n    word_color_dict=dict(),\n    msgs=dict(),\n    startblock_mrk=64,\n    endblock_mrk=64,\n    starttrial_mrk=2,\n    endtrial_mrk=4,\n    congruent_mrk=0,\n    incongruent_mrk=0,\n    lift_off_mrk=8,\n    reaction_mrk=16,\n    timeout_mrk=16,\n    stimulus_time_s=3.0,\n    pre_stimulus_time_s=1.0,\n    wait_time_min_s=1.0,\n    wait_time_max_s=2.0,\n    instruction_time_s=1000.0,\n    results_show_time_s=5.0,\n    arrow_down_press_to_continue_s=0.5,\n    classical_timeout_s=45,\n    focus='color',\n    reactions=list(),\n    block_stimuli=list(),\n    known_stimuli=dict(),\n    current_stimulus_idx=0,\n    current_stimuli=list(),\n    white_y_offset_px=100,\n    font_size=36,\n    instruction_font_size=16,\n    fullscreen=False,\n    screen_width=800,\n    screen_height=600,\n    tic=0,\n    tic_down=0,\n    marker_writer=get_marker_writer(),\n    has_window_attached=False,\n)\nA class to represent the context for the Stroop task.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nlanguage\nstr\nThe language setting for the Stroop task.\n\n\nword_color_dict\ndict\nA dictionary mapping words to their corresponding colors. See configs/.yaml.\n\n\nmsgs\ndict\nA dictionary containing messages for the Stroop task. See configs/.yaml.\n\n\nstartblock_mrk\nint\nMarker for the start of a block. See configs/task.yaml.\n\n\nendblock_mrk\nint\nMarker for the end of a block. See configs/task.yaml.\n\n\nstarttrial_mrk\nint\nMarker for the start of a trial. See configs/task.yaml.\n\n\nendtrial_mrk\nint\nMarker for the end of a trial. See configs/task.yaml.\n\n\ncongruent_mrk\nint\nMarker for congruent stimuli. See configs/task.yaml.\n\n\nincongruent_mrk\nint\nMarker for incongruent stimuli. See configs/task.yaml.\n\n\nlift_off_mrk\nint\nMarker for lift-off. See configs/task.yaml.\n\n\nreaction_mrk\nint\nMarker for reaction. See configs/task.yaml.\n\n\ntimeout_mrk\nint\nMarker for timeout. See configs/task.yaml.\n\n\nstimulus_time_s\nfloat\nDuration in seconds for stimulus presentation. See configs/task.yaml.\n\n\npre_stimulus_time_s\nfloat\nDuration in seconds for pre-stimulus interval. See configs/task.yaml.\n\n\nwait_time_min_s\nfloat\nMinimum wait time in seconds. See configs/task.yaml.\n\n\nwait_time_max_s\nfloat\nMaximum wait time in seconds. See configs/task.yaml.\n\n\ninstruction_time_s\nfloat\nDuration in seconds for instruction display. See configs/task.yaml.\n\n\nresults_show_time_s\nfloat\nDuration in seconds for results display. See configs/task.yaml.\n\n\narrow_down_press_to_continue_s\nfloat\nDuration in seconds for arrow down press to continue. See configs/task.yaml.\n\n\nclassical_timeout_s\nfloat\nTimeout duration in seconds for classical tasks. See configs/task.yaml.\n\n\nfocus\nLiteral['text', 'color']\nFocus of the Stroop task, either “text” or “color”.\n\n\nreactions\nlist\nList to track reactions.\n\n\nblock_stimuli\nlist\nList of stimuli for the current block.\n\n\nknown_stimuli\ndict\nDictionary of known stimuli.\n\n\ncurrent_stimulus_idx\nint\nIndex of the current stimulus.\n\n\ncurrent_stimuli\nlist\nList of current stimuli for drawing.\n\n\nwhite_y_offset_px\nint\nY-offset in pixels for white stimuli. See configs/gui.\n\n\nfont_size\nint\nFont size for stimuli. See configs/gui.\n\n\ninstruction_font_size\nint\nFont size for instructions. See configs/gui.\n\n\nfullscreen\nbool\nFlag for fullscreen mode. See configs/gui.\n\n\nscreen_width\nint\nWidth of the screen. See configs/gui.\n\n\nscreen_height\nint\nHeight of the screen. See configs/gui.\n\n\ntic\nfloat\nTime keeping variable.\n\n\ntic_down\nfloat\nTime keeping variable for countdown.\n\n\nmarker_writer\nMarkerWriter\nMarker writer for the Stroop task.\n\n\nhas_window_attached\nbool\nFlag indicating if a window is attached.\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nadd_instruction_screen_batch\nLoad all components and add them to an intro batch\n\n\nclose_context\nClose the context stopping all pyglet elements\n\n\ncreate_classical_examples_to_batch\nNot the full table just a few examples for the instruction screen\n\n\ncreate_classical_table_stimulus\nCreate a classical table stimulus for the Stroop task.\n\n\ncreate_stimuli\nCreate stimuli for the stroop task using WORD_COLOR_PAIRS from self.word_color_dict\n\n\ninit_block_stimuli\nInitialize a block of trials by modifying a context. The stimuli will\n\n\n\n\n\nstroop_task.context.StroopContext.add_instruction_screen_batch(\n    random_wait=False,\n)\nLoad all components and add them to an intro batch\n\n\n\nstroop_task.context.StroopContext.close_context()\nClose the context stopping all pyglet elements\n\n\n\nstroop_task.context.StroopContext.create_classical_examples_to_batch(batch)\nNot the full table just a few examples for the instruction screen\n\n\n\nstroop_task.context.StroopContext.create_classical_table_stimulus(\n    n_stimuli=60,\n    n_per_row=6,\n    perc_incongruent=0.33,\n)\nCreate a classical table stimulus for the Stroop task.\nThis method generates a table of stimuli for the Stroop task, where each stimulus is either congruent or incongruent based on the specified percentage. The stimuli are arranged in rows and columns, and the table is stored in the known_stimuli dictionary under the key “classical_batch”. The labels for each stimulus are also stored under the key “classical_labels”.\nThe generated table is saved as a CSV file in the stroop_task/assets directory to cache the layout. This will speed up the loading.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nn_stimuli\nint\nThe total number of stimuli to generate. Default is 60.\n60\n\n\nn_per_row\nint\nThe number of stimuli per row in the table. Default is 6.\n6\n\n\nperc_incongruent\nfloat\nThe percentage of incongruent stimuli in the table. Default is 0.33.\n0.33\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nNone\n\n\n\n\n\n\n\n\nstroop_task.context.StroopContext.create_stimuli(random_wait=False)\nCreate stimuli for the stroop task using WORD_COLOR_PAIRS from self.word_color_dict\n\n\n\nstroop_task.context.StroopContext.init_block_stimuli(n_trials)\nInitialize a block of trials by modifying a context. The stimuli will be accessible in ctx.block_stimuli as list of tuples (word, pyglet.text.Label, pyglet.shapes.Rectangle, pyglet.shapes.Rectangle, str) The shapes are the squares that will be shown left and right of the word, while the final string indicates the correct direction\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nn_trials\nint\nnumber of trials per block\nrequired"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/context.StroopContext.html#attributes",
-    "href": "modules/dp-stroop/reference/context.StroopContext.html#attributes",
-    "title": "context.StroopContext",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nlanguage\nstr\nThe language setting for the Stroop task.\n\n\nword_color_dict\ndict\nA dictionary mapping words to their corresponding colors. See configs/.yaml.\n\n\nmsgs\ndict\nA dictionary containing messages for the Stroop task. See configs/.yaml.\n\n\nstartblock_mrk\nint\nMarker for the start of a block. See configs/task.yaml.\n\n\nendblock_mrk\nint\nMarker for the end of a block. See configs/task.yaml.\n\n\nstarttrial_mrk\nint\nMarker for the start of a trial. See configs/task.yaml.\n\n\nendtrial_mrk\nint\nMarker for the end of a trial. See configs/task.yaml.\n\n\ncongruent_mrk\nint\nMarker for congruent stimuli. See configs/task.yaml.\n\n\nincongruent_mrk\nint\nMarker for incongruent stimuli. See configs/task.yaml.\n\n\nlift_off_mrk\nint\nMarker for lift-off. See configs/task.yaml.\n\n\nreaction_mrk\nint\nMarker for reaction. See configs/task.yaml.\n\n\ntimeout_mrk\nint\nMarker for timeout. See configs/task.yaml.\n\n\nstimulus_time_s\nfloat\nDuration in seconds for stimulus presentation. See configs/task.yaml.\n\n\npre_stimulus_time_s\nfloat\nDuration in seconds for pre-stimulus interval. See configs/task.yaml.\n\n\nwait_time_min_s\nfloat\nMinimum wait time in seconds. See configs/task.yaml.\n\n\nwait_time_max_s\nfloat\nMaximum wait time in seconds. See configs/task.yaml.\n\n\ninstruction_time_s\nfloat\nDuration in seconds for instruction display. See configs/task.yaml.\n\n\nresults_show_time_s\nfloat\nDuration in seconds for results display. See configs/task.yaml.\n\n\narrow_down_press_to_continue_s\nfloat\nDuration in seconds for arrow down press to continue. See configs/task.yaml.\n\n\nclassical_timeout_s\nfloat\nTimeout duration in seconds for classical tasks. See configs/task.yaml.\n\n\nfocus\nLiteral['text', 'color']\nFocus of the Stroop task, either “text” or “color”.\n\n\nreactions\nlist\nList to track reactions.\n\n\nblock_stimuli\nlist\nList of stimuli for the current block.\n\n\nknown_stimuli\ndict\nDictionary of known stimuli.\n\n\ncurrent_stimulus_idx\nint\nIndex of the current stimulus.\n\n\ncurrent_stimuli\nlist\nList of current stimuli for drawing.\n\n\nwhite_y_offset_px\nint\nY-offset in pixels for white stimuli. See configs/gui.\n\n\nfont_size\nint\nFont size for stimuli. See configs/gui.\n\n\ninstruction_font_size\nint\nFont size for instructions. See configs/gui.\n\n\nfullscreen\nbool\nFlag for fullscreen mode. See configs/gui.\n\n\nscreen_width\nint\nWidth of the screen. See configs/gui.\n\n\nscreen_height\nint\nHeight of the screen. See configs/gui.\n\n\ntic\nfloat\nTime keeping variable.\n\n\ntic_down\nfloat\nTime keeping variable for countdown.\n\n\nmarker_writer\nMarkerWriter\nMarker writer for the Stroop task.\n\n\nhas_window_attached\nbool\nFlag indicating if a window is attached."
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/context.StroopContext.html#methods",
-    "href": "modules/dp-stroop/reference/context.StroopContext.html#methods",
-    "title": "context.StroopContext",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nadd_instruction_screen_batch\nLoad all components and add them to an intro batch\n\n\nclose_context\nClose the context stopping all pyglet elements\n\n\ncreate_classical_examples_to_batch\nNot the full table just a few examples for the instruction screen\n\n\ncreate_classical_table_stimulus\nCreate a classical table stimulus for the Stroop task.\n\n\ncreate_stimuli\nCreate stimuli for the stroop task using WORD_COLOR_PAIRS from self.word_color_dict\n\n\ninit_block_stimuli\nInitialize a block of trials by modifying a context. The stimuli will\n\n\n\n\n\nstroop_task.context.StroopContext.add_instruction_screen_batch(\n    random_wait=False,\n)\nLoad all components and add them to an intro batch\n\n\n\nstroop_task.context.StroopContext.close_context()\nClose the context stopping all pyglet elements\n\n\n\nstroop_task.context.StroopContext.create_classical_examples_to_batch(batch)\nNot the full table just a few examples for the instruction screen\n\n\n\nstroop_task.context.StroopContext.create_classical_table_stimulus(\n    n_stimuli=60,\n    n_per_row=6,\n    perc_incongruent=0.33,\n)\nCreate a classical table stimulus for the Stroop task.\nThis method generates a table of stimuli for the Stroop task, where each stimulus is either congruent or incongruent based on the specified percentage. The stimuli are arranged in rows and columns, and the table is stored in the known_stimuli dictionary under the key “classical_batch”. The labels for each stimulus are also stored under the key “classical_labels”.\nThe generated table is saved as a CSV file in the stroop_task/assets directory to cache the layout. This will speed up the loading.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nn_stimuli\nint\nThe total number of stimuli to generate. Default is 60.\n60\n\n\nn_per_row\nint\nThe number of stimuli per row in the table. Default is 6.\n6\n\n\nperc_incongruent\nfloat\nThe percentage of incongruent stimuli in the table. Default is 0.33.\n0.33\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nNone\n\n\n\n\n\n\n\n\nstroop_task.context.StroopContext.create_stimuli(random_wait=False)\nCreate stimuli for the stroop task using WORD_COLOR_PAIRS from self.word_color_dict\n\n\n\nstroop_task.context.StroopContext.init_block_stimuli(n_trials)\nInitialize a block of trials by modifying a context. The stimuli will be accessible in ctx.block_stimuli as list of tuples (word, pyglet.text.Label, pyglet.shapes.Rectangle, pyglet.shapes.Rectangle, str) The shapes are the squares that will be shown left and right of the word, while the final string indicates the correct direction\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nn_trials\nint\nnumber of trials per block\nrequired"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html",
-    "href": "modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html",
-    "title": "task_manager.StroopTaskStateManager",
-    "section": "",
-    "text": "stroop_task.task_manager.StroopTaskStateManager(self, ctx, random_wait=False)\nA state manager for the Stroop task providing callbacks for state transitions from: fixation -&gt; stimulus -&gt; random.wait -&gt; fixation …\nAdditionally, there is an instructions and end state.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nctx\nStroopContext\nThe context under which to operate.\n\n\ntransition_map\ndict\nA dictionary mapping state names to their corresponding callback methods.\n\n\nnext_state_transition\nNone\nPlaceholder for the next state transition.\n\n\nstates\nlist\nA list of states in the order they will appear.\n\n\ncurrent_state\nstr\nThe current state of the task.\n\n\ndown_pressed\nbool\nA flag indicating whether the down arrow key is pressed.\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nend_block\nEnd the block and log the results\n\n\nnext_state\nTransition to the next state. dt is only for compliance with pyglet\n\n\nrandom_wait\nUsing the clock scheduler as sub ms accuracy is not needed anyways\n\n\nshow_stimulus\nShow the next stimulus in the self.ctx.block_stimuli list\n\n\nstart_block\nStart a block of trials\n\n\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.end_block()\nEnd the block and log the results\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.next_state(dt=0.0)\nTransition to the next state. dt is only for compliance with pyglet callback signature\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.random_wait()\nUsing the clock scheduler as sub ms accuracy is not needed anyways\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.show_stimulus()\nShow the next stimulus in the self.ctx.block_stimuli list\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.start_block()\nStart a block of trials"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html#attributes",
-    "href": "modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html#attributes",
-    "title": "task_manager.StroopTaskStateManager",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nctx\nStroopContext\nThe context under which to operate.\n\n\ntransition_map\ndict\nA dictionary mapping state names to their corresponding callback methods.\n\n\nnext_state_transition\nNone\nPlaceholder for the next state transition.\n\n\nstates\nlist\nA list of states in the order they will appear.\n\n\ncurrent_state\nstr\nThe current state of the task.\n\n\ndown_pressed\nbool\nA flag indicating whether the down arrow key is pressed."
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html#methods",
-    "href": "modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html#methods",
-    "title": "task_manager.StroopTaskStateManager",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nend_block\nEnd the block and log the results\n\n\nnext_state\nTransition to the next state. dt is only for compliance with pyglet\n\n\nrandom_wait\nUsing the clock scheduler as sub ms accuracy is not needed anyways\n\n\nshow_stimulus\nShow the next stimulus in the self.ctx.block_stimuli list\n\n\nstart_block\nStart a block of trials\n\n\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.end_block()\nEnd the block and log the results\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.next_state(dt=0.0)\nTransition to the next state. dt is only for compliance with pyglet callback signature\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.random_wait()\nUsing the clock scheduler as sub ms accuracy is not needed anyways\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.show_stimulus()\nShow the next stimulus in the self.ctx.block_stimuli list\n\n\n\nstroop_task.task_manager.StroopTaskStateManager.start_block()\nStart a block of trials"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/utils.marker.utf8_write.html",
-    "href": "modules/dp-stroop/reference/utils.marker.utf8_write.html",
-    "title": "utils.marker.utf8_write",
-    "section": "",
-    "text": "stroop_task.utils.marker.utf8_write(port, data)\nConverts integer data into a UTF-8 byte string and writes it to the specified serial port.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nport\nserial.Serial\nThe serial port object to which the data will be written.\nrequired\n\n\ndata\nint\nThe integer data to be written to the serial port.\nrequired\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nint\nThe number of bytes written to the serial port."
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/utils.marker.utf8_write.html#parameters",
-    "href": "modules/dp-stroop/reference/utils.marker.utf8_write.html#parameters",
-    "title": "utils.marker.utf8_write",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nport\nserial.Serial\nThe serial port object to which the data will be written.\nrequired\n\n\ndata\nint\nThe integer data to be written to the serial port.\nrequired"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/utils.marker.utf8_write.html#returns",
-    "href": "modules/dp-stroop/reference/utils.marker.utf8_write.html#returns",
-    "title": "utils.marker.utf8_write",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nint\nThe number of bytes written to the serial port."
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/main.run_paradigm_classical.html",
-    "href": "modules/dp-stroop/reference/main.run_paradigm_classical.html",
-    "title": "main.run_paradigm_classical",
-    "section": "",
-    "text": "main.run_paradigm_classical\nstroop_task.main.run_paradigm_classical(\n    language='english',\n    logger_level=None,\n    focus='color',\n    write_to_serial=True,\n    random_wait=False,\n    classical_timeout_s=None,\n    show_fps=False,\n)\nThe arrangement and colors where drawn randomly once, but are then fixed"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/main.run_paradigm_cli.html",
-    "href": "modules/dp-stroop/reference/main.run_paradigm_cli.html",
-    "title": "main.run_paradigm_cli",
-    "section": "",
-    "text": "stroop_task.main.run_paradigm_cli(\n    n_trials=60,\n    language='english',\n    logger_level=None,\n    focus='color',\n    write_to_serial=False,\n    random_wait=False,\n    classical=False,\n    classic_stroop_time_s=45,\n    show_fps=False,\n)\nStarting the Stroop paradigm standalone in a pyglet window\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nn_trials\nint (default: 60)\nNumber of trials to run in a block. Should be a multiple of 12 to ensure proper balancing\n60\n\n\nlanguage\nstr (default: \"english\")\nLanguage to use. Currently available: - “english” - “dutch” - “german”\n'english'\n\n\nlogger_level\nstr | None (default: None)\nConfiguration level for the logger. This will overwrite the value from configs/logging.yaml. Common python logging names are accepted: DEBUG, INFO, WARNING, ERROR\nNone\n\n\nfocus\nstr (default: \"color\")\nWhether the task was to focus on text or on color for the upper word. Just used in logging. Currently not implemented! -&gt; always focus on color\n'color'\n\n\nwrite_to_serial\nbool (default: False)\nIf True, the marker writer will also consider the configuration for the serial output. Not used if no serial marker hardware is connected.\nFalse\n\n\nrandom_wait\nbool (default: False)\nIf True, a random wait will be done between trials instead of waiting for the key down press. Timed as configured in configs/task.yaml.\nFalse\n\n\nclassical\nbool (default: False)\nIf True, the classical stroop paradigm will be run with displaying the color words on the screen as a table and the subject is asked to read as many as possible in a given time interval. Ask them to name the color of the font.\nFalse\n\n\nclassic_stroop_time_s\nfloat (default: 45)\nTime in seconds for the classical stroop task. Used if classical is True.\n45\n\n\nshow_fps\nbool\nIf True, the FPS will be shown on the screen.\nFalse"
-  },
-  {
-    "objectID": "modules/dp-stroop/reference/main.run_paradigm_cli.html#parameters",
-    "href": "modules/dp-stroop/reference/main.run_paradigm_cli.html#parameters",
-    "title": "main.run_paradigm_cli",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nn_trials\nint (default: 60)\nNumber of trials to run in a block. Should be a multiple of 12 to ensure proper balancing\n60\n\n\nlanguage\nstr (default: \"english\")\nLanguage to use. Currently available: - “english” - “dutch” - “german”\n'english'\n\n\nlogger_level\nstr | None (default: None)\nConfiguration level for the logger. This will overwrite the value from configs/logging.yaml. Common python logging names are accepted: DEBUG, INFO, WARNING, ERROR\nNone\n\n\nfocus\nstr (default: \"color\")\nWhether the task was to focus on text or on color for the upper word. Just used in logging. Currently not implemented! -&gt; always focus on color\n'color'\n\n\nwrite_to_serial\nbool (default: False)\nIf True, the marker writer will also consider the configuration for the serial output. Not used if no serial marker hardware is connected.\nFalse\n\n\nrandom_wait\nbool (default: False)\nIf True, a random wait will be done between trials instead of waiting for the key down press. Timed as configured in configs/task.yaml.\nFalse\n\n\nclassical\nbool (default: False)\nIf True, the classical stroop paradigm will be run with displaying the color words on the screen as a table and the subject is asked to read as many as possible in a given time interval. Ask them to name the color of the font.\nFalse\n\n\nclassic_stroop_time_s\nfloat (default: 45)\nTime in seconds for the classical stroop task. Used if classical is True.\n45\n\n\nshow_fps\nbool\nIf True, the FPS will be shown on the screen.\nFalse"
-  },
-  {
-    "objectID": "modules/dp-ao-communication/AUTHORS.html",
-    "href": "modules/dp-ao-communication/AUTHORS.html",
-    "title": "Contributors to dp-ao-communication",
-    "section": "",
-    "text": "Aron Distelzweig\n\nImplementation\n\nMatthias Dold\n\nDesign\nReworking build chain to make from cmake\nFull refactoring for C++23 and meson.build"
-  },
-  {
-    "objectID": "modules/dp-ao-communication/AUTHORS.html#contributor-sorted-alphabetically",
-    "href": "modules/dp-ao-communication/AUTHORS.html#contributor-sorted-alphabetically",
-    "title": "Contributors to dp-ao-communication",
-    "section": "",
-    "text": "Aron Distelzweig\n\nImplementation\n\nMatthias Dold\n\nDesign\nReworking build chain to make from cmake\nFull refactoring for C++23 and meson.build"
+    "text": "Creating modules\n\n\n\n  \n    \n        \n            Hello world from Dareplane\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n       \n        Building your first module based of the strawmen module.\n\n      \n      \n        \n          View example\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nSetup scripts\n\n\n\n  \n    \n        \n            c-VEP experiment\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n       \n        Walk through the [setup script for c-VEP BCI](https://github.com/thijor/dp-cvep).\n\n      \n      \n        \n          View example\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nNo matching items",
+    "crumbs": [
+      "Home",
+      "Examples"
+    ]
   },
   {
     "objectID": "libraries/dareplane_utils/server.LogRecordStreamHandler.html",
@@ -617,39 +661,6 @@
     ]
   },
   {
-    "objectID": "libraries/dareplane_utils/pylsl_xmlelement_to_dict.html",
-    "href": "libraries/dareplane_utils/pylsl_xmlelement_to_dict.html",
-    "title": "pylsl_xmlelement_to_dict",
-    "section": "",
-    "text": "pylsl_xmlelement_to_dict\ndareplane_utils.stream_watcher.lsl_stream_watcher.pylsl_xmlelement_to_dict(inf)\nThe pylsl XMLElement is hard to investigate -&gt; cast to a dict for simplicity",
-    "crumbs": [
-      "Streaming data",
-      "pylsl_xmlelement_to_dict"
-    ]
-  },
-  {
-    "objectID": "libraries/dareplane_utils/get_streams_names.html",
-    "href": "libraries/dareplane_utils/get_streams_names.html",
-    "title": "get_streams_names",
-    "section": "",
-    "text": "dareplane_utils.stream_watcher.lsl_stream_watcher.get_streams_names()\nGet a list of all available lsl stream names.\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nstreams\nlist[str]\nnames of all available LSL streams",
-    "crumbs": [
-      "Streaming data",
-      "get_streams_names"
-    ]
-  },
-  {
-    "objectID": "libraries/dareplane_utils/get_streams_names.html#returns",
-    "href": "libraries/dareplane_utils/get_streams_names.html#returns",
-    "title": "get_streams_names",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nstreams\nlist[str]\nnames of all available LSL streams",
-    "crumbs": [
-      "Streaming data",
-      "get_streams_names"
-    ]
-  },
-  {
     "objectID": "libraries/dareplane_utils/server.LogRecordSocketReceiver.html",
     "href": "libraries/dareplane_utils/server.LogRecordSocketReceiver.html",
     "title": "server.LogRecordSocketReceiver",
@@ -658,6 +669,17 @@
     "crumbs": [
       "Logging",
       "server.LogRecordSocketReceiver"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/time.full_speed.html",
+    "href": "libraries/dareplane_utils/time.full_speed.html",
+    "title": "time.full_speed",
+    "section": "",
+    "text": "time.full_speed\ndareplane_utils.general.time.full_speed(s, start)",
+    "crumbs": [
+      "General",
+      "time.full_speed"
     ]
   },
   {
@@ -691,6 +713,17 @@
     "crumbs": [
       "Server",
       "DefaultServer"
+    ]
+  },
+  {
+    "objectID": "libraries/dareplane_utils/time.partial_sleep.html",
+    "href": "libraries/dareplane_utils/time.partial_sleep.html",
+    "title": "time.partial_sleep",
+    "section": "",
+    "text": "time.partial_sleep\ndareplane_utils.general.time.partial_sleep(s, start, nsteps=30)\nSleep for 90% of s or up to 30ms to the end, whatever is longer",
+    "crumbs": [
+      "General",
+      "time.partial_sleep"
     ]
   },
   {
@@ -754,28 +787,6 @@
     ]
   },
   {
-    "objectID": "libraries/dareplane_utils/StreamWatcher.html",
-    "href": "libraries/dareplane_utils/StreamWatcher.html",
-    "title": "StreamWatcher",
-    "section": "",
-    "text": "dareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher(\n    self,\n    name='',\n    buffer_size_s=2,\n    logger=logger,\n)\n\n\n\n\n\nName\nDescription\n\n\n\n\nconnect_to_stream\nEither use the self.name or a provided identifier dict to hook up\n\n\ndisconnect\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\nupdate_char_p\nLook for new data on the LSL inlet and update the buffer, processing for strings\n\n\nupdate_numeric\nLook for new data on the LSL inlet and update the buffer\n\n\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(\n    identifier=None,\n)\nEither use the self.name or a provided identifier dict to hook up with an LSL stream, they should coincide\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_char_p()\nLook for new data on the LSL inlet and update the buffer, processing for strings\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()\nLook for new data on the LSL inlet and update the buffer",
-    "crumbs": [
-      "Streaming data",
-      "StreamWatcher"
-    ]
-  },
-  {
-    "objectID": "libraries/dareplane_utils/StreamWatcher.html#methods",
-    "href": "libraries/dareplane_utils/StreamWatcher.html#methods",
-    "title": "StreamWatcher",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nconnect_to_stream\nEither use the self.name or a provided identifier dict to hook up\n\n\ndisconnect\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\nupdate_char_p\nLook for new data on the LSL inlet and update the buffer, processing for strings\n\n\nupdate_numeric\nLook for new data on the LSL inlet and update the buffer\n\n\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.connect_to_stream(\n    identifier=None,\n)\nEither use the self.name or a provided identifier dict to hook up with an LSL stream, they should coincide\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.disconnect()\nDestroying the inlet will disconnect -&gt; see pylsl.pylsl.py\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_char_p()\nLook for new data on the LSL inlet and update the buffer, processing for strings\n\n\n\ndareplane_utils.stream_watcher.lsl_stream_watcher.StreamWatcher.update_numeric()\nLook for new data on the LSL inlet and update the buffer",
-    "crumbs": [
-      "Streaming data",
-      "StreamWatcher"
-    ]
-  },
-  {
     "objectID": "libraries/dareplane_utils/ringbuffer.RingBuffer.html",
     "href": "libraries/dareplane_utils/ringbuffer.RingBuffer.html",
     "title": "ringbuffer.RingBuffer",
@@ -829,5 +840,225 @@
       "General",
       "ringbuffer.RingBuffer"
     ]
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/connection.html",
+    "href": "modules/dp-control-room/reference/connection.html",
+    "title": "connection",
+    "section": "",
+    "text": "connection\nconnection"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/processes.close_child_processes.html",
+    "href": "modules/dp-control-room/reference/processes.close_child_processes.html",
+    "title": "processes.close_child_processes",
+    "section": "",
+    "text": "processes.close_child_processes\nprocesses.close_child_processes(process)\nClose all child processes of a Popen instance"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/main.close_down_connections.html",
+    "href": "modules/dp-control-room/reference/main.close_down_connections.html",
+    "title": "main.close_down_connections",
+    "section": "",
+    "text": "main.close_down_connections\nmain.close_down_connections(mod_connections)\nClose all ModuleConnection instances."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.callbacks.add_pcomm_sender.html",
+    "href": "modules/dp-control-room/reference/gui.callbacks.add_pcomm_sender.html",
+    "title": "gui.callbacks.add_pcomm_sender",
+    "section": "",
+    "text": "gui.callbacks.add_pcomm_sender(app, modules)\nAdd a callback to the Dash app to send pcomm commands to modules.\nThis function sets up a callback that sends pcomm commands to specified modules based on user interactions. It handles the evaluation of pcomm templates and sends the appropriate commands to the modules.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\napp\nDash\nThe Dash application to which the callback will be added.\nrequired\n\n\nmodules\nlist[ModuleConnection]\nA list of ModuleConnection objects representing the modules to be included in the application.\nrequired\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nDash\nThe Dash application with the added callback."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.callbacks.add_pcomm_sender.html#parameters",
+    "href": "modules/dp-control-room/reference/gui.callbacks.add_pcomm_sender.html#parameters",
+    "title": "gui.callbacks.add_pcomm_sender",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\napp\nDash\nThe Dash application to which the callback will be added.\nrequired\n\n\nmodules\nlist[ModuleConnection]\nA list of ModuleConnection objects representing the modules to be included in the application.\nrequired"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.callbacks.add_pcomm_sender.html#returns",
+    "href": "modules/dp-control-room/reference/gui.callbacks.add_pcomm_sender.html#returns",
+    "title": "gui.callbacks.add_pcomm_sender",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nDash\nThe Dash application with the added callback."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.layout.get_module_tile_layout.html",
+    "href": "modules/dp-control-room/reference/gui.layout.get_module_tile_layout.html",
+    "title": "gui.layout.get_module_tile_layout",
+    "section": "",
+    "text": "gui.layout.get_module_tile_layout\ngui.layout.get_module_tile_layout(module)\nCreate the tile showing the individual modules"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/main.initialize_exe_modules.html",
+    "href": "modules/dp-control-room/reference/main.initialize_exe_modules.html",
+    "title": "main.initialize_exe_modules",
+    "section": "",
+    "text": "main.initialize_exe_modules\nmain.initialize_exe_modules(mod_cfgs)\nInitialize modules provided with an executable target. NOT WORKING ATM."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.callbacks.evaluate_templates.html",
+    "href": "modules/dp-control-room/reference/gui.callbacks.evaluate_templates.html",
+    "title": "gui.callbacks.evaluate_templates",
+    "section": "",
+    "text": "gui.callbacks.evaluate_templates\ngui.callbacks.evaluate_templates(d)\nIf a dictionary contains $ templates in its values, replace them with the variable"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/processes.start_container.html",
+    "href": "modules/dp-control-room/reference/processes.start_container.html",
+    "title": "processes.start_container",
+    "section": "",
+    "text": "processes.start_container(\n    module_name,\n    ip,\n    port,\n    loglevel=10,\n    modules_root_path=Path('.'),\n    start_kwargs={},\n)\nStart a container for a given module.\nThis function creates a subprocess to run a specified module using the provided configurations. It supports starting Python modules and can be extended to support other types of containers in the future.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nmodule_name\nstr\nThe name of the module to start.\nrequired\n\n\nip\nstr\nThe IP address on which the module should run.\nrequired\n\n\nport\nint\nThe port number on which the module should run.\nrequired\n\n\nloglevel\nint\nThe logging level for the module, by default 10 (DEBUG).\n10\n\n\nmodules_root_path\nPath\nThe root path where the modules are located, by default Path(“.”).\nPath('.')\n\n\nstart_kwargs\ndict\nAdditional keyword arguments to pass to the module, by default {}.\n{}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nsubprocess.Popen\nA Popen object representing the started subprocess.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nAssertionError\nIf the specified module path does not exist."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/processes.start_container.html#parameters",
+    "href": "modules/dp-control-room/reference/processes.start_container.html#parameters",
+    "title": "processes.start_container",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nmodule_name\nstr\nThe name of the module to start.\nrequired\n\n\nip\nstr\nThe IP address on which the module should run.\nrequired\n\n\nport\nint\nThe port number on which the module should run.\nrequired\n\n\nloglevel\nint\nThe logging level for the module, by default 10 (DEBUG).\n10\n\n\nmodules_root_path\nPath\nThe root path where the modules are located, by default Path(“.”).\nPath('.')\n\n\nstart_kwargs\ndict\nAdditional keyword arguments to pass to the module, by default {}.\n{}"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/processes.start_container.html#returns",
+    "href": "modules/dp-control-room/reference/processes.start_container.html#returns",
+    "title": "processes.start_container",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nsubprocess.Popen\nA Popen object representing the started subprocess."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/processes.start_container.html#raises",
+    "href": "modules/dp-control-room/reference/processes.start_container.html#raises",
+    "title": "processes.start_container",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nAssertionError\nIf the specified module path does not exist."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/index.html",
+    "href": "modules/dp-control-room/reference/index.html",
+    "title": "Documentation control room",
+    "section": "",
+    "text": "The control room is one way of composing Dareplane modules to experimental setups. \n\nThe github repository for this module is located at: https://github.com/bsdlab/dp-control-room/\n\n\n\nThe main script to start and spawn the control_room.\n\n\n\nmain.run_control_room\nRun the control room application with the given setup configuration.\n\n\nmain.close_down_connections\nClose all ModuleConnection instances.\n\n\nmain.initialize_python_modules\nInitialize Python modules based on the provided configurations.\n\n\nmain.initialize_exe_modules\nInitialize modules provided with an executable target. NOT WORKING ATM.\n\n\n\n\n\n\nUI components implemented in dash are the core of the control room.\n\n\n\ngui.app.build_app\nBuild and configure a Dash web application for the control room.\n\n\ngui.callbacks.add_json_verification_cb\nAdd a callback to the Dash app to verify JSON strings in input fields.\n\n\ngui.callbacks.add_macros_sender\nAdd a callbacks to dynamically to macro sections on a Dash app.\n\n\ngui.callbacks.evaluate_templates\nIf a dictionary contains $ templates in its values,\n\n\ngui.callbacks.add_pcomm_sender\nAdd a callback to the Dash app to send pcomm commands to modules.\n\n\ngui.layout.get_layout\nGenerate the layout for the control room application.\n\n\ngui.layout.create_macro_tile\nCreate a tile containing buttons for each macro.\n\n\ngui.layout.get_macro_button_input_pair\nCreate a macro button and input pair for a given macro configuration.\n\n\ngui.layout.get_log_stream_tile\nCreate the tile showing the last lines of the log file\n\n\ngui.layout.get_module_tile_layout\nCreate the tile showing the individual modules\n\n\ngui.layout.get_pcomm_button_input_pair\nCreate pairs of buttons and inputs for each pcommand\n\n\n\n\n\n\nThe control_room spawns and manages the life-times of other python modules.\n\n\n\nprocesses.close_child_processes\nClose all child processes of a Popen instance\n\n\nprocesses.start_container\nStart a container for a given module.\n\n\nconnection\n\n\n\nsocket\n\n\n\n\n\n\n\nThe control_room also routes control_room callbacks, which allow intermodule communication if this is not solved by using something like LSL.\n\n\n\ncallbacks.CallbackBroker\nA class to handle callbacks from socket clients.\n\n\n\n\n\n\nUtils of the control_room concern mainly logging. This relates to providing a TCP that listenes on the standard port for python logging (9020), and therefore consolidates all logging messages shared this way. E.g., when using dareplane-utils and the from dareplane_utils.logging.logger import get_logger.",
+    "crumbs": [
+      "Home",
+      "Documentation",
+      "Dp Control Room",
+      "Documentation control room"
+    ]
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/index.html#control-room-functionality",
+    "href": "modules/dp-control-room/reference/index.html#control-room-functionality",
+    "title": "Documentation control room",
+    "section": "",
+    "text": "The control room is one way of composing Dareplane modules to experimental setups. \n\nThe github repository for this module is located at: https://github.com/bsdlab/dp-control-room/\n\n\n\nThe main script to start and spawn the control_room.\n\n\n\nmain.run_control_room\nRun the control room application with the given setup configuration.\n\n\nmain.close_down_connections\nClose all ModuleConnection instances.\n\n\nmain.initialize_python_modules\nInitialize Python modules based on the provided configurations.\n\n\nmain.initialize_exe_modules\nInitialize modules provided with an executable target. NOT WORKING ATM.\n\n\n\n\n\n\nUI components implemented in dash are the core of the control room.\n\n\n\ngui.app.build_app\nBuild and configure a Dash web application for the control room.\n\n\ngui.callbacks.add_json_verification_cb\nAdd a callback to the Dash app to verify JSON strings in input fields.\n\n\ngui.callbacks.add_macros_sender\nAdd a callbacks to dynamically to macro sections on a Dash app.\n\n\ngui.callbacks.evaluate_templates\nIf a dictionary contains $ templates in its values,\n\n\ngui.callbacks.add_pcomm_sender\nAdd a callback to the Dash app to send pcomm commands to modules.\n\n\ngui.layout.get_layout\nGenerate the layout for the control room application.\n\n\ngui.layout.create_macro_tile\nCreate a tile containing buttons for each macro.\n\n\ngui.layout.get_macro_button_input_pair\nCreate a macro button and input pair for a given macro configuration.\n\n\ngui.layout.get_log_stream_tile\nCreate the tile showing the last lines of the log file\n\n\ngui.layout.get_module_tile_layout\nCreate the tile showing the individual modules\n\n\ngui.layout.get_pcomm_button_input_pair\nCreate pairs of buttons and inputs for each pcommand\n\n\n\n\n\n\nThe control_room spawns and manages the life-times of other python modules.\n\n\n\nprocesses.close_child_processes\nClose all child processes of a Popen instance\n\n\nprocesses.start_container\nStart a container for a given module.\n\n\nconnection\n\n\n\nsocket\n\n\n\n\n\n\n\nThe control_room also routes control_room callbacks, which allow intermodule communication if this is not solved by using something like LSL.\n\n\n\ncallbacks.CallbackBroker\nA class to handle callbacks from socket clients.\n\n\n\n\n\n\nUtils of the control_room concern mainly logging. This relates to providing a TCP that listenes on the standard port for python logging (9020), and therefore consolidates all logging messages shared this way. E.g., when using dareplane-utils and the from dareplane_utils.logging.logger import get_logger.",
+    "crumbs": [
+      "Home",
+      "Documentation",
+      "Dp Control Room",
+      "Documentation control room"
+    ]
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.app.build_app.html",
+    "href": "modules/dp-control-room/reference/gui.app.build_app.html",
+    "title": "gui.app.build_app",
+    "section": "",
+    "text": "gui.app.build_app(modules, macros)\nBuild and configure a Dash web application for the control room.\nThis function initializes a Dash application, sets up the layout, and attaches callbacks to handle user interactions. It returns the configured Dash app.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nmodules\nlist[ModuleConnection]\nA list of ModuleConnection objects representing the modules to be included in the application.\nrequired\n\n\nmacros\ndict | None\nA dictionary containing macro definitions to be used in the application. If None, no macros are used.\nrequired\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nDash\nThe configured Dash application."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.app.build_app.html#parameters",
+    "href": "modules/dp-control-room/reference/gui.app.build_app.html#parameters",
+    "title": "gui.app.build_app",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nmodules\nlist[ModuleConnection]\nA list of ModuleConnection objects representing the modules to be included in the application.\nrequired\n\n\nmacros\ndict | None\nA dictionary containing macro definitions to be used in the application. If None, no macros are used.\nrequired"
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/gui.app.build_app.html#returns",
+    "href": "modules/dp-control-room/reference/gui.app.build_app.html#returns",
+    "title": "gui.app.build_app",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nDash\nThe configured Dash application."
+  },
+  {
+    "objectID": "modules/dp-control-room/reference/main.initialize_python_modules.html",
+    "href": "modules/dp-control-room/reference/main.initialize_python_modules.html",
+    "title": "main.initialize_python_modules",
+    "section": "",
+    "text": "main.initialize_python_modules\nmain.initialize_python_modules(mod_cfgs)\nInitialize Python modules based on the provided configurations."
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/main.run_paradigm_classical.html",
+    "href": "modules/dp-stroop/reference/main.run_paradigm_classical.html",
+    "title": "main.run_paradigm_classical",
+    "section": "",
+    "text": "main.run_paradigm_classical\nstroop_task.main.run_paradigm_classical(\n    language='english',\n    logger_level=None,\n    focus='color',\n    write_to_serial=True,\n    random_wait=False,\n    classical_timeout_s=None,\n    show_fps=False,\n)\nThe arrangement and colors where drawn randomly once, but are then fixed"
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/utils.marker.MarkerWriter.html",
+    "href": "modules/dp-stroop/reference/utils.marker.MarkerWriter.html",
+    "title": "utils.marker.MarkerWriter",
+    "section": "",
+    "text": "stroop_task.utils.marker.MarkerWriter(\n    self,\n    write_to_serial=True,\n    write_to_lsl=True,\n    write_to_logger=False,\n    serial_port='COM4',\n    utf8_encoded=True,\n)\nClass for interacting with the virtual serial port provided by the BV TriggerBox and an LSL marker stream\n\n\n\n\n\nName\nDescription\n\n\n\n\nwrite\nFor this paradigm the writer will have the potential for separate markers for LSL and the parallel port\n\n\n\n\n\nstroop_task.utils.marker.MarkerWriter.write(data, lsl_marker=None)\nFor this paradigm the writer will have the potential for separate markers for LSL and the parallel port\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndata\n\ndata to be written to the serial port\nrequired\n\n\nlsl_marker\nstr | None\nif None, the data is written to the serial port and the LSL stream otherwise the lsl_marker is written to the LSL stream\nNone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nbyteswritten\nint\nnumber of bytes written to the serial port if self.serial_writer is defined"
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/utils.marker.MarkerWriter.html#methods",
+    "href": "modules/dp-stroop/reference/utils.marker.MarkerWriter.html#methods",
+    "title": "utils.marker.MarkerWriter",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nwrite\nFor this paradigm the writer will have the potential for separate markers for LSL and the parallel port\n\n\n\n\n\nstroop_task.utils.marker.MarkerWriter.write(data, lsl_marker=None)\nFor this paradigm the writer will have the potential for separate markers for LSL and the parallel port\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndata\n\ndata to be written to the serial port\nrequired\n\n\nlsl_marker\nstr | None\nif None, the data is written to the serial port and the LSL stream otherwise the lsl_marker is written to the LSL stream\nNone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nbyteswritten\nint\nnumber of bytes written to the serial port if self.serial_writer is defined"
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/utils.marker.port_writer.html",
+    "href": "modules/dp-stroop/reference/utils.marker.port_writer.html",
+    "title": "utils.marker.port_writer",
+    "section": "",
+    "text": "stroop_task.utils.marker.port_writer(port, data, pulsewidth=0.01)\nWrites data to a serial port with a specified pulse width.\nThis function is typically used for writing to the BrainVision trigger box. It writes the actual data to the port, waits for the specified pulse width, and then writes a zero byte to the port.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nport\nserial.Serial\nThe serial port object to which the data will be written.\nrequired\n\n\ndata\nlist[int] | int\nThe data to be written to the serial port. Can be a single integer or a list of integers.\nrequired\n\n\npulsewidth\nfloat\nThe duration in seconds to wait between writing the actual data and the zero byte. Default is 0.01 seconds.\n0.01\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nint\nThe number of bytes written to the serial port."
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/utils.marker.port_writer.html#parameters",
+    "href": "modules/dp-stroop/reference/utils.marker.port_writer.html#parameters",
+    "title": "utils.marker.port_writer",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nport\nserial.Serial\nThe serial port object to which the data will be written.\nrequired\n\n\ndata\nlist[int] | int\nThe data to be written to the serial port. Can be a single integer or a list of integers.\nrequired\n\n\npulsewidth\nfloat\nThe duration in seconds to wait between writing the actual data and the zero byte. Default is 0.01 seconds.\n0.01"
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/utils.marker.port_writer.html#returns",
+    "href": "modules/dp-stroop/reference/utils.marker.port_writer.html#returns",
+    "title": "utils.marker.port_writer",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nint\nThe number of bytes written to the serial port."
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/index.html",
+    "href": "modules/dp-stroop/reference/index.html",
+    "title": "Documentation for the Stroop task",
+    "section": "",
+    "text": "The github repository for this module is located at: https://github.com/bsdlab/dp-stroop\n\n\n\nThe main script to start the Stroop task from command line.\n\n\n\nmain.run_paradigm_cli\nStarting the Stroop paradigm standalone in a pyglet window\n\n\nmain.run_paradigm\nRun the two-word Stroop task paradigm.\n\n\nmain.run_paradigm_classical\nThe arrangement and colors where drawn randomly once, but are then fixed\n\n\ncontext.StroopContext\nA class to represent the context for the Stroop task.\n\n\ntask_manager.StroopTaskStateManager\nA state manager for the Stroop task providing callbacks for state transitions from:\n\n\nutils.marker.utf8_write\nConverts integer data into a UTF-8 byte string\n\n\nutils.marker.port_writer\nWrites data to a serial port with a specified pulse width.\n\n\nutils.marker.MarkerWriter\nClass for interacting with the virtual serial",
+    "crumbs": [
+      "Home",
+      "Documentation",
+      "Dp Stroop",
+      "Documentation for the Stroop task"
+    ]
+  },
+  {
+    "objectID": "modules/dp-stroop/reference/index.html#the-stroop-task",
+    "href": "modules/dp-stroop/reference/index.html#the-stroop-task",
+    "title": "Documentation for the Stroop task",
+    "section": "",
+    "text": "The github repository for this module is located at: https://github.com/bsdlab/dp-stroop\n\n\n\nThe main script to start the Stroop task from command line.\n\n\n\nmain.run_paradigm_cli\nStarting the Stroop paradigm standalone in a pyglet window\n\n\nmain.run_paradigm\nRun the two-word Stroop task paradigm.\n\n\nmain.run_paradigm_classical\nThe arrangement and colors where drawn randomly once, but are then fixed\n\n\ncontext.StroopContext\nA class to represent the context for the Stroop task.\n\n\ntask_manager.StroopTaskStateManager\nA state manager for the Stroop task providing callbacks for state transitions from:\n\n\nutils.marker.utf8_write\nConverts integer data into a UTF-8 byte string\n\n\nutils.marker.port_writer\nWrites data to a serial port with a specified pulse width.\n\n\nutils.marker.MarkerWriter\nClass for interacting with the virtual serial",
+    "crumbs": [
+      "Home",
+      "Documentation",
+      "Dp Stroop",
+      "Documentation for the Stroop task"
+    ]
+  },
+  {
+    "objectID": "modules/index.html",
+    "href": "modules/index.html",
+    "title": "Dareplane",
+    "section": "",
+    "text": "Utility librarires\nCollection of libraries providing functionality to Dareplane\n\n\n  \n    \n        \n            dareplane-utils\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n       \n        Python module with various utility functions for Dareplane modules\n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nSingle module documentation\nDareplane is structured in individual module, each providing its own documentation\n\n\n  \n    \n        \n            dp-strawman-module\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-control-room\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-lsl-recording\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-mockup-streamer\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-copydraw\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-multiband-regression\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-bollinger-control\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-ao-communication\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-arduino-stimulator\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-picoscope-streamer\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-passthrough\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-threshold-controller\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-cortec-bic\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-cvep-speller\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-stroop\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n  \n    \n        \n            dp-c-sdl2-example\n        \n    \n    \n    \n        \n    \n    \n    \n    \n      \n      \n      \n        \n          View documentation\n        \n\n         \n\n      \n    \n    \n  \n\n\n\nNo matching items"
   }
 ]

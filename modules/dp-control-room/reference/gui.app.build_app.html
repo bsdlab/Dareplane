@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>gui.app – Dareplane</title>
+<title>gui.app.build_app – Dareplane</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -42,9 +77,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-083966fab483341b80272ffbd41d3d84.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-0fc807406a3664e7d13a9e6fc8ae2cee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-083966fab483341b80272ffbd41d3d84.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-02faab8b0468390dfe27fe0e4344f365.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-4f5317bed83e40a2408bc2fdbcc84453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-02faab8b0468390dfe27fe0e4344f365.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -310,7 +345,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#control_room.gui.app" id="toc-control_room.gui.app" class="nav-link active" data-scroll-target="#control_room.gui.app">gui.app</a></li>
+  <li><a href="#control_room.gui.app.build_app" id="toc-control_room.gui.app.build_app" class="nav-link active" data-scroll-target="#control_room.gui.app.build_app">gui.app.build_app</a>
+  <ul class="collapse">
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
+  <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -321,11 +360,65 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="control_room.gui.app" class="level1">
-<h1>gui.app</h1>
-<p><code>gui.app</code></p>
+<section id="control_room.gui.app.build_app" class="level1">
+<h1>gui.app.build_app</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>gui.app.build_app(modules, macros)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Build and configure a Dash web application for the control room.</p>
+<p>This function initializes a Dash application, sets up the layout, and attaches callbacks to handle user interactions. It returns the configured Dash app.</p>
+<section id="parameters" class="level2 doc-section doc-section-parameters">
+<h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 17%">
+<col style="width: 68%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>modules</td>
+<td>list[ModuleConnection]</td>
+<td>A list of ModuleConnection objects representing the modules to be included in the application.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>macros</td>
+<td>dict | None</td>
+<td>A dictionary containing macro definitions to be used in the application. If None, no macros are used.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns" class="level2 doc-section doc-section-returns">
+<h2 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Dash</td>
+<td>The configured Dash application.</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
