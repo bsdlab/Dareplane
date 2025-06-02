@@ -366,11 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="control_room.callbacks.CallbackBroker" class="level1">
 <h1>callbacks.CallbackBroker</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>callbacks.CallbackBroker(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    mod_connections<span class="op">=</span><span class="bu">dict</span>(),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    stop_event<span class="op">=</span>threading.Event(),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>callbacks.CallbackBroker(mod_connections<span class="op">=</span><span class="bu">dict</span>(), stop_event<span class="op">=</span>threading.Event())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>A class to handle callbacks from socket clients.</p>
 <p>This class manages connections to various modules and listens for callbacks on these connections. It processes the received messages and forwards them to the appropriate target modules.</p>
 <section id="attributes" class="level2 doc-section doc-section-attributes">
