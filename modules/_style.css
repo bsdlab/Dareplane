@@ -33,3 +33,7 @@
   display: inline;
   margin-right: 20px;
 }
+
+.wip-card {
+  opacity: 0.33;
+}
