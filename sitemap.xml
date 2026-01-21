@@ -2,330 +2,330 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/connection.html</loc>
-    <lastmod>2026-01-21T11:48:23.726Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.552Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/gui.layout.get_layout.html</loc>
-    <lastmod>2026-01-21T11:48:23.704Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.530Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/gui.layout.get_log_stream_tile.html</loc>
-    <lastmod>2026-01-21T11:48:23.713Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.538Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/gui.layout.get_pcomm_button_input_pair.html</loc>
-    <lastmod>2026-01-21T11:48:23.717Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.543Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/main.initialize_python_modules.html</loc>
-    <lastmod>2026-01-21T11:48:23.680Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.506Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/processes.start_container.html</loc>
-    <lastmod>2026-01-21T11:48:23.725Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.551Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/gui.layout.get_macro_button_input_pair.html</loc>
-    <lastmod>2026-01-21T11:48:23.711Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.536Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/gui.layout.get_module_tile_layout.html</loc>
-    <lastmod>2026-01-21T11:48:23.715Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.540Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/processes.close_child_processes.html</loc>
-    <lastmod>2026-01-21T11:48:23.719Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.545Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/gui.callbacks.add_pcomm_sender.html</loc>
-    <lastmod>2026-01-21T11:48:23.700Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.526Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/main.run_control_room.html</loc>
-    <lastmod>2026-01-21T11:48:23.676Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.502Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-stroop/reference/utils.marker.port_writer.html</loc>
-    <lastmod>2026-01-21T11:48:30.675Z</lastmod>
+    <lastmod>2026-01-21T11:56:50.872Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-stroop/reference/utils.marker.MarkerWriter.html</loc>
-    <lastmod>2026-01-21T11:48:30.682Z</lastmod>
+    <lastmod>2026-01-21T11:56:50.878Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-stroop/reference/main.run_paradigm_classical.html</loc>
-    <lastmod>2026-01-21T11:48:30.618Z</lastmod>
+    <lastmod>2026-01-21T11:56:50.816Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-stroop/reference/task_manager.StroopTaskStateManager.html</loc>
-    <lastmod>2026-01-21T11:48:30.666Z</lastmod>
+    <lastmod>2026-01-21T11:56:50.864Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-multiband-regression/reference/main.run_multiband_regression.html</loc>
-    <lastmod>2026-01-21T11:48:26.243Z</lastmod>
+    <lastmod>2026-01-21T11:56:42.355Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-multiband-regression/reference/main.init_lsl_outlet.html</loc>
-    <lastmod>2026-01-21T11:48:26.250Z</lastmod>
+    <lastmod>2026-01-21T11:56:42.362Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-mockup-streamer/reference/main.run_random.html</loc>
-    <lastmod>2026-01-21T11:48:24.615Z</lastmod>
+    <lastmod>2026-01-21T11:56:40.057Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-mockup-streamer/reference/main.run_stream.html</loc>
-    <lastmod>2026-01-21T11:48:24.619Z</lastmod>
+    <lastmod>2026-01-21T11:56:40.061Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-copydraw/reference/main.init_paradigm.html</loc>
-    <lastmod>2026-01-21T11:48:25.437Z</lastmod>
+    <lastmod>2026-01-21T11:56:41.201Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-copydraw/reference/index.html</loc>
-    <lastmod>2026-01-21T11:48:25.413Z</lastmod>
+    <lastmod>2026-01-21T11:56:41.176Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-passthrough/reference/main.connect_stream_watcher.html</loc>
-    <lastmod>2026-01-21T11:48:28.516Z</lastmod>
+    <lastmod>2026-01-21T11:56:45.993Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-passthrough/reference/main.get_main_thread.html</loc>
-    <lastmod>2026-01-21T11:48:28.510Z</lastmod>
+    <lastmod>2026-01-21T11:56:45.987Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-passthrough/reference/main.main.html</loc>
-    <lastmod>2026-01-21T11:48:28.507Z</lastmod>
+    <lastmod>2026-01-21T11:56:45.984Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-threshold-controller/reference/main.compute_controller_output.html</loc>
-    <lastmod>2026-01-21T11:48:29.241Z</lastmod>
+    <lastmod>2026-01-21T11:56:47.053Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-threshold-controller/reference/main.get_main_thread.html</loc>
-    <lastmod>2026-01-21T11:48:29.237Z</lastmod>
+    <lastmod>2026-01-21T11:56:47.050Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-threshold-controller/reference/main.main.html</loc>
-    <lastmod>2026-01-21T11:48:29.235Z</lastmod>
+    <lastmod>2026-01-21T11:56:47.047Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-arduino-stimulator/reference/utils.time.sleep_s.html</loc>
-    <lastmod>2026-01-21T11:48:27.582Z</lastmod>
+    <lastmod>2026-01-21T11:56:44.464Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-arduino-stimulator/reference/main.get_main_thread.html</loc>
-    <lastmod>2026-01-21T11:48:27.579Z</lastmod>
+    <lastmod>2026-01-21T11:56:44.461Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-arduino-stimulator/reference/main.main.html</loc>
-    <lastmod>2026-01-21T11:48:27.570Z</lastmod>
+    <lastmod>2026-01-21T11:56:44.452Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/index.html</loc>
-    <lastmod>2026-01-21T11:47:39.544Z</lastmod>
+    <lastmod>2026-01-21T11:55:47.282Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/DefaultServer.html</loc>
-    <lastmod>2026-01-21T11:48:22.450Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.365Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/ringbuffer.RingBuffer.html</loc>
-    <lastmod>2026-01-21T11:48:22.499Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.413Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/time.sleep_s.html</loc>
-    <lastmod>2026-01-21T11:48:22.502Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.417Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/pylsl_xmlelement_to_dict.html</loc>
-    <lastmod>2026-01-21T11:48:22.476Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.391Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/time.full_speed.html</loc>
-    <lastmod>2026-01-21T11:48:22.506Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.421Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/index.html</loc>
-    <lastmod>2026-01-21T11:48:22.405Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.319Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/server.LogRecordStreamHandler.html</loc>
-    <lastmod>2026-01-21T11:48:22.458Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.373Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/about/quarto_documentation_setup.html</loc>
-    <lastmod>2026-01-21T11:47:39.532Z</lastmod>
+    <lastmod>2026-01-21T11:55:47.270Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/examples/PCOMM_callbacks.html</loc>
-    <lastmod>2026-01-21T11:47:39.540Z</lastmod>
+    <lastmod>2026-01-21T11:55:47.279Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/examples/c-VEP_setup.html</loc>
-    <lastmod>2026-01-21T11:47:39.543Z</lastmod>
+    <lastmod>2026-01-21T11:55:47.281Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/examples/index.html</loc>
-    <lastmod>2026-01-21T11:47:39.543Z</lastmod>
+    <lastmod>2026-01-21T11:55:47.282Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/examples/hello_world.html</loc>
-    <lastmod>2026-01-21T11:47:39.543Z</lastmod>
+    <lastmod>2026-01-21T11:55:47.282Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/main.html</loc>
-    <lastmod>2026-01-21T11:48:22.712Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.684Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/logger.get_logger.html</loc>
-    <lastmod>2026-01-21T11:48:22.455Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.369Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/event_loop.EventLoop.html</loc>
-    <lastmod>2026-01-21T11:48:22.530Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.444Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/StreamWatcher.html</loc>
-    <lastmod>2026-01-21T11:48:22.472Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.386Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/time.partial_sleep.html</loc>
-    <lastmod>2026-01-21T11:48:22.505Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.419Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/server.modify_root_logger.html</loc>
-    <lastmod>2026-01-21T11:48:22.462Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.377Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/get_streams_names.html</loc>
-    <lastmod>2026-01-21T11:48:22.474Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.389Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/server.LogRecordSocketReceiver.html</loc>
-    <lastmod>2026-01-21T11:48:22.461Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.376Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/libraries/dareplane_utils/get_channel_names.html</loc>
-    <lastmod>2026-01-21T11:48:22.479Z</lastmod>
+    <lastmod>2026-01-21T11:56:36.394Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-ao-communication/AUTHORS.html</loc>
-    <lastmod>2026-01-21T11:48:26.866Z</lastmod>
+    <lastmod>2026-01-21T11:56:43.395Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-arduino-stimulator/reference/index.html</loc>
-    <lastmod>2026-01-21T11:48:27.543Z</lastmod>
+    <lastmod>2026-01-21T11:56:44.427Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-arduino-stimulator/reference/main.init_lsl_outlet.html</loc>
-    <lastmod>2026-01-21T11:48:27.573Z</lastmod>
+    <lastmod>2026-01-21T11:56:44.455Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-arduino-stimulator/reference/main.connect_stream_watcher.html</loc>
-    <lastmod>2026-01-21T11:48:27.576Z</lastmod>
+    <lastmod>2026-01-21T11:56:44.458Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-threshold-controller/reference/index.html</loc>
-    <lastmod>2026-01-21T11:48:29.211Z</lastmod>
+    <lastmod>2026-01-21T11:56:47.023Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-threshold-controller/reference/main.init_lsl_outlet.html</loc>
-    <lastmod>2026-01-21T11:48:29.244Z</lastmod>
+    <lastmod>2026-01-21T11:56:47.056Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-threshold-controller/reference/main.connect_stream_watcher.html</loc>
-    <lastmod>2026-01-21T11:48:29.248Z</lastmod>
+    <lastmod>2026-01-21T11:56:47.060Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-passthrough/reference/index.html</loc>
-    <lastmod>2026-01-21T11:48:28.483Z</lastmod>
+    <lastmod>2026-01-21T11:56:45.959Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-passthrough/reference/main.init_lsl_outlet.html</loc>
-    <lastmod>2026-01-21T11:48:28.513Z</lastmod>
+    <lastmod>2026-01-21T11:56:45.990Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-copydraw/reference/main.main.html</loc>
-    <lastmod>2026-01-21T11:48:25.441Z</lastmod>
+    <lastmod>2026-01-21T11:56:41.205Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-copydraw/reference/copydraw.CopyDraw.html</loc>
-    <lastmod>2026-01-21T11:48:25.495Z</lastmod>
+    <lastmod>2026-01-21T11:56:41.257Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-copydraw/reference/copydraw.VPPort.html</loc>
-    <lastmod>2026-01-21T11:48:25.503Z</lastmod>
+    <lastmod>2026-01-21T11:56:41.265Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-mockup-streamer/reference/index.html</loc>
-    <lastmod>2026-01-21T11:48:24.588Z</lastmod>
+    <lastmod>2026-01-21T11:56:40.030Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-multiband-regression/reference/index.html</loc>
-    <lastmod>2026-01-21T11:48:26.220Z</lastmod>
+    <lastmod>2026-01-21T11:56:42.332Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-multiband-regression/reference/main.process_loop.html</loc>
-    <lastmod>2026-01-21T11:48:26.246Z</lastmod>
+    <lastmod>2026-01-21T11:56:42.358Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-stroop/reference/main.run_paradigm_cli.html</loc>
-    <lastmod>2026-01-21T11:48:30.607Z</lastmod>
+    <lastmod>2026-01-21T11:56:50.805Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-stroop/reference/index.html</loc>
-    <lastmod>2026-01-21T11:48:30.578Z</lastmod>
+    <lastmod>2026-01-21T11:56:50.777Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-stroop/reference/main.run_paradigm.html</loc>
-    <lastmod>2026-01-21T11:48:30.614Z</lastmod>
+    <lastmod>2026-01-21T11:56:50.812Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-stroop/reference/utils.marker.utf8_write.html</loc>
-    <lastmod>2026-01-21T11:48:30.670Z</lastmod>
+    <lastmod>2026-01-21T11:56:50.867Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-stroop/reference/context.StroopContext.html</loc>
-    <lastmod>2026-01-21T11:48:30.653Z</lastmod>
+    <lastmod>2026-01-21T11:56:50.851Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/gui.callbacks.evaluate_templates.html</loc>
-    <lastmod>2026-01-21T11:48:23.697Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.522Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/index.html</loc>
-    <lastmod>2026-01-21T11:48:23.652Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.478Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/gui.callbacks.add_macros_sender.html</loc>
-    <lastmod>2026-01-21T11:48:23.695Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.521Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/gui.app.build_app.html</loc>
-    <lastmod>2026-01-21T11:48:23.686Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.512Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/gui.layout.create_macro_tile.html</loc>
-    <lastmod>2026-01-21T11:48:23.707Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.533Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/socket.html</loc>
-    <lastmod>2026-01-21T11:48:23.733Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.558Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/main.initialize_exe_modules.html</loc>
-    <lastmod>2026-01-21T11:48:23.682Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.508Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/gui.callbacks.add_json_verification_cb.html</loc>
-    <lastmod>2026-01-21T11:48:23.690Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.516Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/main.close_down_connections.html</loc>
-    <lastmod>2026-01-21T11:48:23.678Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.504Z</lastmod>
   </url>
   <url>
     <loc>https://bsdlab.github.io/Dareplane/modules/dp-control-room/reference/callbacks.CallbackBroker.html</loc>
-    <lastmod>2026-01-21T11:48:23.742Z</lastmod>
+    <lastmod>2026-01-21T11:56:38.567Z</lastmod>
   </url>
 </urlset>
