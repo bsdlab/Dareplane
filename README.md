@@ -6,6 +6,11 @@
 
 Dareplane is a modular and broad technology agnostic open source software platform for brain-computer interface research. [LSL](https://labstreaminglayer.org) is used for data communication and `TCP` sockets for module communication. The platform is designed to be minimalistic and to allow for easy development of custom modules, with minimal overhead of integrating existing code.
 
+Have a look at the [documentation page](https://bsdlab.github.io/Dareplane/main.html) for some examples of how to get started.
+
+> [!NOTE]
+> The docs are currently being reworked and extended. The coverage will improve in the up-coming months (as of 2025-06).
+
 The platform and first performance evaluations are published in [Dold et al., 2025, J. Neural Eng. 22 026029](https://iopscience.iop.org/article/10.1088/1741-2552/adbb20)
 
 > [!IMPORTANT]
