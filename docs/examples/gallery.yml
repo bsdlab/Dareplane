@@ -10,7 +10,7 @@
     - title: Intra module communication
       description: |
         Description and example of intra module communication using PCOMM callbacks.
-      href: ./hello_world.qmd
+      href: ./PCOMM_callbacks.qmd
       thumbnail: assets/control_room_control_schema.png
 
 - category: Setup scripts
