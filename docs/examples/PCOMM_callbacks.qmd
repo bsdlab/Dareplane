@@ -1,6 +1,6 @@
 # Callback for inter module communication
 
-![control_room_control_schema.png](https://github.com/bsdlab/Dareplane/blob/main/docs/examples/assets/control_room_control_schema.png)
+![control_room_control_schema.png](assets/control_room_control_schema.png)
 
 The Dareplane control room provides a callback handler which allows individual modules to invoke primary commands (PCOMMS) of other modules.
 
