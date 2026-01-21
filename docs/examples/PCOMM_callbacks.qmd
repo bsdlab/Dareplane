@@ -11,17 +11,21 @@ module-1|STARTRECORD|{'filename':'mytargetfile.xdf'}
 ```
 
 This assumes two things:
-- `module-1` is the name of `module 1` within the control room configuration. E.g. this configuration would create a module with internal name `module-1`
+
+1. `module-1` is the name of `module 1` within the control room configuration. E.g. this configuration would create a module with internal name `module-1`:
+
 ```toml
 [python.modules.module-1]                                     
     type = 'io_data'
     port = 8081                                                                 
     ip = '127.0.0.1'
 ```
-- `module 1` implements a primary command for `STARTRECORD` which also accepts a keyword argument for `filename`.
+
+2. `module 1` implements a primary command for `STARTRECORD` which also accepts a keyword argument for `filename`.
 
 ## Use case example Python
-Assume we have a `controller` module which needs to switch on stimulation via a `stimulator` module - like what is done in the [dp-bollinger-control](https://github.com/bsdlab/dp-bollinger-control).
+
+Assume we have a `controller` module which needs to switch some stimulation (ON/OFF) via a `stimulator` module - like what is done in the [dp-bollinger-control](https://github.com/bsdlab/dp-bollinger-control).
 
 Within the `controller` we can store the Dareplane server within a [context helper class](https://github.com/bsdlab/dp-bollinger-control/blob/786dd21624661ae9a1404da6b996d4001d94afe9/bollinger_control/online_control.py#L16):
 
@@ -36,10 +40,10 @@ class Context:
 
 Now the context can for example be initialized during the server startup of the `controller` model. The default folder structure for Dareplane would have a `server.py` for this purpose, e.g.:
 ```
-   dp-controller
-   api
-   └ 󰌠 server.py
-   controller
+dp-controller
+├── api
+│   └── server.py
+├── controller
 ```
 
 Then within the `server.py` we would have:
@@ -106,5 +110,5 @@ if ctx.server is not None:
 	ctx.marker_outlet.push_sample([cmd]) # option: logging the command to an LSL outlet
 ```
 
-Note: The lifetime management in the [`server.py` of the `dp-bollinger-control`](https://github.com/bsdlab/dp-bollinger-control/blob/main/api/server.py) is slightly different, as the `Context` instance is used to track more instances than just the TCP connection. We therefore forward only the server to the `run_bollinger_control` which then instantiates a `Context` internally. How you do the lifetime management is up to you, but the server usually just available when the modules is started via `python -m api.server`.
+Note: The lifetime management in the [`server.py` of the `dp-bollinger-control`](https://github.com/bsdlab/dp-bollinger-control/blob/main/api/server.py) is slightly different, as the `Context` instance is used to track more objects than just the TCP connection/server. We therefore forward only the server to the `run_bollinger_control` which then instantiates a `Context` internally. How you do the lifetime management is up to you, but the server usually just available when the modules is started via `python -m api.server`.
 
