@@ -372,17 +372,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The Dareplane control room provides a callback handler which allows individual modules to invoke primary commands (PCOMMS) of other modules.</p>
 <p>For this purpose, a message is sent to the control room via the existing TCP connection. E.g. <code>module N</code> (paradigm) could start the data recoding from <code>module 1</code> by sending the following message:</p>
 <pre><code>module-1|STARTRECORD|{'filename':'mytargetfile.xdf'}</code></pre>
-<p>This assumes two things: - <code>module-1</code> is the name of <code>module 1</code> within the control room configuration. E.g. this configuration would create a module with internal name <code>module-1</code></p>
+<p>This assumes two things:</p>
+<ol type="1">
+<li><code>module-1</code> is the name of <code>module 1</code> within the control room configuration. E.g. this configuration would create a module with internal name <code>module-1</code>:</li>
+</ol>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[python.modules.module-1]</span>                                     </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">type</span> <span class="op">=</span> <span class="st">'</span><span class="vs">io_data</span><span class="st">'</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">port</span> <span class="op">=</span> <span class="dv">8081</span>                                                                 </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ip</span> <span class="op">=</span> <span class="st">'</span><span class="vs">127.0.0.1</span><span class="st">'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
+<ol start="2" type="1">
 <li><code>module 1</code> implements a primary command for <code>STARTRECORD</code> which also accepts a keyword argument for <code>filename</code>.</li>
-</ul>
+</ol>
 <section id="use-case-example-python" class="level2">
 <h2 class="anchored" data-anchor-id="use-case-example-python">Use case example Python</h2>
-<p>Assume we have a <code>controller</code> module which needs to switch on stimulation via a <code>stimulator</code> module - like what is done in the <a href="https://github.com/bsdlab/dp-bollinger-control">dp-bollinger-control</a>.</p>
+<p>Assume we have a <code>controller</code> module which needs to switch some stimulation (ON/OFF) via a <code>stimulator</code> module - like what is done in the <a href="https://github.com/bsdlab/dp-bollinger-control">dp-bollinger-control</a>.</p>
 <p>Within the <code>controller</code> we can store the Dareplane server within a <a href="https://github.com/bsdlab/dp-bollinger-control/blob/786dd21624661ae9a1404da6b996d4001d94afe9/bollinger_control/online_control.py#L16">context helper class</a>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dareplane_utils.default_server.server <span class="im">import</span> DefaultServer</span>
@@ -391,10 +394,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Context:</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    server: DefaultServer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Now the context can for example be initialized during the server startup of the <code>controller</code> model. The default folder structure for Dareplane would have a <code>server.py</code> for this purpose, e.g.:</p>
-<pre><code>   dp-controller
-   api
-   └ 󰌠 server.py
-   controller</code></pre>
+<pre><code>dp-controller
+├── api
+│&nbsp;&nbsp; └── server.py
+├── controller</code></pre>
 <p>Then within the <code>server.py</code> we would have:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -452,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    logger.debug(<span class="st">"Sending cmd to control room"</span>)</span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    ctx.server.current_conn.sendall(cmd.encode())</span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    ctx.marker_outlet.push_sample([cmd]) <span class="co"># option: logging the command to an LSL outlet</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Note: The lifetime management in the <a href="https://github.com/bsdlab/dp-bollinger-control/blob/main/api/server.py"><code>server.py</code> of the <code>dp-bollinger-control</code></a> is slightly different, as the <code>Context</code> instance is used to track more instances than just the TCP connection. We therefore forward only the server to the <code>run_bollinger_control</code> which then instantiates a <code>Context</code> internally. How you do the lifetime management is up to you, but the server usually just available when the modules is started via <code>python -m api.server</code>.</p>
+<p>Note: The lifetime management in the <a href="https://github.com/bsdlab/dp-bollinger-control/blob/main/api/server.py"><code>server.py</code> of the <code>dp-bollinger-control</code></a> is slightly different, as the <code>Context</code> instance is used to track more objects than just the TCP connection/server. We therefore forward only the server to the <code>run_bollinger_control</code> which then instantiates a <code>Context</code> internally. How you do the lifetime management is up to you, but the server usually just available when the modules is started via <code>python -m api.server</code>.</p>
 
 
 </section>
