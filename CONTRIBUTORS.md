@@ -1,8 +1,8 @@
 # Contributors
 
 Dareplane is developed and maintained as a collaborative, open-source effort.
-We are grateful to everyone who has contributed code, documentation, ideas, and
-feedback to the project across its many modules.
+We are grateful to everyone who has contributed code, documentation, ideas,
+and feedback to the project across its many modules.
 
 ## Project contributors
 
