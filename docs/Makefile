@@ -4,7 +4,7 @@ MODULES_DIR := modules
 DOCS_GALLERY := modules/gallery.yml
 DEFAULT_THUMBNAIL := assets/single_dareplane_logo.svg
 
-.PHONY: all quartodoc build publish clean dp-docs main
+.PHONY: all quartodoc build publish clean dp-docs main contributors
 
 # -----------------------------------------------------------------------------
 # main.qmd from the central README.md
@@ -16,7 +16,15 @@ main:
   BEGIN { print header } \
   /<\/picture>/ { found=1; next } \
   found { print } ' ../README.md > main.qmd
-	
+
+# -----------------------------------------------------------------------------
+# about/contributors.qmd from the central CONTRIBUTORS.md
+# -----------------------------------------------------------------------------
+
+contributors:
+	@echo "Copying over ../CONTRIBUTORS.md to about/contributors.qmd..."
+	@cp ../CONTRIBUTORS.md about/contributors.qmd
+
 
 # -----------------------------------------------------------------------------
 # Single modules parsing
@@ -106,6 +114,7 @@ clean:
 	rm -rf modules/dp-*
 	rm -rf modules/gallery.yml
 	rm -f main.qmd
+	rm -f about/contributors.qmd
 
 quartodoc:
 	quartodoc

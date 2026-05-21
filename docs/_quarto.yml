@@ -32,6 +32,8 @@ website:
         menu:
           - href: about/quarto_documentation_setup.qmd
             text: Quarto setup
+          - href: about/contributors.qmd
+            text: Contributors
 
     right:
       - icon: github

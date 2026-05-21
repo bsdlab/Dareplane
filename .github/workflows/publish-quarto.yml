@@ -50,6 +50,7 @@ jobs:
         run: |
           make clean
           make main
+          make contributors
           make modules.csv
           make docs-gallery
 
